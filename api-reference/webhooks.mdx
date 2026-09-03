@@ -1,0 +1,42 @@
+---
+title: "Webhooks API"
+api: "POST /api/v1/webhooks"
+description: "Register external webhook listener URLs"
+---
+
+### Headers
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token: `Bearer <token>`
+</ParamField>
+
+### Body
+
+<ParamField body="url" type="string" required>
+  Target HTTPS webhook endpoint.
+</ParamField>
+
+<ParamField body="events" type="array" required>
+  Array of event subscriptions e.g. `["call.started", "call.ended", "transcript.ready"]`.
+</ParamField>
+
+### Response
+
+<ResponseField name="webhook_id" type="string">
+  Webhook registration identifier.
+</ResponseField>
+
+<ResponseField name="signing_secret" type="string">
+  HMAC secret key used to verify payloads. Keep this safe.
+</ResponseField>
+
+<ResponseExample>
+```json 201 Created
+{
+  "webhook_id": "wh_18492048",
+  "url": "https://myapp.com/api/webhooks/pingr",
+  "events": ["call.ended", "transcript.ready"],
+  "signing_secret": "whsec_live_9df0283e71029abce"
+}
+```
+</ResponseExample>

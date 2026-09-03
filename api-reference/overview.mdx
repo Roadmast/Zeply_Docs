@@ -1,0 +1,30 @@
+---
+title: "API Reference Overview"
+description: "Specification and interactive endpoints for the Pingr AI REST API"
+---
+
+# Pingr AI REST API
+
+All API endpoints are served from `https://api.pingr.ai` (or `http://localhost:8000` during local development).
+
+## Base URLs
+
+- **Production**: `https://api.pingr.ai/api/v1`
+- **Development**: `http://localhost:8000/api/v1`
+
+## API Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Agents API" icon="user-robot" href="/api-reference/agents">
+    Create, list, update, and manage AI voice agents.
+  </Card>
+  <Card title="Calls API" icon="phone" href="/api-reference/calls">
+    Initiate calls, fetch audio recordings, and retrieve real-time transcripts.
+  </Card>
+  <Card title="Campaigns API" icon="bullhorn" href="/api-reference/campaigns">
+    Batch outbound dispatching, analytics, and contact management.
+  </Card>
+  <Card title="Webhooks API" icon="webhook" href="/api-reference/webhooks">
+    Register webhook endpoints and view delivery logs.
+  </Card>
+</CardGroup>

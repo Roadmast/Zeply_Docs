@@ -1,0 +1,50 @@
+---
+title: "Agent Overview"
+description: "Core concepts of Pingr AI voice agents, pipeline architectures, and execution flow"
+---
+
+# Voice Agents in Pingr AI
+
+Voice agents are the central orchestration entity in Pingr AI. Each agent configures:
+1. **Prompt Intelligence**: System instructions, situational knowledge, guardrails, and role definitions.
+2. **Speech-to-Text (STT)**: High-speed acoustic transcription engine (Deepgram Nova-2 or Whisper Realtime).
+3. **Reasoning Engine (LLM)**: Fast conversational models (Claude 3.5 Sonnet, GPT-4o, or Gemini 1.5 Flash).
+4. **Voice Synthesis (TTS)**: Low-latency neural voices (Cartesia Sonic, ElevenLabs Turbo v2, or PlayHT).
+
+## Life Cycle of a Voice Call
+
+```mermaid
+sequenceDiagram
+    participant User as Customer
+    participant Telephony as Twilio / SIP
+    participant Agent as Pingr Voice Agent
+    participant LLM as Inference
+    participant TTS as Neural Audio
+
+    User->>Telephony: Speaks "Hello, I need help"
+    Telephony->>Agent: Audio packets (RTP / Opus)
+    Agent->>Agent: STT Speech-to-Text streaming
+    Agent->>LLM: Stream user prompt
+    LLM-->>Agent: Token stream
+    Agent->>TTS: Stream characters to synthesize
+    TTS-->>Telephony: Synthesized voice stream (L16 PCM)
+    Telephony-->>User: Plays agent response
+```
+
+## Agent Configuration Parameters
+
+<ParamField path="name" type="string" required>
+  Internal name used to identify the agent in reports and the console.
+</ParamField>
+
+<ParamField path="system_prompt" type="string" required>
+  The system instruction provided to the language model during inference.
+</ParamField>
+
+<ParamField path="voice_id" type="string" default="cartesia/sonic-english">
+  Identifier of the neural voice model used to generate speech.
+</ParamField>
+
+<ParamField path="interruption_threshold_ms" type="number" default="350">
+  Millisecond duration of user voice activity before halting current agent playback.
+</ParamField>

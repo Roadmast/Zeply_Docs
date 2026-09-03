@@ -1,0 +1,42 @@
+---
+title: "Creating an Agent"
+description: "Step-by-step guide to provisioning new conversational agents"
+---
+
+# Creating an Agent
+
+You can create an agent either visually in the [Pingr Console](http://localhost:3000/agents) or programmatically through our API.
+
+## Programmatic Creation
+
+Send a POST request to `/api/v1/agents`:
+
+```bash cURL
+curl -X POST https://api.pingr.ai/api/v1/agents \
+  -H "Authorization: Bearer pingr_live_your_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Appointment Booking Concierge",
+    "system_prompt": "You are Jordan, an appointment assistant for HealthFirst Clinics. Collect patient name, preferred date, and verify insurance status.",
+    "voice_id": "cartesia/sonic-english",
+    "temperature": 0.2,
+    "max_duration_seconds": 600,
+    "metadata": {
+      "department": "Scheduling"
+    }
+  }'
+```
+
+### Response Attributes
+
+<ResponseField name="id" type="string">
+  Unique agent identifier (e.g., `ag_8f3b0e2a9`).
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current provisioning status (`ready`, `provisioning`, `archived`).
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO-8601 creation timestamp.
+</ResponseField>

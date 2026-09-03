@@ -1,0 +1,35 @@
+---
+title: "Outbound Calls"
+description: "Triggering single and concurrent outbound calls to PSTN networks"
+---
+
+# Outbound Voice Calling
+
+Pingr AI connects to tier-1 telecommunications carriers via Twilio and SIP trunks to deliver high-fidelity, low-latency audio to mobile and landline phones globally.
+
+## Triggering an Outbound Call
+
+```bash
+curl -X POST https://api.pingr.ai/api/v1/telephony/calls \
+  -H "Authorization: Bearer pingr_live_your_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": "ag_8f3b0e2a9",
+    "to_number": "+14155550192",
+    "from_number": "+14155550100",
+    "record_audio": true,
+    "max_duration_seconds": 1800
+  }'
+```
+
+## Call Status Workflow
+
+Calls transition through the following states:
+
+1. **`queued`**: Dispatched to carrier queue.
+2. **`ringing`**: The recipient's handset is ringing.
+3. **`in-progress`**: The call was answered; speech audio stream initialized.
+4. **`completed`**: Normal termination after hang-up.
+5. **`busy` / `failed` / `no-answer`**: Destination unreachable or rejected.
+
+Each event triggers a webhook payload if configured.

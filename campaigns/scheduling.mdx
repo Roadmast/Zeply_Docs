@@ -1,0 +1,32 @@
+---
+title: "Campaign Scheduling"
+description: "Orchestrate large-scale outbound calling and messaging campaigns"
+---
+
+# Batch Campaign Scheduling
+
+Run outbound campaigns across thousands of contacts with concurrency controls, time-window throttling, and automatic retry policies.
+
+## Creating a Campaign
+
+```bash
+curl -X POST https://api.pingr.ai/api/v1/campaigns \
+  -H "Authorization: Bearer pingr_live_your_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Q3 Lead Reactivation",
+    "agent_id": "ag_8f3b0e2a9",
+    "scheduled_start_time": "2026-09-10T14:00:00Z",
+    "max_concurrent_calls": 25,
+    "retry_attempts": 2,
+    "retry_interval_minutes": 60,
+    "contacts": [
+      { "to_number": "+14155550101", "name": "Alice Smith" },
+      { "to_number": "+14155550102", "name": "Bob Jones" }
+    ]
+  }'
+```
+
+## Scheduling Architecture
+
+Campaigns in Pingr AI are synchronized into high-throughput Redis sorted sets and dispatched by Celery / Dramatiq background workers respecting recipient timezones (TCPA / GDPR compliance).

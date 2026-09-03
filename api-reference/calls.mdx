@@ -1,0 +1,51 @@
+---
+title: "Calls API"
+api: "POST /api/v1/telephony/calls"
+description: "Dispatch and manage telephony voice calls"
+---
+
+### Headers
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token: `Bearer <token>`
+</ParamField>
+
+### Body
+
+<ParamField body="agent_id" type="string" required>
+  The ID of the provisioned agent executing the call.
+</ParamField>
+
+<ParamField body="to_number" type="string" required>
+  Destination phone number in E.164 format (`+14155552671`).
+</ParamField>
+
+<ParamField body="from_number" type="string">
+  Provisioned Twilio outbound CLI number. If omitted, organization default is used.
+</ParamField>
+
+<ParamField body="record_audio" type="boolean" default="true">
+  Whether to save a dual-channel recording of the call.
+</ParamField>
+
+### Response
+
+<ResponseField name="call_id" type="string">
+  Unique call session identifier.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Initial call state (`queued`).
+</ResponseField>
+
+<ResponseExample>
+```json 200 OK
+{
+  "call_id": "call_61ef871b0a",
+  "status": "queued",
+  "agent_id": "ag_7a1b89ef",
+  "to_number": "+14155552671",
+  "created_at": "2026-09-03T10:20:00Z"
+}
+```
+</ResponseExample>

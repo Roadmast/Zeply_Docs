@@ -1,0 +1,6 @@
+<svg width="140" height="36" viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="4" width="28" height="28" rx="7" fill="#10B981"/>
+  <path d="M16 10L22 14V22L16 26L10 22V14L16 10Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="16" cy="18" r="2.5" fill="white"/>
+  <text x="38" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Pingr<tspan fill="#10B981">.ai</tspan></text>
+</svg>

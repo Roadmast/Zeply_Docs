@@ -1,0 +1,34 @@
+---
+title: "Webhooks"
+description: "Listen to real-time events for calls, recordings, and agent execution"
+---
+
+# Webhooks Overview
+
+Pingr AI delivers event notifications directly to your server via HTTPS POST requests.
+
+## Verifying Signatures
+
+Every webhook payload includes an `X-Pingr-Signature` header computed using HMAC SHA-256 with your webhook signing secret:
+
+```python Python
+import hmac
+import hashlib
+
+def verify_signature(payload_bytes, signature_header, secret):
+    expected = hmac.new(
+        secret.encode('utf-8'),
+        payload_bytes,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(f"sha256={expected}", signature_header)
+```
+
+## Common Event Types
+
+| Event Name | Trigger |
+| :--- | :--- |
+| `call.started` | Call picked up by user. Audio streaming began. |
+| `call.ended` | Call ended. Includes total duration, cost, and disposition. |
+| `transcript.ready` | Full conversation transcript and speech sentiment analysis ready. |
+| `campaign.completed` | All contacts in a batch campaign have reached terminal state. |

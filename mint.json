@@ -1,0 +1,76 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Pingr AI",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#10B981",
+    "light": "#34D399",
+    "dark": "#059669",
+    "background": {
+      "dark": "#0B1120",
+      "light": "#FFFFFF"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "App Dashboard",
+      "url": "http://localhost:3000/dashboard"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Launch Console",
+    "url": "http://localhost:3000"
+  },
+  "tabs": [
+    {
+      "name": "Guides",
+      "url": "introduction"
+    },
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "authentication"
+      ]
+    },
+    {
+      "group": "Voice Agents & Telephony",
+      "pages": [
+        "agents/overview",
+        "agents/create",
+        "telephony/outbound-calls"
+      ]
+    },
+    {
+      "group": "Automations & Campaigns",
+      "pages": [
+        "campaigns/scheduling",
+        "webhooks/overview"
+      ]
+    },
+    {
+      "group": "API Endpoints",
+      "pages": [
+        "api-reference/overview",
+        "api-reference/agents",
+        "api-reference/calls",
+        "api-reference/campaigns",
+        "api-reference/webhooks"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com"
+  }
+}

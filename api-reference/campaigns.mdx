@@ -1,0 +1,46 @@
+---
+title: "Campaigns API"
+api: "POST /api/v1/campaigns"
+description: "Launch scheduled outbound batch campaigns"
+---
+
+### Headers
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token: `Bearer <token>`
+</ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required>
+  Campaign title.
+</ParamField>
+
+<ParamField body="agent_id" type="string" required>
+  Voice agent identifier.
+</ParamField>
+
+<ParamField body="contacts" type="array" required>
+  Array of contact objects containing `to_number` and optional custom variables.
+</ParamField>
+
+### Response
+
+<ResponseField name="campaign_id" type="string">
+  Generated campaign identifier.
+</ResponseField>
+
+<ResponseField name="total_contacts" type="number">
+  Count of validated destination phone numbers queued.
+</ResponseField>
+
+<ResponseExample>
+```json 201 Created
+{
+  "campaign_id": "cmp_54190823",
+  "name": "Customer Followup",
+  "status": "scheduled",
+  "total_contacts": 450
+}
+```
+</ResponseExample>

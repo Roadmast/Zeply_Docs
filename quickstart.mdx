@@ -1,0 +1,90 @@
+---
+title: "Quickstart"
+description: "Get started with Pingr AI in under 5 minutes"
+---
+
+## 1. Retrieve your API Key
+
+Head over to your **Pingr AI Console** under [Settings > API Keys](http://localhost:3000/settings) to generate a secret access token.
+
+All REST requests require the `Authorization` header:
+
+```bash
+Authorization: Bearer pingr_live_your_api_key_here
+```
+
+## 2. Create a Voice Agent
+
+Use the `/api/v1/agents` endpoint to define a voice agent with custom system instructions and TTS voice settings:
+
+```bash cURL
+curl -X POST https://api.pingr.ai/api/v1/agents \
+  -H "Authorization: Bearer pingr_live_your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Customer Support Specialist",
+    "system_prompt": "You are a courteous support concierge for Pingr AI. Keep responses concise and natural.",
+    "voice_id": "cartesia/sonic-english",
+    "temperature": 0.4
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/agents"
+headers = {
+    "Authorization": "Bearer pingr_live_your_api_key_here",
+    "Content-Type": "application/json"
+}
+payload = {
+    "name": "Customer Support Specialist",
+    "system_prompt": "You are a courteous support concierge for Pingr AI. Keep responses concise and natural.",
+    "voice_id": "cartesia/sonic-english",
+    "temperature": 0.4
+}
+
+response = requests.post(url, json=payload, headers=headers)
+agent = response.json()
+print(f"Agent Created: {agent['id']}")
+```
+
+```javascript Node.js
+const res = await fetch("https://api.pingr.ai/api/v1/agents", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer pingr_live_your_api_key_here",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Customer Support Specialist",
+    system_prompt: "You are a courteous support concierge for Pingr AI.",
+    voice_id: "cartesia/sonic-english",
+    temperature: 0.4,
+  }),
+});
+const agent = await res.json();
+console.log(`Agent Created: ${agent.id}`);
+```
+
+## 3. Dispatch an Outbound Call
+
+Once you have your `agent_id`, dispatch an outbound voice call to any valid E.164 phone number:
+
+```bash cURL
+curl -X POST https://api.pingr.ai/api/v1/telephony/calls \
+  -H "Authorization: Bearer pingr_live_your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": "ag_98f418ab72",
+    "to_number": "+14155552671",
+    "metadata": {
+      "customer_name": "Jane Doe",
+      "account_tier": "Enterprise"
+    }
+  }'
+```
+
+<Tip>
+  You can track live call state transitions (`queued`, `ringing`, `in-progress`, `completed`) by subscribing to our real-time [Webhooks](/webhooks/overview).
+</Tip>

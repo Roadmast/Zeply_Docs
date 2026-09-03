@@ -1,0 +1,47 @@
+---
+title: "Authentication"
+description: "How to authenticate your requests against the Pingr AI REST and Realtime APIs"
+---
+
+# Authentication
+
+The Pingr AI API utilizes Bearer tokens generated for your organization or user workspace. Requests must be sent over HTTPS.
+
+## API Header Structure
+
+Include your key in the `Authorization` header on all API calls:
+
+```http
+Authorization: Bearer pingr_live_xxxxxxxxxxxxxxxxxxxxxxxx
+Content-Type: application/json
+```
+
+## Token Scopes & Environments
+
+<ParamField path="Production Keys" type="string">
+  Prefixed with `pingr_live_`. Live keys connect to real telephony lines (Twilio carrier networks) and incur standard minute usage rates.
+</ParamField>
+
+<ParamField path="Test / Sandbox Keys" type="string">
+  Prefixed with `pingr_test_`. Test keys simulate carrier connections, return mock responses, and allow end-to-end local testing without live telecommunication costs.
+</ParamField>
+
+## Error Handling
+
+When authentication fails, Pingr AI responds with standard HTTP status codes:
+
+| HTTP Status | Error Code | Description |
+| :--- | :--- | :--- |
+| `401 Unauthorized` | `INVALID_API_KEY` | The API token supplied was invalid, malformed, or expired. |
+| `403 Forbidden` | `INSUFFICIENT_PERMISSIONS` | The API token lacks permission to access the requested resource. |
+| `429 Too Many Requests` | `RATE_LIMIT_EXCEEDED` | Request rate limit exceeded for this tier. |
+
+```json Example 401 Response
+{
+  "error": {
+    "code": "INVALID_API_KEY",
+    "message": "Authorization header is missing or provided token is invalid",
+    "status": 401
+  }
+}
+```
