@@ -1,0 +1,149 @@
+---
+title: "Agents Overview"
+sidebarTitle: "Overview"
+description: "Build, configure, and orchestrate real-time conversational Voice AI agents with Pingr AI"
+---
+
+# Voice AI Agents API
+
+The **Agents API** enables you to programmatically create, manage, configure, and execute autonomous Voice AI agents. Agents handle inbound and outbound telephone calls, interact with customers via speech, access contextual knowledge, and trigger custom backend APIs and MCP tools in real time.
+
+```
++-------------------------------------------------------------+
+|                      Voice AI Agent                         |
+|  +----------------+  +----------------+  +---------------+  |
+|  |  ASR / Speech  |  |   LLM Brain    |  |  TTS / Voice  |  |
+|  |  (Deepgram/...) |  | (GPT-4o/Claude)|  |  (Cartesia)   |  |
+|  +----------------+  +----------------+  +---------------+  |
+|          |                   |                   |          |
+|  +-------------------------------------------------------+  |
+|  |             Capabilities & Real-Time Tools            |  |
+|  |  * Calendar Booking   * Custom REST APIs   * MCP SSE  |  |
+|  +-------------------------------------------------------+  |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Ultra-Low Latency Voice" icon="waveform-lines">
+    Streaming audio pipelines powered by Cartesia and WebRTC deliver sub-second natural voice conversations.
+  </Card>
+  <Card title="Tool Calling & Webhooks" icon="bolt">
+    Agents invoke custom REST APIs during live phone calls to check order status, trigger actions, or fetch CRM data.
+  </Card>
+  <Card title="MCP Server Integration" icon="plug">
+    Native support for Model Context Protocol (MCP) servers via Server-Sent Events (SSE) or HTTP transports.
+  </Card>
+  <Card title="Calendar Scheduling" icon="calendar">
+    Automated meeting and appointment booking directly into Google Calendar and Calendly.
+  </Card>
+</CardGroup>
+
+---
+
+## Agent Lifecycle & States
+
+Every Voice AI agent transitions through well-defined operational states:
+
+| Status | Description | Permitted Actions |
+| :--- | :--- | :--- |
+| `active` | Agent is published and operational | Receive inbound calls, execute campaigns, run tool calls |
+| `inactive` | Agent is paused or draft | View and update configurations; incoming calls receive fallback message |
+| `archived` | Agent has been retired | Read-only access for historic call logs and analytics |
+
+---
+
+## Authentication
+
+All Agents API endpoints require a valid organization API key or Bearer JWT token passed in the `Authorization` header:
+
+```http
+Authorization: Bearer <your-api-key>
+```
+
+<Warning>
+  Always execute server-side agent creation and mutation requests from secure environments. Never expose secret keys in client-side bundles.
+</Warning>
+
+---
+
+## Available Endpoints
+
+Explore the full suite of Agents API methods available in Pingr AI:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/agents/{agent_id}` | Retrieve detailed configuration, status, and tasks for an agent |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/agents` | Create a new Voice AI prompt agent or static bot |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/agents` | List all voice agents for your organization |
+| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PUT</span> | `/api/v1/agents/{agent_id}` | Update complete configuration of an existing agent |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/agents/{agent_id}` | Permanently delete an agent |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/quickstart" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Get agent</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        Retrieve detailed Voice AI agent informati...
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/agents/get-agent" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>
+
+---
+
+<Card title="Need help?" icon="circle-question" href="/quickstart">
+  Check out our quickstart guide or comprehensive API reference to get your first voice agent running in minutes.
+  
+  [View guides →](/quickstart)
+</Card>

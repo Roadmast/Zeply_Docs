@@ -2,10 +2,13 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "Pingr AI",
+  "appearance": {
+    "default": "dark"
+  },
   "colors": {
     "primary": "#10B981",
-    "light": "#34D399",
-    "dark": "#059669"
+    "light": "#059669",
+    "dark": "#10B981"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -52,18 +55,38 @@
         "tab": "API Reference",
         "groups": [
           {
-            "group": "API Endpoints",
+            "group": "Overview",
+            "icon": "circle-info",
             "pages": [
-              "api-reference/overview",
-              "api-reference/agents",
-              "api-reference/calls",
-              "api-reference/campaigns",
-              "api-reference/webhooks"
+              "api-reference/introduction",
+              "api-reference/authentication",
+              "api-reference/pagination",
+              "api-reference/rate-limiting",
+              "api-reference/errors",
+              "api-reference/limits"
+            ]
+          },
+          {
+            "group": "Agents",
+            "icon": "robot",
+            "pages": [
+              "api-reference/agents/overview",
+              "api-reference/agents/get-agent",
+              "api-reference/agents/create-agent",
+              "api-reference/agents/list-agents",
+              "api-reference/agents/update-agent",
+              "api-reference/agents/delete-agent"
             ]
           }
         ]
       }
     ]
+  },
+  "api": {
+    "baseUrl": "https://api.pingr.ai",
+    "auth": {
+      "method": "bearer"
+    }
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -72,7 +95,7 @@
   "background": {
     "color": {
       "light": "#FFFFFF",
-      "dark": "#0B1120"
+      "dark": "#09090B"
     }
   },
   "navbar": {

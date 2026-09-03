@@ -1,39 +1,74 @@
 ---
 title: "Introduction"
-description: "Welcome to Pingr AI — Next-generation conversational voice agents and automation engine"
+description: "Welcome to Pingr AI — Next-generation conversational voice agents and multi-channel automation engine"
 ---
 
 # Pingr AI Documentation
 
-Pingr AI gives engineering and product teams ultra-low latency voice AI infrastructure. Connect telephony, WebRTC audio streams, intelligent conversation workflows, and multi-channel automations (WhatsApp & SMS) with zero operational headache.
+Pingr AI gives engineering and product teams ultra-low latency conversational voice AI infrastructure. Connect SIP trunks, WebRTC bidirectional audio streams, intelligent conversation workflows, and multi-channel automations (WhatsApp & SMS) with zero operational friction.
+
+<Frame caption="Pingr AI Architecture — Voice AI, WhatsApp Business API, and Real-Time Telephony">
+  <img src="/images/og-image.svg" alt="Pingr AI Platform Banner" />
+</Frame>
+
+---
+
+## Quick Navigation
 
 <CardGroup cols={2}>
   <Card title="Quickstart" icon="bolt" href="/quickstart">
-    Create your first voice agent and place a test call in under 5 minutes.
+    Create your first voice agent and place a live test call in under 5 minutes.
   </Card>
   <Card title="Authentication" icon="key" href="/authentication">
-    Secure your API calls with Bearer tokens and scoped organization keys.
+    Generate and manage scoped Bearer tokens to secure your API requests.
   </Card>
   <Card title="Voice Agents" icon="robot" href="/agents/overview">
-    Configure system prompts, LLM parameters, voice synthesis, and tools.
+    Configure system prompts, LLM parameters, neural voices, and tools.
   </Card>
-  <Card title="API Reference" icon="code" href="/api-reference/overview">
-    Explore the full REST API specification and interactive endpoint documentation.
+  <Card title="API Reference" icon="code" href="/api-reference/introduction">
+    Explore the full REST API specification, pagination, and status codes.
   </Card>
 </CardGroup>
+
+---
+
+## Developer Console & API Access
+
+Manage voice agents, view live call transcripts, configure webhooks, and generate scoped credentials directly from the **Pingr AI Console**.
+
+<Frame caption="Pingr AI Developer Portal — API Key and Workspace Management">
+  <img src="/images/api-key-page.png" alt="Pingr AI Developer API Keys Dashboard" />
+</Frame>
+
+### Provisioning Credentials
+
+1. **Create Scoped Keys**: Generate dedicated keys with granular permissions (`agents:read`, `calls:dispatch`, `campaigns:manage`).
+2. **Set Expiration**: Protect mission-critical deployments with automatic key rotation or non-expiring production secrets.
+
+<Frame caption="Creating a new scoped API credential in the Pingr AI Console">
+  <img src="/images/create-api-key.png" alt="Generate Secret API Key Modal" />
+</Frame>
+
+3. **Secure Your Secret**: Copy and store your secret key immediately in your environment variables or secret manager.
+
+<Frame caption="API key generated — copy and securely store in your environment">
+  <img src="/images/after-create-api-key.png" alt="API Key Generated Successfully" />
+</Frame>
+
+---
 
 ## Architecture Highlights
 
 ```mermaid
 graph LR
-    User[Phone / WebRTC User] --> Twilio[Twilio / LiveKit Gateway]
-    Twilio --> Pipecat[Pipecat Realtime Engine]
+    User[Phone / WebRTC User] --> Gateway[Twilio / LiveKit Gateway]
+    Gateway --> Pipecat[Pipecat Realtime Engine]
     Pipecat --> LLM[LLM / Tool Calling]
-    Pipecat --> TTS[Voice Synthesis TTS]
+    Pipecat --> TTS[Neural Voice Synthesis]
     Pipecat --> PingrCore[Pingr AI Backend API]
     PingrCore --> DB[(PostgreSQL & Redis)]
 ```
 
-- **Sub-500ms Audio Latency**: Streaming speech-to-text, LLM token streaming, and neural text-to-speech pipelines.
-- **Bi-directional Interruption Handling**: Conversational barge-in allows users to interrupt natural speech smoothly.
-- **Multi-channel Execution**: Automatically dispatch WhatsApp follow-ups, trigger webhooks, and log transcripts into CRM.
+- **Sub-500ms Audio Latency**: Streaming speech-to-text (Deepgram Nova-2), LLM token streaming (Claude 3.5 Sonnet / GPT-4o), and neural text-to-speech pipelines (Cartesia & ElevenLabs).
+- **Bi-directional Interruption Handling**: Real-time conversational barge-in allows users to interrupt natural speech smoothly.
+- **Multi-channel Execution**: Automatically dispatch WhatsApp follow-ups, trigger webhooks, and log structured transcripts into your CRM.

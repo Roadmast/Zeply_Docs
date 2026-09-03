@@ -1,0 +1,71 @@
+---
+title: "Errors and Status Codes"
+sidebarTitle: "Errors & Status Codes"
+description: "Comprehensive guide to Pingr AI HTTP status codes and error payloads"
+---
+
+# Errors and Status Codes
+
+Pingr AI uses conventional HTTP response codes to indicate the success or failure of an API request. In general:
+
+- Codes in the `2xx` range indicate success.
+- Codes in the `4xx` range indicate an error that failed given the information provided (e.g. missing required field or authentication failure).
+- Codes in the `5xx` range indicate an error with Pingr AI servers.
+
+---
+
+## Error Response Structure
+
+All error responses return a standardized JSON object:
+
+```json
+{
+  "error": {
+    "code": "resource_not_found",
+    "message": "Voice agent with ID ag_98f1bc could not be found.",
+    "type": "invalid_request_error",
+    "param": "agent_id",
+    "doc_url": "https://pingr.ai/docs/api-reference/errors#resource_not_found"
+  }
+}
+```
+
+### Error Object Attributes
+
+- **`code`**: A machine-readable string indicating the exact error category.
+- **`message`**: A human-readable description explaining why the error occurred and how to fix it.
+- **`type`**: Broad error classification (e.g. `invalid_request_error`, `authentication_error`, `rate_limit_error`, `api_error`).
+- **`param`**: The specific request parameter that triggered the error (if applicable).
+- **`doc_url`**: Direct hyperlink to resolution documentation.
+
+---
+
+## HTTP Status Codes
+
+| Code | Status | Description |
+| :--- | :--- | :--- |
+| `200` | OK | Request was successful and resource is returned. |
+| `201` | Created | Resource successfully created (e.g. new Voice Agent or Campaign). |
+| `204` | No Content | Request succeeded and no content body is returned (e.g. successful deletion). |
+| `400` | Bad Request | Malformed JSON syntax or missing required parameters. |
+| `401` | Unauthorized | Missing or invalid API key Bearer token. |
+| `403` | Forbidden | API key is valid but lacks permissions/scope for the requested action. |
+| `404` | Not Found | The requested resource ID does not exist in your workspace. |
+| `409` | Conflict | State conflict, such as initiating a call on an agent undergoing active deployment. |
+| `422` | Unprocessable Entity | Parameter validation failed (e.g. invalid E.164 phone number format). |
+| `429` | Too Many Requests | Rate limit or concurrency quota exceeded. |
+| `500` | Internal Server Error | Something went wrong on Pingr AI servers. Retrying with backoff is recommended. |
+| `503` | Service Unavailable | Telephony gateway or streaming audio engine is temporarily offline for maintenance. |
+
+---
+
+## Error Code Reference
+
+| Code | HTTP | Description and Resolution |
+| :--- | :--- | :--- |
+| `invalid_api_key` | 401 | The API key is invalid or revoked. Check your console under Developer Settings. |
+| `insufficient_scope` | 403 | The API key lacks the required permission scope (e.g. `calls:dispatch`). |
+| `invalid_phone_number` | 422 | The recipient phone number is not formatted as valid E.164 (e.g. `+14155552671`). |
+| `tts_synthesis_failed` | 422 | Voice synthesis provider error. Check voice ID and stability settings. |
+| `concurrency_limit_reached` | 429 | Your organization has maxed out simultaneous active voice calls. |
+| `telephony_carrier_timeout` | 504 | Upstream carrier trunk (Twilio / LiveKit) failed to respond within 15 seconds. |

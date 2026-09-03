@@ -1,56 +1,23 @@
 ---
 title: "Agents API"
-api: "POST /api/v1/agents"
-description: "Create and manage conversational voice agents"
+description: "Voice AI Agent API specification and reference documentation"
 ---
 
-### Headers
+# Agents API Reference
 
-<ParamField header="Authorization" type="string" required>
-  Bearer token: `Bearer <token>`
-</ParamField>
+The Agents API has been expanded into a dedicated endpoint suite. Please navigate directly to the endpoint you wish to explore:
 
-### Body
-
-<ParamField body="name" type="string" required>
-  Descriptive name of the agent.
-</ParamField>
-
-<ParamField body="system_prompt" type="string" required>
-  System instruction governing the agent's behavior and personality.
-</ParamField>
-
-<ParamField body="voice_id" type="string" default="cartesia/sonic-english">
-  Voice model identifier.
-</ParamField>
-
-<ParamField body="temperature" type="number" default="0.3">
-  LLM sampling temperature between `0.0` and `1.0`.
-</ParamField>
-
-### Response
-
-<ResponseField name="id" type="string">
-  Unique agent identifier.
-</ResponseField>
-
-<ResponseField name="name" type="string">
-  Agent name.
-</ResponseField>
-
-<ResponseField name="status" type="string">
-  Status code of the agent.
-</ResponseField>
-
-<ResponseExample>
-```json 201 Created
-{
-  "id": "ag_7a1b89ef",
-  "name": "Support Concierge",
-  "voice_id": "cartesia/sonic-english",
-  "temperature": 0.3,
-  "status": "ready",
-  "created_at": "2026-09-03T10:15:30Z"
-}
-```
-</ResponseExample>
+<CardGroup cols={2}>
+  <Card title="Agents Overview" icon="compass" href="/api-reference/agents/overview">
+    Architecture, agent lifecycle states, and capability integrations.
+  </Card>
+  <Card title="Get Agent" icon="eye" href="/api-reference/agents/get-agent">
+    GET /v2/agent/{agent_id} — Retrieve detailed agent configuration.
+  </Card>
+  <Card title="Create Agent" icon="plus" href="/api-reference/agents/create-agent">
+    POST /v2/agent — Provision a prompt agent or static bot.
+  </Card>
+  <Card title="List Agents" icon="list" href="/api-reference/agents/list-agents">
+    GET /v2/agent — Retrieve all agents for your organization.
+  </Card>
+</CardGroup>

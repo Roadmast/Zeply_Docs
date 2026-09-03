@@ -8,12 +8,18 @@
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#10B981",
-    "light": "#34D399",
-    "dark": "#059669",
+    "light": "#059669",
+    "dark": "#10B981",
     "background": {
-      "dark": "#0B1120",
+      "dark": "#09090B",
       "light": "#FFFFFF"
     }
+  },
+  "modeToggle": {
+    "default": "dark"
+  },
+  "codeBlock": {
+    "mode": "dark"
   },
   "topbarLinks": [
     {
@@ -32,7 +38,7 @@
     },
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference/introduction"
     }
   ],
   "navigation": [
@@ -60,16 +66,36 @@
       ]
     },
     {
-      "group": "API Endpoints",
+      "group": "Overview",
+      "icon": "circle-info",
       "pages": [
-        "api-reference/overview",
-        "api-reference/agents",
-        "api-reference/calls",
-        "api-reference/campaigns",
-        "api-reference/webhooks"
+        "api-reference/introduction",
+        "api-reference/authentication",
+        "api-reference/pagination",
+        "api-reference/rate-limiting",
+        "api-reference/errors",
+        "api-reference/limits"
+      ]
+    },
+    {
+      "group": "Agents",
+      "icon": "robot",
+      "pages": [
+        "api-reference/agents/overview",
+        "api-reference/agents/get-agent",
+        "api-reference/agents/create-agent",
+        "api-reference/agents/list-agents",
+        "api-reference/agents/update-agent",
+        "api-reference/agents/delete-agent"
       ]
     }
   ],
+  "api": {
+    "baseUrl": "https://api.pingr.ai",
+    "auth": {
+      "method": "bearer"
+    }
+  },
   "footerSocials": {
     "github": "https://github.com"
   }

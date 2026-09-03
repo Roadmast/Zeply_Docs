@@ -4,6 +4,8 @@
   "private": true,
   "description": "Mintlify documentation for Pingr AI",
   "scripts": {
+    "sync-images": "node -e \"const fs=require('fs'),path=require('path');const s=path.resolve('../frontend/public'),d=path.resolve('images');if(!fs.existsSync(d))fs.mkdirSync(d,{recursive:true});['api-key-page.png','create-api-key.png','after-create-api-key.png','og-image.svg'].forEach(f=>{try{fs.copyFileSync(path.join(s,f),path.join(d,f))}catch(e){}})\"",
+    "predev": "npm run sync-images",
     "dev": "mintlify dev --port 3333",
     "install-cli": "npm i -g mintlify"
   }

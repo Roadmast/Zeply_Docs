@@ -1,0 +1,56 @@
+---
+title: "Limits & Quotas"
+sidebarTitle: "Limits & Quotas"
+description: "System limits, payload constraints, and concurrency quotas across Pingr AI"
+---
+
+# Limits and Quotas
+
+To ensure ultra-low latency (sub-500ms voice turn-around) and protect against infrastructure denial-of-service, Pingr AI applies the following payload, concurrency, and operational limits.
+
+---
+
+## Concurrency Quotas
+
+| Metric | Free Tier | Growth Tier | Enterprise Tier |
+| :--- | :--- | :--- | :--- |
+| **Simultaneous Outbound Calls** | 2 | 25 | Up to 1,000+ |
+| **Simultaneous Inbound Trunks** | 2 | 50 | Dedicated Trunks |
+| **Active Campaign Batches** | 1 | 10 | Unlimited |
+| **Simultaneous WebRTC Rooms** | 5 | 100 | Unlimited |
+
+<Info>
+  Simultaneous call limits are evaluated across your entire workspace in real-time. If a dispatch exceeds your concurrency cap, the API returns a `429 concurrency_limit_reached` error.
+</Info>
+
+---
+
+## Payload Size Limits
+
+| Resource | Maximum Limit | Notes |
+| :--- | :--- | :--- |
+| **JSON Request Body** | 10 MB | Applies to all REST endpoints. |
+| **Voice Agent System Prompt** | 32,000 characters | Maximum tokens depend on underlying LLM model. |
+| **Custom Function / Tool Declarations** | 64 tools per agent | Evaluated during conversation turn. |
+| **Audio Upload Size (Recordings / Samples)** | 50 MB | Supported formats: `.wav`, `.mp3`, `.ogg`, `.flac`. |
+| **Batch Campaign Contacts** | 10,000 per request | Use pagination or CSV upload for larger cohorts. |
+
+---
+
+## Operational Timeouts
+
+| Operation | Timeout | Action on Timeout |
+| :--- | :--- | :--- |
+| **REST API Gateway** | 30 seconds | Returns `504 Gateway Timeout`. |
+| **Voice Call Max Duration** | 2 hours | Automatically ends call session and triggers webhook. |
+| **Silence / Idle Timeout** | 120 seconds | Call terminated if recipient remains silent after 3 agent prompts. |
+| **Webhook Delivery Attempt** | 10 seconds | Retried 5 times with exponential backoff before being marked dead-letter. |
+
+---
+
+## Requesting Limit Increases
+
+Enterprise customers can request increased concurrency quotas, custom TTS model instances, and private SIP trunking:
+
+1. Visit the **Billing & Plan** tab in your Pingr AI Console.
+2. Click **Request Quota Increase** or reach out directly to your account manager at [support@pingr.ai](mailto:support@pingr.ai).

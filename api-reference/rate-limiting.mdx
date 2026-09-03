@@ -1,0 +1,90 @@
+---
+title: "Rate Limiting"
+sidebarTitle: "Rate Limiting"
+icon: "gauge-high"
+description: "Understand rate limits, burst quotas, and headers across Pingr AI endpoints"
+---
+
+# Rate Limiting
+
+To guarantee low audio latency and 99.99% uptime across our real-time voice infrastructure, Pingr AI enforces rate limits on REST API requests and concurrent voice audio sessions.
+
+---
+
+## Tier Rate Limits
+
+| Plan Tier | REST Requests / Minute | Concurrent Outbound Calls | Webhook Delivery Rate |
+| :--- | :--- | :--- | :--- |
+| **Developer / Free** | 60 req / min | 2 concurrent streams | 10 events / sec |
+| **Growth** | 600 req / min | 25 concurrent streams | 100 events / sec |
+| **Enterprise** | Custom (10,000+ req/min) | 500+ concurrent streams | Unlimited / Dedicated |
+
+---
+
+## Rate Limit Headers
+
+Every HTTP response from Pingr AI includes headers describing your current quota status:
+
+| Header | Description |
+| :--- | :--- |
+| `X-RateLimit-Limit` | The maximum number of requests allowed in the current time window. |
+| `X-RateLimit-Remaining` | The number of remaining requests allowed in the current time window. |
+| `X-RateLimit-Reset` | Unix epoch timestamp (in seconds) indicating when the current quota window resets. |
+| `Retry-After` | Included only when rate-limited. The number of seconds to wait before retrying. |
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-RateLimit-Limit: 600
+X-RateLimit-Remaining: 582
+X-RateLimit-Reset: 1788448860
+```
+
+---
+
+## Handling 429 Responses
+
+When rate limits are exceeded, Pingr AI responds with HTTP status code `429 Too Many Requests`:
+
+```json
+{
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "Too many requests. Please throttle your traffic and retry after 2 seconds.",
+    "type": "rate_limit_error",
+    "retry_after": 2
+  }
+}
+```
+
+### Implementing Exponential Backoff with Jitter
+
+To reliably recover from rate limits, implement exponential backoff with full jitter in your client code:
+
+```typescript
+async function fetchWithRetry(url: string, options: RequestInit, retries = 5, backoff = 500) {
+  try {
+    const res = await fetch(url, options);
+
+    if (res.status === 429 && retries > 0) {
+      const retryAfter = Number(res.headers.get('Retry-After')) * 1000 || backoff;
+      // Add random jitter between 0ms and 200ms
+      const jitter = Math.random() * 200;
+      await new Promise(r => setTimeout(r, retryAfter + jitter));
+      return fetchWithRetry(url, options, retries - 1, backoff * 2);
+    }
+
+    return res;
+  } catch (err) {
+    if (retries > 0) {
+      await new Promise(r => setTimeout(r, backoff));
+      return fetchWithRetry(url, options, retries - 1, backoff * 2);
+    }
+    throw err;
+  }
+}
+```
+
+<Tip>
+  If your workload requires higher outbound call concurrency or custom burst allowances, contact our team at [enterprise@pingr.ai](mailto:enterprise@pingr.ai).
+</Tip>

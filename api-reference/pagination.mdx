@@ -1,0 +1,121 @@
+---
+title: "Pagination"
+sidebarTitle: "Pagination"
+icon: "ellipsis"
+description: "Navigate through large result sets using cursor-based pagination"
+---
+
+# Pagination
+
+All top-level collection endpoints (such as `GET /api/v1/calls`, `GET /api/v1/agents`, and `GET /api/v1/campaigns`) return paginated results using cursor-based pagination. Cursor pagination provides consistent performance and eliminates duplicate or missing items during active inserts.
+
+---
+
+## Query Parameters
+
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `limit` | integer | `20` | Number of objects to return. Acceptable range: `1` to `100`. |
+| `starting_after` | string | `null` | An object ID defining your place in the list. Fetches records created immediately *after* this cursor. |
+| `ending_before` | string | `null` | An object ID defining your place in the list. Fetches records created immediately *before* this cursor (reverse navigation). |
+
+---
+
+## Standard Response Structure
+
+Every list response wraps item arrays inside a standard paginated envelope:
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "call_101a9b",
+      "agent_id": "ag_8f3b0e2a9",
+      "status": "completed",
+      "created_at": "2026-09-03T11:45:00Z"
+    },
+    {
+      "id": "call_102c4d",
+      "agent_id": "ag_8f3b0e2a9",
+      "status": "completed",
+      "created_at": "2026-09-03T11:46:12Z"
+    }
+  ],
+  "has_more": true,
+  "next_cursor": "call_102c4d",
+  "total_count": 1420
+}
+```
+
+### Response Fields
+
+- **`data`**: Array containing the requested resource objects.
+- **`has_more`**: A boolean flag. Set to `true` if more records exist beyond the current page; otherwise `false`.
+- **`next_cursor`**: The cursor ID of the last element in `data`. Pass this as `starting_after` on your subsequent request.
+- **`total_count`**: Total number of matching elements across the entire collection.
+
+---
+
+## Code Example: Iterating Through All Pages
+
+### Python Example
+
+```python
+import os
+import requests
+
+API_KEY = os.getenv("PINGR_API_KEY")
+BASE_URL = "https://api.pingr.ai/api/v1/calls"
+headers = {"Authorization": f"Bearer {API_KEY}"}
+
+def fetch_all_calls():
+    all_calls = []
+    has_more = True
+    cursor = None
+
+    while has_more:
+        params = {"limit": 50}
+        if cursor:
+            params["starting_after"] = cursor
+
+        res = requests.get(BASE_URL, headers=headers, params=params).json()
+        calls = res.get("data", [])
+        all_calls.extend(calls)
+
+        has_more = res.get("has_more", False)
+        cursor = res.get("next_cursor")
+        print(f"Retrieved {len(calls)} calls. Next cursor: {cursor}")
+
+    return all_calls
+
+calls = fetch_all_calls()
+print(f"Fetched total of {len(calls)} calls.")
+```
+
+### TypeScript / Node.js Example
+
+```typescript
+async function fetchAllAgents() {
+  const agents = [];
+  let hasMore = true;
+  let cursor: string | null = null;
+
+  while (hasMore) {
+    const url = new URL('https://api.pingr.ai/api/v1/agents');
+    url.searchParams.set('limit', '50');
+    if (cursor) url.searchParams.set('starting_after', cursor);
+
+    const res = await fetch(url.toString(), {
+      headers: { 'Authorization': `Bearer ${process.env.PINGR_API_KEY}` }
+    });
+    const json = await res.json();
+
+    agents.push(...json.data);
+    hasMore = json.has_more;
+    cursor = json.next_cursor;
+  }
+
+  return agents;
+}
+```
