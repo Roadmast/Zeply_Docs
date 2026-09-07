@@ -1,42 +1,49 @@
 ---
 title: "Webhooks API"
-api: "POST /api/v1/webhooks"
-description: "Register external webhook listener URLs"
+description: "Subscribe to real-time events and verify inbound webhook deliveries"
 ---
 
-### Headers
+# Webhooks API Reference
 
-<ParamField header="Authorization" type="string" required>
-  Bearer token: `Bearer <token>`
-</ParamField>
+The **Webhooks API** enables you to programmatically manage external HTTPS webhook subscriptions. Register callback URLs to receive immediate alerts for call events, conversational messaging, lead generation, ticket routing, and campaign completion.
 
-### Body
+---
 
-<ParamField body="url" type="string" required>
-  Target HTTPS webhook endpoint.
-</ParamField>
+## Endpoint Suite
 
-<ParamField body="events" type="array" required>
-  Array of event subscriptions e.g. `["call.started", "call.ended", "transcript.ready"]`.
-</ParamField>
+Explore the comprehensive Webhooks API reference:
 
-### Response
+<CardGroup cols={2}>
+  <Card title="Webhooks Overview" icon="compass" href="/api-reference/webhooks/overview">
+    Event catalog (all 19 events), HMAC SHA-256 signatures, and delivery security.
+  </Card>
+  <Card title="Create Webhook" icon="plus" href="/api-reference/webhooks/create-webhook">
+    POST /api/v1/webhooks — Register callback URL and generate signing secret.
+  </Card>
+  <Card title="List Webhooks" icon="list" href="/api-reference/webhooks/list-webhooks">
+    GET /api/v1/webhooks — Retrieve all subscriptions for your organization.
+  </Card>
+  <Card title="Get Webhook" icon="eye" href="/api-reference/webhooks/get-webhook">
+    GET /api/v1/webhooks/{webhook_id} — Retrieve subscription details and signing secret.
+  </Card>
+  <Card title="Update Webhook" icon="pen-to-square" href="/api-reference/webhooks/update-webhook">
+    PUT /api/v1/webhooks/{webhook_id} — Modify callback URL, subscribed events, or active state.
+  </Card>
+  <Card title="Delete Webhook" icon="trash" href="/api-reference/webhooks/delete-webhook">
+    DELETE /api/v1/webhooks/{webhook_id} — Deregister a webhook subscription.
+  </Card>
+</CardGroup>
 
-<ResponseField name="webhook_id" type="string">
-  Webhook registration identifier.
-</ResponseField>
+---
 
-<ResponseField name="signing_secret" type="string">
-  HMAC secret key used to verify payloads. Keep this safe.
-</ResponseField>
+## Quick Example: Creating a Webhook
 
-<ResponseExample>
-```json 201 Created
-{
-  "webhook_id": "wh_18492048",
-  "url": "https://myapp.com/api/webhooks/pingr",
-  "events": ["call.ended", "transcript.ready"],
-  "signing_secret": "whsec_live_9df0283e71029abce"
-}
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/webhooks" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com/api/webhooks/pingr",
+    "events": ["call.completed", "message.received"]
+  }'
 ```
-</ResponseExample>

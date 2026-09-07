@@ -1,0 +1,156 @@
+---
+title: "List quick replies"
+sidebarTitle: "List quick replies"
+api: "GET /api/v1/quick-replies"
+description: "Retrieve paginated quick reply snippets for the organization with automated Redis caching"
+---
+
+Retrieve all configured quick reply snippets for your organization. Responses are served from a low-latency Redis cache with automatic pagination controls.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Query Parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField query="limit" type="integer" default="100">
+  Maximum number of quick replies to retrieve per page (1 to 100).
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Current page index (minimum `1`).
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="has_more" type="boolean">
+  Indicates whether additional items exist beyond the current page.
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  The requested page size limit.
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page index.
+</ResponseField>
+
+<ResponseField name="total" type="integer">
+  Total number of quick replies registered for the organization.
+</ResponseField>
+
+<ResponseField name="items" type="object[]">
+  Array of quick reply objects.
+
+  <Expandable title="QuickReplyResponse Fields">
+    <ResponseField name="id" type="string">
+      Unique UUID identifier of the quick reply.
+    </ResponseField>
+    <ResponseField name="shortcut" type="string">
+      Shortcut trigger string.
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      Snippet message body text.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 creation timestamp.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/quick-replies?limit=50&page=1" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/quick-replies"
+headers = {
+    "Authorization": "Bearer <token>"
+}
+params = {
+    "limit": 50,
+    "page": 1
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/quick-replies?limit=50&page=1", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "has_more": false,
+  "limit": 50,
+  "page": 1,
+  "total": 3,
+  "items": [
+    {
+      "id": "c3f81e19-5d22-48a3-bb90-098716b2ef3a",
+      "shortcut": "/support-hours",
+      "content": "Our live support team is available Monday through Friday from 9:00 AM to 6:00 PM EST.",
+      "created_at": "2026-09-07T15:10:00Z"
+    },
+    {
+      "id": "9a2e3d41-7b08-410a-85d1-6c5e7b29a144",
+      "shortcut": "/greeting",
+      "content": "Hi there! Thanks for reaching out to Pingr AI. How can I assist you today?",
+      "created_at": "2026-09-06T10:00:00Z"
+    },
+    {
+      "id": "1e2f3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b",
+      "shortcut": "/refund",
+      "content": "We offer a 30-day money-back guarantee. Please provide your invoice number to start the process.",
+      "created_at": "2026-09-05T08:15:00Z"
+    }
+  ]
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Could not validate credentials"
+}
+```
+
+</ResponseExample>

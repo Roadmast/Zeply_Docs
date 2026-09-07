@@ -1,0 +1,146 @@
+---
+title: "Knowledge Base Overview"
+sidebarTitle: "Overview"
+description: "Upload, store, and ingest enterprise documents for real-time RAG context in Voice AI and messaging"
+---
+
+# Knowledge Base API
+
+The **Knowledge Base API** enables you to upload, manage, and retrieve proprietary company documentation. Uploaded files (`PDF`, `DOCX`, `TXT`) are automatically parsed, chunked, converted into vector embeddings, and stored in Pingr AI's vector database. During live Voice AI phone conversations and automated WhatsApp messaging, agents query this knowledge base via semantic search to deliver accurate, grounded answers in real time.
+
+```
++-------------------------------------------------------------+
+|               Knowledge Base Ingestion Pipeline             |
+|                                                             |
+|   +-----------------------+     +-----------------------+   |
+|   | Corporate Documents   |     | Product & Policy Docs |   |
+|   |  (PDF / DOCX / TXT)   |     |  (Pricing / FAQs / KB)|   |
+|   +-----------+-----------+     +-----------+-----------+   |
+|               \                             /               |
+|                v                           v                |
+|              +-------------------------------+              |
+|              |     Document Parser & Chunker |              |
+|              |    (Extract text & paragraphs)|              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                              v                              |
+|              +-------------------------------+              |
+|              |    Vector Embedding Engine    |              |
+|              |  (High-dimensional embeddings)|              |
+|              +---------------+---------------+              |
+|                              |                              |
+|              +---------------+---------------+              |
+|              |                               |              |
+|              v                               v              |
+|     +-----------------+             +-----------------+     |
+|     |  Cloud Storage  |             | Vector Database |     |
+|     | (R2 / S3 Store) |             | (Semantic RAG)  |     |
+|     +-----------------+             +-----------------+     |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Multi-Format Ingestion" icon="file-import">
+    Upload standard documentation formats including Portable Document Format (`PDF`), Microsoft Word (`DOCX`), and plain text (`TXT`).
+  </Card>
+  <Card title="Automated Vectorization" icon="brain-circuit">
+    Background workers chunk document content and generate high-precision vector embeddings for instant semantic search.
+  </Card>
+  <Card title="Secure Cloud Storage" icon="shield-halved">
+    Source document files are encrypted and securely stored in S3/R2 object storage with streaming download support.
+  </Card>
+  <Card title="Voice AI RAG Integration" icon="waveform-lines">
+    Conversational Voice agents reference document vectors mid-call to answer caller inquiries without hallucinating.
+  </Card>
+</CardGroup>
+
+---
+
+## Supported File Formats
+
+| Format | Extension | Max File Size | Processing Pipeline |
+| :--- | :--- | :--- | :--- |
+| **Plain Text** | `.txt` | 10 MB | Direct UTF-8 text extraction and chunking |
+| **PDF Document** | `.pdf` | 25 MB | Text stream extraction, OCR fallback, structural paragraph parsing |
+| **Word Document** | `.docx` | 25 MB | OpenXML body parsing, header/table extraction |
+
+---
+
+## Rate Limiting Tiers
+
+- **Document Upload**: `RateLimitTier.EXPENSIVE` — Protects background vectorization queues and object storage quotas.
+- **Document Listing & Download**: `RateLimitTier.READ` — High-throughput cached metadata and file streaming.
+- **Document Deletion**: `RateLimitTier.WRITE` — Fast purging across metadata, storage, and vector indexes.
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/knowledge-base/upload` | Upload a document to storage and vector database |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/knowledge-base` | List all uploaded documents for the organization |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/knowledge-base/{document_id}/download` | Securely download the raw document file |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/knowledge-base/{document_id}` | Permanently purge a document from DB, storage, and vectors |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/templates/create-from-library" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Upload document</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/knowledge-base/upload
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/knowledge-base/upload-document" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

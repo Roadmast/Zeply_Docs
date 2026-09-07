@@ -1,0 +1,205 @@
+---
+title: "Get flow templates"
+sidebarTitle: "Pre-built templates"
+api: "GET /api/v1/whatsapp-flows/templates"
+description: "Retrieve curated pre-built WhatsApp Flow templates for quick deployment"
+---
+
+Returns the catalog of curated pre-built WhatsApp Flow blueprints provided by Pingr AI. These templates include pre-configured screens, form inputs, validation rules, and JSON definitions for instant cloning.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+---
+
+### Response Fields
+
+Returns an array of `WhatsappFlowTemplateResponse` objects:
+
+<ResponseField name="templates" type="WhatsappFlowTemplateResponse[]">
+  Array of template blueprints:
+  <Expandable title="Template attributes">
+    <ResponseField name="id" type="string">Template identifier slug (e.g. `lead_gen_basic`).</ResponseField>
+    <ResponseField name="name" type="string">Template display name.</ResponseField>
+    <ResponseField name="description" type="string">Detailed explanation of the flow workflow.</ResponseField>
+    <ResponseField name="category" type="string">Template category (`Lead Generation`, `Booking`, etc.).</ResponseField>
+    <ResponseField name="icon" type="string">UI icon identifier.</ResponseField>
+    <ResponseField name="screen_count" type="number">Number of screens in this flow.</ResponseField>
+    <ResponseField name="json_definition" type="object">Ready-to-use Meta Flow JSON definition.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/whatsapp-flows/templates" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/whatsapp-flows/templates"
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/whatsapp-flows/templates", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.pingr.ai/api/v1/whatsapp-flows/templates"))
+    .header("Authorization", "Bearer <token>")
+    .GET()
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+[
+  {
+    "id": "appointment_booking_v1",
+    "name": "Appointment Booking",
+    "description": "2-screen flow capturing preferred date, time, and service type",
+    "category": "Appointment Booking",
+    "icon": "calendar",
+    "screen_count": 2,
+    "json_definition": {
+      "version": "3.0",
+      "screens": [
+        {
+          "id": "SELECT_SERVICE",
+          "title": "Select Service",
+          "terminal": false,
+          "data": {},
+          "layout": {
+            "type": "SingleColumnLayout",
+            "children": [
+              {
+                "type": "Dropdown",
+                "name": "service_type",
+                "label": "Service",
+                "required": true,
+                "data-source": [
+                  {"id": "consultation", "title": "Free Consultation"},
+                  {"id": "support", "title": "Technical Support"}
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/whatsapp-flows/list-flows" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Validate flow</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/whatsapp-flows/validate
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/whatsapp-flows/validate-flow" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

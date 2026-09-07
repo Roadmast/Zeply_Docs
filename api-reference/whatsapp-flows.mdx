@@ -1,0 +1,74 @@
+---
+title: "WhatsApp Flows API"
+description: "Build, validate, manage, publish, and execute interactive WhatsApp native forms and workflows"
+---
+
+# WhatsApp Flows API Reference
+
+The **WhatsApp Flows API** allows you to programmatically design, validate, manage, publish, and execute native interactive flows on the WhatsApp Business Platform. WhatsApp Flows empower businesses to deliver app-like rich interactions—such as lead generation questionnaires, appointment scheduling, event RSVPs, and dynamic order customizers—directly within WhatsApp chats.
+
+---
+
+## Endpoint Suite
+
+Explore the full suite of WhatsApp Flows endpoints:
+
+<CardGroup cols={2}>
+  <Card title="Flows Overview" icon="compass" href="/api-reference/whatsapp-flows/overview">
+    Architecture, flow lifecycle, JSON schema specs, and Meta integration.
+  </Card>
+  <Card title="List Flows" icon="list" href="/api-reference/whatsapp-flows/list-flows">
+    GET /api/v1/whatsapp-flows — Retrieve all organizational flows with optional category filtering.
+  </Card>
+  <Card title="Pre-built Templates" icon="layer-group" href="/api-reference/whatsapp-flows/get-flow-templates">
+    GET /api/v1/whatsapp-flows/templates — Browse production-ready WhatsApp Flow blueprints.
+  </Card>
+  <Card title="Validate Flow JSON" icon="shield-check" href="/api-reference/whatsapp-flows/validate-flow">
+    POST /api/v1/whatsapp-flows/validate — Validate Flow JSON syntax, screens, and terminal actions.
+  </Card>
+  <Card title="Import Flow" icon="file-import" href="/api-reference/whatsapp-flows/import-flow">
+    POST /api/v1/whatsapp-flows/import — Parse and import raw Meta Flow JSON definitions directly.
+  </Card>
+  <Card title="Create Flow" icon="plus" href="/api-reference/whatsapp-flows/create-flow">
+    POST /api/v1/whatsapp-flows — Build a custom WhatsApp Flow from scratch.
+  </Card>
+  <Card title="Get Flow" icon="file-lines" href="/api-reference/whatsapp-flows/get-flow">
+    GET /api/v1/whatsapp-flows/{flow_id} — Fetch flow details, screen layout, and status.
+  </Card>
+  <Card title="Update Flow" icon="pen-to-square" href="/api-reference/whatsapp-flows/update-flow">
+    PUT /api/v1/whatsapp-flows/{flow_id} — Modify metadata, category, or draft JSON layout.
+  </Card>
+  <Card title="Delete Flow" icon="trash" href="/api-reference/whatsapp-flows/delete-flow">
+    DELETE /api/v1/whatsapp-flows/{flow_id} — Delete flow definitions and linked assets.
+  </Card>
+  <Card title="Publish Flow" icon="paper-plane" href="/api-reference/whatsapp-flows/publish-flow">
+    POST /api/v1/whatsapp-flows/{flow_id}/publish — Deploy the flow to the Meta Business Platform.
+  </Card>
+  <Card title="Execute Flow Screen" icon="play" href="/api-reference/whatsapp-flows/execute-flow-screen">
+    POST /api/v1/whatsapp-flows/{flow_id}/execute — Run server-side dynamic data exchange logic.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example: Creating a Flow
+
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/whatsapp-flows" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Quick Lead Form",
+    "category": "Lead Generation",
+    "json_definition": {
+      "version": "3.0",
+      "screens": [
+        {
+          "id": "LEAD_SCREEN",
+          "title": "Contact Details",
+          "layout": { "type": "SingleColumnLayout", "children": [] }
+        }
+      ]
+    }
+  }'
+```

@@ -1,46 +1,61 @@
 ---
 title: "Campaigns API"
-api: "POST /api/v1/campaigns"
-description: "Launch scheduled outbound batch campaigns"
+description: "Broadcast outbound WhatsApp messaging and voice campaigns at enterprise scale"
 ---
 
-### Headers
+# Campaigns API Reference
 
-<ParamField header="Authorization" type="string" required>
-  Bearer token: `Bearer <token>`
-</ParamField>
+The **Campaigns API** empowers you to orchestrate high-volume outbound messaging campaigns across your customer base. You can target specific audiences via tags or direct contact lists, bind approved WhatsApp message templates, execute immediate or scheduled broadcasts, and manage operational lifecycles in real time.
 
-### Body
+---
 
-<ParamField body="name" type="string" required>
-  Campaign title.
-</ParamField>
+## Endpoint Suite
 
-<ParamField body="agent_id" type="string" required>
-  Voice agent identifier.
-</ParamField>
+Explore the comprehensive Campaigns API reference pages:
 
-<ParamField body="contacts" type="array" required>
-  Array of contact objects containing `to_number` and optional custom variables.
-</ParamField>
+<CardGroup cols={2}>
+  <Card title="Campaigns Overview" icon="compass" href="/api-reference/campaigns/overview">
+    Architecture, lifecycle states, audience targeting modes, and metrics.
+  </Card>
+  <Card title="Create Campaign" icon="plus" href="/api-reference/campaigns/create-campaign">
+    POST /api/v1/campaigns — Provision immediate or scheduled broadcasts.
+  </Card>
+  <Card title="List Campaigns" icon="list" href="/api-reference/campaigns/list-campaigns">
+    GET /api/v1/campaigns — Paginated campaign lists with delivery metrics.
+  </Card>
+  <Card title="Get Campaign" icon="eye" href="/api-reference/campaigns/get-campaign">
+    GET /api/v1/campaigns/{campaign_id} — Real-time telemetry and funnel counters.
+  </Card>
+  <Card title="Pause Campaign" icon="pause" href="/api-reference/campaigns/pause-campaign">
+    POST /api/v1/campaigns/{campaign_id}/pause — Temporarily halt sending.
+  </Card>
+  <Card title="Resume Campaign" icon="play" href="/api-reference/campaigns/resume-campaign">
+    POST /api/v1/campaigns/{campaign_id}/resume — Restart delivery.
+  </Card>
+  <Card title="Cancel Campaign" icon="ban" href="/api-reference/campaigns/cancel-campaign">
+    POST /api/v1/campaigns/{campaign_id}/cancel — Terminate in-flight campaigns.
+  </Card>
+  <Card title="Delete Campaign" icon="trash" href="/api-reference/campaigns/delete-campaign">
+    DELETE /api/v1/campaigns/{campaign_id} — Purge campaign and message records.
+  </Card>
+  <Card title="Export PDF Report" icon="file-pdf" href="/api-reference/campaigns/export-pdf">
+    GET /api/v1/campaigns/{campaign_id}/export/pdf — Executive summary PDF report.
+  </Card>
+</CardGroup>
 
-### Response
+---
 
-<ResponseField name="campaign_id" type="string">
-  Generated campaign identifier.
-</ResponseField>
+## Quick Example: Creating a Campaign
 
-<ResponseField name="total_contacts" type="number">
-  Count of validated destination phone numbers queued.
-</ResponseField>
-
-<ResponseExample>
-```json 201 Created
-{
-  "campaign_id": "cmp_54190823",
-  "name": "Customer Followup",
-  "status": "scheduled",
-  "total_contacts": 450
-}
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/campaigns" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Q3 Lead Reactivation",
+    "whatsapp_phone_number_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
+    "message_template_id": "3a4b5c6d-7e8f-9012-3456-789abcdef012",
+    "audience_type": "tags",
+    "audience_tags": ["high_intent", "q3_leads"]
+  }'
 ```
-</ResponseExample>

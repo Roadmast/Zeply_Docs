@@ -1,0 +1,51 @@
+---
+title: "Contacts API"
+description: "Manage address books, customer segmentation tags, notes, and bulk contact ingestion"
+---
+
+# Contacts API Reference
+
+The **Contacts API** provides comprehensive programmatic control over your organization's customer and lead directories. Define phone numbers, assign classification tags for audience targeting, store extensible JSON metadata, and import bulk contact lists via spreadsheets.
+
+---
+
+## Endpoint Suite
+
+Explore the comprehensive Contacts API reference pages:
+
+<CardGroup cols={2}>
+  <Card title="Contacts Overview" icon="compass" href="/api-reference/contacts/overview">
+    Architecture, data models, segmentation tags, custom metadata, and security isolation.
+  </Card>
+  <Card title="Create Contact" icon="user-plus" href="/api-reference/contacts/create-contact">
+    POST /api/v1/contacts — Manually add a new contact with phone, tags, and notes.
+  </Card>
+  <Card title="List Contacts" icon="list" href="/api-reference/contacts/list-contacts">
+    GET /api/v1/contacts — Retrieve all contacts for your organization.
+  </Card>
+  <Card title="Update Contact" icon="pen-to-square" href="/api-reference/contacts/update-contact">
+    PUT /api/v1/contacts/{contact_id} — Modify profile details, tags, and custom fields.
+  </Card>
+  <Card title="Delete Contact" icon="trash" href="/api-reference/contacts/delete-contact">
+    DELETE /api/v1/contacts/{contact_id} — Permanently remove a contact record.
+  </Card>
+  <Card title="Bulk Upload Contacts" icon="file-csv" href="/api-reference/contacts/bulk-upload">
+    POST /api/v1/contacts/bulk-upload — Batch import contacts from CSV or Excel files.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example: Creating a Contact
+
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/contacts" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone_number": "+14155550199",
+    "name": "Jane Doe",
+    "tags": ["vip", "enterprise"],
+    "notes": "Interested in enterprise pricing"
+  }'
+```

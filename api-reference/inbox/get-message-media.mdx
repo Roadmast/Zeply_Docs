@@ -1,0 +1,101 @@
+---
+title: "Get message media"
+sidebarTitle: "Download media"
+api: "GET /api/v1/inbox/media/{message_id}"
+description: "Securely stream and download attached media files from S3/R2 storage"
+---
+
+Stream or download the binary media content associated with a message (photos, voice notes, PDFs, or videos). Authenticates access and proxies content directly from cloud object storage.
+
+---
+
+### Authentication
+
+This endpoint supports token authentication passed via Bearer header or access query parameter.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Path Parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField path="message_id" type="string" required>
+  Unique UUID identifier of the message containing the media attachment.
+</ParamField>
+
+---
+
+### Response Headers & Content
+
+This endpoint streams binary file data with appropriate headers:
+
+| Header | Example Value | Description |
+| :--- | :--- | :--- |
+| `Content-Type` | `image/jpeg` / `application/pdf` | MIME type of original file |
+| `Content-Disposition` | `inline; filename="receipt.pdf"` | Browser rendering directive |
+| `Cache-Control` | `private, max-age=3600` | Client caching duration |
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/inbox/media/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e" \
+  -H "Authorization: Bearer <token>" \
+  --output downloaded_attachment.pdf
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/inbox/media/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e"
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers, stream=True)
+if response.status_code == 200:
+    with open("downloaded_attachment.pdf", "wb") as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    print("Media downloaded successfully")
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/inbox/media/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const blob = await response.blob();
+const objectUrl = URL.createObjectURL(blob);
+window.open(objectUrl);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Binary Stream
+<Binary File Stream>
+```
+
+```json 404 Not Found
+{
+  "detail": "Message media not found"
+}
+```
+
+</ResponseExample>

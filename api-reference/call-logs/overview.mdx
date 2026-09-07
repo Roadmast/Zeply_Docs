@@ -1,0 +1,84 @@
+---
+title: "Call Logs Overview"
+sidebarTitle: "Overview"
+description: "Inspect historical telephony and WhatsApp voice calls, transcripts, latency metrics, and audio recordings"
+---
+
+# Call Logs API
+
+The **Call Logs API** provides complete visibility into inbound and outbound voice calls handled by Pingr AI voice agents and telephony providers. Each call record contains lifecycle timestamps, duration metrics, speech-to-text transcripts, AI-generated summaries, cost calculations, and secure access to audio recordings.
+
+```
++-------------------------------------------------------------+
+|                Voice Call Telephony Pipeline                |
+|                                                             |
+|   +-----------------------+     +-----------------------+   |
+|   |  Inbound Caller Dial  |     | Outbound Agent Trigger|   |
+|   +-----------+-----------+     +-----------+-----------+   |
+|               \                             /               |
+|                v                           v                |
+|              +-------------------------------+              |
+|              |     WebRTC / SIP Gateway      |              |
+|              | (Twilio / Plivo / WhatsApp)   |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                              v                              |
+|              +-------------------------------+              |
+|              |   Pingr AI Voice Orchestrator |              |
+|              |   (LLM + STT + TTS Pipeline)  |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|              +---------------+---------------+              |
+|              |                               |              |
+|              v                               v              |
+|     +-----------------+             +-----------------+     |
+|     |  Object Storage |             | PostgreSQL DB   |     |
+|     | (Audio Streams) |             | (Call Metadata) |     |
+|     +-----------------+             +-----------------+     |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Detailed Call Auditing" icon="phone-volume">
+    Track caller and recipient phone numbers, agent identifiers, directional flows (`inbound` or `outbound`), and precise connection timestamps.
+  </Card>
+  <Card title="Speech-to-Text & Summaries" icon="message-lines">
+    Access full dialog transcripts and structured, AI-generated summaries capturing caller intent, outcomes, and sentiment.
+  </Card>
+  <Card title="Secure Recording Streaming" icon="waveform-lines">
+    Stream and download encrypted `.ogg` call recordings via a secure proxy endpoint without exposing cloud bucket credentials.
+  </Card>
+  <Card title="Usage & Cost Tracking" icon="calculator">
+    Inspect calculated billable duration and per-call carrier/compute costs for complete financial transparency.
+  </Card>
+</CardGroup>
+
+---
+
+## Call Lifecycle Statuses
+
+Calls transition through standardized states during their execution:
+
+| Status | Description |
+| :--- | :--- |
+| `initiated` | Call has been dispatched to telephony provider or incoming hook received |
+| `ringing` | Destination device is alerting; ringing signal acknowledged |
+| `in-progress` | Audio channel established; speech agent or user actively conversing |
+| `completed` | Call terminated normally; duration and billing computed |
+| `busy` | Recipient line was engaged or rejected |
+| `failed` | Carrier failure, invalid number, or signaling timeout |
+| `no-answer` | Ringing timeout reached without recipient picking up |
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/call-logs` | List call history logs with pagination, status, direction, and query filters |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/call-logs/{call_log_id}` | Retrieve details, transcript, and summary for a specific call |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/call-logs/{call_log_id}/audio` | Securely stream or download the recorded call audio stream (`audio/ogg`) |

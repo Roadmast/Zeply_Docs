@@ -1,0 +1,193 @@
+---
+title: "Send message"
+sidebarTitle: "Send message"
+api: "POST /api/v1/inbox/messages/{inbox_id}"
+description: "Send an outbound WhatsApp text or rich media message inside a conversation ticket"
+---
+
+Dispatch an outbound message to a customer over WhatsApp within an active ticket. Supports plain text, rich media (images, documents, audio voice notes, videos), and quoted reply contexts.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Path Parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField path="inbox_id" type="string" required>
+  Unique UUID identifier of the inbox ticket.
+</ParamField>
+
+---
+
+### Request Body
+
+<ParamField body="body" type="string">
+  Text body or caption for media attachments. Required if `message_type` is `text`.
+</ParamField>
+
+<ParamField body="message_type" type="string" default="text">
+  Message type category: `text`, `image`, `document`, `audio`, or `video`.
+</ParamField>
+
+<ParamField body="media_url" type="string">
+  Storage path or public URL of the media file (obtained from `POST /api/v1/inbox/upload`). Required for media message types.
+</ParamField>
+
+<ParamField body="media_filename" type="string">
+  Custom filename for document/media attachments (e.g. `Invoice_90412.pdf`).
+</ParamField>
+
+<ParamField body="media_mime_type" type="string">
+  MIME type of the media file (e.g. `application/pdf`, `image/jpeg`).
+</ParamField>
+
+<ParamField body="context_message_id" type="string">
+  Optional `wamid` of an incoming message to reply to in quoted context.
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="id" type="string">
+  UUID of the created message record.
+</ResponseField>
+
+<ResponseField name="inbox_id" type="string">
+  UUID of the ticket.
+</ResponseField>
+
+<ResponseField name="whatsapp_message_id" type="string">
+  Meta WhatsApp message identifier (`wamid...`).
+</ResponseField>
+
+<ResponseField name="direction" type="string">
+  Will be `outbound`.
+</ResponseField>
+
+<ResponseField name="message_type" type="string">
+  Dispatched message type.
+</ResponseField>
+
+<ResponseField name="body" type="string">
+  Text content or caption.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Initial delivery status (`sent`).
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 creation timestamp.
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL Text Message
+curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/e4f3a2b1-9c8d-7e6f-5a4b-3c2d1e0f9a8b" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "body": "Hello Sarah, your enterprise demonstration has been confirmed!",
+    "message_type": "text"
+  }'
+```
+
+```bash cURL Media Attachment
+curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/e4f3a2b1-9c8d-7e6f-5a4b-3c2d1e0f9a8b" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "body": "Here is the architectural overview document for your review.",
+    "message_type": "document",
+    "media_url": "inbox-media/temp/e0b973dc-13a8-4c9f-861a-03e5b4b1a8d9/whitepaper.pdf",
+    "media_filename": "Pingr_Overview.pdf",
+    "media_mime_type": "application/pdf"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/inbox/messages/e4f3a2b1-9c8d-7e6f-5a4b-3c2d1e0f9a8b"
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+payload = {
+    "body": "Hello Sarah, your enterprise demonstration has been confirmed!",
+    "message_type": "text"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/inbox/messages/e4f3a2b1-9c8d-7e6f-5a4b-3c2d1e0f9a8b", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    body: "Hello Sarah, your enterprise demonstration has been confirmed!",
+    message_type: "text"
+  })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "id": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+  "inbox_id": "e4f3a2b1-9c8d-7e6f-5a4b-3c2d1e0f9a8b",
+  "organization_id": "e0b973dc-13a8-4c9f-861a-03e5b4b1a8d9",
+  "contact_id": "8a7c2b3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+  "whatsapp_message_id": "wamid.HBgLMTE4OTAwOTk5MTE1FQIAERgSRjQ1Q0IzOTk3RTYwRTczMzNDBB==",
+  "direction": "outbound",
+  "message_type": "text",
+  "body": "Hello Sarah, your enterprise demonstration has been confirmed!",
+  "status": "sent",
+  "media_url": null,
+  "media_mime_type": null,
+  "media_filename": null,
+  "context_message_id": null,
+  "reactions": null,
+  "created_at": "2026-09-07T15:32:00Z",
+  "updated_at": "2026-09-07T15:32:00Z"
+}
+```
+
+```json 400 Bad Request
+{
+  "detail": "Valid organization_id header is required"
+}
+```
+
+</ResponseExample>

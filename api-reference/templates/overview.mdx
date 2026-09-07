@@ -1,0 +1,174 @@
+---
+title: "Templates Overview"
+sidebarTitle: "Overview"
+description: "Design, synchronize, and manage Meta-approved WhatsApp Business message templates in Pingr AI"
+---
+
+# Templates API
+
+The **Templates API** enables you to programmatically create, manage, synchronize, and deploy WhatsApp Business message templates. In the WhatsApp Business ecosystem, outbound broadcasts must utilize pre-approved structured templates containing verified header, body, footer, and interactive button components.
+
+Pingr AI offers a two-tier template management system:
+1. **Custom Templates API**: Create and register bespoke templates directly on Meta Graph API and track their approval lifecycles.
+2. **Meta Template Library API**: Browse Meta's curated catalog of pre-approved global industry templates and provision them to your WhatsApp Business Account (WABA) instantaneously.
+
+```
++-------------------------------------------------------------+
+|               WhatsApp Message Template Lifecycle           |
+|                                                             |
+|   +-----------------------+     +-----------------------+   |
+|   |   Custom Template     |     |  Meta Library Catalog |   |
+|   | (Header/Body/Buttons) |     | (Pre-approved design) |   |
+|   +-----------+-----------+     +-----------+-----------+   |
+|               \                             /               |
+|                v                           v                |
+|              +-------------------------------+              |
+|              |   Meta Graph API Submission   |              |
+|              |      (v19.0 WABA Gateway)     |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                              v                              |
+|              +-------------------------------+              |
+|              |     Automated Review State    |              |
+|              |  (PENDING -> APPROVED/REJECT) |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                              v                              |
+|              +-------------------------------+              |
+|              |   Pingr AI Local Database     |              |
+|              | (Sync & Campaign Orchestration)|             |
+|              +-------------------------------+              |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Direct Meta Submission" icon="paper-plane">
+    Submit custom marketing, utility, and authentication templates directly to Meta Graph API v19.0.
+  </Card>
+  <Card title="Pre-Approved Template Library" icon="book-bookmark">
+    Query Meta's global message template library by industry, topic, language, and use case for instant adoption.
+  </Card>
+  <Card title="Bi-Directional Synchronization" icon="rotate">
+    Sync existing approved templates from your WhatsApp Business Account directly into Pingr AI's database.
+  </Card>
+  <Card title="Quality Score Monitoring" icon="chart-line">
+    Track template health, recipient feedback flags, and quality status scores (`GREEN`, `YELLOW`, `RED`).
+  </Card>
+</CardGroup>
+
+---
+
+## Template Structure & Components
+
+WhatsApp message templates are composed of modular components:
+
+| Component Type | Description | Permitted Formats |
+| :--- | :--- | :--- |
+| `HEADER` | Optional leading element displayed at the top of the message | `TEXT` (with single variable), `IMAGE`, `VIDEO`, `DOCUMENT` |
+| `BODY` | Mandatory main text containing placeholders (`{{1}}`, `{{2}}`) | Plain text up to 1,024 characters with indexed variable parameters |
+| `FOOTER` | Optional muted footer text at the bottom | Plain text up to 60 characters (no variables) |
+| `BUTTONS` | Optional interactive actionable elements | `QUICK_REPLY` (canned responses), `URL` (web links), `PHONE_NUMBER` |
+
+---
+
+## Template Categories
+
+Meta strictly classifies all templates into three distinct pricing and delivery categories:
+
+1. **`MARKETING`**: Promotional offers, product announcements, newsletters, and lead engagement messages.
+2. **`UTILITY`**: Account updates, order confirmations, billing notifications, and appointment reminders.
+3. **`AUTHENTICATION`**: One-time passwords (OTP) and two-factor verification codes with auto-fill or copy-code actions.
+
+---
+
+## Review & Operational Lifecycles
+
+| Status | Meaning | Can Broadcast? |
+| :--- | :--- | :--- |
+| `PENDING` | Under automated or manual review by Meta | No |
+| `APPROVED` | Approved and ready for immediate campaign dispatching | **Yes** |
+| `REJECTED` | Did not meet Meta Business or Commerce Policies | No |
+| `PAUSED` | Halted by Meta due to poor user quality feedback | No |
+
+---
+
+## Available Endpoints
+
+### Custom Templates
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/templates` | Create a new template locally and submit to Meta |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/templates` | List paginated templates for your organization |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/templates/{template_id}` | Retrieve single template details and components |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/templates/{template_id}` | Delete a template locally and on Meta |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/templates/sync` | Sync all templates from Meta for a specific channel |
+
+### Templates Library
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/templates/library` | Search and browse pre-approved templates from Meta's library |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/templates/library/{template_id}/create` | Provision an official library template for your WABA |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/contacts/bulk-upload" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Create template</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/templates
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/templates/create-template" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,248 @@
+---
+title: "List campaigns"
+sidebarTitle: "List campaigns"
+api: "GET /api/v1/campaigns"
+description: "Retrieve a paginated list of campaigns for the organization with live broadcast metrics"
+---
+
+Retrieve paginated campaigns belonging to your organization. You can filter by campaign status and retrieve live aggregated delivery telemetry across all listed items.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField query="status_filter" type="string" default="all">
+  Filter campaigns by operational status:
+  - `all` (default): Retrieve campaigns across all states.
+  - `draft`: Draft campaigns not yet queued.
+  - `scheduled`: Slotted for future dispatch.
+  - `sending`: Currently actively dispatching messages.
+  - `paused`: Halted dispatching.
+  - `completed`: Finished sending.
+  - `cancelled`: Terminated before finishing.
+</ParamField>
+
+<ParamField query="limit" type="number" default="100">
+  Maximum number of campaign records to return per page (min `1`, max `100`).
+</ParamField>
+
+<ParamField query="page" type="number" default="1">
+  Page number to fetch (starts at `1`).
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="has_more" type="boolean">
+  Indicates whether subsequent pages of results exist beyond current page and limit.
+</ResponseField>
+
+<ResponseField name="total" type="number">
+  Total count of matching campaigns across all pages.
+</ResponseField>
+
+<ResponseField name="page" type="number">
+  Current page index.
+</ResponseField>
+
+<ResponseField name="limit" type="number">
+  Page limit applied.
+</ResponseField>
+
+<ResponseField name="items" type="CampaignResponse[]">
+  Array of campaign objects including live broadcast metrics:
+  <Expandable title="Campaign object attributes">
+    <ResponseField name="id" type="string">Unique UUID of the campaign.</ResponseField>
+    <ResponseField name="organization_id" type="string">Organization UUID.</ResponseField>
+    <ResponseField name="name" type="string">Campaign display title.</ResponseField>
+    <ResponseField name="status" type="string">Current status (`scheduled`, `sending`, `paused`, `completed`, `cancelled`).</ResponseField>
+    <ResponseField name="whatsapp_phone_number_id" type="string">Channel phone number UUID.</ResponseField>
+    <ResponseField name="message_template_id" type="string">Message template UUID or null.</ResponseField>
+    <ResponseField name="audience_type" type="string">Targeting strategy (`all`, `tags`, `manual`).</ResponseField>
+    <ResponseField name="audience_tags" type="string[]">Targeted tags if audience_type is `tags`.</ResponseField>
+    <ResponseField name="audience_contact_ids" type="string[]">Targeted contact UUIDs if audience_type is `manual`.</ResponseField>
+    <ResponseField name="scheduled_at" type="string">Scheduled time in UTC or null.</ResponseField>
+    <ResponseField name="total_contacts_count" type="number">Total recipients resolved.</ResponseField>
+    <ResponseField name="sent_count" type="number">Count of sent messages.</ResponseField>
+    <ResponseField name="delivered_count" type="number">Count of delivered messages.</ResponseField>
+    <ResponseField name="read_count" type="number">Count of messages opened/read.</ResponseField>
+    <ResponseField name="failed_count" type="number">Count of failed deliveries.</ResponseField>
+    <ResponseField name="created_at" type="string">ISO 8601 creation timestamp.</ResponseField>
+    <ResponseField name="updated_at" type="string">ISO 8601 last update timestamp.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/campaigns"
+
+params = {
+    "status_filter": "sending",
+    "limit": 20,
+    "page": 1
+}
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, params=params, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1"))
+    .header("Authorization", "Bearer <token>")
+    .GET()
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "has_more": false,
+  "total": 1,
+  "page": 1,
+  "limit": 20,
+  "items": [
+    {
+      "id": "e4a2e584-3672-4d69-b541-6e9f1a238491",
+      "organization_id": "93f35dc2-5d46-4e58-a9ee-038c35d9bcf1",
+      "name": "Q3 Lead Reactivation",
+      "whatsapp_phone_number_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
+      "message_template_id": "3a4b5c6d-7e8f-9012-3456-789abcdef012",
+      "audience_type": "tags",
+      "audience_tags": [
+        "high_intent",
+        "q3_leads"
+      ],
+      "audience_contact_ids": null,
+      "scheduled_at": "2026-09-15T14:00:00Z",
+      "status": "sending",
+      "total_contacts_count": 450,
+      "sent_count": 432,
+      "delivered_count": 418,
+      "read_count": 312,
+      "failed_count": 14,
+      "created_at": "2026-09-07T10:30:00Z",
+      "updated_at": "2026-09-07T14:15:00Z"
+    }
+  ]
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/campaigns/create-campaign" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Get campaign</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        GET /api/v1/campaigns/&#123;campaign_id&#125;
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/campaigns/get-campaign" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

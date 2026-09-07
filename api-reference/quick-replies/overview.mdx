@@ -1,0 +1,76 @@
+---
+title: "Quick Replies Overview"
+sidebarTitle: "Overview"
+description: "Configure standardized message snippets and slash command shortcuts for agent chat acceleration"
+---
+
+# Quick Replies API
+
+The **Quick Replies API** allows teams to define canned response templates and slash shortcuts (e.g. `/greeting`, `/pricing`, `/refund-policy`). During live WhatsApp customer chat sessions in Pingr AI Inbox, human agents and conversational copilots can type shortcuts to instantly expand comprehensive, pre-approved messaging copy.
+
+```
++-------------------------------------------------------------+
+|              Quick Reply Shortcut Architecture              |
+|                                                             |
+|   +-----------------------+     +-----------------------+   |
+|   | Human Agent in Inbox  |     | AI Copilot Assistant  |   |
+|   |  Types: "/refund"     |     |   Suggests Answers    |   |
+|   +-----------+-----------+     +-----------+-----------+   |
+|               \                             /               |
+|                v                           v                |
+|              +-------------------------------+              |
+|              |     Redis Low-Latency Cache   |              |
+|              |     (300s TTL per Org Cache)  |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                      (Cache Miss Fallback)                  |
+|                              v                              |
+|              +-------------------------------+              |
+|              |   PostgreSQL Persistent Store |              |
+|              |  (Indexed Organization Model) |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|                              v                              |
+|              +-------------------------------+              |
+|              | Instant Expansion in Composer |              |
+|              | "We offer full 30-day refunds"|              |
+|              +-------------------------------+              |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Instant Keyboard Expansion" icon="bolt">
+    Accelerate support response times with pre-configured shortcut triggers like `/hello`, `/hours`, or `/bank-details`.
+  </Card>
+  <Card title="High-Speed Redis Caching" icon="gauge-high">
+    Responses are served from Redis memory cache with automatic cache busting whenever snippets are created or deleted.
+  </Card>
+  <Card title="Standardized Messaging Quality" icon="shield-check">
+    Ensure organizational consistency and compliance across every agent response without spelling or factual errors.
+  </Card>
+  <Card title="Omnichannel Reuse" icon="layer-group">
+    Use quick reply templates seamlessly across WhatsApp, web widgets, and live ticketing channels.
+  </Card>
+</CardGroup>
+
+---
+
+## Cache Invalidation Strategy
+
+The Quick Replies system utilizes Redis caching for blazing-fast typeahead lookups in the UI:
+- **Listing Requests**: Cached under `quick_replies:{organization_id}:{limit}:{page}` with a 300-second (5 minute) TTL.
+- **Eviction Triggers**: Any call to `POST /api/v1/quick-replies` or `DELETE /api/v1/quick-replies/{id}` immediately purges all keys matching `quick_replies:{organization_id}:*` to prevent stale snippet data.
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/quick-replies` | Create a new quick reply snippet and invalidate cache |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/quick-replies` | Retrieve paginated quick replies from cache or database |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/quick-replies/{quick_reply_id}` | Permanently delete a quick reply snippet and clear cache |

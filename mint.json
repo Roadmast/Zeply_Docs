@@ -38,7 +38,7 @@
     },
     {
       "name": "API Reference",
-      "url": "api-reference/introduction"
+      "url": "api-reference"
     }
   ],
   "navigation": [
@@ -69,6 +69,7 @@
       "group": "Overview",
       "icon": "circle-info",
       "pages": [
+        "api-reference",
         "api-reference/introduction",
         "api-reference/authentication",
         "api-reference/pagination",
@@ -87,6 +88,124 @@
         "api-reference/agents/list-agents",
         "api-reference/agents/update-agent",
         "api-reference/agents/delete-agent"
+      ]
+    },
+    {
+      "group": "Campaigns",
+      "icon": "bullhorn",
+      "pages": [
+        "api-reference/campaigns/overview",
+        "api-reference/campaigns/create-campaign",
+        "api-reference/campaigns/list-campaigns",
+        "api-reference/campaigns/get-campaign",
+        "api-reference/campaigns/pause-campaign",
+        "api-reference/campaigns/resume-campaign",
+        "api-reference/campaigns/cancel-campaign",
+        "api-reference/campaigns/delete-campaign",
+        "api-reference/campaigns/export-pdf"
+      ]
+    },
+    {
+      "group": "Contacts",
+      "icon": "address-book",
+      "pages": [
+        "api-reference/contacts/overview",
+        "api-reference/contacts/create-contact",
+        "api-reference/contacts/list-contacts",
+        "api-reference/contacts/update-contact",
+        "api-reference/contacts/delete-contact",
+        "api-reference/contacts/bulk-upload"
+      ]
+    },
+    {
+      "group": "Templates",
+      "icon": "message",
+      "pages": [
+        "api-reference/templates/overview",
+        "api-reference/templates/create-template",
+        "api-reference/templates/list-templates",
+        "api-reference/templates/get-template",
+        "api-reference/templates/delete-template",
+        "api-reference/templates/sync-templates",
+        "api-reference/templates/get-library",
+        "api-reference/templates/create-from-library"
+      ]
+    },
+    {
+      "group": "Knowledge Base",
+      "icon": "database",
+      "pages": [
+        "api-reference/knowledge-base/overview",
+        "api-reference/knowledge-base/upload-document",
+        "api-reference/knowledge-base/list-documents",
+        "api-reference/knowledge-base/download-document",
+        "api-reference/knowledge-base/delete-document"
+      ]
+    },
+    {
+      "group": "Webhooks",
+      "icon": "webhook",
+      "pages": [
+        "api-reference/webhooks/overview",
+        "api-reference/webhooks/create-webhook",
+        "api-reference/webhooks/list-webhooks",
+        "api-reference/webhooks/get-webhook",
+        "api-reference/webhooks/update-webhook",
+        "api-reference/webhooks/delete-webhook"
+      ]
+    },
+    {
+      "group": "WhatsApp Flows",
+      "icon": "diagram-project",
+      "pages": [
+        "api-reference/whatsapp-flows/overview",
+        "api-reference/whatsapp-flows/list-flows",
+        "api-reference/whatsapp-flows/get-flow-templates",
+        "api-reference/whatsapp-flows/validate-flow",
+        "api-reference/whatsapp-flows/import-flow",
+        "api-reference/whatsapp-flows/create-flow",
+        "api-reference/whatsapp-flows/get-flow",
+        "api-reference/whatsapp-flows/update-flow",
+        "api-reference/whatsapp-flows/delete-flow",
+        "api-reference/whatsapp-flows/publish-flow",
+        "api-reference/whatsapp-flows/execute-flow-screen"
+      ]
+    },
+    {
+      "group": "Call Logs",
+      "icon": "phone-volume",
+      "pages": [
+        "api-reference/call-logs/overview",
+        "api-reference/call-logs/list-call-logs",
+        "api-reference/call-logs/get-call-log",
+        "api-reference/call-logs/get-recording-audio"
+      ]
+    },
+    {
+      "group": "Quick Replies",
+      "icon": "bolt",
+      "pages": [
+        "api-reference/quick-replies/overview",
+        "api-reference/quick-replies/create-quick-reply",
+        "api-reference/quick-replies/list-quick-replies",
+        "api-reference/quick-replies/delete-quick-reply"
+      ]
+    },
+    {
+      "group": "Inbox",
+      "icon": "inbox",
+      "pages": [
+        "api-reference/inbox/overview",
+        "api-reference/inbox/create-ticket",
+        "api-reference/inbox/list-tickets",
+        "api-reference/inbox/get-ticket",
+        "api-reference/inbox/update-ticket-status",
+        "api-reference/inbox/list-messages",
+        "api-reference/inbox/get-inbox-messages",
+        "api-reference/inbox/send-message",
+        "api-reference/inbox/upload-media",
+        "api-reference/inbox/get-message-media",
+        "api-reference/inbox/react-to-message"
       ]
     }
   ],

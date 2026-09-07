@@ -1,0 +1,109 @@
+---
+title: "Inbox & Messaging Overview"
+sidebarTitle: "Overview"
+description: "Manage omnichannel conversation tickets, two-way WhatsApp messaging, media attachments, and message reactions"
+---
+
+# Inbox & Messaging API
+
+The **Inbox & Messaging API** powers Pingr AI's customer communication hub. It bridges customer interactions across Meta WhatsApp Cloud API, automated AI voice & text agents, and human support representatives into unified conversation tickets.
+
+```
++-------------------------------------------------------------+
+|             Omnichannel Inbox & Messaging Architecture      |
+|                                                             |
+|   +-----------------------+     +-----------------------+   |
+|   | WhatsApp Cloud Webhook|     | Agent Chat UI / SDK   |   |
+|   +-----------+-----------+     +-----------+-----------+   |
+|               \                             /               |
+|                v                           v                |
+|              +-------------------------------+              |
+|              |     Pingr AI Inbox Service    |              |
+|              |  (Ticket Router & Dispatcher) |              |
+|              +---------------+---------------+              |
+|                              |                              |
+|              +---------------+---------------+              |
+|              |                               |              |
+|              v                               v              |
+|     +-----------------+             +-----------------+     |
+|     | PostgreSQL DB   |             | Cloud Storage   |     |
+|     | (Threads & Msgs)|             | (Images/Audio/Doc)    |
+|     +--------+--------+             +-----------------+     |
+|              |                                              |
+|              v                                              |
+|     +-----------------+                                     |
+|     | WebSocket Stream| <----> Live Agent Dashboard Sync    |
+|     +-----------------+                                     |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Ticket Lifecycle Management" icon="ticket">
+    Organize contact discussions into structured tickets with `open` and `closed` status lifecycles.
+  </Card>
+  <Card title="Rich Two-Way WhatsApp Messaging" icon="whatsapp">
+    Send and receive text, images, documents, audio clips, and video files with context-aware reply threads (`context_message_id`).
+  </Card>
+  <Card title="Secure Media Upload & Streaming" icon="paperclip">
+    Upload attachments securely to cloud object storage and stream media directly through authenticated endpoints.
+  </Card>
+  <Card title="Interactive Emoji Reactions" icon="face-smile">
+    Send and clear WhatsApp emoji reactions (`👍`, `❤️`, `🎉`) on individual messages with instant WebSocket broadcast.
+  </Card>
+</CardGroup>
+
+---
+
+## Ticket Lifecycle & Statuses
+
+Each conversation thread between an organization and a contact is represented by an **Inbox Ticket**:
+
+- **Active Ticket**: Contacts have at most one `open` ticket at a time. New incoming or outgoing messages append directly to this thread.
+- **Closed Ticket**: When a conversation issue is resolved, agents or automations patch the ticket status to `closed`. Subsequent new contact engagements will spawn or reopen a fresh ticket.
+
+| Status | Meaning |
+| :--- | :--- |
+| `open` | Active ticket receiving live messages; visible in unread agent queues. |
+| `closed` | Resolved ticket archived in conversation history. |
+
+---
+
+## Supported Message Types
+
+When sending messages via `POST /api/v1/inbox/messages/{inbox_id}`:
+
+| Type | Description | Required Parameters |
+| :--- | :--- | :--- |
+| `text` | Standard plain-text message | `body` |
+| `image` | PNG, JPEG, or WebP picture | `media_url`, optional `body` (caption) |
+| `document` | PDF, DOCX, or spreadsheet file | `media_url`, optional `media_filename` |
+| `audio` | Voice note or recorded audio clip | `media_url`, `media_mime_type` |
+| `video` | MP4 or standard video recording | `media_url`, optional `body` (caption) |
+
+---
+
+## Available Endpoints
+
+### Tickets & Conversations
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/tickets` | Create a new ticket or return existing open ticket for a contact |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/tickets` | List conversation tickets with status and contact filtering |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/tickets/{inbox_id}` | Retrieve details and contact profile for a specific ticket |
+| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PATCH</span> | `/api/v1/inbox/tickets/{inbox_id}` | Update ticket status (`open` or `closed`) |
+
+### Messaging & Media
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/messages` | List messages across the organization or for a ticket |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/messages/{inbox_id}` | Retrieve chronological message history for a ticket |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/messages/{inbox_id}` | Send WhatsApp text or rich media message |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/upload` | Upload media attachment to S3 storage prior to sending |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/media/{message_id}` | Securely stream and download attached media |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/messages/{message_id}/react` | Add or clear emoji reaction on a WhatsApp message |

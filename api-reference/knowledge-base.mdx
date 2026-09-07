@@ -1,0 +1,42 @@
+---
+title: "Knowledge Base API"
+description: "Upload, manage, and retrieve enterprise documentation for real-time RAG context"
+---
+
+# Knowledge Base API Reference
+
+The **Knowledge Base API** enables you to programmatically upload and manage internal corporate documents (`PDF`, `DOCX`, `TXT`). Source files are securely stored in object storage, while extracted text chunks and vector embeddings are stored in Pingr AI's vector database to empower Voice AI agents with contextual retrieval during customer calls.
+
+---
+
+## Endpoint Suite
+
+Explore the comprehensive Knowledge Base API reference:
+
+<CardGroup cols={2}>
+  <Card title="Knowledge Base Overview" icon="compass" href="/api-reference/knowledge-base/overview">
+    Architecture, vector indexing, RAG retrieval flow, and supported file types.
+  </Card>
+  <Card title="Upload Document" icon="cloud-arrow-up" href="/api-reference/knowledge-base/upload-document">
+    POST /api/v1/knowledge-base/upload — Multipart upload for PDF, DOCX, and TXT files.
+  </Card>
+  <Card title="List Documents" icon="list" href="/api-reference/knowledge-base/list-documents">
+    GET /api/v1/knowledge-base — Retrieve all indexed documents for your organization.
+  </Card>
+  <Card title="Download Document" icon="download" href="/api-reference/knowledge-base/download-document">
+    GET /api/v1/knowledge-base/{document_id}/download — Secure streaming download from cloud storage.
+  </Card>
+  <Card title="Delete Document" icon="trash" href="/api-reference/knowledge-base/delete-document">
+    DELETE /api/v1/knowledge-base/{document_id} — Purge document, files, and vector embeddings.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example: Uploading a Document
+
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/knowledge-base/upload" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -F "file=@/path/to/faq.pdf"
+```

@@ -1,0 +1,240 @@
+---
+title: "Update flow"
+sidebarTitle: "Update flow"
+api: "PUT /api/v1/whatsapp-flows/{flow_id}"
+description: "Modify WhatsApp Flow metadata, status, JSON screen definition, or data exchange URL"
+---
+
+Update an existing WhatsApp Flow configuration, modify its screen layouts, or alter its lifecycle state.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField path="flow_id" type="string" required>
+  Unique UUID identifier of the flow to update. Example: `1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d`.
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField body="name" type="string">
+  Updated flow title.
+</ParamField>
+
+<ParamField body="description" type="string">
+  Updated internal description.
+</ParamField>
+
+<ParamField body="category" type="string">
+  Updated category.
+</ParamField>
+
+<ParamField body="status" type="string">
+  Updated lifecycle state (`DRAFT`, `PUBLISHED`, `DEPRECATED`).
+</ParamField>
+
+<ParamField body="meta_flow_id" type="string">
+  Associated Meta Flow ID.
+</ParamField>
+
+<ParamField body="json_definition" type="object">
+  Updated Meta Flow JSON screen definition object.
+</ParamField>
+
+<ParamField body="data_api_url" type="string">
+  Updated dynamic data exchange webhook URL.
+</ParamField>
+
+---
+
+### Response Fields
+
+Returns the updated [WhatsappFlowResponse](/api-reference/whatsapp-flows/get-flow#response-fields) object:
+
+<ResponseField name="id" type="string">Flow UUID.</ResponseField>
+<ResponseField name="organization_id" type="string">Organization UUID.</ResponseField>
+<ResponseField name="name" type="string">Flow title.</ResponseField>
+<ResponseField name="status" type="string">Updated status.</ResponseField>
+<ResponseField name="json_definition" type="object">Updated screen definition.</ResponseField>
+<ResponseField name="updated_at" type="string">Last modification timestamp.</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X PUT "https://api.pingr.ai/api/v1/whatsapp-flows/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "B2B Lead Flow (Revised)",
+    "description": "Updated qualification steps with budget slider"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/whatsapp-flows/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+
+payload = {
+    "name": "B2B Lead Flow (Revised)",
+    "description": "Updated qualification steps with budget slider"
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.put(url, json=payload, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.pingr.ai/api/v1/whatsapp-flows/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  {
+    method: "PUT",
+    headers: {
+      "Authorization": "Bearer <token>",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: "B2B Lead Flow (Revised)"
+    })
+  }
+);
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.pingr.ai/api/v1/whatsapp-flows/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"))
+    .header("Authorization", "Bearer <token>")
+    .header("Content-Type", "application/json")
+    .PUT(HttpRequest.BodyPublishers.ofString("""
+      {
+        "name": "B2B Lead Flow (Revised)"
+      }
+    """))
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  "organization_id": "93f35dc2-5d46-4e58-a9ee-038c35d9bcf1",
+  "name": "B2B Lead Flow (Revised)",
+  "description": "Updated qualification steps with budget slider",
+  "category": "Lead Generation",
+  "meta_flow_id": null,
+  "status": "DRAFT",
+  "json_definition": {
+    "version": "3.0",
+    "screens": []
+  },
+  "data_api_url": null,
+  "created_at": "2026-09-07T13:40:00Z",
+  "updated_at": "2026-09-07T14:00:00Z"
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "WhatsApp Flow not found"
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/whatsapp-flows/get-flow" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Delete flow</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        DELETE /api/v1/whatsapp-flows/&#123;flow_id&#125;
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/whatsapp-flows/delete-flow" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

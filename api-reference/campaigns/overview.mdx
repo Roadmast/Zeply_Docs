@@ -1,0 +1,176 @@
+---
+title: "Campaigns Overview"
+sidebarTitle: "Overview"
+description: "Broadcast targeted WhatsApp messaging and voice campaigns with Pingr AI"
+---
+
+# Campaigns API
+
+The **Campaigns API** enables you to programmatically create, schedule, monitor, and control bulk outbound campaigns across your organization's contacts. Campaigns support targeted audience filtering, approved WhatsApp templates, automatic asynchronous dispatching via background task queues, real-time delivery telemetry, and executive PDF reporting.
+
+```
++-------------------------------------------------------------+
+|                      Pingr AI Campaign                      |
+|                                                             |
+|   +-------------------+              +------------------+   |
+|   |  Audience Filter  |              | Message Template |   |
+|   | (All/Tags/Manual) |              |  (WhatsApp Meta) |   |
+|   +---------+---------+              +--------+---------+   |
+|             \                                /              |
+|              \                              /               |
+|               +------------+---------------+                |
+|                            |                                |
+|                            v                                |
+|             +------------------------------+                |
+|             |     Campaign Orchestrator    |                |
+|             |  (Immediate / Redis TaskIQ)  |                |
+|             +--------------+---------------+                |
+|                            |                                |
+|              +-------------+-------------+                  |
+|              |                           |                  |
+|              v                           v                  |
+|     +-----------------+         +-----------------+         |
+|     | Dispatch Queue  |         | Live Analytics  |         |
+|     | (WhatsApp WABA) |         | (Sent/Delivered)|         |
+|     +-----------------+         +-----------------+         |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Multi-Tier Audience Targeting" icon="users">
+    Broadcast to your full contact database, filter dynamically by contact tags, or pass specific recipient UUID lists.
+  </Card>
+  <Card title="Immediate & Scheduled Dispatch" icon="clock">
+    Trigger delivery immediately upon creation or schedule a precise future UTC timestamp with automated TaskIQ background workers.
+  </Card>
+  <Card title="Interactive Execution Controls" icon="sliders">
+    Pause active or scheduled dispatches, resume delivery at will, or cancel campaigns safely before messages are sent.
+  </Card>
+  <Card title="Live Metrics & PDF Reports" icon="file-pdf">
+    Inspect live aggregated sent, delivered, read, and failed counts, and export branded PDF executive summary reports on demand.
+  </Card>
+</CardGroup>
+
+---
+
+## Campaign Lifecycle & States
+
+Every campaign progresses through well-defined operational states:
+
+| Status | Description | Permitted Actions |
+| :--- | :--- | :--- |
+| `draft` | Initial campaign draft before queueing | Update, delete |
+| `scheduled` | Slotted in TaskIQ Redis schedule for future dispatch | Pause, cancel, delete, view metrics |
+| `sending` | Currently dispatching messages to recipient contacts | Pause, cancel, view metrics, export PDF |
+| `paused` | Temporarily halted dispatching | Resume, cancel, delete, view metrics |
+| `completed` | All contacts processed and final delivery status recorded | View metrics, export PDF, delete |
+| `cancelled` | Halted before all contacts were sent | View metrics, export PDF, delete |
+
+---
+
+## Audience Types
+
+When creating a campaign, configure the `audience_type` parameter to control recipient resolution:
+
+| Audience Type | Description | Required Parameters |
+| :--- | :--- | :--- |
+| `all` | Dispatches to all contacts in the organization | None |
+| `tags` | Filters contacts matching any specified tags | `audience_tags: ["vip", "leads"]` |
+| `manual` | Sends only to explicitly listed contact IDs | `audience_contact_ids: ["UUID1", "UUID2"]` |
+
+---
+
+## Rate Limiting Tiers
+
+Campaign operations are tiered to ensure infrastructure reliability:
+
+- **Create Campaign**: `RateLimitTier.EXPENSIVE` — Protects dispatch worker queues.
+- **List / Get Campaign**: `RateLimitTier.READ` — High-throughput cached telemetry.
+- **Pause / Resume / Cancel / Delete / PDF Export**: `RateLimitTier.WRITE` — Fast mutation and on-the-fly PDF document generation.
+
+---
+
+## Authentication
+
+All Campaigns API endpoints require a valid organization API key or Bearer JWT token passed in the `Authorization` header:
+
+```http
+Authorization: Bearer <your-api-key>
+```
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/campaigns` | Create a new campaign (immediate or scheduled) |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/campaigns` | List paginated campaigns with live delivery metrics |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/campaigns/{campaign_id}` | Retrieve single campaign details and broadcast telemetry |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/campaigns/{campaign_id}/pause` | Pause a scheduled or sending campaign |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/campaigns/{campaign_id}/resume` | Resume a paused campaign |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/campaigns/{campaign_id}/cancel` | Cancel an active or scheduled campaign |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/campaigns/{campaign_id}` | Permanently delete a campaign |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/campaigns/{campaign_id}/export/pdf` | Download formatted campaign performance PDF report |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/campaigns/scheduling" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Create campaign</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/campaigns
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/campaigns/create-campaign" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

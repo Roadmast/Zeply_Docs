@@ -1,0 +1,63 @@
+---
+title: "Templates API"
+description: "Create, sync, and deploy Meta-approved WhatsApp Business message templates"
+---
+
+# Templates API Reference
+
+The **Templates API** provides full programmatic control over WhatsApp Business message templates. Create custom multi-component templates (Header, Body, Footer, Buttons), synchronize review statuses from Meta Graph API, and browse Meta's pre-approved global template catalog for instant provisioning.
+
+---
+
+## Endpoint Suite
+
+Explore the complete Templates and Templates Library API reference:
+
+<CardGroup cols={2}>
+  <Card title="Templates Overview" icon="compass" href="/api-reference/templates/overview">
+    Components, categories (Marketing, Utility, Auth), lifecycles, and quality scores.
+  </Card>
+  <Card title="Create Template" icon="plus" href="/api-reference/templates/create-template">
+    POST /api/v1/templates — Submit custom template to Meta for review.
+  </Card>
+  <Card title="List Templates" icon="list" href="/api-reference/templates/list-templates">
+    GET /api/v1/templates — Paginated list of organization templates.
+  </Card>
+  <Card title="Get Template" icon="eye" href="/api-reference/templates/get-template">
+    GET /api/v1/templates/{template_id} — Template components and review status.
+  </Card>
+  <Card title="Delete Template" icon="trash" href="/api-reference/templates/delete-template">
+    DELETE /api/v1/templates/{template_id} — Deregister template from Meta and purge locally.
+  </Card>
+  <Card title="Sync Templates" icon="rotate" href="/api-reference/templates/sync-templates">
+    POST /api/v1/templates/sync — Pull existing templates from Meta WABA.
+  </Card>
+  <Card title="Browse Library" icon="book-bookmark" href="/api-reference/templates/get-library">
+    GET /api/v1/templates/library — Query Meta's pre-approved global catalog.
+  </Card>
+  <Card title="Create from Library" icon="wand-magic-sparkles" href="/api-reference/templates/create-from-library">
+    POST /api/v1/templates/library/{template_id}/create — Instant template provisioning.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example: Submitting a Template
+
+```bash
+curl -X POST "https://api.pingr.ai/api/v1/templates" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "channel_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
+    "name": "order_confirmation_v1",
+    "language": "en_US",
+    "category": "UTILITY",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Hi {{1}}, your order #{{2}} has been confirmed!"
+      }
+    ]
+  }'
+```

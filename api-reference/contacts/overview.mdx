@@ -1,0 +1,142 @@
+---
+title: "Contacts Overview"
+sidebarTitle: "Overview"
+description: "Manage customer profiles, segmentation tags, custom metadata, and bulk ingestion in Pingr AI"
+---
+
+# Contacts API
+
+The **Contacts API** enables you to programmatically manage your organization's address book, customer phone numbers, segment tags, internal notes, and arbitrary custom key-value attributes. Contacts serve as the primary audience foundation for outbound WhatsApp campaigns and Voice AI telephony dispatching.
+
+```
++-------------------------------------------------------------+
+|                      Pingr AI Contact                       |
+|                                                             |
+|  +-----------------+  +-----------------+  +--------------+ |
+|  |  Identity Data  |  |  Segmentation   |  | Custom Meta  | |
+|  |  * Phone Number |  |  * Tags         |  | * JSON dict  | |
+|  |  * Full Name    |  |  * Lists        |  | * Notes      | |
+|  +--------+--------+  +--------+--------+  +-------+------+ |
+|           \                    |                   /        |
+|            +-------------------+------------------+         |
+|                                |                            |
+|                                v                            |
+|              +----------------------------------+           |
+|              |     Campaign & Voice Target      |           |
+|              |  (WhatsApp Broadcasts / Calls)  |           |
+|              +----------------------------------+           |
++-------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Individual Contact Management" icon="user-plus">
+    Create, update, and delete individual customer records with phone numbers, names, and notes.
+  </Card>
+  <Card title="Dynamic Segmentation" icon="tags">
+    Assign string tags (e.g. `vip`, `trial_user`, `q3_leads`) to power selective campaign targeting.
+  </Card>
+  <Card title="Arbitrary Custom Fields" icon="brackets-curly">
+    Store extensible JSON key-value data (e.g. `account_id`, `company`, `tier`) for dynamic template variable interpolation.
+  </Card>
+  <Card title="High-Speed Bulk Ingestion" icon="file-csv">
+    Upload CSV or Excel spreadsheets containing thousands of contacts with automated duplicate updating and validation error reporting.
+  </Card>
+</CardGroup>
+
+---
+
+## Contact Model Schema
+
+Each contact in Pingr AI is scoped to your organization and contains:
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `UUID` | Unique contact identifier. |
+| `organization_id` | `UUID` | Owning organization identifier. |
+| `phone_number` | `string` | Customer phone number (E.164 format recommended, e.g. `+14155550123`). |
+| `name` | `string` | Full name of the contact. |
+| `tags` | `string[]` | Array of classification tags used in campaign audience filters. |
+| `notes` | `string` | Internal agent or administrative notes. |
+| `custom_fields` | `object` | Arbitrary JSON metadata for custom integration logic. |
+| `created_at` | `string` | ISO 8601 creation timestamp. |
+| `updated_at` | `string` | ISO 8601 last update timestamp. |
+
+---
+
+## Multi-Tenant Security & Isolation
+
+All contact operations are strictly isolated by organization context. Attempting to update or delete a contact ID belonging to another organization returns a `404 Not Found` response to avoid leaking identifier existence.
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/contacts` | Create a new contact record manually |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/contacts` | List all contacts for your organization |
+| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PUT</span> | `/api/v1/contacts/{contact_id}` | Update an existing contact's details and tags |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/contacts/{contact_id}` | Permanently delete a contact |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/contacts/bulk-upload` | Bulk upload contacts via CSV or Excel spreadsheets |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/campaigns/export-pdf" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Create contact</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/contacts
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/contacts/create-contact" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,224 @@
+---
+title: "List call logs"
+sidebarTitle: "List call logs"
+api: "GET /api/v1/call-logs"
+description: "Retrieve a paginated list of call logs for your organization with optional search and filters"
+---
+
+Retrieve call history records for your active organization. You can filter results by call direction (`inbound` or `outbound`), lifecycle status, or perform free-text searches against call IDs and phone numbers.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Query Parameters
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  Page number to retrieve (minimum `1`).
+</ParamField>
+
+<ParamField query="page_size" type="integer" default="20">
+  Number of items per page (minimum `1`, maximum `100`).
+</ParamField>
+
+<ParamField query="direction" type="string">
+  Filter by call direction. Allowed values: `inbound`, `outbound`.
+</ParamField>
+
+<ParamField query="status" type="string">
+  Filter by call status (e.g. `completed`, `failed`, `in-progress`, `busy`, `no-answer`).
+</ParamField>
+
+<ParamField query="search" type="string">
+  Fuzzy search filter applied to `call_id`, `from_number`, or `to_number`.
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="total" type="integer">
+  Total number of matching call log records across all pages.
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page index.
+</ResponseField>
+
+<ResponseField name="page_size" type="integer">
+  Number of items requested per page.
+</ResponseField>
+
+<ResponseField name="items" type="object[]">
+  Array of call log objects.
+
+  <Expandable title="CallLogResponse Object Fields">
+    <ResponseField name="id" type="string">
+      Unique UUID identifier for this call log entry.
+    </ResponseField>
+    <ResponseField name="organization_id" type="string">
+      UUID of the owning organization.
+    </ResponseField>
+    <ResponseField name="call_id" type="string">
+      Telephony carrier or gateway session identifier (e.g. `call_98f12ac4`).
+    </ResponseField>
+    <ResponseField name="agent_id" type="string">
+      UUID of the voice agent assigned to handle the conversation, or `null`.
+    </ResponseField>
+    <ResponseField name="whatsapp_phone_number_id" type="string">
+      UUID of the organization WhatsApp voice endpoint, or `null`.
+    </ResponseField>
+    <ResponseField name="phone_number_id" type="string">
+      Telephony provider carrier phone number identifier, or `null`.
+    </ResponseField>
+    <ResponseField name="from_number" type="string">
+      Caller phone number in E.164 format (e.g. `+14155550199`).
+    </ResponseField>
+    <ResponseField name="to_number" type="string">
+      Destination phone number in E.164 format (e.g. `+14155550188`).
+    </ResponseField>
+    <ResponseField name="direction" type="string">
+      Direction of the call (`inbound` or `outbound`).
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Terminal or current status of the call (`completed`, `in-progress`, `busy`, `failed`, `no-answer`).
+    </ResponseField>
+    <ResponseField name="duration_seconds" type="integer">
+      Duration of the active audio connection in seconds.
+    </ResponseField>
+    <ResponseField name="started_at" type="string">
+      ISO 8601 timestamp when call audio channel was connected.
+    </ResponseField>
+    <ResponseField name="ended_at" type="string">
+      ISO 8601 timestamp when call was terminated.
+    </ResponseField>
+    <ResponseField name="recording_url" type="string">
+      Relative path or bucket URL to the audio recording if recorded.
+    </ResponseField>
+    <ResponseField name="transcript" type="any">
+      Structured speaker dialog transcript containing utterance segments and timestamps.
+    </ResponseField>
+    <ResponseField name="summary" type="string">
+      AI-generated qualitative summary of the call.
+    </ResponseField>
+    <ResponseField name="cost" type="number">
+      Calculated telephony and AI inference compute cost in USD.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 creation timestamp.
+    </ResponseField>
+    <ResponseField name="updated_at" type="string">
+      ISO 8601 last update timestamp.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/call-logs"
+headers = {
+    "Authorization": "Bearer <token>"
+}
+params = {
+    "page": 1,
+    "page_size": 20,
+    "direction": "inbound",
+    "status": "completed"
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "total": 42,
+  "page": 1,
+  "page_size": 20,
+  "items": [
+    {
+      "id": "7b8d8b9e-63f5-46b6-9bb2-15f18731b819",
+      "organization_id": "e0b973dc-13a8-4c9f-861a-03e5b4b1a8d9",
+      "call_id": "call_61ef871b0a82",
+      "agent_id": "4a1c5d7e-9081-423b-a612-432109876543",
+      "whatsapp_phone_number_id": "11a22b33-44c5-5d6e-7f8a-9b0c1d2e3f4a",
+      "phone_number_id": "PN1234567890abcdef",
+      "from_number": "+14155550199",
+      "to_number": "+14155550188",
+      "direction": "inbound",
+      "status": "completed",
+      "duration_seconds": 142,
+      "started_at": "2026-09-07T14:30:00Z",
+      "ended_at": "2026-09-07T14:32:22Z",
+      "recording_url": "call-recordings/7b8d8b9e-63f5-46b6-9bb2-15f18731b819.ogg",
+      "transcript": [
+        {
+          "speaker": "agent",
+          "text": "Hello! Thank you for calling Pingr AI support. How may I assist you?",
+          "timestamp": 0.8
+        },
+        {
+          "speaker": "caller",
+          "text": "Hi, I would like to inquire about enterprise pricing for conversational agents.",
+          "timestamp": 4.2
+        }
+      ],
+      "summary": "Caller inquired about enterprise pricing models. Agent provided standard tier quotes and scheduled a demo callback.",
+      "cost": 0.048,
+      "created_at": "2026-09-07T14:29:55Z",
+      "updated_at": "2026-09-07T14:32:30Z"
+    }
+  ]
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Could not validate credentials"
+}
+```
+
+</ResponseExample>

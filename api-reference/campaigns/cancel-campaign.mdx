@@ -1,0 +1,214 @@
+---
+title: "Cancel campaign"
+sidebarTitle: "Cancel campaign"
+api: "POST /api/v1/campaigns/{campaign_id}/cancel"
+description: "Permanently terminate an in-flight, paused, or scheduled outbound campaign"
+---
+
+Permanently cancel a campaign that is currently `scheduled`, `sending`, or `paused`. If scheduled in TaskIQ, its background schedule is un-registered from Redis. In-flight messages that have already been sent to WhatsApp will complete, but no further recipients in the queue will be processed.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField path="campaign_id" type="string" required>
+  Unique UUID identifier of the campaign to cancel. Example: `e4a2e584-3672-4d69-b541-6e9f1a238491`.
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+---
+
+### Response Fields
+
+Returns the updated [CampaignResponse](/api-reference/campaigns/get-campaign#response-fields) object with status changed to `cancelled`.
+
+<ResponseField name="id" type="string">
+  UUID of the cancelled campaign.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Operational status: `cancelled`.
+</ResponseField>
+
+<ResponseField name="total_contacts_count" type="number">
+  Total contacts originally queued.
+</ResponseField>
+
+<ResponseField name="sent_count" type="number">
+  Messages dispatched prior to cancellation.
+</ResponseField>
+
+<ResponseField name="failed_count" type="number">
+  Count of failed deliveries.
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://api.pingr.ai/api/v1/campaigns/e4a2e584-3672-4d69-b541-6e9f1a238491/cancel" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/campaigns/e4a2e584-3672-4d69-b541-6e9f1a238491/cancel"
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.post(url, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.pingr.ai/api/v1/campaigns/e4a2e584-3672-4d69-b541-6e9f1a238491/cancel", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.pingr.ai/api/v1/campaigns/e4a2e584-3672-4d69-b541-6e9f1a238491/cancel"))
+    .header("Authorization", "Bearer <token>")
+    .POST(HttpRequest.BodyPublishers.noBody())
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "id": "e4a2e584-3672-4d69-b541-6e9f1a238491",
+  "organization_id": "93f35dc2-5d46-4e58-a9ee-038c35d9bcf1",
+  "name": "Q3 Lead Reactivation",
+  "whatsapp_phone_number_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
+  "message_template_id": "3a4b5c6d-7e8f-9012-3456-789abcdef012",
+  "audience_type": "tags",
+  "audience_tags": [
+    "high_intent",
+    "q3_leads"
+  ],
+  "audience_contact_ids": null,
+  "scheduled_at": "2026-09-15T14:00:00Z",
+  "status": "cancelled",
+  "total_contacts_count": 450,
+  "sent_count": 210,
+  "delivered_count": 204,
+  "read_count": 150,
+  "failed_count": 6,
+  "created_at": "2026-09-07T10:30:00Z",
+  "updated_at": "2026-09-07T14:30:00Z"
+}
+```
+
+```json 400 Bad Request
+{
+  "detail": "Cannot cancel campaign in 'completed' state."
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "Campaign not found."
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/campaigns/resume-campaign" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Delete campaign</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        DELETE /api/v1/campaigns/&#123;campaign_id&#125;
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/campaigns/delete-campaign" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

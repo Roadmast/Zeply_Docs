@@ -1,0 +1,184 @@
+---
+title: "Webhooks Overview"
+sidebarTitle: "Overview"
+description: "Subscribe to real-time event notifications for calls, conversations, AI executions, and campaigns"
+---
+
+# Webhooks API
+
+The **Webhooks API** enables you to register HTTPS listener endpoints that receive real-time JSON payloads whenever asynchronous business events occur within Pingr AI. Receive instant alerts when phone calls complete, AI tools execute, WhatsApp messages arrive or fail, or campaigns terminate.
+
+```
++-------------------------------------------------------------+
+|                      Pingr AI Event Engine                  |
+|                                                             |
+|  +--------------------+  +--------------------+  +--------+ |
+|  | Voice AI Telephony |  | WhatsApp Broadcast |  | Inbox  | |
+|  |   (call.completed) |  | (campaign.started) |  | (msg)  | |
+|  +---------+----------+  +---------+----------+  +----+---+ |
+|             \                      |                 /      |
+|              +---------------------+----------------+       |
+|                                    |                        |
+|                                    v                        |
+|                     +-----------------------------+         |
+|                     |     Webhook Dispatcher      |         |
+|                     |  (HMAC SHA-256 Signatures)  |         |
+|                     +--------------+--------------+         |
+|                                    |                        |
+|                                    v                        |
+|                     +-----------------------------+         |
+|                     |   Your Server HTTPS URL     |         |
+|                     | (e.g. /api/webhooks/pingr)  |         |
+|                     +-----------------------------+         |
++-------------------------------------------------------------+
+```
+
+---
+
+## Event Catalog
+
+Pingr AI supports 19 granular event types:
+
+### Telephony & Calls
+| Event Name | Trigger Description |
+| :--- | :--- |
+| `call.started` | Customer or agent picked up the phone call and audio streaming initiated. |
+| `call.completed` | Call terminated. Contains duration, end reason, transcript summary, and cost. |
+
+### Messaging & Conversations
+| Event Name | Trigger Description |
+| :--- | :--- |
+| `message.received` | Inbound customer message received via WhatsApp or SMS. |
+| `message.sent` | Message dispatched to recipient handset. |
+| `message.failed` | Message delivery failed or was rejected by upstream carrier. |
+| `conversation.started` | New conversational thread created in the team inbox. |
+| `conversation.closed` | Conversation marked closed or resolved by agent or automation. |
+
+### Leads & Support Tickets
+| Event Name | Trigger Description |
+| :--- | :--- |
+| `lead.created` | New prospective lead extracted during voice call or chat interaction. |
+| `lead.updated` | Lead profile, status, or intent score changed. |
+| `ticket.created` | Support ticket generated from customer interaction. |
+| `ticket.assigned` | Ticket assigned to an internal human agent. |
+| `ticket.resolved` | Support ticket marked resolved. |
+
+### AI Agent Execution
+| Event Name | Trigger Description |
+| :--- | :--- |
+| `ai.reply.generated` | Autonomous Voice or chat LLM synthesized a reply. |
+| `ai.tool.executed` | Voice agent invoked a custom REST API or MCP tool mid-conversation. |
+| `agent.handoff` | AI transferred conversation to a human live agent. |
+
+### Outbound Campaigns
+| Event Name | Trigger Description |
+| :--- | :--- |
+| `campaign.started` | Batch campaign began dispatching to contacts. |
+| `campaign.completed` | All contacts in a campaign reached terminal delivery state. |
+| `campaign.message.delivered` | Broadcast message confirmed delivered to contact device. |
+| `campaign.message.failed` | Broadcast message delivery failed for specific contact. |
+
+---
+
+## Verifying Signatures
+
+To ensure payloads originate from Pingr AI and have not been tampered with in transit, every delivery request includes an `X-Pingr-Signature` header computed using HMAC SHA-256 with your webhook secret:
+
+```python Python
+import hmac
+import hashlib
+
+def verify_webhook(payload_bytes: bytes, signature_header: str, secret: str) -> bool:
+    """Validate X-Pingr-Signature against the raw request body bytes."""
+    expected_sig = hmac.new(
+        secret.encode("utf-8"),
+        payload_bytes,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(f"sha256={expected_sig}", signature_header)
+```
+
+```javascript JavaScript
+import crypto from "crypto";
+
+function verifyWebhook(rawBody, signatureHeader, secret) {
+  const expectedSig = crypto
+    .createHmac("sha256", secret)
+    .update(rawBody)
+    .digest("hex");
+  return crypto.timingSafeEqual(
+    Buffer.from(`sha256=${expectedSig}`),
+    Buffer.from(signatureHeader)
+  );
+}
+```
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/webhooks` | Register a new webhook subscription |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/webhooks` | List all webhook subscriptions for your organization |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/webhooks/{webhook_id}` | Retrieve details and events for a webhook |
+| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PUT</span> | `/api/v1/webhooks/{webhook_id}` | Update webhook URL, active events, or status |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/webhooks/{webhook_id}` | Permanently deregister a webhook subscription |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/knowledge-base/delete-document" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Create webhook</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/webhooks
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/webhooks/create-webhook" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

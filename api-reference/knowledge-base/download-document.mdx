@@ -1,0 +1,194 @@
+---
+title: "Download document"
+sidebarTitle: "Download document"
+api: "GET /api/v1/knowledge-base/{document_id}/download"
+description: "Download raw document file content from secure object storage"
+---
+
+Retrieve and stream the raw document file directly from encrypted Cloudflare R2 / AWS S3 object storage by its document UUID.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField path="document_id" type="string" required>
+  Unique UUID identifier of the document to download. Example: `c5d1e2f3-4a5b-6c7d-8e9f-0123456789ab`.
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+---
+
+### Response Headers
+
+The response is returned as binary stream data with the following HTTP headers:
+
+| Header | Example Value | Description |
+| :--- | :--- | :--- |
+| `Content-Type` | `application/pdf` | Media type of the document (`application/pdf`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `text/plain`). |
+| `Content-Disposition` | `attachment; filename="product_manual.pdf"` | Browser download directive. |
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.pingr.ai/api/v1/knowledge-base/c5d1e2f3-4a5b-6c7d-8e9f-0123456789ab/download" \
+  -H "Authorization: Bearer <token>" \
+  --output product_manual.pdf
+```
+
+```python Python
+import requests
+
+url = "https://api.pingr.ai/api/v1/knowledge-base/c5d1e2f3-4a5b-6c7d-8e9f-0123456789ab/download"
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    with open("downloaded_document.pdf", "wb") as f:
+        f.write(response.content)
+    print("Document downloaded successfully.")
+else:
+    print(response.status_code, response.json())
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.pingr.ai/api/v1/knowledge-base/c5d1e2f3-4a5b-6c7d-8e9f-0123456789ab/download",
+  {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer <token>"
+    }
+  }
+);
+
+const blob = await response.blob();
+const downloadUrl = window.URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = downloadUrl;
+a.download = "downloaded_document.pdf";
+document.body.appendChild(a);
+a.click();
+```
+
+```java Java
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.pingr.ai/api/v1/knowledge-base/c5d1e2f3-4a5b-6c7d-8e9f-0123456789ab/download"))
+    .header("Authorization", "Bearer <token>")
+    .GET()
+    .build();
+
+HttpResponse<Path> response =
+    HttpClient.newHttpClient().send(
+        request,
+        HttpResponse.BodyHandlers.ofFile(Paths.get("downloaded_document.pdf"))
+    );
+System.out.println("Saved document to " + response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```http 200 OK
+HTTP/1.1 200 OK
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="product_manual.pdf"
+Content-Length: 1048576
+
+<binary document stream>
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "Document not found."
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/knowledge-base/list-documents" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Delete document</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        DELETE /api/v1/knowledge-base/&#123;document_id&#125;
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/knowledge-base/delete-document" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>
