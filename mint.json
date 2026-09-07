@@ -209,6 +209,11 @@
       ]
     }
   ],
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": false,
+    "raiseIssue": true
+  },
   "api": {
     "baseUrl": "https://api.pingr.ai",
     "auth": {
@@ -216,6 +221,6 @@
     }
   },
   "footerSocials": {
-    "github": "https://github.com"
+    "github": "https://github.com/Roadmast/Zeply_Docs"
   }
 }

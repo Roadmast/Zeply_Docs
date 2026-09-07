@@ -230,9 +230,14 @@
       "href": "http://localhost:3000"
     }
   },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": false,
+    "raiseIssue": true
+  },
   "footer": {
     "socials": {
-      "github": "https://github.com"
+      "github": "https://github.com/Roadmast/Zeply_Docs"
     }
   }
 }
