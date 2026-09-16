@@ -143,23 +143,7 @@
               "api-reference/webhooks/delete-webhook"
             ]
           },
-          {
-            "group": "WhatsApp Flows",
-            "icon": "diagram-project",
-            "pages": [
-              "api-reference/whatsapp-flows/overview",
-              "api-reference/whatsapp-flows/list-flows",
-              "api-reference/whatsapp-flows/get-flow-templates",
-              "api-reference/whatsapp-flows/validate-flow",
-              "api-reference/whatsapp-flows/import-flow",
-              "api-reference/whatsapp-flows/create-flow",
-              "api-reference/whatsapp-flows/get-flow",
-              "api-reference/whatsapp-flows/update-flow",
-              "api-reference/whatsapp-flows/delete-flow",
-              "api-reference/whatsapp-flows/publish-flow",
-              "api-reference/whatsapp-flows/execute-flow-screen"
-            ]
-          },
+
           {
             "group": "Call Logs",
             "icon": "phone-volume",
