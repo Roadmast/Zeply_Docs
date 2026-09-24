@@ -81,14 +81,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/quick-replies?limit=50&page=1" \
+curl -X GET "https://api.sayvy.ai/api/v1/quick-replies?limit=50&page=1" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/quick-replies"
+url = "https://api.sayvy.ai/api/v1/quick-replies"
 headers = {
     "Authorization": "Bearer <token>"
 }
@@ -103,7 +103,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/quick-replies?limit=50&page=1", {
+const response = await fetch("https://api.sayvy.ai/api/v1/quick-replies?limit=50&page=1", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"
@@ -134,7 +134,7 @@ console.log(data);
     {
       "id": "9a2e3d41-7b08-410a-85d1-6c5e7b29a144",
       "shortcut": "/greeting",
-      "content": "Hi there! Thanks for reaching out to Pingr AI. How can I assist you today?",
+      "content": "Hi there! Thanks for reaching out to Sayvy AI. How can I assist you today?",
       "created_at": "2026-09-06T10:00:00Z"
     },
     {

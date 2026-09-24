@@ -86,7 +86,7 @@ phone_number,name,tags
 <RequestExample>
 
 ```bash cURL
-curl -X POST "https://api.pingr.ai/api/v1/contacts/bulk-upload" \
+curl -X POST "https://api.sayvy.ai/api/v1/contacts/bulk-upload" \
   -H "Authorization: Bearer <token>" \
   -F "file=@/path/to/contacts.csv"
 ```
@@ -94,7 +94,7 @@ curl -X POST "https://api.pingr.ai/api/v1/contacts/bulk-upload" \
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/contacts/bulk-upload"
+url = "https://api.sayvy.ai/api/v1/contacts/bulk-upload"
 
 headers = {
     "Authorization": "Bearer <token>"
@@ -112,7 +112,7 @@ print(response.json())
 const formData = new FormData();
 formData.append("file", fileInputElement.files[0]);
 
-const response = await fetch("https://api.pingr.ai/api/v1/contacts/bulk-upload", {
+const response = await fetch("https://api.sayvy.ai/api/v1/contacts/bulk-upload", {
   method: "POST",
   headers: {
     "Authorization": "Bearer <token>"
@@ -127,7 +127,7 @@ console.log(data);
 ```java Java
 // Using Java 11+ HttpClient with multipart body publisher
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/contacts/bulk-upload"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/contacts/bulk-upload"))
     .header("Authorization", "Bearer <token>")
     .POST(ofMimeMultipartData(Map.of("file", Paths.get("contacts.csv")), boundary))
     .build();

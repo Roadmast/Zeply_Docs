@@ -5,7 +5,7 @@ api: "POST /api/v1/inbox/upload"
 description: "Upload a multimedia attachment to temporary S3 storage prior to sending via WhatsApp"
 ---
 
-Upload an image, document, audio file, or video to Pingr AI storage. The response contains a temporary S3 key (`media_url`) and MIME properties that can be directly passed into `POST /api/v1/inbox/messages/{inbox_id}`.
+Upload an image, document, audio file, or video to Sayvy AI storage. The response contains a temporary S3 key (`media_url`) and MIME properties that can be directly passed into `POST /api/v1/inbox/messages/{inbox_id}`.
 
 ---
 
@@ -54,7 +54,7 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X POST "https://api.pingr.ai/api/v1/inbox/upload" \
+curl -X POST "https://api.sayvy.ai/api/v1/inbox/upload" \
   -H "Authorization: Bearer <token>" \
   -F "file=@/path/to/invoice.pdf"
 ```
@@ -62,7 +62,7 @@ curl -X POST "https://api.pingr.ai/api/v1/inbox/upload" \
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/inbox/upload"
+url = "https://api.sayvy.ai/api/v1/inbox/upload"
 headers = {
     "Authorization": "Bearer <token>"
 }
@@ -79,7 +79,7 @@ print(response.json())
 const formData = new FormData();
 formData.append("file", fileInputElement.files[0]);
 
-const response = await fetch("https://api.pingr.ai/api/v1/inbox/upload", {
+const response = await fetch("https://api.sayvy.ai/api/v1/inbox/upload", {
   method: "POST",
   headers: {
     "Authorization": "Bearer <token>"

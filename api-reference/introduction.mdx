@@ -2,12 +2,12 @@
 title: "Introduction"
 sidebarTitle: "Introduction"
 icon: "code"
-description: "Overview of the Pingr AI REST API architecture and developer platform"
+description: "Overview of the Sayvy AI REST API architecture and developer platform"
 ---
 
-# Pingr AI API Reference
+# Sayvy AI API Reference
 
-Welcome to the Pingr AI REST API reference. The Pingr AI API enables developers to programmatically create and configure conversational AI voice agents, dispatch outbound calling campaigns, manage multi-channel messaging (WhatsApp & SMS), stream real-time WebRTC audio, and configure webhook delivery.
+Welcome to the Sayvy AI REST API reference. The Sayvy AI API enables developers to programmatically create and configure conversational AI voice agents, dispatch outbound calling campaigns, manage multi-channel messaging (WhatsApp & SMS), stream real-time WebRTC audio, and configure webhook delivery.
 
 <CardGroup cols={2}>
   <Card title="Authentication" icon="key" href="/api-reference/authentication">
@@ -26,18 +26,18 @@ Welcome to the Pingr AI REST API reference. The Pingr AI API enables developers 
 
 ## Base URLs
 
-The Pingr AI API is served over secure HTTPS. All requests must use TLS 1.3 or higher.
+The Sayvy AI API is served over secure HTTPS. All requests must use TLS 1.3 or higher.
 
 | Environment | Base URL | Usage |
 | :--- | :--- | :--- |
-| **Production** | `https://api.pingr.ai/api/v1` | Live production workloads |
-| **Staging / Sandbox** | `https://sandbox-api.pingr.ai/api/v1` | Pre-production testing |
+| **Production** | `https://api.sayvy.ai/api/v1` | Live production workloads |
+| **Staging / Sandbox** | `https://sandbox-api.sayvy.ai/api/v1` | Pre-production testing |
 | **Local Development** | `http://localhost:8000/api/v1` | Self-hosted backend testing |
 
 ```bash
 # Health check endpoint
-curl -X GET https://api.pingr.ai/api/v1/health \
-  -H "Authorization: Bearer pingr_sk_live_your_api_key"
+curl -X GET https://api.sayvy.ai/api/v1/health \
+  -H "Authorization: Bearer sayvy_sk_live_your_api_key"
 ```
 
 ## Content Types & Character Encoding

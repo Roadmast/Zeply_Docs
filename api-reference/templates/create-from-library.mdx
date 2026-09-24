@@ -64,7 +64,7 @@ Returns the Meta Graph API response confirming template creation:
 <RequestExample>
 
 ```bash cURL
-curl -X POST "https://api.pingr.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc" \
+curl -X POST "https://api.sayvy.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc" \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -75,7 +75,7 @@ curl -X POST "https://api.pingr.ai/api/v1/templates/library/ecommerce_order_ship
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create"
+url = "https://api.sayvy.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create"
 
 params = {
     "channel_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc"
@@ -97,7 +97,7 @@ print(response.json())
 
 ```javascript JavaScript
 const response = await fetch(
-  "https://api.pingr.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
+  "https://api.sayvy.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
   {
     method: "POST",
     headers: {
@@ -116,7 +116,7 @@ console.log(data);
 
 ```java Java
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/templates/library/ecommerce_order_shipped_v1/create?channel_id=8f3b0e2a-71d3-4a5f-9e6b-123456789abc"))
     .header("Authorization", "Bearer <token>")
     .header("Content-Type", "application/json")
     .POST(HttpRequest.BodyPublishers.ofString("""

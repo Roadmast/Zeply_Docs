@@ -6,11 +6,11 @@ description: "Subscribe to real-time event notifications for calls, conversation
 
 # Webhooks API
 
-The **Webhooks API** enables you to register HTTPS listener endpoints that receive real-time JSON payloads whenever asynchronous business events occur within Pingr AI. Receive instant alerts when phone calls complete, AI tools execute, WhatsApp messages arrive or fail, or campaigns terminate.
+The **Webhooks API** enables you to register HTTPS listener endpoints that receive real-time JSON payloads whenever asynchronous business events occur within Sayvy AI. Receive instant alerts when phone calls complete, AI tools execute, WhatsApp messages arrive or fail, or campaigns terminate.
 
 ```
 +-------------------------------------------------------------+
-|                      Pingr AI Event Engine                  |
+|                      Sayvy AI Event Engine                  |
 |                                                             |
 |  +--------------------+  +--------------------+  +--------+ |
 |  | Voice AI Telephony |  | WhatsApp Broadcast |  | Inbox  | |
@@ -28,7 +28,7 @@ The **Webhooks API** enables you to register HTTPS listener endpoints that recei
 |                                    v                        |
 |                     +-----------------------------+         |
 |                     |   Your Server HTTPS URL     |         |
-|                     | (e.g. /api/webhooks/pingr)  |         |
+|                     | (e.g. /api/webhooks/sayvy)  |         |
 |                     +-----------------------------+         |
 +-------------------------------------------------------------+
 ```
@@ -37,7 +37,7 @@ The **Webhooks API** enables you to register HTTPS listener endpoints that recei
 
 ## Event Catalog
 
-Pingr AI supports 19 granular event types:
+Sayvy AI supports 19 granular event types:
 
 ### Telephony & Calls
 | Event Name | Trigger Description |
@@ -82,14 +82,14 @@ Pingr AI supports 19 granular event types:
 
 ## Verifying Signatures
 
-To ensure payloads originate from Pingr AI and have not been tampered with in transit, every delivery request includes an `X-Pingr-Signature` header computed using HMAC SHA-256 with your webhook secret:
+To ensure payloads originate from Sayvy AI and have not been tampered with in transit, every delivery request includes an `X-Sayvy-Signature` header computed using HMAC SHA-256 with your webhook secret:
 
 ```python Python
 import hmac
 import hashlib
 
 def verify_webhook(payload_bytes: bytes, signature_header: str, secret: str) -> bool:
-    """Validate X-Pingr-Signature against the raw request body bytes."""
+    """Validate X-Sayvy-Signature against the raw request body bytes."""
     expected_sig = hmac.new(
         secret.encode("utf-8"),
         payload_bytes,

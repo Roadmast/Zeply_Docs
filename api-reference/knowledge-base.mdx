@@ -5,7 +5,7 @@ description: "Upload, manage, and retrieve enterprise documentation for real-tim
 
 # Knowledge Base API Reference
 
-The **Knowledge Base API** enables you to programmatically upload and manage internal corporate documents (`PDF`, `DOCX`, `TXT`). Source files are securely stored in object storage, while extracted text chunks and vector embeddings are stored in Pingr AI's vector database to empower Voice AI agents with contextual retrieval during customer calls.
+The **Knowledge Base API** enables you to programmatically upload and manage internal corporate documents (`PDF`, `DOCX`, `TXT`). Source files are securely stored in object storage, while extracted text chunks and vector embeddings are stored in Sayvy AI's vector database to empower Voice AI agents with contextual retrieval during customer calls.
 
 ---
 
@@ -36,7 +36,7 @@ Explore the comprehensive Knowledge Base API reference:
 ## Quick Example: Uploading a Document
 
 ```bash
-curl -X POST "https://api.pingr.ai/api/v1/knowledge-base/upload" \
+curl -X POST "https://api.sayvy.ai/api/v1/knowledge-base/upload" \
   -H "Authorization: Bearer <your-api-key>" \
   -F "file=@/path/to/faq.pdf"
 ```

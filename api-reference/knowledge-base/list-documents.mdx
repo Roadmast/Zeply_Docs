@@ -50,14 +50,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/knowledge-base" \
+curl -X GET "https://api.sayvy.ai/api/v1/knowledge-base" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/knowledge-base"
+url = "https://api.sayvy.ai/api/v1/knowledge-base"
 
 headers = {
     "Authorization": "Bearer <token>"
@@ -69,7 +69,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/knowledge-base", {
+const response = await fetch("https://api.sayvy.ai/api/v1/knowledge-base", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"
@@ -82,7 +82,7 @@ console.log(data);
 
 ```java Java
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/knowledge-base"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/knowledge-base"))
     .header("Authorization", "Bearer <token>")
     .GET()
     .build();

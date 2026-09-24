@@ -97,14 +97,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/inbox/tickets?status=open&limit=25&offset=0" \
+curl -X GET "https://api.sayvy.ai/api/v1/inbox/tickets?status=open&limit=25&offset=0" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/inbox/tickets"
+url = "https://api.sayvy.ai/api/v1/inbox/tickets"
 headers = {
     "Authorization": "Bearer <token>"
 }
@@ -120,7 +120,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/inbox/tickets?status=open&limit=25&offset=0", {
+const response = await fetch("https://api.sayvy.ai/api/v1/inbox/tickets?status=open&limit=25&offset=0", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"

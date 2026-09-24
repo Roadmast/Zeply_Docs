@@ -10,8 +10,8 @@ Run outbound campaigns across thousands of contacts with concurrency controls, t
 ## Creating a Campaign
 
 ```bash
-curl -X POST https://api.pingr.ai/api/v1/campaigns \
-  -H "Authorization: Bearer pingr_live_your_key" \
+curl -X POST https://api.sayvy.ai/api/v1/campaigns \
+  -H "Authorization: Bearer sayvy_live_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Q3 Lead Reactivation",
@@ -29,11 +29,10 @@ curl -X POST https://api.pingr.ai/api/v1/campaigns \
 
 ## Scheduling Architecture
 
-Campaigns in Pingr AI are synchronized into high-throughput Redis sorted sets and dispatched by Celery / Dramatiq background workers respecting recipient timezones (TCPA / GDPR compliance).
+Campaigns in Sayvy AI are synchronized into high-throughput Redis sorted sets and dispatched by Celery / Dramatiq background workers respecting recipient timezones (TCPA / GDPR compliance).
 
 ---
 
 <Card title="Campaigns API Reference" icon="bullhorn" href="/api-reference/campaigns/overview">
   Explore the interactive REST API reference for creating, listing, pausing, resuming, cancelling, and exporting campaign PDF reports.
 </Card>
-

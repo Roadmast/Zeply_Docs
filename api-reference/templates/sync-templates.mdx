@@ -2,10 +2,10 @@
 title: "Sync templates"
 sidebarTitle: "Sync templates"
 api: "POST /api/v1/templates/sync"
-description: "Synchronize approved message templates from your Meta WhatsApp Business Account to Pingr AI"
+description: "Synchronize approved message templates from your Meta WhatsApp Business Account to Sayvy AI"
 ---
 
-Pulls all existing templates registered on your connected WhatsApp Business Account (WABA) from Meta Graph API v19.0 and upserts them into Pingr AI's local database. This updates template review statuses (`PENDING`, `APPROVED`, `REJECTED`), components, and quality ratings.
+Pulls all existing templates registered on your connected WhatsApp Business Account (WABA) from Meta Graph API v19.0 and upserts them into Sayvy AI's local database. This updates template review statuses (`PENDING`, `APPROVED`, `REJECTED`), components, and quality ratings.
 
 ---
 
@@ -48,7 +48,7 @@ The following parameters are accepted in the JSON request body.
 </ResponseField>
 
 <ResponseField name="synced_count" type="number">
-  Count of templates parsed and upserted into Pingr AI.
+  Count of templates parsed and upserted into Sayvy AI.
 </ResponseField>
 
 ---
@@ -56,7 +56,7 @@ The following parameters are accepted in the JSON request body.
 <RequestExample>
 
 ```bash cURL
-curl -X POST "https://api.pingr.ai/api/v1/templates/sync" \
+curl -X POST "https://api.sayvy.ai/api/v1/templates/sync" \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -67,7 +67,7 @@ curl -X POST "https://api.pingr.ai/api/v1/templates/sync" \
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/templates/sync"
+url = "https://api.sayvy.ai/api/v1/templates/sync"
 
 payload = {
     "channel_id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc"
@@ -84,7 +84,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/templates/sync", {
+const response = await fetch("https://api.sayvy.ai/api/v1/templates/sync", {
   method: "POST",
   headers: {
     "Authorization": "Bearer <token>",
@@ -101,7 +101,7 @@ console.log(data);
 
 ```java Java
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/templates/sync"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/templates/sync"))
     .header("Authorization", "Bearer <token>")
     .header("Content-Type", "application/json")
     .POST(HttpRequest.BodyPublishers.ofString("""

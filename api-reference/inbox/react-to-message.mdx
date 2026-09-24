@@ -54,7 +54,7 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL Add Reaction
-curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react" \
+curl -X POST "https://api.sayvy.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react" \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -63,7 +63,7 @@ curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e
 ```
 
 ```bash cURL Remove Reaction
-curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react" \
+curl -X POST "https://api.sayvy.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react" \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -74,7 +74,7 @@ curl -X POST "https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react"
+url = "https://api.sayvy.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react"
 headers = {
     "Authorization": "Bearer <token>",
     "Content-Type": "application/json"
@@ -89,7 +89,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react", {
+const response = await fetch("https://api.sayvy.ai/api/v1/inbox/messages/2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e/react", {
   method: "POST",
   headers: {
     "Authorization": "Bearer <token>",

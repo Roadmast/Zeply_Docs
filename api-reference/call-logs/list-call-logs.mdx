@@ -134,14 +134,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed" \
+curl -X GET "https://api.sayvy.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/call-logs"
+url = "https://api.sayvy.ai/api/v1/call-logs"
 headers = {
     "Authorization": "Bearer <token>"
 }
@@ -158,7 +158,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed", {
+const response = await fetch("https://api.sayvy.ai/api/v1/call-logs?page=1&page_size=20&direction=inbound&status=completed", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"
@@ -197,7 +197,7 @@ console.log(data);
       "transcript": [
         {
           "speaker": "agent",
-          "text": "Hello! Thank you for calling Pingr AI support. How may I assist you?",
+          "text": "Hello! Thank you for calling Sayvy AI support. How may I assist you?",
           "timestamp": 0.8
         },
         {

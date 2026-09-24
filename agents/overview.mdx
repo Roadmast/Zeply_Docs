@@ -1,11 +1,11 @@
 ---
 title: "Agent Overview"
-description: "Core concepts of Pingr AI voice agents, pipeline architectures, and execution flow"
+description: "Core concepts of Sayvy AI voice agents, pipeline architectures, and execution flow"
 ---
 
-# Voice Agents in Pingr AI
+# Voice Agents in Sayvy AI
 
-Voice agents are the central orchestration entity in Pingr AI. Each agent configures:
+Voice agents are the central orchestration entity in Sayvy AI. Each agent configures:
 1. **Prompt Intelligence**: System instructions, situational knowledge, guardrails, and role definitions.
 2. **Speech-to-Text (STT)**: High-speed acoustic transcription engine (Deepgram Nova-2 or Whisper Realtime).
 3. **Reasoning Engine (LLM)**: Fast conversational models (Claude 3.5 Sonnet, GPT-4o, or Gemini 1.5 Flash).
@@ -17,7 +17,7 @@ Voice agents are the central orchestration entity in Pingr AI. Each agent config
 sequenceDiagram
     participant User as Customer
     participant Telephony as Twilio / SIP
-    participant Agent as Pingr Voice Agent
+    participant Agent as Sayvy Voice Agent
     participant LLM as Inference
     participant TTS as Neural Audio
 

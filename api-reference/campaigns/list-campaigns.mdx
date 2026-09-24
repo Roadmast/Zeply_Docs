@@ -96,14 +96,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1" \
+curl -X GET "https://api.sayvy.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/campaigns"
+url = "https://api.sayvy.ai/api/v1/campaigns"
 
 params = {
     "status_filter": "sending",
@@ -121,7 +121,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1", {
+const response = await fetch("https://api.sayvy.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"
@@ -134,7 +134,7 @@ console.log(data);
 
 ```java Java
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/campaigns?status_filter=sending&limit=20&page=1"))
     .header("Authorization", "Bearer <token>")
     .GET()
     .build();

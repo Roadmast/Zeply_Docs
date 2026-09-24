@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Pingr AI",
+  "name": "Sayvy AI",
   "appearance": {
     "default": "dark"
   },
@@ -186,7 +186,7 @@
     ]
   },
   "api": {
-    "baseUrl": "https://api.pingr.ai",
+    "baseUrl": "https://api.sayvy.ai",
     "auth": {
       "method": "bearer"
     }

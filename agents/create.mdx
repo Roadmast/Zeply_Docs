@@ -5,15 +5,15 @@ description: "Step-by-step guide to provisioning new conversational agents"
 
 # Creating an Agent
 
-You can create an agent either visually in the [Pingr Console](http://localhost:3000/agents) or programmatically through our API.
+You can create an agent either visually in the [Sayvy Console](http://localhost:3000/agents) or programmatically through our API.
 
 ## Programmatic Creation
 
 Send a POST request to `/api/v1/agents`:
 
 ```bash cURL
-curl -X POST https://api.pingr.ai/api/v1/agents \
-  -H "Authorization: Bearer pingr_live_your_key" \
+curl -X POST https://api.sayvy.ai/api/v1/agents \
+  -H "Authorization: Bearer sayvy_live_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Appointment Booking Concierge",

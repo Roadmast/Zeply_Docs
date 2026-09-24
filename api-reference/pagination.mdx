@@ -65,8 +65,8 @@ Every list response wraps item arrays inside a standard paginated envelope:
 import os
 import requests
 
-API_KEY = os.getenv("PINGR_API_KEY")
-BASE_URL = "https://api.pingr.ai/api/v1/calls"
+API_KEY = os.getenv("SAYVY_API_KEY")
+BASE_URL = "https://api.sayvy.ai/api/v1/calls"
 headers = {"Authorization": f"Bearer {API_KEY}"}
 
 def fetch_all_calls():
@@ -102,12 +102,12 @@ async function fetchAllAgents() {
   let cursor: string | null = null;
 
   while (hasMore) {
-    const url = new URL('https://api.pingr.ai/api/v1/agents');
+    const url = new URL('https://api.sayvy.ai/api/v1/agents');
     url.searchParams.set('limit', '50');
     if (cursor) url.searchParams.set('starting_after', cursor);
 
     const res = await fetch(url.toString(), {
-      headers: { 'Authorization': `Bearer ${process.env.PINGR_API_KEY}` }
+      headers: { 'Authorization': `Bearer ${process.env.SAYVY_API_KEY}` }
     });
     const json = await res.json();
 

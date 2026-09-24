@@ -1,14 +1,14 @@
 ---
 title: "Introduction"
-description: "Welcome to Pingr AI — Next-generation conversational voice agents and multi-channel automation engine"
+description: "Welcome to Sayvy AI — Next-generation conversational voice agents and multi-channel automation engine"
 ---
 
-# Pingr AI Documentation
+# Sayvy AI Documentation
 
-Pingr AI gives engineering and product teams ultra-low latency conversational voice AI infrastructure. Connect SIP trunks, WebRTC bidirectional audio streams, intelligent conversation workflows, and multi-channel automations (WhatsApp & SMS) with zero operational friction.
+Sayvy AI gives engineering and product teams ultra-low latency conversational voice AI infrastructure. Connect SIP trunks, WebRTC bidirectional audio streams, intelligent conversation workflows, and multi-channel automations (WhatsApp & SMS) with zero operational friction.
 
-<Frame caption="Pingr AI Architecture — Voice AI, WhatsApp Business API, and Real-Time Telephony">
-  <img src="/images/og-image.svg" alt="Pingr AI Platform Banner" />
+<Frame caption="Sayvy AI Architecture — Voice AI, WhatsApp Business API, and Real-Time Telephony">
+  <img src="/images/og-image.svg" alt="Sayvy AI Platform Banner" />
 </Frame>
 
 ---
@@ -34,10 +34,10 @@ Pingr AI gives engineering and product teams ultra-low latency conversational vo
 
 ## Developer Console & API Access
 
-Manage voice agents, view live call transcripts, configure webhooks, and generate scoped credentials directly from the **Pingr AI Console**.
+Manage voice agents, view live call transcripts, configure webhooks, and generate scoped credentials directly from the **Sayvy AI Console**.
 
-<Frame caption="Pingr AI Developer Portal — API Key and Workspace Management">
-  <img src="/images/api-key-page.png" alt="Pingr AI Developer API Keys Dashboard" />
+<Frame caption="Sayvy AI Developer Portal — API Key and Workspace Management">
+  <img src="/images/api-key-page.png" alt="Sayvy AI Developer API Keys Dashboard" />
 </Frame>
 
 ### Provisioning Credentials
@@ -45,7 +45,7 @@ Manage voice agents, view live call transcripts, configure webhooks, and generat
 1. **Create Scoped Keys**: Generate dedicated keys with granular permissions (`agents:read`, `calls:dispatch`, `campaigns:manage`).
 2. **Set Expiration**: Protect mission-critical deployments with automatic key rotation or non-expiring production secrets.
 
-<Frame caption="Creating a new scoped API credential in the Pingr AI Console">
+<Frame caption="Creating a new scoped API credential in the Sayvy AI Console">
   <img src="/images/create-api-key.png" alt="Generate Secret API Key Modal" />
 </Frame>
 
@@ -65,8 +65,8 @@ graph LR
     Gateway --> Pipecat[Pipecat Realtime Engine]
     Pipecat --> LLM[LLM / Tool Calling]
     Pipecat --> TTS[Neural Voice Synthesis]
-    Pipecat --> PingrCore[Pingr AI Backend API]
-    PingrCore --> DB[(PostgreSQL & Redis)]
+    Pipecat --> SayvyCore[Sayvy AI Backend API]
+    SayvyCore --> DB[(PostgreSQL & Redis)]
 ```
 
 - **Sub-500ms Audio Latency**: Streaming speech-to-text (Deepgram Nova-2), LLM token streaming (Claude 3.5 Sonnet / GPT-4o), and neural text-to-speech pipelines (Cartesia & ElevenLabs).

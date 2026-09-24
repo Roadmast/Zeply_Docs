@@ -2,12 +2,12 @@
 title: "Rate Limiting"
 sidebarTitle: "Rate Limiting"
 icon: "gauge-high"
-description: "Understand rate limits, burst quotas, and headers across Pingr AI endpoints"
+description: "Understand rate limits, burst quotas, and headers across Sayvy AI endpoints"
 ---
 
 # Rate Limiting
 
-To guarantee low audio latency and 99.99% uptime across our real-time voice infrastructure, Pingr AI enforces rate limits on REST API requests and concurrent voice audio sessions.
+To guarantee low audio latency and 99.99% uptime across our real-time voice infrastructure, Sayvy AI enforces rate limits on REST API requests and concurrent voice audio sessions.
 
 ---
 
@@ -23,7 +23,7 @@ To guarantee low audio latency and 99.99% uptime across our real-time voice infr
 
 ## Rate Limit Headers
 
-Every HTTP response from Pingr AI includes headers describing your current quota status:
+Every HTTP response from Sayvy AI includes headers describing your current quota status:
 
 | Header | Description |
 | :--- | :--- |
@@ -44,7 +44,7 @@ X-RateLimit-Reset: 1788448860
 
 ## Handling 429 Responses
 
-When rate limits are exceeded, Pingr AI responds with HTTP status code `429 Too Many Requests`:
+When rate limits are exceeded, Sayvy AI responds with HTTP status code `429 Too Many Requests`:
 
 ```json
 {
@@ -86,5 +86,5 @@ async function fetchWithRetry(url: string, options: RequestInit, retries = 5, ba
 ```
 
 <Tip>
-  If your workload requires higher outbound call concurrency or custom burst allowances, contact our team at [enterprise@pingr.ai](mailto:enterprise@pingr.ai).
+  If your workload requires higher outbound call concurrency or custom burst allowances, contact our team at [enterprise@sayvy.ai](mailto:enterprise@sayvy.ai).
 </Tip>

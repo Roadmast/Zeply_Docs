@@ -52,14 +52,14 @@ Authorization: Bearer <token>
 <RequestExample>
 
 ```bash cURL
-curl -X GET "https://api.pingr.ai/api/v1/webhooks" \
+curl -X GET "https://api.sayvy.ai/api/v1/webhooks" \
   -H "Authorization: Bearer <token>"
 ```
 
 ```python Python
 import requests
 
-url = "https://api.pingr.ai/api/v1/webhooks"
+url = "https://api.sayvy.ai/api/v1/webhooks"
 
 headers = {
     "Authorization": "Bearer <token>"
@@ -71,7 +71,7 @@ print(response.json())
 ```
 
 ```javascript JavaScript
-const response = await fetch("https://api.pingr.ai/api/v1/webhooks", {
+const response = await fetch("https://api.sayvy.ai/api/v1/webhooks", {
   method: "GET",
   headers: {
     "Authorization": "Bearer <token>"
@@ -84,7 +84,7 @@ console.log(data);
 
 ```java Java
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://api.pingr.ai/api/v1/webhooks"))
+    .uri(URI.create("https://api.sayvy.ai/api/v1/webhooks"))
     .header("Authorization", "Bearer <token>")
     .GET()
     .build();
@@ -104,7 +104,7 @@ System.out.println(response.body());
     {
       "id": "8f3b0e2a-71d3-4a5f-9e6b-123456789abc",
       "organization_id": "93f35dc2-5d46-4e58-a9ee-038c35d9bcf1",
-      "url": "https://example.com/api/webhooks/pingr",
+      "url": "https://example.com/api/webhooks/sayvy",
       "secret": "whsec_3b9f8a12e4c7d018b249aef567890123",
       "events": [
         "call.completed",

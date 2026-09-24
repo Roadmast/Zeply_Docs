@@ -1,6 +1,6 @@
-# Pingr AI Mintlify Documentation
+# Sayvy AI Mintlify Documentation
 
-Official documentation for Pingr AI powered by [Mintlify](https://mintlify.com).
+Official documentation for Sayvy AI powered by [Mintlify](https://mintlify.com).
 
 ## Getting Started Locally
 
@@ -29,4 +29,4 @@ Your main Next.js app (`http://localhost:3000`) automatically proxies:
 
 1. Push your changes to GitHub.
 2. Link your repository in the [Mintlify Dashboard](https://dashboard.mintlify.com).
-3. To host at `pingr.ai/docs`, enable the **Host at** subpath setting in Mintlify dashboard and set `MINTLIFY_URL=https://your-subdomain.mintlify.site/docs` in your production environment variables.
+3. To host at `sayvy.ai/docs`, enable the **Host at** subpath setting in Mintlify dashboard and set `MINTLIFY_URL=https://your-subdomain.mintlify.site/docs` in your production environment variables.
