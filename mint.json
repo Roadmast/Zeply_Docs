@@ -24,12 +24,12 @@
   "topbarLinks": [
     {
       "name": "App Dashboard",
-      "url": "http://localhost:3000/dashboard"
+      "url": "https://sayvyai.com/dashboard"
     }
   ],
   "topbarCtaButton": {
     "name": "Launch Console",
-    "url": "http://localhost:3000"
+    "url": "https://sayvyai.com"
   },
   "tabs": [
     {

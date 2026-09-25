@@ -205,13 +205,13 @@
     "links": [
       {
         "label": "App Dashboard",
-        "href": "http://localhost:3000/dashboard"
+        "href": "https://sayvyai.com/dashboard"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Launch Console",
-      "href": "http://localhost:3000"
+      "href": "https://sayvyai.com"
     }
   },
   "feedback": {
