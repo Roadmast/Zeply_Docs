@@ -1,7 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Sayvy AI",
+  "description": "Sayvy AI Documentation - Build, automate, and deploy conversational AI voice agents and telephony campaigns.",
   "appearance": {
     "default": "dark"
   },
@@ -11,6 +12,12 @@
     "dark": "#10B981"
   },
   "favicon": "/favicon.svg",
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "canonical": "https://docs.sayvyai.com"
+    }
+  },
   "navigation": {
     "tabs": [
       {
