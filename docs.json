@@ -7,9 +7,9 @@
     "default": "dark"
   },
   "colors": {
-    "primary": "#10B981",
-    "light": "#059669",
-    "dark": "#10B981"
+    "primary": "#5842F5",
+    "light": "#818CF8",
+    "dark": "#5842F5"
   },
   "favicon": "/favicon.svg",
   "seo": {
