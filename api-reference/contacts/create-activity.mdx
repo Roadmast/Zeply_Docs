@@ -1,0 +1,263 @@
+---
+title: "Create contact activity"
+sidebarTitle: "Add activity or note"
+api: "POST /api/v1/contacts/{contact_id}/activities"
+description: "Log a manual note or activity event against a contact record"
+---
+
+Log an internal note, manual action, or custom activity event against a contact. Adding a `note_added` activity automatically synchronizes with the contact's CRM interaction history and updates the contact's `last_activity_at` timestamp.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField path="contact_id" type="string" required>
+  Unique UUID identifier of the contact. Example: `7b8f9e2a-4c1d-48ef-9123-bcde456789ab`.
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField body="type" type="string" default="note_added">
+  Activity type identifier matching standard events (e.g. `note_added`, `meeting_scheduled`, `call_logged`).
+</ParamField>
+
+<ParamField body="note" type="string">
+  Direct textual note content (e.g. `"Customer requested custom SLA terms."`).
+</ParamField>
+
+<ParamField body="payload" type="object">
+  Optional JSON dictionary containing additional event metadata and attributes.
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="id" type="string">
+  Generated UUID identifier of the activity.
+</ResponseField>
+
+<ResponseField name="organization_id" type="string">
+  Organization UUID.
+</ResponseField>
+
+<ResponseField name="contact_id" type="string">
+  Associated contact UUID.
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Activity type event recorded.
+</ResponseField>
+
+<ResponseField name="actor_type" type="string">
+  Actor attribution type (typically `user`).
+</ResponseField>
+
+<ResponseField name="actor_id" type="string">
+  UUID of the authenticated user who created the note/activity.
+</ResponseField>
+
+<ResponseField name="payload" type="object">
+  Stored event metadata dictionary.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 creation timestamp.
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "note_added",
+    "note": "Spoke on phone regarding enterprise migration timeline.",
+    "payload": {
+      "channel": "phone",
+      "call_duration_mins": 15
+    }
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities"
+
+payload = {
+    "type": "note_added",
+    "note": "Spoke on phone regarding enterprise migration timeline.",
+    "payload": {
+        "channel": "phone",
+        "call_duration_mins": 15
+    }
+}
+
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    type: "note_added",
+    note: "Spoke on phone regarding enterprise migration timeline.",
+    payload: {
+      channel: "phone",
+      call_duration_mins: 15
+    }
+  })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+String jsonPayload = """
+{
+  "type": "note_added",
+  "note": "Spoke on phone regarding enterprise migration timeline."
+}
+""";
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities"))
+    .header("Authorization", "Bearer <token>")
+    .header("Content-Type", "application/json")
+    .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "id": "d9818e6b-67e3-4632-9cb4-221272718e88",
+  "organization_id": "00000000-0000-0000-0000-000000000001",
+  "contact_id": "7b8f9e2a-4c1d-48ef-9123-bcde456789ab",
+  "type": "note_added",
+  "actor_type": "user",
+  "actor_id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+  "payload": {
+    "note": "Spoke on phone regarding enterprise migration timeline.",
+    "channel": "phone",
+    "call_duration_mins": 15
+  },
+  "created_at": "2026-10-07T16:15:00Z"
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "Contact not found"
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/contacts/get-activities" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Delete contact</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        DELETE /api/v1/contacts/&#123;contact_id&#125;
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/contacts/delete-contact" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

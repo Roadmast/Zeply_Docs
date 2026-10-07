@@ -7,9 +7,9 @@
     "default": "dark"
   },
   "colors": {
-    "primary": "#5842F5",
-    "light": "#818CF8",
-    "dark": "#5842F5"
+    "primary": "#4D63DA",
+    "light": "#7588EC",
+    "dark": "#4D63DA"
   },
   "favicon": "/favicon.png",
   "seo": {
@@ -19,50 +19,9 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "quickstart",
-              "authentication"
-            ]
-          },
-          {
-            "group": "Voice Agents & Telephony",
-            "pages": [
-              "agents/overview",
-              "agents/create",
-              "telephony/outbound-calls"
-            ]
-          },
-          {
-            "group": "Automations & Campaigns",
-            "pages": [
-              "campaigns/scheduling",
-              "webhooks/overview"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "introduction"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "Overview",
+        "group": "Overview",
             "icon": "circle-info",
             "pages": [
               "api-reference",
@@ -108,9 +67,26 @@
               "api-reference/contacts/overview",
               "api-reference/contacts/create-contact",
               "api-reference/contacts/list-contacts",
+              "api-reference/contacts/get-contact",
               "api-reference/contacts/update-contact",
+              "api-reference/contacts/patch-contact",
+              "api-reference/contacts/get-activities",
+              "api-reference/contacts/create-activity",
               "api-reference/contacts/delete-contact",
               "api-reference/contacts/bulk-upload"
+            ]
+          },
+          {
+            "group": "CRM",
+            "icon": "handshake",
+            "pages": [
+              "api-reference/crm/overview",
+              "api-reference/crm/dashboard",
+              "api-reference/crm/list-tasks",
+              "api-reference/crm/create-task",
+              "api-reference/crm/get-task",
+              "api-reference/crm/update-task",
+              "api-reference/crm/delete-task"
             ]
           },
           {
@@ -188,8 +164,6 @@
               "api-reference/inbox/react-to-message"
             ]
           }
-        ]
-      }
     ]
   },
   "api": {

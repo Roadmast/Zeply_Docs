@@ -1,31 +1,38 @@
 ---
 title: "Contacts Overview"
 sidebarTitle: "Overview"
-description: "Manage customer profiles, segmentation tags, custom metadata, and bulk ingestion in Sayvy AI"
+description: "Manage customer profiles, segmentation tags, CRM lifecycle stages, activities, and bulk ingestion in Sayvy AI"
 ---
 
 # Contacts API
 
-The **Contacts API** enables you to programmatically manage your organization's address book, customer phone numbers, segment tags, internal notes, and arbitrary custom key-value attributes. Contacts serve as the primary audience foundation for outbound WhatsApp campaigns and Voice AI telephony dispatching.
+The **Contacts API** enables you to programmatically manage your organization's address book, customer phone numbers, segment tags, internal notes, and arbitrary custom key-value attributes. Contacts also integrate deeply with the CRM engine, supporting **lifecycle stages**, **lead scoring**, **AI/human handling delegation**, and a chronological **activity timeline**.
 
 ```
-+-------------------------------------------------------------+
-|                      Sayvy AI Contact                       |
-|                                                             |
-|  +-----------------+  +-----------------+  +--------------+ |
-|  |  Identity Data  |  |  Segmentation   |  | Custom Meta  | |
-|  |  * Phone Number |  |  * Tags         |  | * JSON dict  | |
-|  |  * Full Name    |  |  * Lists        |  | * Notes      | |
-|  +--------+--------+  +--------+--------+  +-------+------+ |
-|           \                    |                   /        |
-|            +-------------------+------------------+         |
-|                                |                            |
-|                                v                            |
-|              +----------------------------------+           |
-|              |     Campaign & Voice Target      |           |
-|              |  (WhatsApp Broadcasts / Calls)  |           |
-|              +----------------------------------+           |
-+-------------------------------------------------------------+
++---------------------------------------------------------------------------------+
+|                               Sayvy AI Contact                                  |
+|                                                                                 |
+|  +-----------------+  +-----------------+  +--------------+  +---------------+  |
+|  |  Identity Data  |  |  Segmentation   |  | Custom Meta  |  |  CRM & Status |  |
+|  |  * Phone Number |  |  * Tags         |  | * JSON dict  |  |  * Stage      |  |
+|  |  * Full Name    |  |  * Lists        |  | * Notes      |  |  * Lead Score |  |
+|  |                 |  |                 |  |              |  |  * AI/Human   |  |
+|  +--------+--------+  +--------+--------+  +-------+------+  +-------+-------+  |
+|           \                    |                   /                 /          |
+|            +-------------------+------------------+-----------------+           |
+|                                |                                                |
+|                                v                                                |
+|              +----------------------------------+                               |
+|              |     Campaign & Voice Target      |                               |
+|              |  (WhatsApp Broadcasts / Calls)  |                               |
+|              +-----------------+----------------+                               |
+|                                |                                                |
+|                                v                                                |
+|              +----------------------------------+                               |
+|              |    Activity Timeline & Tasks     |                               |
+|              | (Notes, Messages, Handoffs, CRM) |                               |
+|              +----------------------------------+                               |
++---------------------------------------------------------------------------------+
 ```
 
 ---
@@ -34,13 +41,19 @@ The **Contacts API** enables you to programmatically manage your organization's 
 
 <CardGroup cols={2}>
   <Card title="Individual Contact Management" icon="user-plus">
-    Create, update, and delete individual customer records with phone numbers, names, and notes.
+    Create, get, update, and delete individual customer records with phone numbers, names, and notes.
+  </Card>
+  <Card title="CRM Lifecycle & Lead Scoring" icon="chart-line">
+    Track customer progression across stages (`new`, `engaged`, `qualified`, `customer`, `lost`) and automated lead scores (0–100).
+  </Card>
+  <Card title="AI & Human Handoff Control" icon="robot">
+    Toggle `ai_handling` flags per contact to smoothly route conversations between automated AI agents and human support staff.
+  </Card>
+  <Card title="Chronological Activity Timeline" icon="timeline">
+    Audit all customer touchpoints including inbound/outbound messages, stage updates, agent handoffs, and internal notes.
   </Card>
   <Card title="Dynamic Segmentation" icon="tags">
     Assign string tags (e.g. `vip`, `trial_user`, `q3_leads`) to power selective campaign targeting.
-  </Card>
-  <Card title="Arbitrary Custom Fields" icon="brackets-curly">
-    Store extensible JSON key-value data (e.g. `account_id`, `company`, `tier`) for dynamic template variable interpolation.
   </Card>
   <Card title="High-Speed Bulk Ingestion" icon="file-csv">
     Upload CSV or Excel spreadsheets containing thousands of contacts with automated duplicate updating and validation error reporting.
@@ -62,6 +75,12 @@ Each contact in Sayvy AI is scoped to your organization and contains:
 | `tags` | `string[]` | Array of classification tags used in campaign audience filters. |
 | `notes` | `string` | Internal agent or administrative notes. |
 | `custom_fields` | `object` | Arbitrary JSON metadata for custom integration logic. |
+| `lifecycle_stage` | `string` | Current pipeline stage: `new`, `engaged`, `qualified`, `customer`, or `lost`. Default is `new`. |
+| `lead_score` | `integer` | Numerical lead qualification score from `0` to `100`. Default is `0`. |
+| `owner_id` | `UUID` | ID of the assigned team member or user (optional). |
+| `ai_handling` | `boolean` | When `true`, Voice and Chat AI handle interactions automatically. When `false`, routed to human agents. |
+| `last_activity_at` | `string` | ISO 8601 timestamp of the most recent interaction or activity event. |
+| `source` | `string` | Origin source of the contact (e.g. `manual`, `bulk_upload`, `inbound_call`). |
 | `created_at` | `string` | ISO 8601 creation timestamp. |
 | `updated_at` | `string` | ISO 8601 last update timestamp. |
 
@@ -78,8 +97,12 @@ All contact operations are strictly isolated by organization context. Attempting
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/contacts` | Create a new contact record manually |
-| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/contacts` | List all contacts for your organization |
-| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PUT</span> | `/api/v1/contacts/{contact_id}` | Update an existing contact's details and tags |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/contacts` | List contacts with CRM filtering (stage, owner, score, tag) and pagination |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/contacts/{contact_id}` | Retrieve a single contact by unique ID |
+| <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PUT</span> | `/api/v1/contacts/{contact_id}` | Update standard contact details (name, phone, tags, custom fields) |
+| <span style={{ color: '#8B5CF6', fontWeight: 'bold' }}>PATCH</span> | `/api/v1/contacts/{contact_id}` | Partially update CRM attributes (stage, lead score, owner, AI handling) |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/contacts/{contact_id}/activities` | Retrieve chronological activity timeline for a contact |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/contacts/{contact_id}/activities` | Log a manual note or activity event against a contact |
 | <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/contacts/{contact_id}` | Permanently delete a contact |
 | <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/contacts/bulk-upload` | Bulk upload contacts via CSV or Excel spreadsheets |
 

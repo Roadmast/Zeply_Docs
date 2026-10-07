@@ -1,0 +1,248 @@
+---
+title: "Get contact activities"
+sidebarTitle: "List activities"
+api: "GET /api/v1/contacts/{contact_id}/activities"
+description: "Retrieve chronological activity timeline for a contact"
+---
+
+Retrieve a chronological, paginated activity timeline for a contact (newest first). The timeline tracks all interactions, system events, manual agent notes, campaign messages, lifecycle stage changes, and AI/human handoffs.
+
+---
+
+### Authentication
+
+This endpoint requires Bearer token authentication.
+
+```http
+Authorization: Bearer <token>
+```
+
+| Header | Type | Required | Description | Format |
+| :--- | :--- | :--- | :--- | :--- |
+| `Authorization` | `string` | **Yes** | Scoped organization API key or Bearer JWT token | `Bearer <token>` |
+
+---
+
+### Input parameters
+
+<ParamField path="contact_id" type="string" required>
+  Unique UUID identifier of the contact. Example: `7b8f9e2a-4c1d-48ef-9123-bcde456789ab`.
+</ParamField>
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField query="limit" type="integer" default="50">
+  Maximum number of activities to return (minimum 1, maximum 100).
+</ParamField>
+
+<ParamField query="offset" type="integer" default="0">
+  Number of activities to skip for pagination.
+</ParamField>
+
+<ParamField query="activity_types" type="string[]">
+  Optional filter by one or more activity types (e.g. `note_added`, `stage_changed`, `lead_score_changed`, `handoff_to_human`, `handoff_to_ai`, `task_created`, `task_completed`, `message_inbound`, `message_outbound`).
+</ParamField>
+
+---
+
+### Response Fields
+
+<ResponseField name="activities" type="ActivityResponse[]">
+  List of chronological activity records:
+  <Expandable title="Activity record fields">
+    <ResponseField name="id" type="string">Unique UUID identifier of the activity.</ResponseField>
+    <ResponseField name="organization_id" type="string">Organization UUID.</ResponseField>
+    <ResponseField name="contact_id" type="string">Associated contact UUID.</ResponseField>
+    <ResponseField name="type" type="string">Activity type event string (e.g. `contact_created`, `note_added`, `stage_changed`, `lead_score_changed`, `handoff_to_human`, `handoff_to_ai`, `task_created`, `task_completed`).</ResponseField>
+    <ResponseField name="actor_type" type="string">Initiator type: `user`, `ai`, or `system`.</ResponseField>
+    <ResponseField name="actor_id" type="string">UUID of the user or agent actor, or `null`.</ResponseField>
+    <ResponseField name="payload" type="object">Event metadata dictionary containing details (such as previous stage, new stage, note text, task ID, etc.).</ResponseField>
+    <ResponseField name="created_at" type="string">ISO 8601 creation timestamp.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="total" type="integer">
+  Total count of activities matching filters.
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Limit requested.
+</ResponseField>
+
+<ResponseField name="offset" type="integer">
+  Pagination offset applied.
+</ResponseField>
+
+<ResponseField name="has_more" type="boolean">
+  Flag indicating if more activities exist beyond this page.
+</ResponseField>
+
+---
+
+<RequestExample>
+
+```bash cURL
+curl -X GET "https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities?limit=10" \
+  -H "Authorization: Bearer <token>"
+```
+
+```python Python
+import requests
+
+url = "https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities"
+
+params = {
+    "limit": 10
+}
+
+headers = {
+    "Authorization": "Bearer <token>"
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.status_code)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities?limit=10", {
+  method: "GET",
+  headers: {
+    "Authorization": "Bearer <token>"
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```java Java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://api.sayvy.ai/api/v1/contacts/7b8f9e2a-4c1d-48ef-9123-bcde456789ab/activities?limit=10"))
+    .header("Authorization", "Bearer <token>")
+    .GET()
+    .build();
+
+HttpResponse<String> response =
+    HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 OK
+{
+  "activities": [
+    {
+      "id": "c71a39f4-2f22-4217-b715-cf9ec6a0cf55",
+      "organization_id": "00000000-0000-0000-0000-000000000001",
+      "contact_id": "7b8f9e2a-4c1d-48ef-9123-bcde456789ab",
+      "type": "stage_changed",
+      "actor_type": "user",
+      "actor_id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "payload": {
+        "old_stage": "engaged",
+        "new_stage": "qualified"
+      },
+      "created_at": "2026-10-07T16:00:00Z"
+    },
+    {
+      "id": "d9818e6b-67e3-4632-9cb4-221272718e88",
+      "organization_id": "00000000-0000-0000-0000-000000000001",
+      "contact_id": "7b8f9e2a-4c1d-48ef-9123-bcde456789ab",
+      "type": "note_added",
+      "actor_type": "user",
+      "actor_id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "payload": {
+        "note": "Customer showed interest in multi-seat annual plan."
+      },
+      "created_at": "2026-10-07T15:30:00Z"
+    }
+  ],
+  "total": 2,
+  "limit": 10,
+  "offset": 0,
+  "has_more": false
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "Contact not found"
+}
+```
+
+```json 401 Unauthorized
+{
+  "detail": "Unauthorized"
+}
+```
+
+</ResponseExample>
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/contacts/patch-contact" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>Create contact activity</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        POST /api/v1/contacts/&#123;contact_id&#125;/activities
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/contacts/create-activity" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

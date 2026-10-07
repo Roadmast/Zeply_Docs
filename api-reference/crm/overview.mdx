@@ -1,0 +1,141 @@
+---
+title: "CRM Overview"
+sidebarTitle: "Overview"
+description: "Sales pipeline tracking, AI-human collaboration metrics, and automated task management in Sayvy AI"
+---
+
+# CRM API
+
+The **CRM API** enables you to inspect organization-level pipeline velocity, retrieve real-time operational dashboard metrics, and orchestrate customer follow-up tasks linked to contacts and team members.
+
+```
++---------------------------------------------------------------------------------+
+|                               Sayvy AI CRM System                               |
+|                                                                                 |
+|  +-------------------------+         +---------------------------------------+  |
+|  |   Executive Dashboard   |         |           Task Orchestration          |  |
+|  |  * Pipeline Stages      |         |  * Follow-up Actions & Reminders      |  |
+|  |  * AI vs Human Ratio    |         |  * Contact Linkage & Team Assignment  |  |
+|  |  * Pending & Overdue    |         |  * State Transitions (Done/Cancelled) |  |
+|  +------------+------------+         +-------------------+-------------------+  |
+|               |                                          |                      |
+|               v                                          v                      |
+|  +---------------------------------------------------------------------------+  |
+|  |                         Contact Activity Timeline                         |  |
+|  |          (task_created, task_completed, stage_changed, notes)            |  |
+|  +---------------------------------------------------------------------------+  |
++---------------------------------------------------------------------------------+
+```
+
+---
+
+## Key Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Aggregated Dashboard Analytics" icon="chart-pie">
+    Retrieve real-time metrics summarizing contacts by lifecycle stage, AI vs human handling workloads, and overdue tasks in a single query.
+  </Card>
+  <Card title="Task Orchestration" icon="list-check">
+    Assign action items and follow-ups to team members, complete with due dates and contact linkages.
+  </Card>
+  <Card title="Lifecycle Tracking" icon="arrows-split-up-and-left">
+    Track deals as they progress from `new` to `engaged`, `qualified`, `customer`, or `lost`.
+  </Card>
+  <Card title="Audit & Event Integration" icon="timeline">
+    Creating or completing a task automatically appends an event to the contact's activity history for complete organizational visibility.
+  </Card>
+</CardGroup>
+
+---
+
+## Task Model Schema
+
+Tasks in Sayvy AI represent follow-up obligations linked to a specific customer contact:
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `UUID` | Unique identifier of the task. |
+| `organization_id` | `UUID` | Owning organization identifier. |
+| `contact_id` | `UUID` | Associated contact UUID. |
+| `title` | `string` | Task title or subject (1–255 characters). |
+| `description` | `string` | Detailed notes or instructions for the task, or `null`. |
+| `due_at` | `string` | ISO 8601 datetime when the task is due, or `null`. |
+| `assignee_id` | `UUID` | User UUID assigned to execute this task, or `null`. |
+| `status` | `string` | Task state: `pending`, `completed`, or `cancelled`. |
+| `created_by_type` | `string` | Creator actor type: `user`, `ai`, or `system`. |
+| `created_by_id` | `UUID` | Identifier of the user or agent creator, or `null`. |
+| `completed_at` | `string` | ISO 8601 timestamp when status changed to `completed`, or `null`. |
+| `created_at` | `string` | ISO 8601 creation timestamp. |
+| `updated_at` | `string` | ISO 8601 modification timestamp. |
+| `contact` | `object` | Lightweight summary of the associated contact (`id`, `name`, `phone_number`). |
+
+---
+
+## Available Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/crm/dashboard` | Retrieve aggregated pipeline, handling, and task metrics |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/crm/tasks` | List and filter tasks by status, contact, assignee, or due dates |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/crm/tasks` | Create a new task linked to a contact |
+| <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/crm/tasks/{task_id}` | Retrieve a single task by ID |
+| <span style={{ color: '#8B5CF6', fontWeight: 'bold' }}>PATCH</span> | `/api/v1/crm/tasks/{task_id}` | Update task details, reassign, or transition status |
+| <span style={{ color: '#EF4444', fontWeight: 'bold' }}>DELETE</span> | `/api/v1/crm/tasks/{task_id}` | Permanently delete a task |
+
+---
+
+<div style={{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  borderRadius: "16px",
+  padding: "10px 18px",
+  marginTop: "40px",
+  gap: "16px",
+  flexWrap: "wrap"
+}}>
+  <a href="/api-reference/contacts/bulk-upload" style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    color: "#94A3B8",
+    textDecoration: "none",
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "4px 8px"
+  }}>
+    <span style={{ fontSize: "16px" }}>‹</span> Previous (Contacts)
+  </a>
+
+  <div style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
+    borderRadius: "12px",
+    padding: "8px 16px",
+    marginLeft: "auto"
+  }}>
+    <div style={{ textAlign: "right" }}>
+      <div style={{ fontSize: "13px", fontWeight: "700", color: "#F8FAFC" }}>CRM Dashboard</div>
+      <div style={{ fontSize: "11px", color: "#94A3B8", maxWidth: "260px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        GET /api/v1/crm/dashboard
+      </div>
+    </div>
+    <div style={{ width: "1px", height: "24px", backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+    <a href="/api-reference/crm/dashboard" style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "6px",
+      color: "#94A3B8",
+      textDecoration: "none",
+      fontSize: "14px",
+      fontWeight: "500"
+    }}>
+      Next <span style={{ fontSize: "16px" }}>›</span>
+    </a>
+  </div>
+</div>

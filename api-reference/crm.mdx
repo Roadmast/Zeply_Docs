@@ -1,0 +1,54 @@
+---
+title: "CRM API"
+description: "Programmatically monitor sales pipelines, aggregated dashboard metrics, task management, and team assignments in Sayvy AI"
+---
+
+# CRM API Reference
+
+The **CRM API** enables you to query aggregated customer pipeline performance, manage follow-up tasks linked to customer records, monitor AI vs human conversation handling, and coordinate team task assignments.
+
+---
+
+## Endpoint Suite
+
+Explore the comprehensive CRM API reference pages:
+
+<CardGroup cols={2}>
+  <Card title="CRM Overview" icon="compass" href="/api-reference/crm/overview">
+    Architecture, lifecycle pipeline metrics, AI delegation, and task orchestration.
+  </Card>
+  <Card title="CRM Dashboard Metrics" icon="chart-pie" href="/api-reference/crm/dashboard">
+    GET /api/v1/crm/dashboard — Aggregated metrics for contacts, handling delegation, and tasks.
+  </Card>
+  <Card title="List Tasks" icon="list-check" href="/api-reference/crm/list-tasks">
+    GET /api/v1/crm/tasks — Query and filter tasks by status, contact, assignee, and due dates.
+  </Card>
+  <Card title="Create Task" icon="square-plus" href="/api-reference/crm/create-task">
+    POST /api/v1/crm/tasks — Create a task linked to a contact and emit an activity event.
+  </Card>
+  <Card title="Get Task" icon="check-to-slot" href="/api-reference/crm/get-task">
+    GET /api/v1/crm/tasks/{task_id} — Retrieve individual task details and contact summary.
+  </Card>
+  <Card title="Update Task" icon="pen-to-square" href="/api-reference/crm/update-task">
+    PATCH /api/v1/crm/tasks/{task_id} — Update status, reassign team member, or edit task metadata.
+  </Card>
+  <Card title="Delete Task" icon="trash" href="/api-reference/crm/delete-task">
+    DELETE /api/v1/crm/tasks/{task_id} — Permanently remove a task.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example: Creating a Follow-Up Task
+
+```bash
+curl -X POST "https://api.sayvy.ai/api/v1/crm/tasks" \
+  -H "Authorization: Bearer <your-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contact_id": "7b8f9e2a-4c1d-48ef-9123-bcde456789ab",
+    "title": "Send contract proposal",
+    "description": "Client requested proposal with annual volume discount",
+    "due_at": "2026-10-15T17:00:00Z"
+  }'
+```
