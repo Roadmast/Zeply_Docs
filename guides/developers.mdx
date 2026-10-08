@@ -1,0 +1,19 @@
+---
+title: "Build with Sayvy"
+description: "Use the API and webhooks to connect Sayvy to your product."
+---
+
+# Build with Sayvy
+
+Use the developer tools to integrate Sayvy with your own application, data pipeline, or internal operations.
+
+<CardGroup cols={2}>
+  <Card title="API keys" icon="key-round" href="/guides/api-keys">Authenticate server-side requests safely.</Card>
+  <Card title="API reference" icon="book-open" href="/api-reference">Browse endpoints, parameters, and examples.</Card>
+  <Card title="Webhooks" icon="webhook" href="/guides/webhooks">Receive events when important data changes.</Card>
+  <Card title="Errors and limits" icon="triangle-alert" href="/api-reference/errors">Design retries and failure handling for production.</Card>
+</CardGroup>
+
+## Production checklist
+
+Use environment-specific secrets, validate webhook signatures, make event processing idempotent, log request IDs, and monitor retries. Keep API calls on your server rather than exposing credentials in browser code.

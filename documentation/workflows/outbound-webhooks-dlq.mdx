@@ -1,0 +1,39 @@
+---
+title: "Outbound Webhooks"
+description: "Real-time event notifications, retry policies, and delivery guarantees"
+---
+
+# Outbound Webhooks
+
+*This page covers how Sayvy AI dispatches real-time outbound event notifications to your webhooks and systems.*
+
+---
+
+## Outbound Event Catalog
+
+*Content coming soon.*
+
+- `call.started` & `call.ended` (transcripts, audio URLs, duration)
+- `whatsapp.message.received` & `whatsapp.message.sent`
+- `crm.lead.created` & `crm.stage.updated`
+- `workflow.step.failed`
+
+---
+
+## Security & Signature Verification
+
+*Content coming soon.*
+
+- The `X-Sayvy-Signature` header
+- HMAC-SHA256 hash calculation using your webhook secret
+- Timestamp verification to prevent replay attacks
+
+---
+
+## Delivery Guarantees, Retries & Dead Letter Queues (DLQ)
+
+*Content coming soon.*
+
+- At-least-once delivery semantics
+- Exponential backoff algorithm with full jitter (up to 5 retries)
+- Dead Letter Queue (DLQ) storage for failed events and manual replay controls

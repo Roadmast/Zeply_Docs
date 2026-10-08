@@ -2,8 +2,8 @@
   <rect width="1200" height="630" fill="#0F172A"/>
   
   <!-- Ambient Radial Glow Orbs -->
-  <circle cx="150" cy="100" r="300" fill="#4D63DA" opacity="0.18" filter="blur(80px)"/>
-  <circle cx="1050" cy="530" r="280" fill="#7588EC" opacity="0.18" filter="blur(80px)"/>
+  <circle cx="150" cy="100" r="300" fill="#5842F5" opacity="0.18" filter="blur(80px)"/>
+  <circle cx="1050" cy="530" r="280" fill="#818CF8" opacity="0.18" filter="blur(80px)"/>
   
   <!-- Subtle Grid Dots -->
   <pattern id="grid-dots" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -13,18 +13,18 @@
 
   <!-- Logo Group -->
   <g transform="translate(100, 120)">
-    <rect width="64" height="64" rx="16" fill="#1E293B" stroke="#4D63DA" stroke-width="2"/>
-    <path d="M42 30C42 36.6274 35.732 42 28 42C25.569 42 23.2882 41.4606 21.3204 40.5048L14 43L16.5436 36.4732C14.9458 34.6146 14 32.409 14 30C14 23.3726 20.268 18 28 18C35.732 18 42 23.3726 42 30Z" stroke="#7588EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="46" cy="16" r="6" fill="#4D63DA" stroke="#0F172A" stroke-width="2"/>
+    <rect width="64" height="64" rx="16" fill="#1E293B" stroke="#5842F5" stroke-width="2"/>
+    <path d="M42 30C42 36.6274 35.732 42 28 42C25.569 42 23.2882 41.4606 21.3204 40.5048L14 43L16.5436 36.4732C14.9458 34.6146 14 32.409 14 30C14 23.3726 20.268 18 28 18C35.732 18 42 23.3726 42 30Z" stroke="#818CF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="46" cy="16" r="6" fill="#5842F5" stroke="#0F172A" stroke-width="2"/>
     
-    <text x="88" y="44" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Sayvy <tspan fill="#7588EC">AI</tspan></text>
+    <text x="88" y="44" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Sayvy <tspan fill="#818CF8">AI</tspan></text>
   </g>
 
   <!-- Main Headline -->
   <text x="100" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#FFFFFF" letter-spacing="-1.5">
     Turn Every Customer Conversation
   </text>
-  <text x="100" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#7588EC" letter-spacing="-1.5">
+  <text x="100" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#818CF8" letter-spacing="-1.5">
     Into Automated Action.
   </text>
 
@@ -42,12 +42,12 @@
 
     <!-- Chip 2: Voice AI -->
     <rect x="250" y="0" width="220" height="48" rx="24" fill="#1E293B" stroke="#334155"/>
-    <circle cx="274" cy="24" r="6" fill="#7588EC"/>
+    <circle cx="274" cy="24" r="6" fill="#818CF8"/>
     <text x="290" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#E2E8F0">Voice AI Agents</text>
 
     <!-- Chip 3: SLA -->
     <rect x="490" y="0" width="240" height="48" rx="24" fill="#1E293B" stroke="#334155"/>
-    <circle cx="514" cy="24" r="6" fill="#4D63DA"/>
+    <circle cx="514" cy="24" r="6" fill="#5842F5"/>
     <text x="530" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#E2E8F0">99.99% Uptime SLA</text>
   </g>
 </svg>

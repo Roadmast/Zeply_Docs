@@ -1,0 +1,37 @@
+---
+title: "Rate Limits"
+description: "Meta Cloud API throughput tiers, phone number quality, and queues"
+---
+
+# Rate Limits
+
+*This page covers managing Meta Cloud API rate limits, maintaining high phone number quality ratings, and outbound queueing.*
+
+---
+
+## Messaging Tiers & Daily Limits
+
+*Content coming soon.*
+
+- Tier progression: Tier 1 (1,000 users/24h) $\to$ Tier 2 (10,000) $\to$ Tier 3 (100,000) $\to$ Tier 4 (Unlimited)
+- Criteria for automatic tier upgrades and scaling thresholds
+
+---
+
+## Phone Number Quality Rating Health
+
+*Content coming soon.*
+
+- Understanding quality statuses (`High`, `Medium`, `Low`, `Flagged`)
+- Factors that degrade ratings: user blocks, spam reports, and template pacing
+- Automatic rate-throttling during quality degradation
+
+---
+
+## Outbound Queueing & Throttling Architecture
+
+*Content coming soon.*
+
+- Token bucket / Leaky bucket rate limiters
+- Handling error code `130429` (Rate limit hit)
+- Exponential backoff with jitter and retry priority queues

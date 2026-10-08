@@ -1,0 +1,37 @@
+---
+title: "Interruptions"
+description: "Speech detection (VAD), barge-in handling, and natural turn-taking"
+---
+
+# Interruptions
+
+*This page covers how Sayvy AI detects user speech, manages natural turn-taking, and handles conversational interruptions.*
+
+---
+
+## Voice Activity Detection (VAD) Tuning
+
+*Content coming soon.*
+
+- Silero VAD calibration and threshold parameters
+- Detection windows (`min_speech_duration_ms`, `min_silence_duration_ms`)
+- Mitigating false triggers from breathing and background noise
+
+---
+
+## Barge-In Interrupt Protocol
+
+*Content coming soon.*
+
+- Emitting cancellation tokens on active turns
+- WebRTC Data Channel fast-kill packets
+- Instant client-side audio buffer flushing
+
+---
+
+## Conversational Fillers & Natural Turn Management
+
+*Content coming soon.*
+
+- Distinguishing passive backchannel affirmations ("mhm", "yeah") from true barge-ins
+- Dynamic pause thresholding based on sentence completion heuristics

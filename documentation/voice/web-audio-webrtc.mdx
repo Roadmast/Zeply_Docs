@@ -1,0 +1,39 @@
+---
+title: "Web Calls"
+description: "Browser-based WebRTC voice calling and low-latency audio"
+---
+
+# Web Calls
+
+*This page covers the technical implementation and architecture for low-latency WebRTC browser audio streaming in Sayvy AI.*
+
+---
+
+## Latency Budget Breakdown (Sub-500ms)
+
+*Content coming soon.*
+
+- Audio packetization (20ms frames)
+- Streaming Speech-to-Text (STT) pipeline
+- LLM time-to-first-token (TTFT) streaming
+- Incremental Text-to-Speech (TTS) chunking at sentence boundaries
+
+---
+
+## WebRTC Transport & Audio Codecs
+
+*Content coming soon.*
+
+- Opus audio codec (24kHz / 48kHz)
+- WebRTC Data & Media Channels configuration
+- Jitter buffer management and packet loss concealment (PLC)
+
+---
+
+## Browser Client Audio Lifecycle
+
+*Content coming soon.*
+
+- Microphone capture constraints (`echoCancellation`, `noiseSuppression`)
+- Audio track initialization and handshake
+- Network drop recovery and automatic session reconnection

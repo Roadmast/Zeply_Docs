@@ -1,0 +1,36 @@
+---
+title: "Messaging Window"
+description: "Understanding WhatsApp 24-hour customer service session rules"
+---
+
+# Messaging Window
+
+*This page covers the rules, timers, and state machine lifecycle governing Meta's 24-hour customer service window.*
+
+---
+
+## Session Lifecycle & Window Rules
+
+*Content coming soon.*
+
+- User-Initiated Conversations (UIC) vs. Business-Initiated Conversations (BIC)
+- 24-hour sliding window mechanics calculated from the last user message
+- Freeform conversational messages vs. pre-approved HSM template constraints
+
+---
+
+## Session State Machine
+
+*Content coming soon.*
+
+- States: `IDLE`, `ACTIVE_24H`, `EXPIRED`, `TEMPLATE_PENDING`
+- Transitions triggered by inbound messages, timer expirations, and template replies
+
+---
+
+## Expiration Handling & Fallbacks
+
+*Content coming soon.*
+
+- Graceful degradation when the window closes mid-workflow
+- Automatic re-engagement via approved utility templates

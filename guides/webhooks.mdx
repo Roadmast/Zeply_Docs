@@ -1,0 +1,20 @@
+---
+title: "Receive events with webhooks"
+description: "Keep your systems in sync with reliable Sayvy event delivery."
+---
+
+# Receive events with webhooks
+
+Webhooks notify your application when supported Sayvy resources change. They are useful for syncing customer records, updating internal systems, and triggering follow-up work.
+
+## Set up a webhook safely
+
+1. Create an HTTPS endpoint that returns a fast success response.
+2. Register the endpoint and subscribe only to the events you need.
+3. Validate the signature before processing the payload.
+4. Make processing idempotent because events can be retried or delivered more than once.
+5. Log failures and replay safely after fixing the cause.
+
+<Warning>Treat webhook payloads as untrusted input. Verify authenticity, validate the schema, and never let an event directly execute an unreviewed destructive action.</Warning>
+
+See the [Webhooks API](/api-reference/webhooks/overview) for event and endpoint details.

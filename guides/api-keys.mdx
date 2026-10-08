@@ -1,0 +1,19 @@
+---
+title: "Create and rotate API keys"
+description: "Securely authenticate integrations that call the Sayvy API."
+---
+
+# Create and rotate API keys
+
+API keys authenticate server-to-server requests. Treat them like passwords: keep them on your backend, limit who can view them, and rotate them on a schedule.
+
+## Create a key
+
+1. Open **Settings → API keys**.
+2. Select **Create API key** and give it a purpose-based name, such as `production-sync`.
+3. Copy the secret immediately and store it in your server's secret manager.
+4. Send it using the `Authorization: Bearer <your-key>` header.
+
+<Warning>Never commit a key to source control, place it in browser code, or paste it into a support ticket. If it is exposed, revoke it immediately and create a replacement.</Warning>
+
+See [API authentication](/api-reference/authentication) for request examples and [API limits](/api-reference/limits) for operational constraints.

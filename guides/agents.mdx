@@ -1,0 +1,29 @@
+---
+title: "Create and manage agents"
+description: "Build reliable AI agents for voice, messaging, and customer workflows."
+---
+
+# Create and manage agents
+
+Agents are the operational layer between your customers and Sayvy. Each agent has a purpose, instructions, and the tools it is allowed to use.
+
+## Create an agent
+
+1. Open **Agents** and select **Create agent**.
+2. Give the agent a specific name and describe its job in one sentence.
+3. Add clear instructions: tone, scope, required questions, and when to hand off.
+4. Add only the integrations and tools it needs.
+5. Test common, ambiguous, and out-of-scope requests before publishing.
+
+## Make an agent production-ready
+
+<CardGroup cols={2}>
+  <Card title="Define the boundary" icon="shield-check">State what the agent must not promise, change, or disclose.</Card>
+  <Card title="Plan the handoff" icon="arrow-up-right">Tell the agent when to involve a person and what context to include.</Card>
+  <Card title="Test edge cases" icon="flask-conical">Try missing information, interruptions, unhappy customers, and duplicate requests.</Card>
+  <Card title="Review outcomes" icon="chart-no-axes-combined">Use inbox history and call logs to improve instructions.</Card>
+</CardGroup>
+
+<Warning>Do not give an agent access to a tool just because it is available. Keep permissions narrow and review them whenever its scope changes.</Warning>
+
+For API-based workflows, see the [Agents API reference](/api-reference/agents/overview).

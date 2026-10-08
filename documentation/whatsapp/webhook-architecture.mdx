@@ -1,0 +1,37 @@
+---
+title: "Webhooks"
+description: "Setting up Meta Cloud API webhooks and signature verification"
+---
+
+# Webhooks
+
+*This page covers the webhook infrastructure, cryptographic verification, and inbound event routing for the Meta Cloud API.*
+
+---
+
+## Webhook Verification Challenge
+
+*Content coming soon.*
+
+- Meta handshake parameters (`hub.mode`, `hub.challenge`, `hub.verify_token`)
+- Handshake endpoint validation
+
+---
+
+## Cryptographic Security (HMAC-SHA256)
+
+*Content coming soon.*
+
+- Verifying the `X-Hub-Signature-256` header
+- Meta App Secret hashing
+- Constant-time string comparison (`timingSafeEqual`) to prevent timing attacks
+
+---
+
+## Idempotency & Deduplication
+
+*Content coming soon.*
+
+- Handling Meta's at-least-once delivery guarantees
+- Redis-based locking and message ID (`wamid`) deduplication
+- Asynchronous queueing for inbound message processors

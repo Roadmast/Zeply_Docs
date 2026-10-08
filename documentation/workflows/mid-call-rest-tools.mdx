@@ -1,0 +1,37 @@
+---
+title: "Live Tool Calling"
+description: "Executing real-time REST API tools during voice calls and chats"
+---
+
+# Live Tool Calling
+
+*This page covers defining external REST tools and executing them synchronously while a voice call or WhatsApp conversation is active.*
+
+---
+
+## Tool Definition Schema
+
+*Content coming soon.*
+
+- OpenAPI / JSON Schema function parameter definitions
+- Describing tool capabilities and parameter types for the LLM
+- Strict parameter validation and schema sanitization
+
+---
+
+## Strict Latency Budget (Sub-400ms)
+
+*Content coming soon.*
+
+- HTTP client connection pooling and sub-400ms timeout enforcement
+- Fallback strategies when external REST APIs exceed timeouts or return 5xx errors
+- Circuit breakers for unstable downstream services
+
+---
+
+## Optimistic Filler Audio & Voice Masking
+
+*Content coming soon.*
+
+- Triggering real-time filler audio ("*Looking that up for you right now...*") to mask API latency
+- Seamless injection of external API responses into the agent's active memory context
