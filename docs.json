@@ -344,8 +344,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/letter-logo.png",
+    "dark": "/letter-logo.png"
   },
   "background": {
     "color": {

@@ -1,0 +1,16 @@
+/* ==========================================================================
+   Mintlify Global Style Customizations
+   ========================================================================== */
+
+/* Ensure the navbar brand logo displays with prominent, legible size */
+img.nav-logo,
+.nav-logo,
+header img[src*="letter-logo"],
+nav img[src*="letter-logo"],
+a[href="/"] img,
+a[href="https://sayvyai.com"] img {
+  height: 38px !important;
+  max-height: 42px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
