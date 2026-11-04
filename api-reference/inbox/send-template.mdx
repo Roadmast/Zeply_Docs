@@ -1,0 +1,181 @@
+---
+title: "Send template"
+sidebarTitle: "Send template"
+api: "POST /api/v1/inbox/send-template"
+description: "Send an approved WhatsApp template to a contact and automatically resolve or create the conversation ticket"
+---
+
+Send an approved WhatsApp template to an existing contact in your organization.
+The endpoint finds an open ticket for the contact and selected WhatsApp channel,
+or creates one automatically, then sends and saves the outbound template message.
+Use the returned `inbox_id` to open the conversation or retrieve its messages.
+
+This replaces standalone ticket creation. There is no separate create-ticket
+step and no file upload is required. Recipient variables are supplied directly
+in `parameters`.
+
+## Authentication
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token for authentication. Format: `Bearer <token>`.
+</ParamField>
+
+<ParamField header="X-Organization-Id" type="string" required>
+  UUID of the organization in which the authenticated user is operating.
+</ParamField>
+
+## Request body
+
+<ParamField body="contact_id" type="string" required>
+  UUID of an existing contact belonging to the organization.
+</ParamField>
+
+<ParamField body="template_id" type="string" required>
+  UUID of a message template belonging to the organization. Its status must be
+  `APPROVED`. The service uses the template's active WhatsApp phone number when
+  available, otherwise an active channel subscribed to webhooks in the organization.
+</ParamField>
+
+<ParamField body="parameters" type="object">
+  Optional map of template variable names to string values. For BODY variables,
+  use numeric keys such as `"1"` and `"2"`; `var_1` and `variable_1` aliases are
+  also accepted. For TEXT HEADER variables, use `header_1`, `header_2`, etc.;
+  numeric keys are a fallback.
+
+  Missing or empty BODY variable `1` falls back to the contact name, or `there`.
+  Other missing BODY variables and missing TEXT HEADER variables are sent as `-`.
+  Supply all values explicitly for predictable message personalization.
+</ParamField>
+
+<Warning>
+  This endpoint sends a real WhatsApp message. It is not idempotent: repeated
+  requests can send duplicate messages. A failed request may leave a created
+  ticket, or the message may already have been sent. Check the conversation
+  before retrying an uncertain result.
+</Warning>
+
+## Response
+
+Returns **201 Created** with a message object, rather than a ticket object.
+
+<ResponseField name="id" type="string">
+  UUID of the saved outbound message.
+</ResponseField>
+
+<ResponseField name="inbox_id" type="string">
+  UUID of the conversation ticket that was reused or created.
+</ResponseField>
+
+<ResponseField name="organization_id" type="string">
+  UUID of the organization owning the message.
+</ResponseField>
+
+<ResponseField name="contact_id" type="string">
+  UUID of the recipient contact.
+</ResponseField>
+
+<ResponseField name="whatsapp_message_id" type="string">
+  Provider message ID returned by WhatsApp.
+</ResponseField>
+
+<ResponseField name="direction" type="string">
+  `outbound`.
+</ResponseField>
+
+<ResponseField name="message_type" type="string">
+  `template`.
+</ResponseField>
+
+<ResponseField name="body" type="string">
+  Locally rendered template text saved in the conversation. This can differ from
+  the sent text when values are omitted; provide all required parameters.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Initially `sent`; delivery updates are processed separately.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 creation timestamp.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  ISO 8601 last update timestamp.
+</ResponseField>
+
+## Examples
+
+<RequestExample>
+
+```bash cURL
+curl -X POST "https://api.sayvy.ai/api/v1/inbox/send-template" \
+  -H "Authorization: Bearer <token>" \
+  -H "X-Organization-Id: 11111111-1111-4111-8111-111111111111" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contact_id": "22222222-2222-4222-8222-222222222222",
+    "template_id": "33333333-3333-4333-8333-333333333333",
+    "parameters": {"1": "Sarah", "2": "ORD-123"}
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch("https://api.sayvy.ai/api/v1/inbox/send-template", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer <token>",
+    "X-Organization-Id": "11111111-1111-4111-8111-111111111111",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    contact_id: "22222222-2222-4222-8222-222222222222",
+    template_id: "33333333-3333-4333-8333-333333333333",
+    parameters: { "1": "Sarah", "2": "ORD-123" }
+  })
+});
+if (!response.ok) throw new Error("Template send could not be confirmed");
+const message = await response.json();
+console.log(message.inbox_id);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 201 Created
+{
+  "id": "44444444-4444-4444-8444-444444444444",
+  "inbox_id": "55555555-5555-4555-8555-555555555555",
+  "organization_id": "11111111-1111-4111-8111-111111111111",
+  "contact_id": "22222222-2222-4222-8222-222222222222",
+  "whatsapp_message_id": "wamid.example",
+  "direction": "outbound",
+  "message_type": "template",
+  "body": "Hi Sarah, your order ORD-123 is ready.",
+  "status": "sent",
+  "created_at": "2026-10-26T09:00:00Z",
+  "updated_at": "2026-10-26T09:00:00Z",
+  "media_url": null,
+  "media_mime_type": null,
+  "media_filename": null,
+  "context_message_id": null,
+  "reactions": {},
+  "context_message_body": null,
+  "context_message_direction": null,
+  "context_message_type": null
+}
+```
+
+```json 400 Bad Request
+{
+  "detail": "No active WhatsApp phone numbers registered for this organization"
+}
+```
+
+```json 404 Not Found
+{
+  "detail": "Contact not found"
+}
+```
+
+</ResponseExample>

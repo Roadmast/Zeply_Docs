@@ -62,7 +62,7 @@ The **Inbox & Messaging API** powers Sayvy AI's customer communication hub. It b
 
 Each conversation thread between an organization and a contact is represented by an **Inbox Ticket**:
 
-- **Active Ticket**: Contacts have at most one `open` ticket at a time. New incoming or outgoing messages append directly to this thread.
+- **Active Ticket**: Open tickets are resolved by contact and WhatsApp channel. Sending an approved template reuses the matching open ticket or creates one automatically, then attaches the outbound message to it.
 - **Closed Ticket**: When a conversation issue is resolved, agents or automations patch the ticket status to `closed`. Subsequent new contact engagements will spawn or reopen a fresh ticket.
 
 | Status | Meaning |
@@ -92,7 +92,6 @@ When sending messages via `POST /api/v1/inbox/messages/{inbox_id}`:
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/tickets` | Create a new ticket or return existing open ticket for a contact |
 | <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/tickets` | List conversation tickets with status and contact filtering |
 | <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/tickets/{inbox_id}` | Retrieve details and contact profile for a specific ticket |
 | <span style={{ color: '#F59E0B', fontWeight: 'bold' }}>PATCH</span> | `/api/v1/inbox/tickets/{inbox_id}` | Update ticket status (`open` or `closed`) |
@@ -102,6 +101,7 @@ When sending messages via `POST /api/v1/inbox/messages/{inbox_id}`:
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/messages` | List messages across the organization or for a ticket |
+| <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/send-template` | Send an approved template with recipient variables; automatically find or create its ticket |
 | <span style={{ color: '#10B981', fontWeight: 'bold' }}>GET</span> | `/api/v1/inbox/messages/{inbox_id}` | Retrieve chronological message history for a ticket |
 | <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/messages/{inbox_id}` | Send WhatsApp text or rich media message |
 | <span style={{ color: '#3B82F6', fontWeight: 'bold' }}>POST</span> | `/api/v1/inbox/upload` | Upload media attachment to S3 storage prior to sending |

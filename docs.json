@@ -321,7 +321,7 @@
             "icon": "inbox",
             "pages": [
               "api-reference/inbox/overview",
-              "api-reference/inbox/create-ticket",
+              "api-reference/inbox/send-template",
               "api-reference/inbox/list-tickets",
               "api-reference/inbox/get-ticket",
               "api-reference/inbox/update-ticket-status",
