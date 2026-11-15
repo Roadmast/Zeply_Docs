@@ -334,6 +334,32 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Agent Templates",
+        "groups": [
+          {
+            "group": "Templates",
+            "icon": "robot",
+            "pages": [
+              "agent-templates/front-desk-and-wedding-booking-assistant",
+              "agent-templates/personal-loan-advisor",
+              "agent-templates/credit-card-sales-advisor",
+              "agent-templates/reminders-and-follow-ups-agent",
+              "agent-templates/news-and-updates-caller",
+              "agent-templates/delivery-verification-specialist",
+              "agent-templates/cart-recovery-specialist",
+              "agent-templates/customer-help-desk",
+              "agent-templates/ai-weekend-planner",
+              "agent-templates/salon-receptionist",
+              "agent-templates/property-verification-specialist",
+              "agent-templates/wellness-onboarding-advisor",
+              "agent-templates/lead-qualification-specialist",
+              "agent-templates/ai-recruitment-and-interview-specialist",
+              "agent-templates/guest-experience-specialist"
+            ]
+          }
+        ]
       }
     ]
   },
