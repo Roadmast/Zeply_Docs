@@ -1,0 +1,183 @@
+---
+title: "Sayvy MCP Quickstart"
+sidebarTitle: "Quickstart"
+description: "Step-by-step guide to connecting Cursor, Claude Desktop, Windsurf, or custom MCP clients to Sayvy AI."
+---
+
+Connect your favorite AI coding assistant to your Sayvy AI workspace in under five minutes.
+
+## Prerequisites
+
+Before setting up your client, ensure you have:
+1. An active Sayvy AI workspace account.
+2. A valid workspace API key. (Generate one in **Dashboard → Developers → API Keys**).
+
+---
+
+## 1. Connect Cursor IDE
+
+Cursor supports remote HTTP/SSE MCP endpoints natively through workspace configuration.
+
+<Steps>
+  <Step title="Create or open .cursor/mcp.json">
+    In the root of your project directory, create or edit `.cursor/mcp.json`:
+    
+    ```json
+    {
+      "mcpServers": {
+        "sayvy-ai": {
+          "url": "https://api.sayvy.ai/mcp",
+          "headers": {
+            "Authorization": "Bearer YOUR_SAYVY_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+    
+    *(Replace `YOUR_SAYVY_API_KEY` with your actual workspace key).*
+  </Step>
+
+  <Step title="Reload MCP Servers in Cursor">
+    1. Open **Cursor Settings** (`Cmd + ,` or `Ctrl + ,`).
+    2. Navigate to **Features → MCP**.
+    3. Click the **Refresh** icon next to `sayvy-ai`. You should see green status lights indicating that 25+ tools (e.g., `list_agents`, `list_contacts`, `list_call_logs`) have been discovered.
+  </Step>
+
+  <Step title="Run a Test Prompt in Composer">
+    Open the Cursor Composer (`Cmd + I` or `Ctrl + I`) or chat window and run:
+    
+    ```text
+    Use the sayvy-ai tool to list all agents in my workspace.
+    ```
+  </Step>
+</Steps>
+
+---
+
+## 2. Connect Claude Desktop
+
+Claude Desktop supports local stdio command runners as well as remote HTTP proxies. You can connect to Sayvy AI using `mcp-remote` or direct HTTP transport.
+
+<Tabs>
+  <Tab title="macOS">
+    Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "sayvy-ai": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "https://api.sayvy.ai/mcp",
+            "--header",
+            "Authorization: Bearer YOUR_SAYVY_API_KEY"
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Windows">
+    Edit `%APPDATA%\Claude\claude_desktop_config.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "sayvy-ai": {
+          "command": "cmd.exe",
+          "args": [
+            "/c",
+            "npx",
+            "-y",
+            "mcp-remote",
+            "https://api.sayvy.ai/mcp",
+            "--header",
+            "Authorization: Bearer YOUR_SAYVY_API_KEY"
+          ]
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Restart Claude Desktop. You will see the hammer icon indicating that Sayvy AI tools are available in the conversation prompt.
+
+---
+
+## 3. Connect Windsurf
+
+To configure Windsurf:
+
+1. Open **Windsurf Settings** → **Cascade** → **MCP Servers**.
+2. Add the following entry to your `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "sayvy-ai": {
+      "url": "https://api.sayvy.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_SAYVY_API_KEY"
+      }
+    }
+  }
+}
+```
+
+---
+
+## 4. Local Development Server
+
+If you are developing or running the Sayvy AI backend locally:
+
+```json
+{
+  "mcpServers": {
+    "sayvy-ai-local": {
+      "url": "http://localhost:8000/mcp",
+      "headers": {
+        "Authorization": "Bearer LOCAL_DEV_API_KEY"
+      }
+    }
+  }
+}
+```
+
+---
+
+## Verification & Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Tools are not appearing in client">
+    1. Verify that your API key starts with the expected prefix and belongs to an active workspace.
+    2. Check that the URL is pointing to `/mcp` (`https://api.sayvy.ai/mcp`).
+    3. Ensure no corporate firewalls or VPNs are blocking outbound HTTPS connections to `api.sayvy.ai`.
+  </Accordion>
+
+  <Accordion title="401 Unauthorized or 'Sign in to Sayvy AI'">
+    This occurs if the `Authorization: Bearer <TOKEN>` header is missing or expired. Generate a fresh API key in **Dashboard → Developers → API Keys** and update your client configuration.
+  </Accordion>
+
+  <Accordion title="Checking Server Health Directly via cURL">
+    Run a quick cURL command to verify discovery headers:
+    
+    ```bash
+    curl -I https://api.sayvy.ai/.well-known/oauth-protected-resource/mcp
+    ```
+    
+    You should receive an HTTP `200 OK` response with JSON resource metadata.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+Now that your client is connected:
+- Browse the [Complete Tool List](/developers/mcp/tool-list) for detailed schemas.
+- Explore the [Prompt Cheatsheet](/developers/mcp/prompt-cheatsheet) for high-impact prompting workflows.

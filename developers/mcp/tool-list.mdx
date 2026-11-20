@@ -1,0 +1,206 @@
+---
+title: "Sayvy MCP Tool List"
+sidebarTitle: "Tool List"
+description: "Complete reference of all tools exposed by the Sayvy AI MCP Server, including input parameters, schemas, and descriptions."
+---
+
+The Sayvy AI MCP server registers 25+ native tools across your workspace. All tools validate inputs against [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12/release-notes) and are strictly scoped to the authenticated workspace.
+
+---
+
+## 1. Agent Management Tools
+
+Manage voice and conversational AI agent configurations, system prompts, voices, and LLM parameters.
+
+### `list_agents`
+List agents in the authenticated workspace, ordered by last updated date descending.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `workspace_id` *(string, optional, UUID)*: Specific workspace filter.
+  * `limit` *(integer, default: 50, min: 1, max: 100)*: Maximum agents to return.
+  * `offset` *(integer, default: 0)*: Pagination offset.
+* **Returns:** List of agent summaries (ID, name, description, active status, voice ID, LLM model) and total count.
+
+### `get_agent`
+Fetch an agent's complete configuration by UUID.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `agent_id` *(string, required, UUID)*: The UUID of the agent.
+* **Returns:** Detailed configuration including `system_prompt`, `voice_provider`, `voice_id`, `temperature`, `llm_model`, `tools_enabled`, and `custom_headers` (sensitive secrets are masked).
+
+### `create_agent`
+Provision a new voice or chat agent.
+
+* **Type:** Write
+* **Parameters:**
+  * `name` *(string, required, 1-255 chars)*: Name of the agent.
+  * `description` *(string, optional)*: Agent description or operational role.
+  * `system_prompt` *(string, required)*: Core system instruction instructions.
+  * `voice_id` *(string, optional)*: Text-to-speech voice identifier.
+  * `llm_model` *(string, optional)*: Model choice (e.g., `gemini-2.5-flash`, `gpt-4o`).
+  * `temperature` *(number, optional, 0.0 - 1.0)*: Model sampling temperature.
+* **Returns:** The created agent object.
+
+### `update_agent`
+Modify an existing agent's configuration.
+
+* **Type:** Write
+* **Parameters:**
+  * `agent_id` *(string, required, UUID)*: The agent to modify.
+  * Accepts any configuration fields from `create_agent` (e.g., `system_prompt`, `voice_id`, `temperature`).
+* **Returns:** The updated agent summary.
+
+### `delete_agent`
+Permanently remove an agent from your workspace.
+
+* **Type:** Destructive
+* **Parameters:**
+  * `agent_id` *(string, required, UUID)*: The agent to delete.
+
+---
+
+## 2. Contacts & CRM Tools
+
+Search customer records, update lead qualification stages, log activity notes, and manage customer lifecycles.
+
+### `list_contacts`
+Search and filter contacts within the workspace.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `search` *(string, optional)*: Free-text search matching name or phone.
+  * `lifecycle_stage` *(string, optional, enum: `["new", "engaged", "qualified", "customer", "lost"]`)*: Stage filter.
+  * `min_lead_score` / `max_lead_score` *(integer, optional, 0-100)*: Lead score range.
+  * `tag` *(string, optional)*: Filter by assigned tag.
+  * `page` *(integer, default: 1)*: Page number.
+  * `page_size` *(integer, default: 20, max: 100)*: Results per page.
+* **Returns:** Paginated contact summaries (`id`, `name`, `lifecycle_stage`, `lead_score`, `ai_handling`, `last_activity_at`).
+
+### `get_contact`
+Retrieve a single contact's core profile and CRM metrics.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `contact_id` *(string, required, UUID)*: Contact UUID.
+
+### `create_contact`
+Create a new contact record.
+
+* **Type:** Write
+* **Parameters:**
+  * `name` *(string, required)*: Contact full name.
+  * `phone_number` *(string, required)*: International E.164 phone number.
+  * `tags` *(array of strings, optional)*: Initial tags.
+
+### `update_contact_crm`
+Update CRM-specific fields with automatic activity audit logging.
+
+* **Type:** Write
+* **Parameters:**
+  * `contact_id` *(string, required, UUID)*: Target contact.
+  * `lifecycle_stage` *(string, optional)*: New stage (`new`, `engaged`, `qualified`, `customer`, `lost`).
+  * `lead_score` *(integer, optional, 0-100)*: Updated lead score.
+  * `owner_id` *(string or null, optional, UUID)*: Assigned team member UUID.
+  * `ai_handling` *(boolean, optional)*: Whether AI is authorized to converse with this contact.
+
+### `list_contact_activities`
+Fetch chronological activity timeline for a contact.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `contact_id` *(string, required, UUID)*: Target contact.
+  * `activity_types` *(array of strings, optional)*: Filter by event type (`contact_created`, `stage_changed`, `lead_score_changed`, `handoff_to_human`, `note_added`).
+  * `limit` *(integer, default: 20, max: 100)*: Limit records.
+
+### `add_contact_note`
+Append a timestamped internal note to a contact.
+
+* **Type:** Write
+* **Parameters:**
+  * `contact_id` *(string, required, UUID)*: Target contact.
+  * `note` *(string, required)*: Text body of the note.
+
+---
+
+## 3. Campaigns Tools
+
+Orchestrate batch outbound voice calls and WhatsApp messaging broadcasts.
+
+### `list_campaigns`
+List campaigns in the workspace with status metrics.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `limit` *(integer, default: 50)*, `offset` *(integer, default: 0)*.
+
+### `get_campaign`
+Get campaign progress, picked up calls, and completed targets.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `campaign_id` *(string, required, UUID)*: Campaign UUID.
+
+### `create_campaign`
+Create a voice or messaging outreach campaign.
+
+* **Type:** Write
+* **Parameters:**
+  * `name` *(string, required)*: Campaign name.
+  * `agent_id` *(string, required, UUID)*: Agent assigned to handle calls.
+  * `channel` *(string, optional, default: `"voice"`)*: Outreach channel (`voice`, `whatsapp`).
+  * `contact_ids` *(array of strings, UUIDs)*: Audience contact list.
+
+### `pause_campaign` / `resume_campaign` / `cancel_campaign`
+Control campaign lifecycle execution.
+
+* **Type:** Write
+* **Parameters:**
+  * `campaign_id` *(string, required, UUID)*: Target campaign.
+
+---
+
+## 4. Call Logs & Transcripts Tools
+
+### `list_call_logs`
+Query historical calls by date, agent, duration, or sentiment.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `agent_id` *(string, optional, UUID)*: Filter by agent.
+  * `limit` *(integer, default: 50)*, `offset` *(integer, default: 0)*.
+* **Returns:** Call summaries with duration, cost, termination status, and sentiment.
+
+### `get_call_log`
+Retrieve full Call Detail Record (CDR) including turn-by-turn dialog transcripts.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `call_id` *(string, required, UUID)*: The unique call ID.
+* **Returns:** Full transcript array with speaker labels (`user` vs `agent`), millisecond timestamps, audio recording URLs, and execution metrics.
+
+---
+
+## 5. Knowledge Base & Billing Tools
+
+### `search_knowledge_base`
+Perform semantic vector search against workspace knowledge base files.
+
+* **Type:** Read-Only
+* **Parameters:**
+  * `query` *(string, required)*: Natural language question.
+  * `top_k` *(integer, default: 5)*: Number of matched chunks.
+
+### `get_billing_summary`
+Retrieve real-time credit balance, active subscription plan, and billing cycle renewal date.
+
+* **Type:** Read-Only
+
+### `sayvy_agent`
+Directly converse with a designated Sayvy AI agent for live testing.
+
+* **Type:** Read-Only / Interactive
+* **Parameters:**
+  * `agent_id` *(string, required, UUID)*: Agent ID.
+  * `query` *(string, required)*: Message prompt.

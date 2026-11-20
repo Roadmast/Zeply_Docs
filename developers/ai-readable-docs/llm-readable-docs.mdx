@@ -1,0 +1,32 @@
+---
+title: "llms.txt & llms-full.txt"
+sidebarTitle: "LLM-readable docs"
+description: "Sayvy AI publishes llms.txt as a page index and llms-full.txt as the full docs in one Markdown file, both built for an LLM's context window."
+---
+
+These docs publish two plain-text files built for LLMs and AI agents to consume directly, without scraping HTML.
+
+<CardGroup cols={2}>
+  <Card title="llms.txt" icon="list" href="https://docs.sayvyai.com/llms.txt">
+    A structured index of every page in these docs, with titles and descriptions, for fast lookup by an LLM before it decides what to fetch in full.
+  </Card>
+  <Card title="llms-full.txt" icon="file-lines" href="https://docs.sayvyai.com/llms-full.txt">
+    The complete Sayvy AI documentation concatenated into a single Markdown file, for pasting into a chat context or feeding to a RAG pipeline.
+  </Card>
+</CardGroup>
+
+## When to use which
+
+- Use **llms.txt** when an agent needs to decide which pages are relevant before reading them.
+- Use **llms-full.txt** when you want the entire documentation set in one context window, for example to prime an LLM before asking it to write Sayvy AI API integration code.
+
+## Per-page AI actions
+
+Every page in these docs also has its own AI actions menu:
+
+- **Copy page**: copy the page content as Markdown
+- **View as Markdown**: open the raw Markdown source for that page
+- **Open in ChatGPT**: ask ChatGPT questions about that page
+- **Open in Claude**: ask Claude questions about that page
+
+For API-level integration facts an LLM needs, such as the base URL and authentication, see [AGENTS.md](/developers/ai-readable-docs/agents-md).

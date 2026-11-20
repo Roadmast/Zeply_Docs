@@ -1,0 +1,134 @@
+---
+title: "Sayvy AI Updates for November, 2026"
+sidebarTitle: "November, 2026"
+description: "November 2026 Sayvy AI changelog: Multi-tenant Workspaces, Instagram Direct Message channel, Inbound/Outbound Email integration, WhatsApp outbound voice calls, MCP (Model Context Protocol) & CRM actions for agents, 2FA security, granular RBAC, and real-time webhook infrastructure."
+tag: "LATEST"
+---
+
+<Update label="19th November, 2026" description="Voice & WhatsApp">
+  ## WhatsApp Outbound Calling & Instant Delivery Receipts
+
+  Agents can now initiate outbound phone calls directly over WhatsApp voice calling, paired with real-time delivery receipt telemetry.
+
+  ### What's New
+  * **Outbound WhatsApp Voice Calling:** Trigger outbound voice agent calls directly to verified contacts over WhatsApp voice protocols without requiring standard PSTN telephony trunks.
+  * **Campaign Integration:** Include WhatsApp voice calls in batch outbound campaigns alongside WhatsApp text broadcasts.
+  * **Real-Time Delivery Status Tracking:** Fixed a latency lag where Meta message delivery receipts (`delivered`, `read`, `failed`) were delayed under heavy webhook volume. Receipts now stream immediately into the inbox and analytics timeline.
+
+  [WhatsApp Setup Guide](/documentation/whatsapp/setup) · [Channels Overview](/guides/channels) · [Campaigns](/guides/campaigns)
+</Update>
+
+<Update label="17th November, 2026" description="Platform & Architecture">
+  ## Multi-Tenant Workspaces & Cross-Workspace Isolation
+
+  Organize your voice agents, contacts, integrations, and campaigns into isolated workspaces under a single parent organization.
+
+  ### Key Capabilities
+  * **Tenant Data Isolation:** Each workspace functions as an independent environment with its own contact database, knowledge base documents, channels, API keys, and audit logs.
+  * **Instant Workspace Switching:** Switch between workspaces via the organization dropdown in the top sidebar without re-authenticating.
+  * **Scoped Member Permissions:** Invite team members to specific workspaces (e.g., *Customer Support Workspace* vs. *Outbound Sales Workspace*) with tailored access levels.
+  * **Zero-Downtime Migration:** Existing accounts were seamlessly transitioned into a default primary workspace with complete data integrity.
+
+  [Organizations and Team Members](/documentation/workspace/organizations-and-team-members) · [Team Members Guide](/guides/team-members)
+</Update>
+
+<Update label="14th November, 2026" description="Omnichannel & Messaging">
+  ## Native Instagram Direct Messaging (DM) Integration
+
+  Connect your brand's Instagram Professional or Business account to let Sayvy AI agents engage, qualify, and converse with followers over Instagram Direct.
+
+  ### Highlights
+  * **Omnichannel Inbox Sync:** Instagram direct messages appear side-by-side with WhatsApp, Web, and Email conversations in the unified agent inbox.
+  * **AI Story Reply & DM Automation:** Automatically reply to story mentions and inbound DMs with customizable tone and knowledge base retrieval.
+  * **Human Escalation:** Seamlessly transition conversation control from the AI agent to a human team member with a single toggle.
+
+  [Channels Guide](/guides/channels) · [Unified Inbox](/guides/inbox)
+</Update>
+
+<Update label="13th November, 2026" description="Security & Auth">
+  ## Two-Factor Authentication (2FA) & Session Resilience
+
+  Strengthen your organization's security posture with time-based one-time password (TOTP) two-factor authentication.
+
+  ### Security Features
+  * **Authenticator App Support:** Enable 2FA using Google Authenticator, 1Password, Authy, or any standard TOTP app.
+  * **Backup Recovery Codes:** Generate and download single-use recovery codes to prevent administrative lockouts.
+  * **Session Persistence Fix:** Resolved an issue where updating account passwords prematurely invalidated active sessions across secondary devices.
+
+  [Security Settings](/guides/security) · [Profile Guide](/guides/profile)
+</Update>
+
+<Update label="12th November, 2026" description="Channels & Email">
+  ## Inbound & Outbound Email Channel Support
+
+  Send, receive, and manage customer email threads with autonomous AI drafts and automated CRM tracking.
+
+  ### Capabilities
+  * **Custom Domain Email Integration:** Connect custom email domains via DNS records (SPF, DKIM, DMARC) or inbound webhook forwarders.
+  * **Long-Form Contextual Replies:** Agents digest full email threads and craft natural, structured replies citing knowledge base documentation.
+  * **Automatic Contact Creation:** Unrecognized senders are automatically upserted into the contact directory with extracted sender names and contact emails.
+
+  [Email Channel Setup](/guides/channels) · [Inbox Workflows](/guides/inbox)
+</Update>
+
+<Update label="10th November, 2026" description="Agents & Tooling">
+  ## Model Context Protocol (MCP) & Native CRM Tool Execution
+
+  Empower agents with external data sources and real-time CRM mutations during live voice and text interactions.
+
+  ### Tool Capabilities
+  * **Native CRM Operations:** Agents can autonomously update contact lifecycles, adjust lead scores, assign tags, append internal notes, and schedule follow-up tasks during conversations.
+  * **Model Context Protocol (MCP) Integration:** Connect any standardized MCP server to supply your agent with custom backend databases, internal APIs, or calendar scheduling tools.
+
+  ```json
+  {
+    "tool": "create_crm_task",
+    "parameters": {
+      "contact_id": "8a3d4f12-5b6c-7e8a-9b0c-1d2e3f4a5b6c",
+      "title": "Follow up on enterprise pricing inquiry",
+      "due_date": "2026-11-25T10:00:00Z",
+      "priority": "high"
+    }
+  }
+  ```
+
+  [Tools & MCP Integrations](/documentation/agents/tools-and-integrations) · [Agent Configuration](/guides/agents)
+</Update>
+
+<Update label="7th November, 2026" description="Web Integrations">
+  ## Embeddable Web Audio Voice Agent & CSP Hardening
+
+  Deploy full-duplex conversational voice agents directly on your website using our embeddable widget.
+
+  ### Improvements
+  * **One-Click Voice Calling:** Website visitors can speak directly to your agent through browser audio without dialing a phone number.
+  * **Content Security Policy (CSP) Compliance:** Optimized iframe and script delivery so the widget loads smoothly on domains with strict enterprise CSP and CORS headers.
+
+  [Web Widget Documentation](/documentation/integrations/web-widget)
+</Update>
+
+<Update label="5th November, 2026" description="Access & Governance">
+  ## Role-Based Access Control (RBAC) & Invite Governance
+
+  Manage organization security with granular permissions and automated team member onboarding controls.
+
+  ### Governance Features
+  * **Standard Roles:** Assign `Owner`, `Admin`, `Agent Manager`, or `Member` permissions to regulate who can modify billing, create agents, or view customer call recordings.
+  * **Seat Quotas:** Enforce maximum user invite thresholds per workspace to prevent unauthorized seat expansion.
+  * **Enforced Password Standards:** Invited users must set strong passwords adhering to minimum character complexity requirements upon invite acceptance.
+
+  [Team Members Governance](/guides/team-members) · [Security Policies](/guides/security)
+</Update>
+
+<Update label="3rd November, 2026" description="Developers & Webhooks">
+  ## Real-Time Webhooks & Dead Letter Queue (DLQ)
+
+  Subscribe your backend to real-time events across calls, conversations, campaigns, and lead mutations.
+
+  ### Infrastructure Updates
+  * **Event Topics:** Subscribe to events including `call.completed`, `message.received`, `lead.created`, and `campaign.finished`.
+  * **Dead Letter Queue (DLQ):** Failed webhook dispatches automatically enter a retry loop with exponential backoff, preventing lost telemetry during subscriber outages.
+  * **Signature Verification:** Verify webhook authenticity using the `X-Sayvy-Signature` HMAC-SHA256 header.
+
+  [Webhooks Guide](/guides/webhooks) · [Webhooks API Reference](/api-reference/webhooks/overview) · [Dead Letter Queue Architecture](/documentation/workflows/outbound-webhooks-dlq)
+</Update>

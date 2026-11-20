@@ -1,0 +1,78 @@
+---
+title: "Sayvy Skills Example Prompts"
+sidebarTitle: "Example Prompts"
+description: "High-yield prompt recipes for coding assistants to generate voice agent prompts, webhook handlers, and campaign scripts."
+---
+
+Use these prompts in Cursor Composer, Claude Code, or Windsurf to accelerate your development with Sayvy AI.
+
+---
+
+## 1. Generating Voice Agent Prompts
+
+### Prompt: Inbound Real Estate Lead Qualifier
+```text
+Generate a Sayvy AI voice agent system prompt for an inbound real estate agency receptionist.
+Constraints:
+1. Greet the caller and ask if they are looking to buy, sell, or rent.
+2. If buying, collect their budget range, preferred neighborhood, and timeframe.
+3. Keep spoken turns under 2 sentences.
+4. No markdown formatting, bullet points, or emojis.
+5. If budget > $500,000, trigger CRM lead score update to 85 and lifecycle_stage to 'qualified'.
+```
+
+### Prompt: Appointment Reminder Outbound Agent
+```text
+Write a system prompt for an outbound medical appointment confirmation voice agent.
+Constraints:
+- Use mustache variables for {{contact.name}} and {{custom_fields.appointment_time}}.
+- Ask the patient to confirm with "yes", reschedule, or cancel.
+- If they want to reschedule, politely transfer the call to the front desk.
+```
+
+---
+
+## 2. Generating Webhook Handlers
+
+### Prompt: Next.js App Router Webhook Receiver
+```text
+Write a Next.js (App Router) API route at `app/api/webhooks/sayvy/route.ts` that:
+1. Validates the raw body using the `X-Sayvy-Signature` header and HMAC-SHA256 with process.env.SAYVY_WEBHOOK_SECRET.
+2. Handles the `call.completed` event.
+3. If call duration > 60 seconds and sentiment is 'positive', updates our internal database.
+4. Returns a 200 OK immediately to avoid timeouts.
+```
+
+### Prompt: Express.js / Node.js Webhook Handler
+```text
+Create an Express.js middleware and route to receive Sayvy AI `message.received` webhooks:
+- Verify HMAC-SHA256 signature against req.rawBody.
+- Handle WhatsApp inbound messages.
+- Extract sender phone number, message text, and attachments.
+```
+
+---
+
+## 3. Campaign & CRM Integration Scripts
+
+### Prompt: Outbound Voice Campaign Dispatcher
+```text
+Write a Python script to:
+1. Query our Postgres database for contacts marked 'trial_expiring_soon'.
+2. Format phone numbers in E.164 and resolve them to Sayvy contact IDs with the `list_contacts` MCP tool.
+3. Call the Sayvy MCP tool `create_campaign` with channel "voice", agent_id 'c9a1b2c3-d4e5-4f6a-8b9c-0d1e2f3a4b5c', and the resolved contact_ids.
+4. Print the returned campaign ID.
+```
+
+<Note>
+  Voice campaigns are created with the MCP `create_campaign` tool. The REST endpoint `POST /api/v1/campaigns` creates WhatsApp broadcast campaigns only (`whatsapp_phone_number_id`, `message_template_id`, audience fields).
+</Note>
+
+### Prompt: CRM Sync on Lead Qualification
+```text
+Write a Python function using SQLAlchemy and the Sayvy MCP tool definitions to:
+- Find contacts with lead_score >= 80.
+- Update their lifecycle_stage to 'qualified'.
+- Append a timestamped activity note to the contact record.
+- Strictly use workspace_id for tenant isolation.
+```

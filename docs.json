@@ -360,6 +360,65 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": " ",
+            "pages": ["developers/overview"]
+          },
+          {
+            "group": "Sayvy MCP",
+            "icon": "server",
+            "pages": [
+              "developers/mcp/overview",
+              "developers/mcp/quickstart",
+              "developers/mcp/tool-list",
+              "developers/mcp/prompt-cheatsheet",
+              "developers/mcp/example-dashboard"
+            ]
+          },
+          {
+            "group": "Sayvy Skills",
+            "icon": "wand-magic-sparkles",
+            "pages": [
+              "developers/skills/overview",
+              "developers/skills/installation",
+              "developers/skills/setup",
+              "developers/skills/skills-reference",
+              "developers/skills/example-prompts",
+              "developers/skills/supported-assistants"
+            ]
+          },
+          {
+            "group": "AI-readable docs",
+            "icon": "file-lines",
+            "pages": [
+              "developers/ai-readable-docs/llm-readable-docs",
+              "developers/ai-readable-docs/agents-md"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Platform",
+            "icon": "newspaper",
+            "pages": [
+              {
+                "group": "2026",
+                "icon": "calendar",
+                "pages": [
+                  "changelog/2026/november",
+                  "changelog/2026/october"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   },

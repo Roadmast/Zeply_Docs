@@ -1,0 +1,152 @@
+---
+title: "Sayvy AI Updates for October, 2026"
+sidebarTitle: "October, 2026"
+description: "October 2026 Sayvy AI changelog: Multi-number WhatsApp Business, deterministic static bots, automated follow-up sequences, comprehensive campaign analytics, streaming live call transcription, trial & referral engines, and billing."
+---
+
+<Update label="31st October, 2026" description="Billing & Finance">
+  ## Online Checkout, Discount Codes & Precise Call Metering
+
+  We have introduced self-serve online checkout, support for promotional discount codes, and precision per-second usage deduction for high-duration calls.
+
+  ### What's New
+  * **Self-Serve Plan & Credit Checkout:** Purchase monthly subscriptions or on-demand voice and message credit top-ups directly from your dashboard using domestic and international payment methods.
+  * **Dynamic Discount Codes:** Apply fixed or percentage-based promotional coupon codes at checkout with immediate subtotal recalculation.
+  * **Precision CDR Metering Fix:** Resolved a credit calculation issue for long-duration calls (>30 minutes). Credits are now deducted on a per-second basis strictly verified against final carrier Call Detail Records (CDRs), eliminating mid-session heartbeat drift.
+
+  <Info>
+    Navigate to **Dashboard → Billing** to manage active subscriptions, download tax invoices, or apply voucher codes to your workspace.
+  </Info>
+
+  [Billing Overview](/guides/billing) · [Subscriptions & Plans](/guides/subscriptions) · [Invoices](/guides/invoices)
+</Update>
+
+<Update label="29th October, 2026" description="Growth & Onboarding">
+  ## 7-Day Full Access Free Trial & Workspace Referral Engine
+
+  Get started faster with zero friction and earn usage credits by inviting teams and colleagues.
+
+  ### Key Capabilities
+  * **7-Day Complimentary Trial:** Every newly registered workspace automatically receives 7 days of unrestricted access, including complimentary test credits, virtual test numbers, and full Agent Studio capabilities without requiring an upfront credit card.
+  * **Graceful Trial Expiration:** When the trial window closes, agent outbound dialing and webhook triggers pause safely without data deletion. Custom prompts, contact directories, and past logs remain intact until upgraded.
+  * **Referral Tracking Program:** Generate branded referral links directly from the dashboard. Once an invited organization registers and activates their account, both organizations receive bonus usage credits.
+
+  [Billing Guide](/guides/billing) · [Organization Settings](/documentation/workspace/organizations-and-team-members)
+</Update>
+
+<Update label="27th October, 2026" description="Agents & Speech">
+  ## Real-Time Live Call Transcription & RAG Retrieval Optimization
+
+  Monitor live calls as they happen and leverage improved Knowledge Base retrieval for complex multi-turn dialogs.
+
+  ### Live Call Transcription
+  In-flight audio streams are now captured and transcribed incrementally over WebSocket connections. Supervisors and operators can observe the ongoing conversation in real time with distinct speaker separation (`Agent` vs. `User`).
+
+  ```json
+  {
+    "event": "transcript.partial",
+    "call_id": "c9a1b2c3-d4e5-4f6a-8b9c-0d1e2f3a4b5c",
+    "speaker": "user",
+    "text": "Can I reschedule my appointment to tomorrow morning?",
+    "confidence": 0.98,
+    "timestamp_ms": 1420
+  }
+  ```
+
+  ### Knowledge Base Improvements
+  * **Contextual Reranking:** Upgraded search relevance on custom PDFs and uploaded URLs to prevent hallucinations during fast-paced voice interactions.
+  * **Fact Grounding:** Voice agents now prioritize authoritative knowledge snippets when answering technical or pricing queries.
+
+  [Call Logs & Live Transcripts](/guides/call-logs) · [Knowledge Base Guide](/documentation/memory/knowledge-base)
+</Update>
+
+<Update label="24th October, 2026" description="Developers & API">
+  ## Public REST API Reference & Granular Rate Limiting
+
+  The complete Sayvy AI REST API documentation is now live, accompanied by standard token-bucket rate limiting to guarantee high platform availability.
+
+  ### Developer Features
+  * **Interactive API Reference:** Comprehensive endpoint documentation covering Agents, Contacts, Campaigns, Call Logs, Webhooks, and CRM operations with copyable cURL, Python, and JavaScript snippets.
+  * **Per-API-Key Rate Limiting:** Outbound calls to public endpoints now return standard rate-limiting headers:
+    * `X-RateLimit-Limit`: Maximum requests permitted per minute.
+    * `X-RateLimit-Remaining`: Remaining allowance in the current window.
+    * `X-RateLimit-Reset`: Unix epoch timestamp when quotas reset.
+  * **Scoped Key Management:** Generate and revoke API keys with fine-grained read/write permissions directly in the developer portal.
+
+  [API Reference](/api-reference) · [Rate Limiting Specifications](/api-reference/rate-limiting) · [API Keys](/guides/api-keys)
+</Update>
+
+<Update label="22nd October, 2026" description="Campaigns & Analytics">
+  ## Campaign Performance Analytics & PDF Audit Reports
+
+  Analyze outreach efficacy with deep funnel metrics and download presentation-ready PDF reports for your clients and stakeholders.
+
+  ### Analytics Highlights
+  * **End-to-End Delivery Funnels:** Track attempts, pickup rates, busy/unreachable statuses, average duration, and AI objective completion rates per campaign.
+  * **Downloadable PDF & CSV Reports:** Export comprehensive summaries containing call-by-call breakdown, sentiment distributions, and cost metrics with one click.
+  * **Real-Time Execution Bar:** Watch campaign batches dispatch and inspect live call statuses from a single consolidated dashboard view.
+
+  [Campaign Management](/guides/campaigns) · [Export Campaign PDF API](/api-reference/campaigns/export-pdf)
+</Update>
+
+<Update label="20th October, 2026" description="Conversations & CRM">
+  ## Multi-Channel Automated Follow-ups
+
+  Ensure leads and inquiries are never lost by scheduling intelligent post-call follow-ups across channels.
+
+  ### Workflow Capabilities
+  * **Outcome-Based Triggers:** Trigger automated follow-ups based on specific call dispositions (e.g., call unanswered, customer requested follow-up, or meeting booked).
+  * **Cross-Channel Sequences:** Automatically send an outbound WhatsApp message or summary email immediately following an inconclusive voice call.
+  * **Customizable Message Templates:** Personalize follow-up messages using dynamic contact attributes like customer name, call date, and agent notes.
+
+  [Inbox Management](/guides/inbox) · [Contacts Directory](/guides/contacts)
+</Update>
+
+<Update label="17th October, 2026" description="Agents">
+  ## Deterministic Static Decision-Tree Bots
+
+  Build rule-based IVR and chat flows alongside conversational AI for structured, predictable customer interactions.
+
+  ### Features & Use Cases
+  * **Scripted Navigation:** Configure fixed menus, numeric dial pad options (DTMF), and standardized reply buttons for triage, order status lookups, and PIN verifications.
+  * **Hybrid Escalation:** Combine deterministic decision trees with LLM intelligence. Let the static flow handle initial authentication before handing off to a generative AI voice agent for complex queries.
+
+  [Agent Configuration Guide](/guides/agents) · [Agent Types Overview](/agents/overview)
+</Update>
+
+<Update label="15th October, 2026" description="Platform & Auth">
+  ## Guided Onboarding Tour & Authentication Fixes
+
+  New users can now create, configure, and test their first voice agent in under two minutes with our guided walkthrough.
+
+  ### Enhancements
+  * **Step-by-Step Wizard:** Step through persona selection, voice synthesizer testing, knowledge base document upload, and initial browser test calling.
+  * **Google OAuth Fix:** Fixed an edge-case authentication failure where users belonging to multiple Google Workspace domains encountered session mismatch errors during login.
+
+  [Dashboard Overview](/guides/dashboard) · [Quickstart Guide](/documentation/quickstart)
+</Update>
+
+<Update label="12th October, 2026" description="Voice & WebRTC">
+  ## Low-Latency Web Audio & WebRTC Optimization
+
+  Browser-based voice testing has been overhauled with upgraded audio encoding and optimized jitter buffering.
+
+  ### Audio Improvements
+  * **Opus Codec Tuning:** Tuned WebRTC voice packetization to handle packet loss and variable latency over unstable connections.
+  * **Greeting Priority Resolution:** Resolved an audio initialization issue where the browser microphone stream could cut off the agent's first greeting line. The agent now consistently delivers its opening line cleanly upon connection establishment.
+
+  [Web Audio & WebRTC Architecture](/documentation/voice/web-audio-webrtc)
+</Update>
+
+<Update label="9th October, 2026" description="Channels & WhatsApp">
+  ## Multi-Number WhatsApp Business (WABA) Support
+
+  Connect and manage multiple WhatsApp Business numbers within a single workspace.
+
+  ### Management Features
+  * **Number Pooling:** Connect distinct phone numbers under a single Meta Business Account to separate department lines (e.g., Sales, Support, Operations).
+  * **Per-Agent Channel Routing:** Assign dedicated WhatsApp phone numbers to specific voice/chat agents or outbound campaign batches.
+  * **Independent Inboxes:** Inbound chats are organized by originating number with dedicated webhook and routing preferences.
+
+  [WhatsApp Setup Guide](/documentation/whatsapp/setup) · [Channels Management](/guides/channels)
+</Update>

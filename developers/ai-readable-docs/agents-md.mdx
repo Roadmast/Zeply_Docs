@@ -1,0 +1,46 @@
+---
+title: "AGENTS.md"
+description: "A compact, machine-readable reference of the integration facts an LLM or coding agent needs to work with Sayvy AI."
+---
+
+This page collects the core facts an LLM or autonomous coding agent needs before writing code against Sayvy AI. For the complete page index, fetch [llms.txt](https://docs.sayvyai.com/llms.txt) first.
+
+## API & Protocol Basics
+
+- **REST API Base URL:** `https://api.sayvy.ai`
+- **MCP Server Endpoint:** `https://api.sayvy.ai/mcp` (Streamable HTTP transport)
+- **Authentication:** Bearer token. Send `Authorization: Bearer <API_KEY>` on every request.
+
+```bash
+curl https://api.sayvy.ai/<endpoint> \
+  -H "Authorization: Bearer $SAYVY_API_KEY"
+```
+
+## Critical Architecture Guidelines
+
+1. **CRM Multi-Tenancy:**
+   - Activities and contact operations strictly require `workspace_id`.
+   - `organization_id` is reserved for billing and organization membership; do not supply it for contact activities.
+2. **Voice Agent Dialog Formatting:**
+   - Agents speak through text-to-speech synthesizers. Never emit Markdown syntax (`**bold**`, `#`, bullet lists, backticks) in spoken dialog.
+   - Turns must be concise: 1–2 short spoken sentences per turn.
+   - Format telephone numbers in E.164 (`+14155552671`).
+3. **MCP Tool Calling:**
+   - Refer to the official [Sayvy MCP Tool List](/developers/mcp/tool-list).
+   - Use validated tools: `list_agents`, `get_agent`, `create_agent`, `list_contacts`, `update_contact_crm`, `create_campaign`, `list_call_logs`.
+   - Never invent arbitrary query parameters.
+
+## Where to Find Details
+
+- [API Reference](/api-reference)
+- [Authentication](/api-reference/authentication)
+- [Rate Limiting](/api-reference/rate-limiting)
+- [Webhooks](/guides/webhooks)
+- [Sayvy MCP Suite](/developers/mcp/overview)
+- [Sayvy Skills](/developers/skills/overview)
+
+## Guidance for AI Agents
+
+- Read [llms.txt](https://docs.sayvyai.com/llms.txt) to locate relevant documentation pages, then fetch only that page as Markdown by adding `.md` to its URL.
+- Use the [API Reference](/api-reference) as the source of truth for request and response shapes. Do not guess field names.
+- Handle `429` responses by implementing exponential backoff.

@@ -1,0 +1,68 @@
+---
+title: "Sayvy Skills Overview"
+sidebarTitle: "Overview"
+description: "Train AI coding assistants like Claude Code, Cursor, and Codex to build, configure, and operate Sayvy voice and chat agents using natural language."
+---
+
+**Sayvy Skills** are packaged instruction bundles, prompt guidelines, and domain schemas that teach AI coding assistants how to interact with the Sayvy AI platform accurately.
+
+When an AI assistant (like Cursor Composer or Claude Code) has Sayvy Skills installed in your repository, it understands:
+- The exact JSON schema requirements for voice agent creation and tool calling.
+- How to structure multi-turn conversational prompts and dynamic greetings.
+- How to query and update CRM contacts without hallucinating parameter names.
+- Best practices for telephony parameters (TTS voices, latency optimization, WebRTC, and WhatsApp calling).
+
+---
+
+## Why Use Sayvy Skills?
+
+Without skills, general LLMs often guess API schemas, invent unsupported voice IDs, or produce system prompts that cause agents to hallucinate on real phone calls.
+
+| Without Sayvy Skills | With Sayvy Skills |
+| :--- | :--- |
+| Guesses parameter names (e.g. `phone` instead of `phone_number`) | Strictly uses validated JSON Schemas |
+| Writes generic, ungrounded conversational prompts | Uses structured IVR and telephony prompt conventions |
+| Misses workspace scoping requirements | Enforces proper `workspace_id` and auth headers |
+| Requires manual trial-and-error debugging | Generates correct, production-grade configurations on the first turn |
+
+---
+
+## Supported Developer Environments
+
+Sayvy Skills can be loaded into any modern AI-assisted engineering workflow:
+
+<CardGroup cols={3}>
+  <Card title="Cursor IDE" icon="terminal" href="/developers/skills/supported-assistants#cursor">
+    Project rules placed in `.cursor/rules/sayvy.mdc` provide instant context to Cursor Composer.
+  </Card>
+  <Card title="Claude Code" icon="brain" href="/developers/skills/supported-assistants#claude-code">
+    CLI skills loaded into `~/.claude/skills/sayvy/` for autonomous command-line agent operation.
+  </Card>
+  <Card title="Windsurf" icon="wind" href="/developers/skills/supported-assistants#windsurf">
+    Workspace rules in `.windsurfrules` directing Cascade to execute Sayvy tools cleanly.
+  </Card>
+</CardGroup>
+
+---
+
+## What a Skill Contains
+
+A typical Sayvy Skill bundle contains four core instruction layers:
+
+1. **System Persona Guidelines:** Formatting rules for telephone-first voice agents (concise sentences, no Markdown in spoken output, clean pronunciation of numbers).
+2. **Schema & API Rules:** Explicit parameter types, mandatory fields, and validation patterns for all endpoints and MCP tools.
+3. **Telephony Best Practices:** Handling interruptions, silence detection, DTMF digits, and fallback handoffs.
+4. **CRM & Activity Standards:** Proper activity logging conventions (e.g., ensuring activities are strictly scoped to `workspace_id`).
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Installation Guide" icon="download" href="/developers/skills/installation">
+    Install Sayvy Skills into your codebase or local user directory in minutes.
+  </Card>
+  <Card title="Example Prompts" icon="message" href="/developers/skills/example-prompts">
+    Explore prompts for agent creation, campaign configuration, and webhook setup.
+  </Card>
+</CardGroup>

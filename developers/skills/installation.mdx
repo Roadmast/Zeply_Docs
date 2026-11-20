@@ -1,0 +1,137 @@
+---
+title: "Installing Sayvy Skills"
+sidebarTitle: "Installation"
+description: "How to install and activate Sayvy Skills across Cursor, Claude Code, Windsurf, and custom AI assistant workflows."
+---
+
+Install Sayvy Skills into your project to give your coding assistants native intelligence about Sayvy AI.
+
+---
+
+## 1. Cursor IDE Installation
+
+Cursor uses project-specific rule files located in `.cursor/rules/`.
+
+<Steps>
+  <Step title="Create the rule file">
+    In the root of your repository, create `.cursor/rules/sayvy.mdc`:
+  </Step>
+
+  <Step title="Add the Sayvy Skill configuration">
+    Paste the following content into `.cursor/rules/sayvy.mdc`:
+
+    ```markdown
+    ---
+    description: Sayvy AI voice agent and CRM integration rules
+    globs: **/*
+    ---
+
+    # Sayvy AI Development Guidelines
+
+    When writing code or configurations for Sayvy AI:
+    - Base URL: https://api.sayvy.ai
+    - Authentication: Bearer token via Authorization header.
+    - CRM Multi-Tenancy: Activities and contacts must strictly use `workspace_id`. Do not use `organization_id` for CRM activity records.
+    - Voice Prompt Rules:
+      - Voice agents must never output Markdown formatting (no asterisks, bolding, bullet points, or raw URLs) in spoken speech.
+      - Phone numbers must be formatted in E.164 (e.g., +14155552671).
+      - Numbers should be written as digits or spoken words depending on context.
+    - API & MCP Tools:
+      - Refer to the official Sayvy MCP tool definitions before making tool calls.
+      - Never guess parameter names; use `list_agents`, `get_contact`, `update_contact_crm`, etc.
+    ```
+  </Step>
+
+  <Step title="Verify in Composer">
+    Open Cursor Composer (`Cmd + I` or `Ctrl + I`). Cursor will automatically apply this rule when answering Sayvy-related questions.
+  </Step>
+</Steps>
+
+---
+
+## 2. Claude Code Installation
+
+Claude Code reads skill definitions from `.claude/skills/` or `~/.claude/skills/`.
+
+### Quick install
+
+<CodeGroup>
+```text Plugin marketplace
+/plugin marketplace add Roadmast/Sayvy-Skill
+/plugin install sayvy@sayvy-skill
+```
+
+```bash npx
+npx skills add Roadmast/Sayvy-Skill --skill sayvy -a claude-code -g
+```
+</CodeGroup>
+
+The skill source is at [github.com/Roadmast/Sayvy-Skill](https://github.com/Roadmast/Sayvy-Skill). To install manually instead, follow the steps below.
+
+<Steps>
+  <Step title="Create the Skill Directory">
+    Run the following command in your terminal:
+    
+    ```bash
+    mkdir -p ~/.claude/skills/sayvy
+    ```
+  </Step>
+
+  <Step title="Add the skill files">
+    The `sayvy` skill folder contains four files:
+
+    | File | Purpose |
+    | :--- | :--- |
+    | `SKILL.md` | Entry point: setup check, workspace rules, write-confirmation rule, tool index |
+    | `reference.md` | MCP tool parameters and verified REST endpoints |
+    | `prompting.md` | Voice prompt rules, mustache variables, human handoff |
+    | `webhooks.md` | Event catalog and `X-Sayvy-Signature` verification |
+
+    Copy all four into `~/.claude/skills/sayvy/`. For a single project, use `.claude/skills/sayvy/` in the repository instead. `SKILL.md` starts with:
+
+    ```markdown
+    ---
+    name: sayvy
+    description: Build, configure, and operate Sayvy AI voice/chat agents, campaigns, CRM contacts, and webhooks via the Sayvy MCP server or REST API. Use when writing Sayvy agent system prompts, calling Sayvy MCP tools (list_agents, update_contact_crm, create_campaign, etc.), or writing code against api.sayvy.ai or Sayvy webhooks (X-Sayvy-Signature).
+    argument-hint: "[task]"
+    ---
+    ```
+
+    Before any write tool (`create_agent`, `update_agent`, `delete_agent`, `update_contact_crm`, `create_campaign`, and others), the skill shows you the exact arguments and waits for your confirmation.
+  </Step>
+
+  <Step title="Connect the Sayvy MCP server">
+    Claude Code supports Streamable HTTP natively:
+
+    ```bash
+    claude mcp add --transport http sayvy https://api.sayvy.ai/mcp \
+      --header "Authorization: Bearer $SAYVY_API_KEY"
+    ```
+  </Step>
+
+  <Step title="Use it">
+    Claude loads the skill automatically for Sayvy tasks. You can also call it directly, for example `/sayvy list my agents`.
+  </Step>
+</Steps>
+
+---
+
+## 3. Windsurf Installation
+
+For Windsurf, add rules to your project's `.windsurfrules` file:
+
+```markdown
+# Sayvy AI Rules for Cascade
+- Target API: https://api.sayvy.ai
+- All CRM activities and contacts are strictly scoped to workspace_id.
+- Spoken agent text must be clean plain text without Markdown characters or backticks.
+- When generating webhook handlers, verify the `X-Sayvy-Signature` HMAC-SHA256 header.
+```
+
+---
+
+## 4. Universal Repository Root (`AGENTS.md`)
+
+For agents that scan the repository root (like Antigravity, Codex, or GitHub Copilot), place an `AGENTS.md` file in the root of your project.
+
+See our complete [AGENTS.md Reference](/developers/ai-readable-docs/agents-md) for copy-paste instructions.

@@ -1,0 +1,71 @@
+---
+title: "Sayvy Skills Technical Reference"
+sidebarTitle: "Skills Reference"
+description: "Authoritative engineering reference for prompt structures, voice agent constraints, CRM data formats, and error recovery patterns."
+---
+
+When building or asking an AI assistant to generate configurations for Sayvy AI, follow these technical specifications to ensure production reliability.
+
+---
+
+## 1. Voice Agent Prompt Engineering Rules
+
+Voice agents interact over audio streams where speech synthesizers convert text to speech in real time. Standard chatbot prompts will cause poor user experiences on phone calls.
+
+### Spoken Output Constraints
+* **No Markdown Formatting:** Never emit asterisks (`**bold**`), hashtags (`# Header`), bullet points (`- Item`), or backticks in spoken output. Text-to-speech engines will either speak the symbols or introduce awkward pauses.
+* **Keep Turns Under 2 Sentences:** Spoken dialog must be concise. Limit responses to 1–2 short sentences per turn before returning the floor to the user.
+* **Phonetic Clarity:**
+  * Spell out complex abbreviations or write them phonetically if TTS mispronounces them (e.g., write "S A P" instead of "SAP" if you want individual letters spoken).
+  * Format currency as words: write "one hundred dollars" rather than "$100".
+  * For phone numbers, format with dashes or spaces: `4 1 5, 5 5 5, 2 6 7 1`.
+
+---
+
+## 2. Dynamic Variable Injection
+
+System prompts support dynamic mustache variables injected from contact records or campaign metadata at call initialization:
+
+```text
+You are an appointment confirmation assistant calling {{contact.name}}.
+Their scheduled appointment is on {{custom_fields.appointment_date}} at {{custom_fields.appointment_time}}.
+```
+
+Available default variables:
+* `{{contact.name}}`: Customer full name.
+* `{{contact.phone_number}}`: E.164 phone number.
+* `{{contact.lifecycle_stage}}`: Current CRM lifecycle stage.
+* `{{contact.lead_score}}`: Lead score integer.
+* `{{custom_fields.<key>}}`: Custom JSON attributes attached to the contact.
+
+---
+
+## 3. CRM Activity & Multi-Tenancy Rules
+
+When creating CRM records or modifying contact lifecycles:
+
+* **Workspace Scoping:** All activities and contacts require `workspace_id`. Organization ID (`organization_id`) is reserved for billing and organization membership, not contact activity logs.
+* **Valid Lifecycle Stages:**
+  * `new`: Ingested contact, no human or AI conversation completed yet.
+  * `engaged`: Inbound/outbound conversation in progress.
+  * `qualified`: Lead criteria met (score > threshold).
+  * `customer`: Deal closed / converted.
+  * `lost`: Disqualified or unsubscribed.
+* **Valid Activity Types:**
+  * `contact_created`, `message_inbound`, `message_outbound`, `stage_changed`, `lead_score_changed`, `handoff_to_human`, `handoff_to_ai`, `note_added`, `tag_added`, `task_created`.
+
+---
+
+## 4. Human Handoff Patterns
+
+When a customer asks to speak with a human agent or becomes frustrated:
+
+1. Acknowledge the request calmly.
+2. Trigger the transfer tool configured on the agent, or set `ai_handling` to `false` with the `update_contact_crm` MCP tool.
+3. Inform the caller that a human representative is being connected.
+
+```text
+If the customer asks to speak with a human or expresses anger, say:
+"I completely understand. Let me transfer you to one of our team members right now. Please hold for just a moment."
+Then trigger your configured transfer tool.
+```

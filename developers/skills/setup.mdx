@@ -1,0 +1,59 @@
+---
+title: "Sayvy Skills Setup & Configuration"
+sidebarTitle: "Setup"
+description: "Configuring environment variables, workspace scopes, and authentication keys for Sayvy Skills."
+---
+
+Before your AI assistant can execute commands and configure agents, set up your project environment variables and permissions.
+
+---
+
+## 1. Environment Variables
+
+Store your Sayvy credentials in your project's `.env` file or export them in your shell:
+
+```bash
+# Sayvy AI API Credentials
+SAYVY_API_KEY="sayvy_sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+SAYVY_BASE_URL="https://api.sayvy.ai"
+SAYVY_WORKSPACE_ID="b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e"
+```
+
+<Warning>
+  Never commit your `.env` file to version control. Add `.env` to your `.gitignore` to prevent leaking API keys.
+</Warning>
+
+---
+
+## 2. API Key Permissions
+
+Sayvy AI supports fine-grained permission scopes for API keys:
+
+| Scope | Description | Recommended Usage |
+| :--- | :--- | :--- |
+| **Full Admin** | Unrestricted access across agents, billing, campaigns, and team settings. | Workspace owners & local scripts |
+| **Agent Operator** | Create and tune agents, view call logs, and manage knowledge base files. | Developer IDEs & Cursor |
+| **CRM Read/Write** | Manage contacts, lifecycle stages, notes, and activity feeds. | Integration pipelines & MCP clients |
+| **Read-Only Auditor**| Inspect call logs, metrics, and billing without write privileges. | Analytics scripts & monitoring |
+
+Generate scoped keys in **Dashboard → Developers → API Keys**.
+
+---
+
+## 3. Workspace Scoping Best Practices
+
+Sayvy AI is strictly multi-tenant. Every contact, campaign, call log, and agent belongs to a specific `workspace_id`.
+
+* If your user belongs to multiple workspaces, always pass the target `workspace_id` in API requests or set `SAYVY_WORKSPACE_ID`.
+* For MCP connections, your API key is automatically bound to the workspace in which it was generated.
+* Note that CRM activities strictly require `workspace_id`; never supply `organization_id` for CRM activity tracking.
+
+---
+
+## 4. Rate Limiting & Backoff
+
+Sayvy AI enforces token-bucket rate limits per API key:
+- **Standard Tier:** 120 requests/minute.
+- **Enterprise Tier:** Custom burst allowances.
+
+If your assistant executes batch calls, ensure it inspects the rate limit headers (`X-RateLimit-Remaining`) and implements exponential backoff on `429 Too Many Requests`.

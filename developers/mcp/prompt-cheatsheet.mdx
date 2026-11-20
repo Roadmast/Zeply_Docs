@@ -1,0 +1,122 @@
+---
+title: "Sayvy MCP Prompt Cheatsheet"
+sidebarTitle: "Prompt Cheatsheet"
+description: "Practical copy-paste prompt recipes to control your Sayvy AI workspace through Cursor, Claude Desktop, or Windsurf."
+---
+
+Once your MCP client is connected to Sayvy AI, you can manage your entire workspace using natural language. Here are battle-tested prompt templates grouped by use case.
+
+---
+
+## 1. Agent Management & Prompt Engineering
+
+### Audit Agent Configurations
+```text
+List all voice agents in my workspace. For each agent, summarize its name, the assigned voice model, and the first 3 lines of its system prompt.
+```
+
+### Inspect an Agent Prompt
+```text
+Fetch the details of agent [AGENT_NAME_OR_ID]. Display its complete system prompt, temperature setting, and list of attached knowledge base documents.
+```
+
+### Update an Agent's System Instructions
+```text
+Update agent [AGENT_ID] with the following changes:
+1. Increase temperature from 0.3 to 0.5.
+2. In the system prompt, add a rule that requires the agent to confirm the customer's preferred callback time before ending the call.
+```
+
+### Create a New Voice Persona
+```text
+Create a new voice agent named "Dental Booking Specialist".
+- System prompt: You are a friendly receptionist at Bright Smiles Dental. Your goal is to collect the patient's full name, preferred appointment slot, and insurance provider.
+- LLM model: gemini-2.5-flash
+- Temperature: 0.4
+```
+
+---
+
+## 2. CRM Operations & Lead Lifecycle
+
+### Identify High-Value Qualified Leads
+```text
+Search my contacts for all records in the "qualified" lifecycle stage with a lead score greater than 70. Format the result as a Markdown table.
+```
+
+### Add a Meeting Note to a Contact
+```text
+Add a note to contact [CONTACT_ID]:
+"Customer completed demo call on Nov 20. Interested in Enterprise 5-seat plan. Follow up with security whitepaper on Monday."
+```
+
+### Advance Lead Stage & Reassign Ownership
+```text
+Update the CRM status for contact [CONTACT_ID]:
+- Set lifecycle_stage to "customer"
+- Set lead_score to 95
+- Enable ai_handling to true
+```
+
+### View Contact Interaction History
+```text
+Show me the chronological activity history for contact [CONTACT_ID], including all status changes and outbound call attempts.
+```
+
+---
+
+## 3. Campaign Orchestration
+
+### Launch an Outbound Outreach Campaign
+```text
+Create a new outbound voice campaign named "Q4 Enterprise Follow-up".
+- Assign agent: [AGENT_ID]
+- Channel: voice
+- Audience: All contacts tagged with "q4_leads"
+```
+
+### Inspect Campaign Progress
+```text
+Get the real-time status of campaign [CAMPAIGN_ID]. How many calls were answered, how many failed, and what is the current completion percentage?
+```
+
+### Pause Running Campaign
+```text
+Pause campaign [CAMPAIGN_ID] immediately and report the total minutes billed so far.
+```
+
+---
+
+## 4. Call Debugging & Transcript Analysis
+
+### Investigate Recent Call Failures
+```text
+List the last 10 call logs for agent [AGENT_ID]. Identify any calls with duration under 15 seconds or with a "timeout" / "user_hangup" termination status.
+```
+
+### Analyze Call Transcript for Objections
+```text
+Fetch the complete transcript for call [CALL_ID].
+1. Summarize the customer's primary objections.
+2. Identify whether the agent answered accurately based on our knowledge base.
+3. Suggest improvements to the agent's prompt to overcome this objection in the future.
+```
+
+---
+
+## 5. Multi-Step Chained Workflows
+
+You can ask your AI client to execute multi-tool workflows in sequence:
+
+### Lead Recovery Workflow
+```text
+1. Find all call logs from today that ended in "customer_unreachable" or "user_hangup" under 30 seconds.
+2. Extract the contact IDs associated with these calls.
+3. For each contact, add an internal note: "Voice outreach unsuccessful - scheduled for WhatsApp follow-up".
+4. Create a draft WhatsApp campaign named "Re-engagement Broadcast" targeting these contacts.
+```
+
+### Knowledge Base Gap Detection
+```text
+Fetch the last 5 calls handled by agent [AGENT_ID]. Review customer questions where the agent replied "I'm not sure about that". Compare them against our knowledge base using search_knowledge_base and list the missing topics we need to document.
+```

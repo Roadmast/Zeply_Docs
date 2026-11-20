@@ -1,0 +1,129 @@
+---
+title: "Developer Resources"
+sidebarTitle: "Overview"
+description: "Everything you need to build, automate, integrate, and extend omnichannel voice and conversational AI agents with Sayvy AI."
+---
+
+Welcome to the Sayvy AI developer documentation. Whether you are connecting your development tools via the Model Context Protocol (MCP), triggering outbound campaigns via our REST API, capturing customer events through real-time webhooks, or teaching coding assistants how to interact with your agents, this hub provides the guides and technical references you need.
+
+<CardGroup cols={2}>
+  <Card title="Sayvy MCP Server" icon="server" href="/developers/mcp/overview">
+    Connect AI coding assistants (Claude Desktop, Cursor, Windsurf) directly to your workspace using our native Model Context Protocol server.
+  </Card>
+  <Card title="Sayvy Skills" icon="wand-magic-sparkles" href="/developers/skills/overview">
+    Equip coding assistants with prompt guidelines and rules to build, test, and operate Sayvy voice and chat agents using natural language.
+  </Card>
+  <Card title="REST API Reference" icon="code" href="/api-reference">
+    Explore OpenAPI-compliant endpoints to create agents, launch campaigns, query CRM contacts, and fetch call logs programmatically.
+  </Card>
+  <Card title="Webhooks & Events" icon="webhook" href="/guides/webhooks">
+    Receive real-time signed HTTP events for call completions, inbound messages, and CRM updates with built-in retry queues.
+  </Card>
+</CardGroup>
+
+---
+
+## Sayvy MCP Server
+
+Sayvy AI includes a native, production-ready **Model Context Protocol (MCP) server** implementing the official MCP specification (SDK v2). Powered by Streamable HTTP transport at `/mcp`, it exposes 25+ granular tools allowing external LLMs and IDEs to:
+- Audit and modify voice agent personas, greetings, and LLM temperature.
+- Search and update CRM contacts, adjust lead scores, and append notes.
+- Dispatch, pause, and inspect outbound calling campaigns.
+- Retrieve full call recordings, latency breakdowns, and dialog transcripts.
+- Interact with live knowledge bases and billing summaries.
+
+```bash
+# Connect Cursor IDE or Claude Desktop to Sayvy MCP
+https://api.sayvy.ai/mcp
+```
+
+[Explore the MCP Suite](/developers/mcp/overview) · [MCP Quickstart](/developers/mcp/quickstart) · [Tool List](/developers/mcp/tool-list)
+
+---
+
+## REST API
+
+Every action available in the Sayvy AI dashboard can be performed via our REST API. Standardized around JSON payloads, Bearer token authentication, and token-bucket rate limiting, developers can integrate Sayvy AI into existing CRMs (Salesforce, HubSpot), ERP systems, and proprietary backends.
+
+* **Base URL:** `https://api.sayvy.ai`
+* **Authentication:** `Authorization: Bearer <API_KEY>`
+
+```bash
+curl https://api.sayvy.ai/api/agents \
+  -H "Authorization: Bearer $SAYVY_API_KEY"
+```
+
+[View REST API Reference](/api-reference) · [API Authentication](/api-reference/authentication) · [Rate Limits](/api-reference/rate-limiting)
+
+---
+
+## Webhooks & Real-Time Events
+
+Stay in sync with customer activity across calls and messaging channels by subscribing your backend endpoints to real-time signed HTTP events:
+* `call.completed`: In-depth telemetry including duration, sentiment, user hangup status, and full transcript.
+* `message.received`: Real-time incoming chats from WhatsApp, Instagram, Email, or Web Widget.
+* `lead.created` / `lead.score_changed`: CRM triggers when leads qualify during automated calls.
+
+All dispatches feature `X-Sayvy-Signature` HMAC-SHA256 headers and automatic retry policies backed by our Dead Letter Queue (DLQ).
+
+[Configure Webhooks](/guides/webhooks) · [Webhooks API Reference](/api-reference/webhooks/overview) · [DLQ Architecture](/documentation/workflows/outbound-webhooks-dlq)
+
+---
+
+## Omnichannel Channels & Voice
+
+Develop workflows across phone networks and digital messaging apps simultaneously:
+* **Voice:** Inbound/outbound telephony, WebRTC browser calling, and WhatsApp outbound voice calls.
+* **Messaging:** WhatsApp Business API (WABA), Instagram Direct Messages, Inbound/Outbound Email, and embeddable Web Widgets.
+
+[Explore Channels](/guides/channels) · [WhatsApp Setup](/documentation/whatsapp/setup) · [Web Widget Integration](/documentation/integrations/web-widget)
+
+---
+
+## Sayvy Skills for Coding Assistants
+
+Teach AI coding assistants like Claude Code, Cursor, and Codex how to generate voice agent configurations, write webhook receivers, and interact with Sayvy APIs without hallucinating field names:
+* **Cursor Rules:** `.cursor/rules/sayvy.mdc`
+* **Claude Code Skills:** `~/.claude/skills/sayvy/SKILL.md`
+* **Windsurf Rules:** `.windsurfrules`
+
+[Sayvy Skills Overview](/developers/skills/overview) · [Installation Guide](/developers/skills/installation) · [Example Prompts](/developers/skills/example-prompts)
+
+---
+
+## AI-Readable Documentation
+
+Sayvy AI publishes machine-optimized documentation formats designed specifically for consumption by LLMs without scraping HTML:
+* **`llms.txt`**: Concise page catalog with summaries for fast agent retrieval.
+* **`llms-full.txt`**: Complete documentation concatenated into a single Markdown file for RAG pipelines and prompt contexts.
+* **`AGENTS.md`**: Machine-readable specification outlining authentication, base URLs, schemas, and common gotchas.
+
+[Read AI Documentation Specs](/developers/ai-readable-docs/llm-readable-docs) · [View AGENTS.md](/developers/ai-readable-docs/agents-md)
+
+---
+
+## Developer Community & Support
+
+Join fellow voice and conversational AI developers to share templates, ask technical questions, and report feedback:
+* **Developer Slack / Discord:** Real-time help with webhook integrations and prompt engineering.
+* **GitHub Issues:** Report SDK or CLI bugs and request new MCP tools.
+* **Product Feedback:** Direct access to the engineering team.
+
+---
+
+## Getting Started
+
+<Steps>
+  <Step title="Generate an API Key">
+    Navigate to **Dashboard → Developers → API Keys** to create a scoped API key for your workspace.
+  </Step>
+  <Step title="Connect Your IDE via MCP">
+    Configure Cursor, Claude Desktop, or Windsurf using our [MCP Quickstart](/developers/mcp/quickstart) to manage your workspace directly from chat.
+  </Step>
+  <Step title="Install Sayvy Skills">
+    Add Sayvy prompt instructions to your project via [Sayvy Skills](/developers/skills/installation) to instruct your AI assistants on proper tool execution.
+  </Step>
+  <Step title="Configure Webhooks">
+    Set up a receiver endpoint and subscribe to `call.completed` and `message.received` events in [Webhooks](/guides/webhooks).
+  </Step>
+</Steps>

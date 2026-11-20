@@ -1,0 +1,85 @@
+---
+title: "Supported AI Assistants"
+sidebarTitle: "Supported Assistants"
+description: "Compatibility matrix and configuration instructions for Cursor, Claude Code, Windsurf, and custom AI tools."
+---
+
+Sayvy AI integrates with leading AI coding tools, IDEs, and autonomous agent runners.
+
+---
+
+## Compatibility Matrix
+
+| Assistant | MCP Tool Calling | System Rules (`.rules` / `SKILL.md`) | Streamable HTTP Support |
+| :--- | :---: | :---: | :---: |
+| **Cursor IDE** | Full Support | `.cursor/rules/sayvy.mdc` | Direct (`.cursor/mcp.json`) |
+| **Claude Desktop** | Full Support | System Prompt / Project Instructions | via `mcp-remote` / Direct |
+| **Claude Code (CLI)** | Full Support | `~/.claude/skills/sayvy/` | Direct (`claude mcp add --transport http`) |
+| **Windsurf (Cascade)** | Full Support | `.windsurfrules` | Direct (`mcp_config.json`) |
+| **Antigravity / Codex**| Full Support | `AGENTS.md` / Custom Skill | Native |
+
+---
+
+## Assistant-Specific Setup
+
+<Tabs>
+  <Tab title="Cursor IDE">
+    ### Setup Instructions
+    1. **MCP Integration:** Add Sayvy MCP to `.cursor/mcp.json`:
+       ```json
+       {
+         "mcpServers": {
+           "sayvy": {
+             "url": "https://api.sayvy.ai/mcp",
+             "headers": {
+               "Authorization": "Bearer YOUR_API_KEY"
+             }
+           }
+         }
+       }
+       ```
+    2. **Rules Configuration:** Create `.cursor/rules/sayvy.mdc` with Sayvy voice prompt constraints.
+  </Tab>
+
+  <Tab title="Claude Code (CLI)">
+    ### Setup Instructions
+    1. **Install Claude Code:** Ensure you have the latest version of Claude Code installed.
+    2. **Add Skill:** Copy the `sayvy` skill folder (`SKILL.md`, `reference.md`, `prompting.md`, `webhooks.md`) to `~/.claude/skills/sayvy/`. See [Installation](/developers/skills/installation#2-claude-code-installation).
+    3. **Set Environment Variables:**
+       ```bash
+       export SAYVY_API_KEY="your_api_key_here"
+       export SAYVY_BASE_URL="https://api.sayvy.ai"
+       ```
+    4. **MCP Integration:**
+       ```bash
+       claude mcp add --transport http sayvy https://api.sayvy.ai/mcp \
+         --header "Authorization: Bearer $SAYVY_API_KEY"
+       ```
+  </Tab>
+
+  <Tab title="Windsurf (Cascade)">
+    ### Setup Instructions
+    1. **MCP Configuration:** Add to `~/.codeium/windsurf/mcp_config.json`:
+       ```json
+       {
+         "mcpServers": {
+           "sayvy": {
+             "url": "https://api.sayvy.ai/mcp",
+             "headers": {
+               "Authorization": "Bearer YOUR_API_KEY"
+             }
+           }
+         }
+       }
+       ```
+    2. **Rules:** Add instructions to `.windsurfrules`.
+  </Tab>
+
+  <Tab title="OpenAI / Custom GPTs">
+    ### Setup Instructions
+    For Custom GPTs or assistants built on the OpenAI Assistants API:
+    1. In the GPT Builder, select **Actions → Create new action**.
+    2. Import the OpenAPI schema from `https://api.sayvy.ai/openapi.json`.
+    3. Set Authentication to **API Key (Bearer)** and paste your Sayvy API key.
+  </Tab>
+</Tabs>
