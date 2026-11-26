@@ -1,0 +1,43 @@
+---
+title: "Inbound calls"
+description: "How a call to your WhatsApp Business number reaches an agent."
+---
+
+Inbound calls reach Sayvy AI in two ways: a customer calls your WhatsApp Business number, or a visitor presses the call button in your web widget. Calls to regular phone numbers aren't supported.
+
+## Which agent answers
+
+Each WhatsApp number belongs to exactly one agent, and that agent answers every call to it. You set this on the agent's **Deploy** tab. When you turn on WhatsApp for an agent, the first connected number is picked for you. Change it there if you have more than one.
+
+A number can't be shared between agents. To send callers to a different agent, move the number to that agent. If you want one number to handle several kinds of calls, use a single [workflow agent](/documentation/learn/agent-types) that branches on what the caller needs.
+
+For the web widget, the agent is the one whose widget you embedded on the page.
+
+## What happens when someone calls
+
+<Steps>
+  <Step title="The call arrives">
+    WhatsApp sends the call to Sayvy AI, which looks up the agent assigned to the number.
+  </Step>
+  <Step title="The agent picks up">
+    The call is accepted and the welcome message plays.
+  </Step>
+  <Step title="The conversation runs">
+    The agent talks with the caller, using its tools as needed, until someone hangs up or the time limit is reached.
+  </Step>
+  <Step title="The call is recorded">
+    The call log, transcript, and recording are saved when those options are on, and the call appears in the contact's history.
+  </Step>
+</Steps>
+
+If the voice service is briefly unavailable, the call isn't answered. The caller can try again, or send a WhatsApp message instead.
+
+## Business hours
+
+There's no built-in schedule for when an agent takes calls. The agent answers at any time, day or night. If callers should hear something different outside your hours, say so in the prompt. The agent is given the current date and time in UTC, so name your timezone:
+
+```markdown
+Our hours are 9am to 6pm IST, Monday to Saturday. Outside those hours,
+tell the caller we're closed, take their name and reason for calling, and
+say someone will call back the next working day.
+```

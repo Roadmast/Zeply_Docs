@@ -1,36 +1,44 @@
 ---
-title: "Contacts"
-description: "In-built CRM data model, contacts, and deal pipeline stages"
+title: "CRM data model"
+description: "How contacts, conversations, activities, and tasks relate to each other."
 ---
 
-# Contacts
+The CRM is built around the contact. Everything else, from conversations to tasks, hangs off a contact and belongs to one workspace. This page is useful if you work with the CRM through the API or webhooks.
 
-*This page covers the data schema, entity relationships, and pipeline lifecycle in Sayvy AI's native in-built CRM.*
+## Objects
 
----
+| Object | What it holds | Belongs to |
+|---|---|---|
+| Contact | Name, phone number or channel ID, tags, notes, custom fields, stage, score, owner, handling, source | The workspace |
+| Inbox ticket | One conversation between the contact and one of your channels, open or closed | A contact |
+| Message | A single message in a ticket, in either direction | A ticket |
+| Activity | One event in the contact's history, made by a user, the AI, or the system | A contact |
+| Task | A follow-up with a title, description, due date, assignee, and status | A contact |
 
-## Native CRM Data Model
+A contact can have many tickets, one per channel conversation. When a ticket is closed and the person writes again, a new ticket opens.
 
-*Content coming soon.*
+## Lifecycle stages
 
-- **Contacts:** Core identity, phone, email, channel tags, custom attributes
-- **Conversations:** Voice call sessions (Web / WhatsApp) and WhatsApp chat threads
-- **Deals & Pipelines:** Pipeline stages, monetary deal values, and owners
+There's one fixed set of stages. You can't add, rename, or remove stages.
 
----
+| Stage | Typical meaning |
+|---|---|
+| `new` | Just arrived. Every contact starts here. |
+| `engaged` | In conversation with you |
+| `qualified` | A real prospect with a need you can meet |
+| `customer` | Has bought from you |
+| `lost` | Not going ahead |
 
-## Pipeline Stages & Custom Funnels
+The meanings are yours to decide. Write them into your agent's prompt so the agent moves contacts the same way your team would.
 
-*Content coming soon.*
+## Lead score
 
-- Default stages: `New Lead`, `Contacted`, `Qualified`, `Appointment Booked`, `Won`, `Lost`
-- Creating custom pipelines for different service lines and products
+The lead score is a whole number from 0 to 100, starting at 0. It isn't calculated for you. It changes only when a teammate sets it, or when an agent with CRM tools updates it. Score bands in CRM Hub treat 70 and above as high and below 40 as low.
 
----
+## Deals
 
-## Automated Lifecycle Stage Transitions
+The CRM doesn't have deals, amounts, or multiple pipelines. To track value or product interest, use tags or custom fields on the contact.
 
-*Content coming soon.*
+## Deleting
 
-- AI-driven stage updates based on conversational outcomes
-- Transitioning leads automatically when calendar bookings succeed or intents match
+Deleting a contact also deletes its tickets, messages, activities, and tasks. See [Contacts](/documentation/crm/contacts).

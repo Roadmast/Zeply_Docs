@@ -1,4 +1,46 @@
 ---
-title: "Agents Overview"
-description: "Create and manage conversational agents in Sayvy AI"
+title: "Agents overview"
+description: "Create an agent, test it from the dashboard, and put it live on your website or WhatsApp."
 ---
+
+Agents live on the **Agents** page of your workspace. From there you can start a new agent from scratch, import one from a template, or open an existing agent to change it.
+
+## Create an agent
+
+Click **New Agent**. You'll be asked which of the three agent types to build, so it helps to decide how the agent should work out its replies before you start.
+
+| Type in the dashboard | What it is |
+|---|---|
+| Prompt-based AI Agent | A language model that follows the instructions you write. Most teams start here. |
+| Static Bot | Fixed replies triggered by rules you set, with no language model. |
+| Workflow Agent | A conversation graph you build step by step in the Workflow Builder. |
+
+Not sure which one fits? [Agent types](/documentation/learn/agent-types) compares them. To copy a prebuilt agent instead, click **Import Template**. See [Agent templates](/documentation/agents/templates).
+
+## The agent editor
+
+A prompt agent's settings are split across five tabs. Static bots and workflow agents have fewer, because rules or the graph replace the prompt.
+
+<Steps>
+  <Step title="Prompts & Identity">
+    Name, primary language, timezone, welcome message, and the agent prompt. See [Writing prompts](/documentation/agents/prompts).
+  </Step>
+  <Step title="AI Model & Voice">
+    The model stack and category, and the voice used on calls. See [Voices](/documentation/voice/voices).
+  </Step>
+  <Step title="Tools & Integrations">
+    Booking, CRM actions, your own HTTP APIs, and MCP servers. See [Tools](/documentation/agents/tools-and-integrations).
+  </Step>
+  <Step title="Advanced Settings">
+    Recording, transcription, follow-up messages, and call length. See [Agent settings](/documentation/agents/configuration).
+  </Step>
+  <Step title="Deploy">
+    Turn on the web widget, voice in the widget, and WhatsApp.
+  </Step>
+</Steps>
+
+Changes aren't live until you click **Save Changes**. If you leave with unsaved edits, a bar at the bottom lets you save or discard them.
+
+## Test before you deploy
+
+Click **Test Agent** in the editor header. A panel opens with two tabs: **Chat** to type to the agent, and **Webcall** to talk to it through your microphone. Static bots only have the chat test. Workflow agents are tested from the test tab in the Workflow Builder.

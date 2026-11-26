@@ -1,4 +1,44 @@
 ---
 title: "Calendly"
-description: "Connect Calendly to support appointment scheduling"
+description: "Connect Calendly so agents can send customers your scheduling link."
 ---
+
+Calendly works differently from Google Calendar. An agent doesn't book the slot itself. It gives the customer your Calendly scheduling link, and the customer picks a time on Calendly's page.
+
+Choose Calendly when you already run your schedule there, or when appointments need Calendly's own rules, such as buffers, round-robin hosts, or intake questions.
+
+## Connect
+
+<Steps>
+  <Step title="Open Connections">
+    Go to **Connections** and find the **Calendly** card. It reads "Connect Calendly to send appointment booking links via WhatsApp."
+  </Step>
+  <Step title="Sign in with Calendly">
+    Click **Connect Calendly** and sign in with your Calendly account.
+  </Step>
+  <Step title="Turn booking on for an agent">
+    On the agent's **Tools & Integrations** tab, turn on **Enable Booking**, and tell the agent in its booking instructions to send the link. See [Calendar booking](/documentation/workflows/calendar-booking).
+  </Step>
+</Steps>
+
+## The Calendly card
+
+The card shows when you connected, when the sign-in expires, and your Calendly slug if there is one.
+
+## What the agent does
+
+When a customer wants to book, the agent sends your scheduling link in the conversation. The agent doesn't see which time the customer chooses, because that happens on Calendly's page.
+
+If you need the agent to confirm the booking, ask the customer to tell it when they've booked.
+
+## Disconnect
+
+Click **Disconnect** and confirm. The warning reads that it will disable appointment booking workflows. Agents stop being able to send your link until you reconnect.
+
+## Google Calendar or Calendly
+
+| | Google Calendar | Calendly |
+|---|---|---|
+| Who picks the time | The agent and the customer, in conversation | The customer, on Calendly |
+| Who creates the event | The agent | Calendly |
+| Suits | Simple appointments you want handled in chat | Schedules with rules or several hosts |

@@ -1,0 +1,55 @@
+---
+title: "WhatsApp campaigns"
+description: "Send a personalised WhatsApp template to a group of contacts."
+---
+
+A WhatsApp campaign sends one template message to many contacts, filling in each person's details as it goes. Create one from **Campaigns** with **New Campaign**.
+
+<Note>
+Template campaigns aren't available on the Pay as you go plan. Upgrade to Basic or above to send them.
+</Note>
+
+## Create a campaign
+
+<Steps>
+  <Step title="Basics">
+    Enter a **Campaign Name** and choose the **WhatsApp Business Channel**, the number the messages come from.
+  </Step>
+  <Step title="Template">
+    Pick a template under **Select WhatsApp Template**. The preview shows the header, body, footer, and buttons as contacts will see them. Only templates Meta has approved will be delivered.
+  </Step>
+  <Step title="Audience">
+    Choose **All Contacts**, **Contacts by Tags**, or **Select Contacts Manually**. The **Eligible Audience Preview** lists the first 20 contacts who will get the message. See [Audiences](/documentation/campaigns/audiences).
+  </Step>
+  <Step title="Variables">
+    This step appears only when the template has placeholders such as `{{1}}`. Choose where each value comes from. The options are explained below.
+  </Step>
+  <Step title="Schedule">
+    Choose **Send Now (Immediate Launch)** or **Schedule for Later**. See [Scheduling](/documentation/campaigns/scheduling).
+  </Step>
+  <Step title="Review">
+    Check the summary and the live WhatsApp preview, then click **Launch Campaign**.
+  </Step>
+</Steps>
+
+## Filling in template variables
+
+Each placeholder in the template's header or body gets its value from one of three sources:
+
+| Source | Use it for |
+|---|---|
+| Contact Field | Values you already store, such as the contact's name, phone number, or a custom field |
+| Same for Everyone | A fixed value, such as an offer code or an event date |
+| From CSV File | Values that differ per person and aren't in your contacts, such as an invoice amount |
+
+For a CSV, download the **Sample CSV**, fill in one row per contact, upload it, and pick which column holds the phone number. Rows are matched to contacts by phone number. Formatting differences, such as spaces or a missing country code, are ignored.
+
+Under **If missing**, decide what happens when a contact has no value. **Use fallback** puts in a default ("there" for `{{1}}`, so "Hi there" still reads well). **Skip contact** leaves that person out.
+
+Only text placeholders are filled. Templates with an image, video, or document header can't be sent with their media from a campaign yet.
+
+## After you launch
+
+Messages go out one at a time, with a short pause between each. Every contact gets an inbox conversation that holds the campaign message, so replies arrive in the inbox like any other chat. Nobody gets the same campaign twice, even if they match it more than once.
+
+If Meta reports that a contact has hit their limit for marketing messages, that message is marked **limit exceeded** and the campaign tries again the next day. See [Sending limits](/documentation/campaigns/retries-and-concurrency).

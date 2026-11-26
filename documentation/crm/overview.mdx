@@ -1,0 +1,49 @@
+---
+title: "CRM overview"
+description: "Contacts, lifecycle stages, lead scores, activities, and tasks, kept up to date by your agents."
+---
+
+Sayvy AI has a CRM built in, so every person who talks to your agents ends up as a contact you can follow up with. Open it from **CRM Hub** in the dashboard.
+
+Contacts are created for you. The first time someone messages your WhatsApp number, writes on Instagram, emails your connected address, or chats in your web widget, a contact appears. You can also add contacts by hand or upload a spreadsheet.
+
+## What the CRM tracks
+
+| | What it is |
+|---|---|
+| Contact | One person, identified by their phone number or channel ID, with tags, notes, and custom fields |
+| Lifecycle stage | Where they stand: new, engaged, qualified, customer, or lost |
+| Lead score | A number from 0 to 100 for how promising they are |
+| Handling | Whether AI replies to them, or a person on your team does |
+| Activity | An entry in their history, such as a message, a stage change, or a note |
+| Task | A follow-up for your team, with a due date |
+
+## How agents keep it current
+
+With CRM tools turned on in the agent's **Tools & Integrations** tab, the agent updates the CRM while it talks. It can move a contact to a new stage, change their lead score, add a note, create a follow-up task, or hand the contact to your team. Each change is logged in the contact's activity history, marked as made by the AI.
+
+Nothing changes stage or score on its own. Without an agent or a teammate making the change, a contact stays where it is. Tell your agent in its prompt when to update them:
+
+```markdown
+When the caller confirms a budget and a timeline, set their stage to
+qualified and their lead score to at least 70. Add a note with both.
+```
+
+## The CRM Hub page
+
+Cards across the top count all contacts and those in each stage. Click a card to filter the list by that stage. Below them, switch between three views: **Table**, **Kanban** (columns by stage), and **Tasks**.
+
+<CardGroup cols={2}>
+  <Card title="Contacts" icon="user" href="/documentation/crm/contacts">
+    Add, find, edit, and delete contacts.
+  </Card>
+  <Card title="Activity timeline" icon="clock-rotate-left" href="/documentation/crm/timeline">
+    Everything that happened with a contact.
+  </Card>
+  <Card title="Tasks" icon="list-check" href="/documentation/crm/tasks">
+    Follow-ups for your team.
+  </Card>
+  <Card title="Import and export" icon="file-arrow-up" href="/documentation/crm/import-export">
+    Bring contacts in from a spreadsheet.
+  </Card>
+</CardGroup>

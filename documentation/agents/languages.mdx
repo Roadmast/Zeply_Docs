@@ -1,0 +1,32 @@
+---
+title: "Languages"
+description: "Make your agent speak and understand the languages your customers use."
+---
+
+An agent replies in the language you write its prompt and welcome message in, and it understands callers in any language its model supports. To run an agent in a language other than English, set up three things together.
+
+<Steps>
+  <Step title="Choose a stack that handles the language">
+    Gemini covers English and most widely spoken languages. Sarvam is built for Indian languages, such as Hindi, Tamil, Telugu, and Bengali, and for Indian English.
+  </Step>
+  <Step title="Write the prompt and welcome message in that language">
+    Or write the prompt in English and add a clear rule, such as "Always reply in Hindi." The welcome message is spoken exactly as written, so write it in the language callers should hear first.
+  </Step>
+  <Step title="Pick a voice that speaks it">
+    Play the sample in the voice picker with a line in your language before you choose. A voice built for one language can sound heavily accented in another.
+  </Step>
+</Steps>
+
+## Primary Language
+
+The **Primary Language** field on the **Prompts & Identity** tab records the agent's main language. It does not change how the agent speaks or listens. The prompt, the stack, and the voice decide that.
+
+## Callers who switch languages
+
+A caller who starts in English and switches to Hindi is still understood, if the model supports both. Whether the agent switches with them depends on your prompt. Spell out what you want:
+
+```markdown
+Reply in the language the caller is using. If they mix Hindi and English, you can too.
+```
+
+Test this with a webcall before going live. Some voices handle a mix of languages better than others.

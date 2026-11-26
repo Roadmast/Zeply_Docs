@@ -1,4 +1,34 @@
 ---
-title: "Analytics & Usage"
-description: "Understand product analytics, activity, and usage metrics"
+title: "Analytics and usage"
+description: "Track calls, messages, campaigns, and agent performance over time, and keep an eye on credits."
 ---
+
+## The analytics page
+
+Open **Analytics** to see how the workspace is doing. Pick a time range of the last 24 hours, 7 days, 30 days, or 90 days. Five tabs split the numbers:
+
+| Tab | Shows |
+|---|---|
+| Overview | Total calls, total messages, call time, and cost, with traffic trends and a channel breakdown |
+| Voice Calls | Success rate, completed calls, failed and missed calls, average call length, inbound against outbound, and the busiest hours of the day |
+| Messaging & Inbox | Delivery rate, read rate, and messages received and sent |
+| Campaigns | Campaigns run, messages sent, and overall delivery and read rates |
+| Agent Performance | Calls, completed calls, success rate, call time, chat sessions, and cost for each agent |
+
+The busiest-hours heatmap shows when calls actually come in, which helps you decide when your team should be available for handoffs.
+
+## The dashboard home
+
+The dashboard home shows a quicker summary: messages sent and received, how many agents are active, how many inbox tickets are open, and short lists of your agents, campaigns, and recent conversations.
+
+## Credits
+
+Calls and AI replies are paid for from your workspace's prepaid credits. Your available balance is always shown in the sidebar. Click it to open **Billing**, where you can top up and see the per-minute voice rate for your plan.
+
+The cost figures on the analytics page show what calls and replies used over the selected period. There's no separate breakdown of minutes or AI replies used yet. Use the analytics cost figures, or add up the `cost` field on [call logs](/api-reference/call-logs/list-call-logs), to track spending.
+
+Call campaigns pause on their own when credits run out. Top up before large campaigns.
+
+## Reports elsewhere
+
+For numbers the dashboard doesn't show, pull data through the [API](/api-reference/introduction), or collect [webhook events](/documentation/monitor/webhooks-and-events) as they happen into your own reporting tool.

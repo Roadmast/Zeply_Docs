@@ -1,0 +1,42 @@
+---
+title: "Audiences and CSV upload"
+description: "Choose who receives a campaign, and bring contacts in from a spreadsheet."
+---
+
+A campaign's audience is drawn from your contacts. Pick it in the **Audience** step, under **Target Audience Strategy**.
+
+| Strategy | Who gets the campaign |
+|---|---|
+| All Contacts | Every contact in the workspace with a phone number |
+| Contacts by Tags | Contacts with any of the tags you choose |
+| Select Contacts Manually | The contacts you search for and pick |
+
+Tags match on any, not all. A campaign aimed at `vip` and `pune` reaches everyone tagged `vip`, plus everyone tagged `pune`. To target people who have both, give them a third tag, such as `vip-pune`, and use that.
+
+Contacts without a phone number are skipped, such as those who only reached you by email or Instagram. So is anyone who has already received this campaign.
+
+<Warning>
+Contacts aren't filtered for opt-outs. If someone asks not to be messaged, tag them, for example with `do-not-contact`. Then target campaigns by tags that leave them out, rather than sending to all contacts.
+</Warning>
+
+## Import contacts from a spreadsheet
+
+Upload a CSV (UTF-8), XLSX, or XLS file from the contacts page to create or update contacts in bulk.
+
+| Column | Required | Notes |
+|---|---|---|
+| `phone_number` | Yes | Include the country code, for example `+919876543210` |
+| `name` | Yes | The contact's name |
+| `tags` | No | Separate several tags with commas or semicolons |
+
+Column names aren't case-sensitive. Other columns are ignored, so custom fields can't be imported this way.
+
+```csv
+phone_number,name,tags
++919876543210,Asha Rao,vip;pune
++919812345678,Rahul Mehta,pune
+```
+
+If a phone number is already in your contacts, written exactly the same way, that contact is updated: the name is replaced, and the tags are replaced when the row has any. Write numbers the same way every time, or you'll get duplicates.
+
+When the upload finishes you see how many contacts were created, updated, and failed, with the row number of each failure.

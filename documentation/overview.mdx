@@ -1,58 +1,41 @@
 ---
-title: "Overview"
-description: "Overview of Sayvy AI's voice engine, WhatsApp automation, in-built CRM, and AI memory"
+title: "Sayvy AI documentation"
+description: "Build AI agents that talk to your customers on WhatsApp, Instagram, email, and your website."
 ---
 
-# Overview
+Sayvy AI runs AI agents that take calls, reply to messages, and keep a record of every customer they talk to. One workspace holds your agents, your shared inbox, your contacts, and your campaigns, so nothing a customer says gets lost between tools.
 
-Sayvy AI unifies Web Voice AI agents, WhatsApp Business automation, a native in-built CRM, and long-term conversational memory into a cohesive real-time conversational intelligence platform.
+<CardGroup cols={3}>
+  <Card title="Build in the dashboard" icon="wand-magic-sparkles" href="/documentation/quickstart">
+    Create a workspace, set up an agent, and talk to it from your browser.
+  </Card>
+  <Card title="Build with the API" icon="code" href="/api-reference/introduction">
+    Manage agents, contacts, and campaigns from your own code with an API key.
+  </Card>
+  <Card title="Understand Sayvy AI" icon="compass" href="/documentation/get-started/what-sayvy-does">
+    What the platform does and how its parts fit together.
+  </Card>
+</CardGroup>
 
----
-
-## Architecture
-
-```mermaid
-graph TD
-    subgraph Channels ["Channels"]
-        Web[Web Audio / WebRTC]
-        WA[WhatsApp Cloud API]
-    end
-
-    subgraph Core ["Engine"]
-        Voice[Voice AI]
-        WhatsApp[WhatsApp Engine]
-    end
-
-    subgraph Data ["Data Layer"]
-        CRM[Smart CRM]
-        Memory[AI Memory]
-    end
-
-    Web --> Voice
-    WA --> WhatsApp
-    WA -.-> Voice
-    Voice <--> CRM
-    WhatsApp <--> CRM
-    Voice <--> Memory
-    WhatsApp <--> Memory
-    CRM <--> Memory
-```
-
----
-
-## The 4 Pillars
+## Explore the docs
 
 <CardGroup cols={2}>
-  <Card title="Voice AI" icon="microphone" href="/documentation/voice/web-audio-webrtc">
-    Browser WebRTC voice calls, WhatsApp audio, interruptions, and voice personas.
+  <Card title="Agents" icon="robot" href="/documentation/agents/overview">
+    Prompt agents, static bots, and workflow agents, with their models, voices, and tools.
   </Card>
-  <Card title="WhatsApp" icon="whatsapp" href="/documentation/whatsapp/setup">
-    Meta Cloud API setup, messaging window, templates, and interactive buttons.
+  <Card title="Campaigns" icon="bullhorn" href="/documentation/campaigns/overview">
+    WhatsApp template broadcasts and AI call campaigns sent to a list of contacts.
   </Card>
-  <Card title="Smart CRM" icon="address-book" href="/documentation/crm/data-model-and-pipelines">
-    Native contacts, deal pipelines, custom attributes, and interaction timelines.
+  <Card title="Inbox" icon="inbox" href="/documentation/conversations/inbox">
+    Conversations from every channel in one list, where AI and your team take turns.
   </Card>
-  <Card title="AI Memory" icon="brain" href="/documentation/memory/identity-resolution">
-    Cross-channel identity resolution, context buffers, semantic memory, and knowledge base.
+  <Card title="CRM" icon="address-book" href="/documentation/crm/overview">
+    Contacts, lifecycle stages, lead scores, notes, and tasks that agents keep current.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/documentation/integrations/overview">
+    WhatsApp, calendars, custom API tools, MCP servers, and webhooks.
+  </Card>
+  <Card title="Developers" icon="terminal" href="/developers/overview">
+    The Sayvy MCP server and the Sayvy skill for AI coding assistants.
   </Card>
 </CardGroup>

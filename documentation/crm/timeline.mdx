@@ -1,37 +1,40 @@
 ---
-title: "Timeline"
-description: "Unified activity feed, call recordings, transcripts, and message history"
+title: "Activity timeline"
+description: "Every message, stage change, note, handoff, and task in a contact's history."
 ---
 
-# Timeline
+Each contact has an activity timeline, a running record of what happened with them, newest first. You'll find it on the **Activity Timeline** tab of any contact.
 
-*This page covers the chronological customer activity timeline, interaction audit logs, and conversation playback.*
+Every entry records who made it. That's a teammate, the AI, or Sayvy AI itself for automatic events.
 
----
+## What gets recorded
 
-## Unified Activity Feed
+| Activity | Added when |
+|---|---|
+| Contact created | The person first reaches you on any channel |
+| Inbound message | The contact sends a message |
+| Outbound message | You or the agent send a message |
+| Stage transition | The lifecycle stage changes |
+| Lead score change | The lead score changes |
+| Transferred to human agent | The contact is handed to your team |
+| Resumed AI handling | The contact is handed back to AI |
+| Agent note | A teammate or the AI adds a note |
+| Tag added or removed | Tags on the contact change |
+| Task created | A follow-up task is created |
+| Task completed | A task is marked done |
 
-*Content coming soon.*
+A handoff entry includes the agent's reason, so you can see why it passed the contact on.
 
-- Chronological logging of all Web Voice calls and WhatsApp messages per contact
-- Filtering timeline events by channel, date range, or interaction type
+## Add a note
 
----
+Type in the box at the top of the timeline and click **Add Note**. Use it to record a phone call made outside Sayvy AI, a promise made to the customer, or anything your teammates should know. The note also gets appended to the contact's notes field.
 
-## Call Recordings & Audio Playback
+Notes are the only kind of entry you can add by hand. Every other entry comes from something that happened.
 
-*Content coming soon.*
+## Calls
 
-- In-dashboard audio playback with waveform visualization
-- Synchronized transcript reading with active speaker highlighting
-- Audio retention and download policies
+WhatsApp calls are kept in [call logs](/documentation/conversations/call-logs), with their duration, transcript, and recording. A call's follow-up message appears in the timeline as an outbound message.
 
----
+## Pulling it into reports
 
-## Interaction Transcripts & Sentiment
-
-*Content coming soon.*
-
-- Full turn-by-turn conversational transcripts
-- AI-generated conversation summaries and key takeaway bullets
-- Detected customer sentiment scores and emotion tags per session
+The timeline is available from the contacts API, which can filter by activity type. That's useful for pulling stage changes into your own reports. See [Get activities](/api-reference/contacts/get-activities).

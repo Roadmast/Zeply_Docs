@@ -1,4 +1,43 @@
 ---
-title: "Message Templates"
-description: "Create and manage reusable messaging templates"
+title: "Message templates"
+description: "Create WhatsApp templates, get them approved by Meta, and send them."
 ---
+
+A template is a WhatsApp message that Meta has approved in advance. You need one to start a conversation with a contact, to message them more than 24 hours after their last reply, and to run a campaign.
+
+Templates live on the **Message Templates** page. Check the status column before you use one: only approved templates can be sent. Meta also gives each template a quality rating, which drops when people block or report it.
+
+## Create a template
+
+Click **+ Create Template** to open the builder. Drag in the parts you need, starting with the body, and watch the preview update as you type.
+
+| Part | Notes |
+|---|---|
+| Name | Lowercase letters, numbers, and underscores, such as `order_ready` |
+| Language | English, US English, or Spanish |
+| Category | Marketing, Utility, or Authentication. Meta checks that the category fits the content. |
+| Header | Optional. Text, an image, a video, or a document. |
+| Body | Required. Use `{{1}}`, `{{2}}`, and so on for values that change per contact. |
+| Footer | Optional short line under the body |
+| Buttons | Optional. Quick reply, URL, phone number, or a published WhatsApp Flow. |
+
+Click **Save & Submit to Meta**. The template shows as pending while Meta reviews it, then changes to approved or rejected. Reviews often take minutes, but can take longer.
+
+```text
+Hi {{1}}, your order {{2}} is ready for pickup at our Baner store.
+Reply here if you'd like it delivered instead.
+```
+
+## Start from Meta's library
+
+Click **Explore Templates** to browse Meta's template library, which you can search and filter by industry. **Add to Meta** submits a library template as it is. **Customize in Builder** opens it in the builder so you can change it first.
+
+## Sync from Meta
+
+If you create or edit templates in Meta's WhatsApp Manager, click **Sync from Meta** and choose the channel. Every template on that WhatsApp account is pulled in or updated.
+
+## Send a template
+
+Send a template to one contact with the template button in the inbox, or from the contacts list. Pick the contact, pick an approved template, fill in its variables (`{{1}}` starts as the contact's name), check the preview, and click **Send to Customer**.
+
+To send one template to many contacts, use a [WhatsApp campaign](/documentation/campaigns/whatsapp-campaigns).

@@ -1,0 +1,44 @@
+---
+title: "Life of a conversation"
+description: "What happens from the first hello to the saved record, for calls and for messages."
+---
+
+This page follows one call and one message from start to finish, so you know what your agent does at each moment and what is saved once it ends.
+
+## A voice call
+
+<Steps>
+  <Step title="The call connects">
+    A visitor starts a call from your web widget, or a contact calls your WhatsApp Business number. If you're running a call campaign, the agent places the call instead. Sayvy AI starts a voice session for the agent assigned to that widget or number.
+  </Step>
+  <Step title="The agent greets the caller">
+    The welcome message plays as soon as the caller joins.
+  </Step>
+  <Step title="Turns go back and forth">
+    Voice activity detection notices when the caller starts and stops speaking. Their speech is transcribed, the model writes a reply, and the reply is spoken in the agent's voice. If the caller talks while the agent is speaking, the agent finishes its sentence before it answers. Gemini Live presets skip the separate transcription and speech steps and work with audio directly.
+  </Step>
+  <Step title="The agent uses tools">
+    When the agent needs something, it calls a tool mid-conversation: it searches the knowledge base, checks calendar slots, books an appointment, updates the contact, or calls one of your APIs. Each tool call sends an `ai.tool.executed` webhook.
+  </Step>
+  <Step title="The call ends">
+    The caller hangs up, the agent ends the call, or the maximum call duration runs out. Calls never run longer than 15 minutes.
+  </Step>
+</Steps>
+
+### What gets saved
+
+| | WhatsApp call | Browser call |
+|---|---|---|
+| Call log with status and duration | Yes | No |
+| Transcript | Yes | No |
+| Recording | When recording is on | No |
+| Activity on the contact | Yes | No |
+| Follow-up message | When follow-ups are on | No |
+| `call.started` and `call.completed` webhooks | Yes | No |
+
+## A message
+
+1. A message arrives on WhatsApp, Instagram, email, or the web widget chat.
+2. It lands in the inbox thread for that contact and channel. If the sender is new, a contact is created.
+3. On WhatsApp and the web widget, if AI is on for the thread, the agent reads the conversation so far and replies, using the same tools it has on calls. Instagram and email messages wait for your team, because agents don't reply on those channels yet.
+4. If the agent decides a person should take over, it hands off. AI stops replying until a teammate turns it back on or hands back.

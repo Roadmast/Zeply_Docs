@@ -1,4 +1,43 @@
 ---
-title: "Agent Tools & Integrations"
-description: "Connect agents to custom tools, MCP servers, and calendars"
+title: "Tools"
+description: "Let an agent book appointments, update the CRM, call your APIs, and use MCP servers."
 ---
+
+Tools are actions an agent can take in the middle of a conversation. You turn them on in the **Tools & Integrations** tab. The agent decides when to use each one, based on its description and the conversation.
+
+## Built-in tools
+
+| Tool | What it does | Turned on by |
+|---|---|---|
+| Knowledge base search | Looks up passages in your uploaded documents | Always on |
+| Check free slots | Finds open times in the connected calendar | **Enable Booking** |
+| Book appointment | Books a slot in Google Calendar, or sends a Calendly link | **Enable Booking** |
+| Change lifecycle stage | Moves the contact to a new stage, such as qualified | CRM tools |
+| Update lead score | Sets the contact's score from 0 to 100 | CRM tools |
+| Add note | Adds a note to the contact's history | CRM tools |
+| Create task | Creates a follow-up task for your team | CRM tools |
+| Hand off to human or AI | Passes the conversation to your team, or back to AI | CRM tools |
+
+## Booking
+
+Turn on **Enable Booking** and use **Booking Instructions Prompt** to tell the agent how to book: which services take how long, how far ahead people can book, what to ask before booking. With Google Calendar, the agent books the slot directly. With Calendly, it sends the customer your scheduling link to pick a time.
+
+## Your own APIs
+
+Add a custom tool to let the agent call an HTTP endpoint, for example to check an order status. In the dashboard you set:
+
+| Field | Notes |
+|---|---|
+| Tool Name | A short name the model sees, such as `check_order_status` |
+| Description | When to use it and what it returns. The model relies on this. |
+| Endpoint URL | Must be a public URL. You can put parameters in it, such as `https://api.example.com/orders/{order_id}`. |
+| HTTP Method | GET, POST, PUT, or DELETE |
+| Timeout (ms) | Defaults to 5,000 |
+
+GET and DELETE send the agent's values as query parameters. POST and PUT send them as a JSON body. Use **Test Connection** to check the endpoint responds before saving.
+
+Parameters, headers, and values to pull from the response can be set through the [API](/api-reference/agents/update-agent). Header values that look like secrets are hidden when the agent is read back.
+
+## MCP servers
+
+You can connect an MCP server to give the agent every tool that server offers. Add its name, server URL, and transport, either **SSE (Server-Sent Events)** or **Streamable HTTP**, plus any headers it needs for auth. **Test Connection** checks that the server can be reached.

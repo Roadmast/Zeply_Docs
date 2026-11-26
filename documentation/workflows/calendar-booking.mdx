@@ -1,38 +1,46 @@
 ---
-title: "Calendar Booking"
-description: "Real-time slot negotiation and calendar appointment booking"
+title: "Calendar booking"
+description: "Let an agent find free times and book appointments with Google Calendar, or send a Calendly link."
 ---
 
-# Calendar Booking
+Agents can book appointments while they talk. Connect a calendar once for the workspace, then turn booking on for each agent that should use it.
 
-*This page covers real-time appointment scheduling, natural language slot negotiation, and calendar synchronization.*
+## Connect a calendar
 
----
+On **Connections**, use the **Google Calendar** card (**Connect Calendar**) or the **Calendly** card (**Connect Calendly**). Both sign in with your account. The card then shows when it was connected and when the sign-in expires.
 
-## Natural Language Slot Negotiation
+| | Google Calendar | Calendly |
+|---|---|---|
+| What the agent does | Checks free times and books the slot itself | Sends the customer your scheduling link to pick a time |
+| Calendar used | The primary calendar of the connected Google account | Your Calendly scheduling page |
 
-*Content coming soon.*
+## Turn booking on for an agent
 
-- Converting relative conversational requests ("*Next Tuesday afternoon*") into UTC ISO-8601 windows
-- Parsing client timezones and localized business hour constraints
-- Dynamic multi-slot presentation during voice calls and WhatsApp chats
+On the agent's **Tools & Integrations** tab, turn on **Enable Booking**. In **Booking Instructions Prompt**, tell the agent how your bookings work. It has no other settings to go on:
 
----
+```markdown
+Appointments are 30 minutes. We take bookings Monday to Saturday,
+10am to 7pm IST, up to two weeks ahead. Never book on Sundays.
+Before booking, confirm the customer's name and the treatment they want.
+Offer at most three times at once.
+```
 
-## Supported Calendar Providers
+## How Google Calendar booking works
 
-*Content coming soon.*
+1. The agent checks free times between two dates it picks from the conversation. It finds every free 30-minute slot in that range.
+2. It offers the customer a few of them.
+3. Once the customer picks one, it creates the event in the primary calendar, with a title and an optional description.
 
-- Google Calendar (OAuth 2.0 / Service Account)
-- Microsoft Outlook / Graph API
-- Cal.com API integration
+Dates without a timezone are read in the agent's timezone, set on **Prompts & Identity**. Set it to your business's timezone.
 
----
+There are no settings for working hours, buffers, or slot length. Free times come straight from the calendar. Spell out your hours in the booking instructions, or block unavailable times in Google Calendar itself.
 
-## Atomic Slot Reservation & Double-Booking Prevention
+<Warning>
+The calendar isn't checked again at the moment of booking. If someone else takes the slot during the conversation, it can be double-booked. Keep conversations short between offering a time and booking it.
+</Warning>
 
-*Content coming soon.*
+The customer doesn't get a calendar invite. If they need a confirmation, have the agent confirm the time in the conversation. On WhatsApp, a follow-up message can do the same after a call.
 
-- Temporary soft-locks on candidate slots during live conversation
-- Atomic commit upon user confirmation
-- Automatic rollback if the user declines or drops the call
+## Booking in workflows
+
+In a workflow agent, call `booking` from a [Function step](/documentation/workflows/mid-call-rest-tools) when the details are collected, or make it available in a Conversation step.

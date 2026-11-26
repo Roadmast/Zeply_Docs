@@ -1,4 +1,42 @@
 ---
 title: "Google Calendar"
-description: "Connect Google Calendar for agent-assisted appointment booking"
+description: "Connect Google Calendar so agents can find free times and book appointments."
 ---
+
+Connecting Google Calendar lets your agents check when you're free and add appointments to your calendar during conversations.
+
+## Connect
+
+<Steps>
+  <Step title="Open Connections">
+    Go to **Connections** and find the **Google Calendar** card.
+  </Step>
+  <Step title="Sign in with Google">
+    Click **Connect Calendar** and sign in with the Google account that owns the calendar. Approve the access Google asks for, which covers viewing and creating calendar events.
+  </Step>
+  <Step title="Turn booking on for an agent">
+    On the agent's **Tools & Integrations** tab, turn on **Enable Booking** and write its booking instructions. See [Calendar booking](/documentation/workflows/calendar-booking).
+  </Step>
+</Steps>
+
+If connecting fails, you'll see "Failed to connect Google Calendar. Please try again." Try again with the right Google account.
+
+## The calendar card
+
+Once connected, the card shows when you connected, when the sign-in expires, and a **Real-time Booking** row.
+
+<Note>
+**Real-time Booking** always reads "Verified". It's a label, not a live test. Confirm booking works by asking a test agent to book a slot, then check your calendar.
+</Note>
+
+## Which calendar is used
+
+Agents use the primary calendar of the connected Google account, both to look for free times and to add events. There's no setting to choose a different calendar, so connect the Google account whose primary calendar should hold your appointments.
+
+## Disconnect
+
+Click **Disconnect** on the card and confirm. Booking stops working for every agent until you reconnect. The warning reads "This will disable appointment booking workflows." Events already on your calendar stay.
+
+## If bookings stop working
+
+Agents that can't reach the calendar fail with "Failed to retrieve calendar availability. Please try again." Reconnect the calendar. The sign-in may have expired. See [Troubleshooting](/documentation/go-live/troubleshooting).

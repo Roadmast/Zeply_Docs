@@ -1,0 +1,37 @@
+---
+title: "Reducing latency"
+description: "Make your voice agent answer faster on calls."
+---
+
+Latency is the pause between a caller finishing a sentence and the agent starting to answer. Under a second feels natural. Two seconds or more and callers start repeating themselves or asking "Hello?"
+
+Sayvy AI doesn't show latency figures in the dashboard. Judge it by ear: run test calls with **Test Agent**, and listen to real calls in [call logs](/documentation/conversations/call-logs).
+
+## Where the time goes
+
+On a typical call, each reply passes through several stages:
+
+1. Detecting that the caller has stopped speaking, about half a second of quiet
+2. Turning their speech into text
+3. The model writing a reply, including any tool calls
+4. Turning the reply into speech
+
+Gemini Live presets combine the speech steps and the model into one, which removes two of those stages.
+
+## What you can change
+
+| Change | Effect |
+|---|---|
+| Switch to a Gemini Live preset | The biggest single gain, because speech is handled directly |
+| Use a lighter preset, such as Flash or Lite, instead of Pro | Faster replies, at the cost of some reasoning on hard requests |
+| Keep replies short in the prompt | The voice starts speaking sooner and callers get to respond sooner |
+| Trim the prompt | A shorter prompt is quicker for the model to work through |
+| Turn off tools the agent doesn't need | Fewer chances for a slow tool call before the reply |
+| Make your APIs fast, and keep their timeout low | A slow API holds up the whole reply |
+| Add a filler line to Function steps that call APIs | The caller hears "One moment" instead of silence |
+
+## Tool calls
+
+Tool calls are the most common cause of long pauses. A knowledge base search, a calendar check, or a call to your API all happen before the agent can answer. Each reply can make several in a row.
+
+Tell the agent in its prompt to say something short before it looks things up, such as "Let me check", so the caller isn't left in silence. In workflow agents, use the **Speak while the tool runs** option on Function steps.

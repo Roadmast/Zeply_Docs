@@ -1,0 +1,53 @@
+---
+title: "Contacts"
+description: "Add, find, update, and delete contacts in CRM Hub."
+---
+
+A contact is one person your business talks to. Most contacts are created automatically when someone first reaches you. This page covers working with them by hand in **CRM Hub**.
+
+## Add a contact
+
+Click **New Contact** and enter a **Full Name**, a **WhatsApp Phone Number**, and any **Tags**. The phone number must be unique in the workspace. If another contact already has it, the new one isn't created.
+
+Add the rest of the details, such as notes, stage, and custom fields, after the contact is saved. To add many contacts at once, see [Import and export](/documentation/crm/import-export).
+
+## Find contacts
+
+The table lists each contact's name, phone, stage, lead score, handling, and tags. The most recently active contacts come first.
+
+- Search matches on name and phone number.
+- **Handling** filters to contacts handled by AI or by a human.
+- **Score** filters to high (70 to 100), medium (40 to 69), or low (0 to 39) lead scores.
+- The stage cards at the top of the page filter by lifecycle stage.
+
+The **Kanban** view lays contacts out in columns by stage, which helps when you want to see how many sit at each step.
+
+## Open a contact
+
+Click **View Profile** on a row to open the contact. From there you can:
+
+- change the **Lifecycle Stage** and **Lead Score**
+- switch **Conversation Handling** between AI and a human
+- edit tags
+- read the **Activity Timeline** and add notes
+- add and complete **Tasks & Reminders**
+
+**Chat in Inbox** jumps to the contact's conversation, and **Edit Contact** changes their name, phone, and tags.
+
+## Contact details
+
+| Field | Notes |
+|---|---|
+| Name | Required |
+| Phone number | Required and unique in the workspace. For Instagram, email, and web widget contacts this holds a channel ID instead. See [Identity resolution](/documentation/memory/identity-resolution). |
+| Tags | Any labels you like. Campaigns can target contacts by tag. |
+| Notes | One running notes field. Each note added by a teammate or the AI is appended on a new line. |
+| Custom fields | Your own key and value pairs. See [Custom fields](/documentation/crm/custom-attributes-and-timeline). |
+| Lifecycle stage | New, engaged, qualified, customer, or lost. New contacts start as new. |
+| Lead score | 0 to 100. New contacts start at 0. |
+| Owner | The teammate responsible for the contact |
+| Source | The channel the contact first came from |
+
+## Delete a contact
+
+**Delete Contact** removes the contact for good, together with their activity history, tasks, and inbox conversations. It can't be undone. If you only want to stop messaging someone, tag them instead.

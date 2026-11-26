@@ -1,37 +1,25 @@
 ---
-title: "Interruptions"
-description: "Speech detection (VAD), barge-in handling, and natural turn-taking"
+title: "Turn-taking"
+description: "How an agent knows when the caller has finished speaking, and what happens if they talk over it."
 ---
 
-# Interruptions
+A call works in turns: the caller speaks, the agent replies, and back again. Sayvy AI uses voice activity detection to tell when a turn starts and ends.
 
-*This page covers how Sayvy AI detects user speech, manages natural turn-taking, and handles conversational interruptions.*
+## How the agent detects speech
 
----
+The agent listens for speech that is loud and clear enough to count. Speech must last about a fifth of a second before it starts a turn. That way a cough or a door closing doesn't trigger a reply. When the caller goes quiet for under half a second, the agent treats the turn as finished and starts replying.
 
-## Voice Activity Detection (VAD) Tuning
+These values are the same for every agent and can't be changed. They work well for normal conversation. A caller who pauses mid-sentence to think may get a reply before they finish. If that happens often with your callers, ask the agent in its prompt to check before moving on: "If an answer sounds unfinished, ask the caller to go on."
 
-*Content coming soon.*
+## Talking over the agent
 
-- Silero VAD calibration and threshold parameters
-- Detection windows (`min_speech_duration_ms`, `min_silence_duration_ms`)
-- Mitigating false triggers from breathing and background noise
+Interruptions are turned off. If the caller speaks while the agent is talking, the agent finishes its sentence first and then answers. Keep replies short, so callers rarely need to cut in. See [Writing for voice](/documentation/voice/persona-and-ssml).
 
----
+## When a call ends
 
-## Barge-In Interrupt Protocol
-
-*Content coming soon.*
-
-- Emitting cancellation tokens on active turns
-- WebRTC Data Channel fast-kill packets
-- Instant client-side audio buffer flushing
-
----
-
-## Conversational Fillers & Natural Turn Management
-
-*Content coming soon.*
-
-- Distinguishing passive backchannel affirmations ("mhm", "yeah") from true barge-ins
-- Dynamic pause thresholding based on sentence completion heuristics
+| Situation | What happens |
+|---|---|
+| Caller hangs up | The call ends. |
+| Agent ends the conversation | The call ends after its last reply. |
+| **Max Call Duration** reached | The call ends. The limit is set in Advanced Settings and can't go above 15 minutes. |
+| Nobody joins a browser call within 20 seconds | The call is cancelled. |

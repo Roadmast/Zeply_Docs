@@ -1,39 +1,46 @@
 ---
-title: "Outbound Webhooks"
-description: "Real-time event notifications, retry policies, and delivery guarantees"
+title: "Webhook delivery and security"
+description: "Verify that webhook requests come from Sayvy AI, and handle retries."
 ---
 
-# Outbound Webhooks
+## Verify the signature
 
-*This page covers how Sayvy AI dispatches real-time outbound event notifications to your webhooks and systems.*
+Anyone can send a POST to your webhook URL. Check the signature on every request before you trust it.
 
----
+Sayvy AI signs the raw request body with HMAC-SHA256, using your endpoint's secret as the key. The hex digest is sent in the `X-Sayvy-Signature-256` header, prefixed with `sha256=`. Compute the same digest over the exact bytes you received and compare.
 
-## Outbound Event Catalog
+```python
+import hmac, hashlib
 
-*Content coming soon.*
+def is_valid(raw_body: bytes, header: str, secret: str) -> bool:
+    expected = "sha256=" + hmac.new(
+        secret.encode(), raw_body, hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected, header)
+```
 
-- `call.started` & `call.ended` (transcripts, audio URLs, duration)
-- `whatsapp.message.received` & `whatsapp.message.sent`
-- `crm.lead.created` & `crm.stage.updated`
-- `workflow.step.failed`
+```javascript
+const crypto = require("crypto");
 
----
+function isValid(rawBody, header, secret) {
+  const expected = "sha256=" +
+    crypto.createHmac("sha256", secret).update(rawBody).digest("hex");
+  return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(header));
+}
+```
 
-## Security & Signature Verification
+Use the raw body. If your framework parses the JSON and you serialise it again, spacing or key order can change and the signature won't match.
 
-*Content coming soon.*
+## Retries
 
-- The `X-Sayvy-Signature` header
-- HMAC-SHA256 hash calculation using your webhook secret
-- Timestamp verification to prevent replay attacks
+A delivery fails if your server doesn't answer with a 2xx status within 10 seconds. Sayvy AI then tries again, for three attempts in total, waiting 2 seconds and then 4 seconds between them.
 
----
+After the third failure, the event is dropped. There's no queue of failed events to replay, and no delivery log in the dashboard. Design your endpoint with that in mind:
 
-## Delivery Guarantees, Retries & Dead Letter Queues (DLQ)
+- Reply quickly. Accept the request, store it, and do slow work afterwards.
+- Expect the occasional duplicate. A delivery that timed out on our side may still have reached you. Use the event `id` to skip events you've already handled.
+- For data you can't afford to miss, also pull it from the [API](/api-reference/introduction) on a schedule.
 
-*Content coming soon.*
+## Testing
 
-- At-least-once delivery semantics
-- Exponential backoff algorithm with full jitter (up to 5 retries)
-- Dead Letter Queue (DLQ) storage for failed events and manual replay controls
+There's no test button. To try your endpoint, subscribe to `message.received` and send your WhatsApp number a message, or use a request-inspection service as the payload URL while you develop.

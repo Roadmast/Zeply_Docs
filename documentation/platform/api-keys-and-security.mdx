@@ -1,4 +1,54 @@
 ---
-title: "API Keys & Security"
-description: "Manage API access, authentication, and account security"
+title: "API keys"
+description: "Create, store, and revoke API keys for your workspace."
 ---
+
+API keys let your own code talk to Sayvy AI. Each key belongs to one workspace, so it only reaches that workspace's agents, contacts, and campaigns.
+
+<Note>
+API keys can't be requested during the free trial. Subscribe to a plan first.
+</Note>
+
+## Create a key
+
+Go to **Developers**, then **API Keys**, and click **Create New API Key**. Fill in:
+
+| Field | Options |
+|---|---|
+| Key Name | Something that says where it's used, such as "Production backend worker" |
+| Permissions / Scopes | Full Access (Read & Write), Read Only, or Webhooks & Events Only |
+| Expiration | Never expire, 30, 60, or 90 days, or 1 year |
+
+Click **Generate Key**. The key starts with `sayvy_sk_live_`.
+
+<Warning>
+The full key is shown once. Copy it straight away and store it in a password manager or your server's secret store. Sayvy AI keeps only a hash of it, so a lost key can't be shown again. Make a new one instead.
+</Warning>
+
+The key list shows each key's name and a masked prefix, so you can tell them apart.
+
+## Use a key
+
+Send the key in the `Authorization` header as a bearer token:
+
+```bash
+curl https://api.sayvy.ai/v1/agents \
+  -H "Authorization: Bearer sayvy_sk_live_your_key_here"
+```
+
+See the [API reference](/api-reference/authentication) for endpoints and responses.
+
+## Keep keys safe
+
+- Keep keys on your server. Never put one in a web page, a mobile app, or a public repository.
+- Use a separate key for each system, so you can revoke one without breaking the rest.
+- Choose the narrowest scope that works. Use Read Only for reports.
+- Set an expiry for keys given to contractors or used for a short project.
+
+## Revoke a key
+
+Revoke or delete a key from the list if it leaks, or when the system using it is retired. Revoking takes effect straight away, and anything still using the key stops working. There's no rotate button. To replace a key, create the new one, update your systems, then revoke the old one.
+
+## Rate limits
+
+Your plan sets how many requests a workspace can make per minute and per month. See [Plans and limits](/documentation/platform/plans-and-limits) for the numbers and what a 429 response looks like.

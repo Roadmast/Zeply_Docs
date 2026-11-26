@@ -1,37 +1,36 @@
 ---
-title: "Webhooks"
-description: "Setting up Meta Cloud API webhooks and signature verification"
+title: "How WhatsApp events work"
+description: "What Sayvy AI does when WhatsApp sends a message, a status update, or a call."
 ---
 
-# Webhooks
+When someone messages or calls your WhatsApp number, Meta sends that event to Sayvy AI. You don't set anything up for this. The connection is made when you [connect WhatsApp](/documentation/whatsapp/setup). This page explains what happens next, so you know what to expect in the dashboard.
 
-*This page covers the webhook infrastructure, cryptographic verification, and inbound event routing for the Meta Cloud API.*
+## Events Sayvy AI handles
 
----
+| Event from Meta | What you see |
+|---|---|
+| A message arrives | The contact is created if they're new, and the message appears in the inbox. If AI is on and the message is text, the agent replies. |
+| A message status changes | The ticks in the conversation update: sent, delivered, read, or failed |
+| A call is offered or answered | The agent picks up. See [WhatsApp calls](/documentation/voice/whatsapp-calls). |
+| A call ends | The call appears in [call logs](/documentation/conversations/call-logs) |
+| A template's status changes | Its status updates from pending to approved or rejected |
+| A template's quality changes | Its quality rating updates |
+| A customer answers a call permission request | The reply is saved, and any call campaign waiting on it moves on |
 
-## Webhook Verification Challenge
+Other kinds of events from Meta are ignored. That includes number quality changes, account alerts, and Flow status changes.
 
-*Content coming soon.*
+## Security
 
-- Meta handshake parameters (`hub.mode`, `hub.challenge`, `hub.verify_token`)
-- Handshake endpoint validation
+Every request from Meta is checked against a signature before it's trusted. Requests with a missing or wrong signature are rejected. You don't need to do anything for this.
 
----
+## Duplicates
 
-## Cryptographic Security (HMAC-SHA256)
+Meta sometimes delivers the same event more than once. Sayvy AI keeps only one copy of each message in a workspace, so you won't see double messages in the inbox or run duplicate AI replies.
 
-*Content coming soon.*
+## Events for your own systems
 
-- Verifying the `X-Hub-Signature-256` header
-- Meta App Secret hashing
-- Constant-time string comparison (`timingSafeEqual`) to prevent timing attacks
+Things that happen after a WhatsApp event, such as a new contact, a new ticket, or a failed send, can be sent on to your server with webhooks. See [Webhooks and events](/documentation/monitor/webhooks-and-events).
 
----
+## What AI answers
 
-## Idempotency & Deduplication
-
-*Content coming soon.*
-
-- Handling Meta's at-least-once delivery guarantees
-- Redis-based locking and message ID (`wamid`) deduplication
-- Asynchronous queueing for inbound message processors
+The agent replies only to text messages. Messages with images, documents, voice notes, locations, or button taps are saved in the inbox but don't start an AI reply. See [Inbox](/documentation/conversations/inbox).

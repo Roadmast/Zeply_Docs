@@ -1,0 +1,40 @@
+---
+title: "Sending limits"
+description: "How fast campaigns send, how many calls run at once, and what gets retried."
+---
+
+Campaigns send at a steady pace to stay inside WhatsApp's limits and keep your number's quality rating healthy. None of the limits on this page can be changed from the dashboard.
+
+## Template messages
+
+Messages go out one contact at a time, with a short pause between each.
+
+If WhatsApp says the number is sending too fast, Sayvy AI waits and tries that message again, up to three times, leaving longer between each attempt. If the limit keeps coming back, the campaign stops and the number rests for an hour before it sends campaigns again.
+
+Meta also caps how many marketing messages a single person can receive. When a contact hits that cap, their message is marked **limit exceeded** and the campaign tries again the next day.
+
+## Calls
+
+| Limit | Value |
+|---|---|
+| Calls running at the same time | 3 |
+| Calls to one contact in 24 hours | 5 |
+| Calls from one number in a day | 100 |
+
+When the number reaches its daily limit, remaining calls wait until just after midnight UTC.
+
+## Which calls are retried
+
+Some failures are about Sayvy AI or the network, not the person you're calling. Those are retried after a minute:
+
+- all three call slots are busy
+- the voice service is briefly unavailable
+- the call couldn't be set up with WhatsApp in time
+
+Other outcomes are final, and the contact isn't called again in that campaign:
+
+- no answer, or a busy line
+- the contact has already had five calls in the last 24 hours
+- WhatsApp says permission to call has expired. The contact needs to accept a new request in a later campaign.
+
+If the workspace runs out of voice credits, the whole campaign pauses. Top up and resume it to carry on.

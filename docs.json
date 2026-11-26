@@ -24,113 +24,165 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Overview",
-            "icon": "book-open",
+            "group": " ",
             "pages": [
-              "documentation/overview",
+              "documentation/overview"
+            ]
+          },
+          {
+            "group": "Get started",
+            "icon": "play",
+            "pages": [
+              "documentation/get-started/what-sayvy-does",
+              "documentation/get-started/choose-how-to-build",
               "documentation/quickstart"
             ]
           },
           {
-            "group": "Voice AI",
-            "icon": "microphone",
+            "group": "Learn",
+            "icon": "graduation-cap",
             "pages": [
-              "documentation/voice/web-audio-webrtc",
-              "documentation/voice/whatsapp-calls",
-              "documentation/voice/vad-and-barge-in",
-              "documentation/voice/persona-and-ssml",
-              "documentation/voice/voices"
+              "documentation/learn/platform-overview",
+              "documentation/learn/life-of-a-conversation",
+              "documentation/learn/agent-types",
+              "documentation/learn/glossary"
             ]
           },
           {
-            "group": "WhatsApp",
-            "icon": "whatsapp",
-            "pages": [
-              "documentation/whatsapp/setup",
-              "documentation/whatsapp/webhook-architecture",
-              "documentation/whatsapp/24h-session-management",
-              "documentation/whatsapp/hsm-templates",
-              "documentation/whatsapp/interactive-messages",
-              "documentation/whatsapp/rate-limits-and-queues"
-            ]
-          },
-          {
-            "group": "Smart CRM",
-            "icon": "address-book",
-            "pages": [
-              "documentation/crm/data-model-and-pipelines",
-              "documentation/crm/pipelines",
-              "documentation/crm/custom-attributes-and-timeline",
-              "documentation/crm/timeline"
-            ]
-          },
-          {
-            "group": "AI Memory",
-            "icon": "brain",
-            "pages": [
-              "documentation/memory/identity-resolution",
-              "documentation/memory/context",
-              "documentation/memory/semantic-facts",
-              "documentation/memory/knowledge-base"
-            ]
-          },
-          {
-            "group": "Agents",
+            "group": "Build agents",
             "icon": "robot",
             "pages": [
               "documentation/agents/overview",
               "documentation/agents/configuration",
-              "documentation/agents/tools-and-integrations"
+              "documentation/agents/prompts",
+              "documentation/memory/knowledge-base",
+              {
+                "group": "Voice",
+                "icon": "microphone",
+                "pages": [
+                  "documentation/voice/voices",
+                  "documentation/voice/persona-and-ssml",
+                  "documentation/voice/vad-and-barge-in"
+                ]
+              },
+              "documentation/agents/languages",
+              "documentation/agents/tools-and-integrations",
+              "documentation/agents/templates"
             ]
           },
           {
-            "group": "Conversations",
-            "icon": "comments",
+            "group": "Deploy",
+            "icon": "rocket",
             "pages": [
-              "documentation/conversations/inbox",
-              "documentation/conversations/call-logs"
+              "documentation/deploy/overview",
+              "documentation/deploy/inbound-calls",
+              "documentation/voice/web-audio-webrtc",
+              "documentation/voice/whatsapp-calls"
             ]
           },
           {
             "group": "Campaigns",
             "icon": "bullhorn",
             "pages": [
+              "documentation/campaigns/overview",
               "documentation/campaigns/voice-campaigns",
-              "documentation/campaigns/scheduling"
+              "documentation/campaigns/whatsapp-campaigns",
+              "documentation/campaigns/audiences",
+              "documentation/campaigns/scheduling",
+              "documentation/campaigns/retries-and-concurrency",
+              "documentation/campaigns/campaign-analytics"
             ]
           },
           {
-            "group": "Messaging",
-            "icon": "message",
+            "group": "Inbox",
+            "icon": "inbox",
             "pages": [
-              "documentation/messaging/templates",
-              "documentation/messaging/quick-replies"
+              "documentation/conversations/inbox",
+              "documentation/inbox/channels",
+              "documentation/inbox/ai-human-handoff",
+              "documentation/messaging/quick-replies",
+              "documentation/messaging/templates"
+            ]
+          },
+          {
+            "group": "CRM",
+            "icon": "address-book",
+            "pages": [
+              "documentation/crm/overview",
+              "documentation/crm/contacts",
+              "documentation/crm/data-model-and-pipelines",
+              "documentation/crm/custom-attributes-and-timeline",
+              "documentation/crm/timeline",
+              "documentation/crm/tasks",
+              "documentation/crm/import-export"
+            ]
+          },
+          {
+            "group": "Identity and context",
+            "icon": "brain",
+            "pages": [
+              "documentation/memory/identity-resolution",
+              "documentation/memory/context"
+            ]
+          },
+          {
+            "group": "Workflows",
+            "icon": "diagram-project",
+            "pages": [
+              "documentation/workflows/overview",
+              "documentation/workflows/architecture-and-triggers",
+              "documentation/workflows/mid-call-rest-tools",
+              "documentation/workflows/calendar-booking"
+            ]
+          },
+          {
+            "group": "Monitor",
+            "icon": "chart-line",
+            "pages": [
+              "documentation/monitor/overview",
+              "documentation/conversations/call-logs",
+              "documentation/platform/analytics-and-usage",
+              "documentation/monitor/latency",
+              "documentation/monitor/webhooks-and-events",
+              "documentation/workflows/outbound-webhooks-dlq"
             ]
           },
           {
             "group": "Integrations",
             "icon": "plug",
             "pages": [
-              "documentation/integrations/web-widget",
+              "documentation/integrations/overview",
+              {
+                "group": "WhatsApp",
+                "icon": "whatsapp",
+                "pages": [
+                  "documentation/whatsapp/setup",
+                  "documentation/whatsapp/webhook-architecture",
+                  "documentation/whatsapp/24h-session-management",
+                  "documentation/whatsapp/interactive-messages"
+                ]
+              },
               "documentation/integrations/google-calendar",
-              "documentation/integrations/calendly",
-              "documentation/integrations/connected-apps"
+              "documentation/integrations/calendly"
             ]
           },
           {
-            "group": "Workspace",
+            "group": "Account",
             "icon": "users",
             "pages": [
-              "documentation/workspace/organizations-and-team-members"
+              "documentation/workspace/organizations-and-team-members",
+              "documentation/platform/billing",
+              "documentation/platform/plans-and-limits",
+              "documentation/platform/api-keys-and-security",
+              "documentation/platform/security-and-compliance"
             ]
           },
           {
-            "group": "Platform",
-            "icon": "sliders",
+            "group": "Go live",
+            "icon": "flag-checkered",
             "pages": [
-              "documentation/platform/api-keys-and-security",
-              "documentation/platform/analytics-and-usage",
-              "documentation/platform/billing"
+              "documentation/go-live/launch-checklist",
+              "documentation/go-live/troubleshooting"
             ]
           }
         ]
@@ -141,28 +193,127 @@
           {
             "group": "Get started",
             "icon": "layout-dashboard",
-            "pages": ["guides/dashboard", "guides/connections", "guides/channels"]
-          },
-          {
-            "group": "Operate",
-            "icon": "inbox",
-            "pages": ["guides/inbox", "guides/contacts", "guides/agents", "guides/campaigns", "guides/workflows", "guides/call-logs", "guides/analytics"]
-          },
-          {
-            "group": "Content",
-            "icon": "library",
             "pages": [
-              "guides/resources",
-              "guides/documents",
-              "guides/connections"
+              "guides/dashboard",
+              "guides/workspaces",
+              "guides/get-started/first-agent"
+            ]
+          },
+          {
+            "group": "Connections",
+            "icon": "plug",
+            "pages": [
+              "guides/connections",
+              "guides/connections/whatsapp",
+              "guides/connections/instagram",
+              "guides/connections/email",
+              "guides/connections/website-chatbot",
+              "guides/connections/google-calendar",
+              "guides/connections/calendly"
+            ]
+          },
+          {
+            "group": "Agents",
+            "icon": "robot",
+            "pages": [
+              "guides/agents",
+              {
+                "group": "Set up an agent",
+                "pages": [
+                  "guides/agents/create",
+                  "guides/agents/prompts-and-identity",
+                  "guides/agents/model-and-voice",
+                  "guides/agents/tools",
+                  "guides/agents/booking",
+                  "guides/agents/advanced-settings",
+                  "guides/agents/deploy",
+                  "guides/agents/test"
+                ]
+              },
+              {
+                "group": "Workflow builder",
+                "pages": [
+                  "guides/workflows",
+                  "guides/workflows/steps",
+                  "guides/workflows/publish",
+                  "guides/workflows/executions"
+                ]
+              },
+              "guides/documents"
+            ]
+          },
+          {
+            "group": "Customers and insights",
+            "icon": "inbox",
+            "pages": [
+              {
+                "group": "Inbox",
+                "pages": [
+                  "guides/inbox",
+                  "guides/inbox/reply",
+                  "guides/inbox/ai-handoff",
+                  "guides/inbox/start-conversation"
+                ]
+              },
+              {
+                "group": "CRM Hub",
+                "pages": [
+                  "guides/contacts",
+                  "guides/contacts/add",
+                  "guides/contacts/import",
+                  "guides/contacts/profile",
+                  "guides/contacts/tasks",
+                  "guides/contacts/kanban"
+                ]
+              },
+              "guides/call-logs",
+              "guides/analytics"
+            ]
+          },
+          {
+            "group": "Outreach",
+            "icon": "bullhorn",
+            "pages": [
+              {
+                "group": "Campaigns",
+                "pages": [
+                  "guides/campaigns",
+                  "guides/campaigns/create",
+                  "guides/campaigns/audience",
+                  "guides/campaigns/manage",
+                  "guides/campaigns/results"
+                ]
+              },
+              {
+                "group": "Message templates",
+                "pages": [
+                  "guides/templates",
+                  "guides/templates/create",
+                  "guides/templates/sync"
+                ]
+              },
+              {
+                "group": "WhatsApp Flows",
+                "pages": [
+                  "guides/whatsapp-flows",
+                  "guides/whatsapp-flows/build",
+                  "guides/whatsapp-flows/send"
+                ]
+              },
+              "guides/quick-replies"
             ]
           },
           {
             "group": "Billing",
             "icon": "credit-card",
             "pages": [
-              "guides/billing",
-              "guides/subscriptions",
+              {
+                "group": "Subscriptions and credits",
+                "pages": [
+                  "guides/subscriptions",
+                  "guides/subscriptions/top-up"
+                ]
+              },
               "guides/invoices"
             ]
           },
@@ -172,17 +323,29 @@
             "pages": [
               "guides/developers",
               "guides/api-keys",
-              "guides/webhooks"
+              {
+                "group": "Webhooks",
+                "pages": [
+                  "guides/webhooks",
+                  "guides/webhooks/verify-signatures"
+                ]
+              }
             ]
           },
           {
-            "group": "Workspace",
+            "group": "Settings",
             "icon": "settings",
             "pages": [
-              "guides/settings",
               "guides/profile",
-              "guides/team-members",
-              "guides/security"
+              {
+                "group": "Team management",
+                "pages": [
+                  "guides/team-members",
+                  "guides/team-members/invite"
+                ]
+              },
+              "guides/security",
+              "guides/referrals"
             ]
           }
         ]
@@ -366,7 +529,9 @@
         "groups": [
           {
             "group": " ",
-            "pages": ["developers/overview"]
+            "pages": [
+              "developers/overview"
+            ]
           },
           {
             "group": "Sayvy MCP",
