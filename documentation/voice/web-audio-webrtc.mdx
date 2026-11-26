@@ -1,39 +1,53 @@
 ---
-title: "Web Calls"
-description: "Browser-based WebRTC voice calling and low-latency audio"
+title: "Web calls and widget"
+description: "Add the Sayvy AI widget to your website so visitors can chat with or call your agent."
 ---
 
-# Web Calls
+The web widget puts your agent on your own website. Visitors open it from a button in the corner of the page and either type or, if voice is on, start a call from the browser. No phone or app is needed, only a microphone.
 
-*This page covers the technical implementation and architecture for low-latency WebRTC browser audio streaming in Sayvy AI.*
+## Turn the widget on
 
----
+<Steps>
+  <Step title="Enable it on the agent">
+    On the agent's **Deploy** tab, turn on **Web Chat Widget**. To allow calls as well, turn on **Enable Voice**. This only works once voice is enabled for the agent on the **AI Model & Voice** tab.
+  </Step>
+  <Step title="Customize how it looks">
+    Click **Configure Embed Script**. The widget settings open on the **Connections** page, with a live preview beside them.
+  </Step>
+  <Step title="Add it to your site">
+    Copy the embed script and paste it into your site's HTML, ideally just before the closing `</head>` tag, on every page where the widget should appear.
+  </Step>
+</Steps>
 
-## Latency Budget Breakdown (Sub-500ms)
+## Widget settings
 
-*Content coming soon.*
+| Setting | What it changes |
+|---|---|
+| Chatbot title | The name shown at the top of the widget |
+| Chatbot logo | The image beside the title |
+| Initial greetings | The first message visitors see |
+| Initial questions | Suggested questions visitors can tap to start |
+| Disclaimer | Small print shown in the widget, such as a privacy note |
+| Button background colour | The colour of the launcher button |
+| Voice AI call button | Whether the call button appears |
 
-- Audio packetization (20ms frames)
-- Streaming Speech-to-Text (STT) pipeline
-- LLM time-to-first-token (TTFT) streaming
-- Incremental Text-to-Speech (TTS) chunking at sentence boundaries
+## The embed script
 
----
+The script looks like this. Copy yours from the widget settings, because the `eid` value is unique to your widget.
 
-## WebRTC Transport & Audio Codecs
+```html
+<script>
+  (function () {
+    var script = document.createElement('script');
+    script.src = "https://<your-sayvy-domain>/widget.js";
+    script.setAttribute('eid', "<your-widget-key>");
+    document.head.appendChild(script);
+  })();
+</script>
+```
 
-*Content coming soon.*
+The widget works on any site where this script is placed. The key isn't secret, because visitors' browsers can read it.
 
-- Opus audio codec (24kHz / 48kHz)
-- WebRTC Data & Media Channels configuration
-- Jitter buffer management and packet loss concealment (PLC)
+## What gets saved
 
----
-
-## Browser Client Audio Lifecycle
-
-*Content coming soon.*
-
-- Microphone capture constraints (`echoCancellation`, `noiseSuppression`)
-- Audio track initialization and handshake
-- Network drop recovery and automatic session reconnection
+Widget chats appear in the inbox like any other conversation. Browser calls are not saved: there is no call log, recording, or transcript for them, and no `call.completed` webhook. If you need records of calls, use [WhatsApp calls](/documentation/voice/whatsapp-calls).

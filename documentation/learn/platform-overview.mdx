@@ -1,0 +1,34 @@
+---
+title: "Platform overview"
+description: "How workspaces, agents, channels, the inbox, the CRM, and campaigns fit together."
+---
+
+Everything in Sayvy AI lives inside a workspace. Agents, contacts, conversations, knowledge base files, and campaigns all belong to one workspace and are never shared with another. One login can own or join several workspaces and switch between them.
+
+## Agents
+
+An agent is the AI that talks to your customers. You give it instructions, a model preset, a voice, and a set of tools, then deploy it to the web widget, WhatsApp, or both. There are three kinds: prompt agents, static bots, and workflow agents. [Compare them](/documentation/learn/agent-types).
+
+## Channels
+
+Channels are where conversations arrive. Connect them on the Connections page. WhatsApp and the web widget carry both voice and text, and agents can reply on both. Instagram Direct and email carry text only, and their conversations are answered by your team.
+
+## Inbox
+
+Each conversation with a contact on a channel becomes a thread in the inbox. AI can be switched on or off per thread. When it's off, or when the agent hands over, your team replies by hand using quick replies and WhatsApp templates.
+
+## Contacts and CRM
+
+A contact record is created the first time someone reaches you. It holds their details, tags, custom fields, lifecycle stage, lead score, owner, notes, tasks, and an activity history. Agents can move a contact to a new stage, change its score, add notes, and create tasks while they talk.
+
+## Campaigns
+
+Campaigns reach out to many contacts at once. A template campaign sends an approved WhatsApp template. A call campaign asks each contact for permission and then has an agent call them over WhatsApp. You choose the audience by tag, by hand, or from everyone.
+
+## Knowledge base
+
+The knowledge base holds files your agents search during conversations, such as price lists and FAQs. Every agent in the workspace can use it. Agents don't carry details about a contact from one conversation to the next, so put facts they always need in the prompt or the knowledge base.
+
+## Integrations and webhooks
+
+Agents can book on Google Calendar or Calendly, call your own HTTP APIs, and use tools from MCP servers. Webhooks send events such as `call.completed` to your systems as they happen.

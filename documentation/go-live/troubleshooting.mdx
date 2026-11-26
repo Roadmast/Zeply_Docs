@@ -1,0 +1,100 @@
+---
+title: "Troubleshooting"
+description: "Fix the problems people most often hit with connections, calls, messages, and billing."
+---
+
+## Connections
+
+### WhatsApp won't connect
+
+If you see "Failed to connect WhatsApp Business account. Please try again.", the sign-in with Meta didn't finish. Try again, and make sure you choose a business and a number you have admin rights to. The number must be registered for the WhatsApp Business Platform, not only the regular WhatsApp app.
+
+### "WhatsApp Session Expired or Invalidated on Meta"
+
+Meta's access token for your number has expired, or was revoked. Messages and calls stop until you fix it. Click **Reconnect WhatsApp** on the banner, or **Update Token** on the WhatsApp card on **Connections**, and sign in again.
+
+### Google Calendar or Calendly fails
+
+"Failed to connect Google Calendar" means the sign-in didn't finish. Try again with the account that owns the calendar. If bookings stop working later with "Failed to retrieve calendar availability", reconnect the calendar on **Connections**, since the sign-in may have expired.
+
+## Calls
+
+### Nobody answers a WhatsApp call
+
+Check, in order:
+
+1. **Enable voice** is on and a voice is chosen on the agent.
+2. The number is assigned to that agent on its **Deploy** tab.
+3. Calling is turned on for the number in Meta's settings.
+4. Your credits aren't at zero. Calls are rejected without credits.
+
+If it still fails, try again in a few minutes. A brief "Voice service worker currently unavailable" error means the voice service wasn't ready.
+
+### Calls stop after 15 minutes
+
+Calls are capped at 15 minutes, whatever **Max Call Duration** says.
+
+### The agent reads out `{customer_name}`
+
+Variable tokens from the **Insert Variables** menu aren't replaced yet. Delete them from the prompt and welcome message.
+
+### The agent talks over, or ignores, interruptions
+
+Interruptions are off, so the agent finishes its sentence before it answers. Shorten its replies in the prompt.
+
+### There's no call log for a browser call
+
+Browser calls from the web widget aren't logged. WhatsApp calls are.
+
+## Messages
+
+### The agent isn't replying
+
+Check, in order:
+
+1. The channel is WhatsApp or the web widget. Agents don't reply on Instagram or email.
+2. The ticket header shows **AI On**.
+3. The contact hasn't been handed off. Open them in CRM Hub and check **Conversation Handling**.
+4. The message is text. Agents don't answer voice notes, images, or other media.
+5. Your credits aren't at zero.
+
+### My reply won't send on WhatsApp
+
+WhatsApp accepts free-form replies for 24 hours after the customer's last message. Past that, you need to send an approved template.
+
+### The agent answers after a teammate has joined in
+
+A teammate replying doesn't pause the AI. Switch the ticket to **AI Off** before you reply.
+
+### A template is rejected
+
+The template shows as rejected, without a reason. Open it in Meta's WhatsApp Manager to read Meta's explanation, fix the wording, and submit a new template.
+
+## Campaigns
+
+### A campaign reaches nobody
+
+If you chose **Select Contacts Manually**, pick the audience by tag instead, because manual selection may not send. Contacts without a phone number are skipped.
+
+### A call campaign is stuck on "Awaiting responses"
+
+It's waiting for contacts to accept the permission request. It closes by itself after seven days. Contacts who declined, or didn't answer, aren't called.
+
+### A campaign paused
+
+Call campaigns pause when credits run out. Top up, then resume. Template campaigns pause if the workspace moves to Pay as you go. If WhatsApp keeps limiting how fast you can send, the campaign stops and the number rests for an hour. See [Sending limits](/documentation/campaigns/retries-and-concurrency).
+
+## Billing and limits
+
+| Message | What to do |
+|---|---|
+| "{Feature} is not included in Pay as you go" | Subscribe to a plan. Your credits carry over. |
+| "Insufficient AI credits" | Top up on the billing page |
+| "Seat limit reached" | Upgrade, or remove an unused member |
+| "Monthly API request quota reached for your plan" | Upgrade, or wait for the start of next month |
+| A 429 response from the API | Wait for the number of seconds in `Retry-After` |
+| "Your 7-day trial period has ended" | Subscribe to a plan to unpause your features |
+
+## Still stuck?
+
+Contact support with the call ID from [call logs](/documentation/conversations/call-logs), or the contact's name and the time of the message, so the team can find it quickly.

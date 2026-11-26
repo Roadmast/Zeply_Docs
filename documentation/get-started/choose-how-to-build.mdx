@@ -1,0 +1,39 @@
+---
+title: "Choose how to build"
+description: "Use the dashboard, the REST API, or the MCP server. They all work on the same workspace."
+---
+
+There are three ways to work with Sayvy AI. They all read and write the same workspace, so you can start in the dashboard and move parts of your setup into code later without migrating anything.
+
+| | Dashboard | REST API | MCP server |
+|---|---|---|---|
+| Best for | Anyone setting up agents, campaigns, and the inbox | Developers connecting Sayvy AI to their own product | Teams who manage the workspace from an AI assistant |
+| Sign-in | Email and password | API key sent as a Bearer token | OAuth sign-in from the assistant |
+| Code needed | None | Yes | None |
+
+## Dashboard
+
+Most teams start here. You create agents, connect WhatsApp and other channels, upload knowledge base files, run campaigns, and answer conversations in the inbox. Everything in these docs can be done from the dashboard unless a page says otherwise.
+
+## REST API
+
+Use the API when another system needs to drive Sayvy AI: adding contacts from your sign-up form, starting a campaign from your backend, or pulling call logs into a report. Create an API key in the dashboard and send it in the `Authorization` header. Your plan sets how many API calls you can make per minute and per month.
+
+<Card title="API reference" icon="code" href="/api-reference/introduction">
+  Endpoints for agents, campaigns, contacts, CRM tasks, the inbox, templates, and more.
+</Card>
+
+## MCP server
+
+The Sayvy MCP server lets an assistant such as Claude create agents, look up contacts, check analytics, or draft a campaign when you ask in plain language. You sign in once through OAuth, and the assistant acts with your permissions in your workspace.
+
+If your assistant supports skills, install the Sayvy skill as well. It teaches the assistant how Sayvy AI works so it picks the right tools.
+
+<CardGroup cols={2}>
+  <Card title="Sayvy MCP" icon="server" href="/developers/mcp/overview">
+    Connect an assistant to your workspace.
+  </Card>
+  <Card title="Sayvy skill" icon="wand-magic-sparkles" href="/developers/skills/overview">
+    Give the assistant product knowledge.
+  </Card>
+</CardGroup>

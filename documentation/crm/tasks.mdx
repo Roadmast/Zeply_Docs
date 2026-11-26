@@ -1,0 +1,46 @@
+---
+title: "Tasks"
+description: "Create follow-up tasks for contacts and track them to done."
+---
+
+Tasks are follow-ups for your team, each linked to one contact: call Asha back on Friday, send the revised quote, check the payment went through. Teammates create them by hand, and agents create them during conversations.
+
+<Note>
+Tasks aren't available on the Pay as you go plan.
+</Note>
+
+## Add a task
+
+Open a contact, go to **Tasks & Reminders**, and click **Add Task**. Say what needs doing. Details and a due date are optional, but a task without a due date is easy to forget.
+
+## Let the agent create tasks
+
+With CRM tools on, an agent can create a task for the contact it's talking to, with a title, details, and a due date. Say in the prompt when it should:
+
+```markdown
+If the caller asks for a callback, create a task titled "Call back"
+with the time they asked for as the due date.
+```
+
+Tasks made by an agent are marked as created by the AI.
+
+## Track tasks
+
+Switch CRM Hub to the **Tasks** view to see tasks across all contacts. Tabs filter by **Pending**, **Completed**, or **All Tasks**, and the search box matches task titles and contact names. Each row shows the task, the linked contact, and the due date. Mark a task done from there or from the contact's profile.
+
+Overdue tasks are counted in the CRM dashboard numbers available through the API.
+
+## Task fields
+
+| Field | Notes |
+|---|---|
+| Title | Required, up to 255 characters |
+| Description | Optional details |
+| Due date | Optional date and time |
+| Status | Pending, completed, or cancelled |
+| Assignee | A teammate. Set through the API or by an agent. The dashboard form doesn't have an assignee picker. |
+| Contact | Required. Every task belongs to one contact. |
+
+## Reminders
+
+Sayvy AI doesn't send reminders when a task falls due. Check the **Tasks** view each day, or pull due tasks through the [CRM API](/api-reference/crm/list-tasks) into a tool that alerts your team.

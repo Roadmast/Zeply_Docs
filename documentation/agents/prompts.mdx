@@ -1,0 +1,47 @@
+---
+title: "Writing prompts"
+description: "Write the agent prompt and welcome message, and see what Sayvy AI adds around them."
+---
+
+The agent prompt is where you tell a prompt-based agent who it is, what it should get done, and where its limits are. You write it in the **Agent prompt** field on the **Prompts & Identity** tab.
+
+## What a good prompt covers
+
+Write it the way you would brief a new hire on their first day. Most good prompts answer five questions:
+
+1. Who is the agent, and which business does it speak for?
+2. What should a successful conversation end with, such as a booked slot, a qualified lead, or an answered question?
+3. What facts does it need that aren't in the knowledge base, such as opening hours or a returns policy?
+4. What must it never do? For example: quote prices it isn't sure of, or promise refunds.
+5. When should it hand the conversation to a person?
+
+Short sections with plain headings are easier for you to maintain and for the model to follow. The editor has a Markdown view and an outline that lists your headings, which helps once a prompt grows past a page.
+
+```markdown
+## Role
+You answer calls for Green Leaf Dental in Pune.
+
+## Goal
+Help callers book a check-up. Collect their name, phone number, and preferred day.
+
+## Rules
+- Never give a diagnosis. Suggest a visit instead.
+- If the caller is upset or asks for a person, hand over to a human.
+```
+
+## What Sayvy AI adds
+
+Your prompt isn't the only thing the model sees. Before it, Sayvy AI adds its own safety rules and guidance on sounding natural in conversation. After it, the agent also gets:
+
+- booking instructions, when booking is turned on
+- the current date and time in UTC
+
+You don't need to repeat any of this in your prompt.
+
+## Welcome message
+
+The welcome message is spoken, or sent, as soon as the conversation starts. Keep it to one or two sentences that say who is talking and invite the customer to start, for example: "Hi, you've reached Green Leaf Dental. How can I help?"
+
+<Warning>
+The **Insert Variables** menu adds tokens such as `{customer_name}`. These are not filled in during conversations yet, so the agent would read them out as written. Leave them out of live agents for now. Workflow agents do support variables, written as `{{name}}`.
+</Warning>

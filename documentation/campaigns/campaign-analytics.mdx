@@ -1,0 +1,35 @@
+---
+title: "Campaign analytics"
+description: "Track delivery and read rates for a campaign, and download a PDF report."
+---
+
+## In the campaign list
+
+Each campaign on the **Campaigns** page shows four counts: sent, delivered, read, and failed. Next to them are the audience size, the scheduled time, and when it was created. Filter the list by status with the tabs above it.
+
+## Campaign details
+
+Open a campaign to see its status, total audience, launch time, and a delivery funnel:
+
+| Stage | Counts messages that |
+|---|---|
+| Sent | Left Sayvy AI and were accepted by WhatsApp |
+| Delivered | Reached the contact's phone |
+| Read | Were opened. Contacts who turn off read receipts never show as read. |
+| Failed | Couldn't be delivered |
+
+A big gap between sent and delivered usually means many numbers aren't on WhatsApp, or are written wrongly. Few reads among delivered messages usually means the opening line isn't working.
+
+## Call campaign numbers
+
+The dashboard funnel covers messages only. For call campaigns, the [campaign API](/api-reference/campaigns/get-campaign) also returns how many contacts granted or rejected permission, and how many calls were started, answered, and completed. Each call's duration, recording, and transcript are in [call logs](/documentation/conversations/call-logs).
+
+## PDF report
+
+Download a PDF of a campaign to share with people who don't use Sayvy AI. It includes:
+
+- the campaign name, status, audience, WhatsApp number, template, and dates (in UTC)
+- the total audience and the sent, delivered, read, and failed counts
+- delivery, read, and failure rates
+
+The report covers messages only, not calls.

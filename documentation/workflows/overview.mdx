@@ -1,0 +1,49 @@
+---
+title: "Workflows overview"
+description: "Build a workflow agent: a conversation laid out as steps you control."
+---
+
+A workflow agent follows a conversation you draw as a graph. Each step does one job, such as greeting the caller, asking about their need, calling your API, or ending the call. Arrows between steps decide what comes next. You get the language skills of an AI agent with the predictability of a script.
+
+Use a workflow when the conversation has a shape you want every caller to follow: qualify a lead in a set order, triage a support request, or collect booking details before anything else. For open-ended conversations, a [prompt agent](/documentation/learn/agent-types) is simpler.
+
+## Create a workflow agent
+
+On **Agents**, click **New Agent** and choose **Workflow Agent**. The Workflow Builder opens. Start from one of the templates, or describe what you want and use **Build with AI** to draft a graph. Drafting uses AI credits.
+
+## The builder
+
+The builder has three tabs:
+
+| Tab | What it's for |
+|---|---|
+| Editor | The canvas where you add steps, connect them, and set each one up |
+| Test | Talk to the workflow before it goes live |
+| Executions | See how real conversations moved through the steps |
+
+Your work saves automatically as you go. The header shows when it last saved.
+
+## Publish
+
+Click **Publish** to make the saved draft live on the inbox, WhatsApp, campaigns, and calls. Add a short note on what changed if you like. Publishing is blocked until any errors in the graph are fixed.
+
+After publishing, the header shows the live version, such as **v3 live**. Later edits stay in the draft until you publish again.
+
+<Warning>
+Until a workflow has been published once, live channels run the draft. Every saved edit reaches customers straight away. Publish your first version early, so later edits are held back until you're ready.
+</Warning>
+
+Publishing replaces the live version. Earlier versions aren't kept, so you can't roll back. Use **Export JSON** on the canvas toolbar to save a copy before big changes.
+
+## Executions
+
+The **Executions** tab counts runs, completed runs, transfers, and drop-offs, along with the average number of turns. Filter by date range, channel, and version. Each step shows how many runs entered it and how many dropped off there, which points to where callers get stuck. A run counts as dropped after 30 minutes without activity, if it never reached an ending or a transfer.
+
+<CardGroup cols={2}>
+  <Card title="Steps and transitions" icon="diagram-project" href="/documentation/workflows/architecture-and-triggers">
+    What each step does and how to connect them.
+  </Card>
+  <Card title="Function steps" icon="code" href="/documentation/workflows/mid-call-rest-tools">
+    Call your APIs and tools mid-conversation.
+  </Card>
+</CardGroup>

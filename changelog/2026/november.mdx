@@ -1,9 +1,23 @@
 ---
 title: "Sayvy AI Updates for November, 2026"
 sidebarTitle: "November, 2026"
-description: "November 2026 Sayvy AI changelog: Multi-tenant Workspaces, Instagram Direct Message channel, Inbound/Outbound Email integration, WhatsApp outbound voice calls, MCP (Model Context Protocol) & CRM actions for agents, 2FA security, granular RBAC, and real-time webhook infrastructure."
+description: "November 2026 Sayvy AI changelog: Workflow Agents (Beta), Multi-tenant Workspaces, Instagram Direct Message channel, Inbound/Outbound Email integration, WhatsApp outbound voice calls, MCP (Model Context Protocol) & CRM actions for agents, 2FA security, granular RBAC, and real-time webhook infrastructure."
 tag: "LATEST"
 ---
+
+<Update label="23rd November, 2026" description="Agents & Workflows (Beta)">
+  ## Workflow Agents (Beta)
+
+  Build, test, and deploy graph-based conversational **Workflow Agents** using a visual drag-and-drop builder—now available in **Beta** alongside Prompt and Static agents.
+
+  ### What's New
+  * **Visual Workflow Builder:** Design multi-step conversation flows on an interactive canvas with `Start`, `Conversation`, `Function`, `Transfer`, `Ending`, and `Note` nodes connected by natural-language transition conditions.
+  * **Node-Scoped Prompts & Tools:** Configure per-node instructions and tool subsets layered on top of a shared global prompt, with session variables and automatic transition routing.
+  * **Voice & Chat Execution:** Run workflow agents across both chat and Pipecat voice pipelines with live node-state tracking, draft validation, and versioned graph management.
+  * **Starter Templates & Auto-Layout:** Start from built-in templates, organize complex graphs with one-click auto-layout, and validate graphs before publishing.
+
+  [Agents Guide](/guides/agents) · [Workflows Guide](/guides/workflows) · [Workflows Overview](/documentation/workflows/overview)
+</Update>
 
 <Update label="19th November, 2026" description="Voice & WhatsApp">
   ## WhatsApp Outbound Calling & Instant Delivery Receipts
@@ -15,7 +29,7 @@ tag: "LATEST"
   * **Campaign Integration:** Include WhatsApp voice calls in batch outbound campaigns alongside WhatsApp text broadcasts.
   * **Real-Time Delivery Status Tracking:** Fixed a latency lag where Meta message delivery receipts (`delivered`, `read`, `failed`) were delayed under heavy webhook volume. Receipts now stream immediately into the inbox and analytics timeline.
 
-  [WhatsApp Setup Guide](/documentation/whatsapp/setup) · [Channels Overview](/guides/channels) · [Campaigns](/guides/campaigns)
+  [WhatsApp Setup Guide](/documentation/whatsapp/setup) · [Channels Overview](/guides/connections) · [Campaigns](/guides/campaigns)
 </Update>
 
 <Update label="17th November, 2026" description="Platform & Architecture">
@@ -42,7 +56,7 @@ tag: "LATEST"
   * **AI Story Reply & DM Automation:** Automatically reply to story mentions and inbound DMs with customizable tone and knowledge base retrieval.
   * **Human Escalation:** Seamlessly transition conversation control from the AI agent to a human team member with a single toggle.
 
-  [Channels Guide](/guides/channels) · [Unified Inbox](/guides/inbox)
+  [Channels Guide](/guides/connections) · [Unified Inbox](/guides/inbox)
 </Update>
 
 <Update label="13th November, 2026" description="Security & Auth">
@@ -68,7 +82,7 @@ tag: "LATEST"
   * **Long-Form Contextual Replies:** Agents digest full email threads and craft natural, structured replies citing knowledge base documentation.
   * **Automatic Contact Creation:** Unrecognized senders are automatically upserted into the contact directory with extracted sender names and contact emails.
 
-  [Email Channel Setup](/guides/channels) · [Inbox Workflows](/guides/inbox)
+  [Email Channel Setup](/guides/connections) · [Inbox Workflows](/guides/inbox)
 </Update>
 
 <Update label="10th November, 2026" description="Agents & Tooling">
@@ -104,7 +118,7 @@ tag: "LATEST"
   * **One-Click Voice Calling:** Website visitors can speak directly to your agent through browser audio without dialing a phone number.
   * **Content Security Policy (CSP) Compliance:** Optimized iframe and script delivery so the widget loads smoothly on domains with strict enterprise CSP and CORS headers.
 
-  [Web Widget Documentation](/documentation/integrations/web-widget)
+  [Web Widget Documentation](/documentation/voice/web-audio-webrtc)
 </Update>
 
 <Update label="5th November, 2026" description="Access & Governance">

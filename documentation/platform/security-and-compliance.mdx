@@ -1,0 +1,44 @@
+---
+title: "Security and compliance"
+description: "How Sayvy AI protects your account and data, and what it doesn't offer yet."
+---
+
+## Signing in
+
+You can sign in with an email and password, or with Google. Passwords are handled by our authentication provider, not stored by Sayvy AI itself.
+
+### Two-factor sign-in
+
+Add a second step with an authenticator app, such as Google Authenticator. Go to **Settings**, then **Security**, click **Setup Google Authenticator**, scan the code, and enter the six-digit code under **Verify & Enable**. Ask every admin to turn it on.
+
+## Access control
+
+Everyone on your team has a role, and each workspace is separate. Work in one workspace never appears in another. Only admins can invite people, change roles, and remove members. See [Team members](/documentation/workspace/organizations-and-team-members).
+
+Invitations expire after 7 days, and the last admin of an organization can't be removed.
+
+## How your data is protected
+
+- **Connection secrets** are encrypted before they're stored. This covers the tokens for WhatsApp, Instagram, Google Calendar, and Calendly, and the secrets used to sign your webhooks.
+- **API keys** are stored only as a hash, so a database leak wouldn't expose them. See [API keys](/documentation/platform/api-keys-and-security).
+- **Webhook requests** are signed, so your server can check where they came from. See [Webhook delivery and security](/documentation/workflows/outbound-webhooks-dlq).
+
+## What to keep in mind
+
+Agents see whatever you give them, and callers can ask them anything. A few habits keep that safe:
+
+- Don't put passwords, card numbers, or other secrets in an agent prompt or knowledge base document.
+- Tell agents in the prompt what they must never disclose, such as other customers' details.
+- Recordings and transcripts contain what callers said. Turn them off for agents where you don't need them, and tell callers they're being recorded where the law requires it.
+- Remove ex-teammates from **Team Management** straight away.
+
+## What isn't available yet
+
+| | Status |
+|---|---|
+| Single sign-on (SAML) | Not available |
+| Audit log of who changed what | Not available |
+| Deleting your account or a workspace from the dashboard | Not available. Contact support. |
+| Choosing where your data is hosted | Not available |
+
+If your organization needs formal certifications, a data processing agreement, or a security questionnaire answered, contact support. Don't rely on this page for compliance claims.

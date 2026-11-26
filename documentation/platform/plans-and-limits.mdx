@@ -1,0 +1,56 @@
+---
+title: "Plans and limits"
+description: "What each plan includes, and the limits that apply to your workspace."
+---
+
+## Plans
+
+| | Pay as you go | Basic | Advanced | Premium | Enterprise |
+|---|---|---|---|---|---|
+| Price per month | No subscription | ₹999 | ₹2,499 | ₹4,499 | Custom |
+| Team seats | 3 | 3 | 6 | 10 | Custom |
+| Webhook endpoints | 0 | 1 | 3 | 10 | Unlimited |
+| API requests per month | 5,000 | 50,000 | 200,000 | 1,000,000 | Unlimited |
+| API requests per minute | 60 | 60 | 200 | 1,000 | 2,000 |
+
+Subscription prices are plus 18% GST. Yearly billing saves 20%. Extra team seats cost ₹299 a month each. Voice minutes and AI replies are paid for with credits on every plan. See [Billing](/documentation/platform/billing).
+
+## Pay as you go
+
+Pay as you go is for voice only. Voice agents and call campaigns work, and you pay for them with credits. These features need a subscription:
+
+- WhatsApp template campaigns
+- CRM tasks
+- Webhook endpoints, because the plan allows none
+
+Trying to use one shows "{Feature} is not included in Pay as you go. Upgrade to a subscription plan to use it." Your credits carry over when you subscribe.
+
+## Trial
+
+New organizations get a 7-day free trial. When it ends, feature pages are paused until you subscribe. API keys can't be requested during the trial.
+
+## API limits
+
+API requests are counted per workspace against two limits: a monthly total that resets at the start of each calendar month in UTC, and a per-minute rate. Writes count against a lower per-minute limit than reads.
+
+When you go over, the API returns status 429 with these headers:
+
+| Header | Meaning |
+|---|---|
+| `Retry-After` | Seconds to wait before trying again |
+| `X-RateLimit-Limit` | The limit you hit |
+| `X-RateLimit-Remaining` | Requests left, which is 0 on a 429 |
+
+The response body says which limit it was and when to retry. For the monthly total, the message tells you to upgrade or wait for next month. See [Rate limiting](/api-reference/rate-limiting).
+
+## Other limits
+
+| Limit | Value |
+|---|---|
+| Call length | 15 minutes at most |
+| Calls running at once in a campaign | 3 |
+| Calls to one contact per day in a campaign | 5 |
+| Calls from one number per day in a campaign | 100 |
+| Webhook delivery attempts | 3 |
+
+These are the same on every plan. See [Sending limits](/documentation/campaigns/retries-and-concurrency).

@@ -1,39 +1,53 @@
 ---
-title: "Triggers & Workflows"
-description: "Event-driven workflow triggers, logic branching, and actions"
+title: "Steps and transitions"
+description: "Every step type in the Workflow Builder, and how to connect them."
 ---
 
-# Triggers & Workflows
+A workflow is made of steps joined by transitions. Add a step with **Add Node** or by dragging from the palette, then drag from one step's handle to another to connect them. Double-click a step to set it up. Its settings are split into **Parameters** and **Transitions**.
 
-*This page covers Sayvy AI's event-driven workflow execution engine, trigger catalog, and multi-channel orchestration.*
+## Step types
 
----
+| Step | What it does |
+|---|---|
+| Start | The entry point. Every workflow has exactly one, and it always leads straight to the next step. |
+| Greeting | Opens the conversation |
+| Conversation | Talks with the user about one topic until a transition fires |
+| Function | Runs a tool, such as one of your APIs. See [Function steps](/documentation/workflows/mid-call-rest-tools). |
+| Extract Variables | Pulls values out of what the user said, such as a name or budget |
+| Logic Split | Branches on variable values, without involving the model |
+| Call Transfer | Hands the contact to a human |
+| Ending | Says a final message and ends the conversation |
+| Note | A sticky note for your team. It never runs. |
 
-## Native Trigger Taxonomy
+## Greeting and conversation steps
 
-*Content coming soon.*
+Choose **Prompt** to give the model an instruction, such as "Ask what brings them in today", or **Static sentence** to have it say exact words. Both can include variables, such as `{{name}}`. You can also pick which of the agent's tools are available in this step.
 
-- Web voice call connected / ended
-- WhatsApp inbound message / voice note received
-- CRM lead stage or property updated
-- Inactivity and timeout events
+Mark a Conversation step as a **Global step** to make it reachable from anywhere in the workflow. When its condition is met, the conversation jumps there, then returns to where the user was. That suits questions that can come up at any time, such as "What are your opening hours?"
 
----
+## Transitions
 
-## Conditional Branching & Evaluation
+Most steps leave by one of two kinds of transition:
 
-*Content coming soon.*
+- **When**, with a condition in plain language, such as "The user wants to speak to a person". The model decides when it's met.
+- **Always**, which moves on as soon as the step is done.
 
-- Evaluating user intent, message sentiment, and CRM contact attributes
-- Boolean logic expressions and multi-path branching
-- Fallback paths and default routes
+A step with no transitions keeps the conversation there.
 
----
+## Extract Variables
 
-## Cross-Channel Orchestration
+List the values to pull out. Give each one a name, a type (text, number, yes or no, or one of a set of choices), and a description that tells the model what to look for. Values the user didn't mention are left empty. The step has one **Then** transition.
 
-*Content coming soon.*
+## Logic Split
 
-- Seamless handoffs: moving from an in-call web conversation directly to an automated WhatsApp confirmation
-- Asynchronous workflow step scheduling
-- Execution checkpointing and state persistence
+Logic Split checks variables against conditions you set, with no model involved, so it gives the same answer every time. Branches are checked top to bottom, and the first match wins. If none match, the **Else** branch runs.
+
+Conditions can test whether a value equals, contains, is one of, or is greater or less than something. They can also test whether a value is set, or is true or false. A branch with several conditions can require all or any of them. Compare against tool results with dotted paths, such as `lookup_result.status`.
+
+## Call Transfer
+
+Set the number, the transfer type, and a message to say first. Today, the agent says the message and ends the conversation, the contact is passed to your team in the inbox, and the `agent.handoff` webhook is sent with the number. Live call bridging to that number isn't available yet.
+
+## Built-in variables
+
+Besides the variables you extract, every workflow can use `{{current_date}}`, `{{current_time}}`, and `{{agent_name}}`. A Function step stores its result as `{{toolname_result}}`.

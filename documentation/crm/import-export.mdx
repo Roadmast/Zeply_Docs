@@ -1,0 +1,38 @@
+---
+title: "Import and export"
+description: "Upload contacts from a spreadsheet, and get your data out through the API."
+---
+
+## Import contacts
+
+Click **Upload Contacts** in **CRM Hub** and choose a CSV (UTF-8), XLSX, or XLS file. For a starting file, open the **⋮** menu and choose **Download Sample CSV**.
+
+| Column | Required | Notes |
+|---|---|---|
+| `phone_number` | Yes | Include the country code, such as `+919876543210` |
+| `name` | Yes | The contact's name |
+| `tags` | No | Several tags separated by commas or semicolons |
+
+Column names aren't case-sensitive, and other columns are ignored.
+
+```csv
+phone_number,name,tags
++919876543210,Asha Rao,vip;pune
++919812345678,Rahul Mehta,pune
+```
+
+### What happens to each row
+
+- A phone number not in the workspace creates a new contact.
+- A phone number already in the workspace updates that contact's name, and replaces its tags if the row has any.
+- A row missing a phone number or name fails. The result lists each failure by row number.
+
+Matching is on the exact text of the phone number. `+919876543210` and `9876543210` count as different contacts, so pick one format and use it everywhere. WhatsApp contacts are stored without the `+`, so a number written as `919876543210` will match a contact who messaged you on WhatsApp.
+
+### What can't be imported
+
+Notes, custom fields, stages, scores, and owners aren't read from the file. Set them afterwards, by hand or through the [contacts API](/api-reference/contacts/update-contact).
+
+## Export
+
+There's no export button in the dashboard yet. To get your contacts out, page through the [list contacts](/api-reference/contacts/list-contacts) endpoint with an API key and write the results to a file. Activities and tasks have their own endpoints.

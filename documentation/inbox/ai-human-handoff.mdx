@@ -1,0 +1,50 @@
+---
+title: "AI to human handoff"
+description: "How conversations pass from your agent to your team, and back again."
+---
+
+Your agent can handle a conversation from start to finish, but some customers need a person. A handoff stops the AI replying to a contact so your team can take over, and a hand-back lets the AI pick up again.
+
+## When the agent hands off
+
+An agent with CRM tools turned on can hand a conversation to a human whenever it decides it should. Tell it when, in its prompt:
+
+```markdown
+Hand the conversation to a human if the customer asks for a person,
+is upset, wants a refund, or asks something you can't answer from the
+knowledge base. Tell them a team member will reply soon.
+```
+
+Workflow agents hand off with a transfer step.
+
+## What a handoff does
+
+- AI stops replying to that contact.
+- The contact can be assigned to a teammate as its owner.
+- A handoff entry, with the agent's reason, is added to the contact's history.
+- When a workflow agent transfers, an `agent.handoff` webhook is sent, if you've subscribed to it.
+
+<Warning>
+Nobody on your team is notified inside Sayvy AI when a handoff happens. Watch the inbox, or connect the `agent.handoff` webhook to Slack, email, or another tool your team checks.
+</Warning>
+
+## Taking over by hand
+
+You don't need to wait for the agent. In any conversation, switch **AI On** to **AI Off** in the header. The AI won't reply on that ticket until you switch it back, even if it was halfway through writing a reply.
+
+Replying yourself doesn't turn the AI off. If AI is still on, the agent may answer the customer's next message as well. Switch it off before you join in.
+
+## Handing back to AI
+
+When your part is done, switch the ticket back to **AI On**. If the contact had been handed off, this turns AI handling back on for them and records the hand-back in their history.
+
+You can also switch a contact between **AI Handled** and **Human Agent** from their row in the contacts list.
+
+## How AI on and off fit together
+
+AI replies to a message only when both are true:
+
+1. AI is on for the ticket.
+2. The contact is set to AI handling, meaning they haven't been handed off.
+
+A handoff turns off the second one for all of the contact's tickets. The header toggle controls the first one for a single ticket.

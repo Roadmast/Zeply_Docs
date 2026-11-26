@@ -1,4 +1,44 @@
 ---
-title: "Call Logs"
-description: "Review call history, transcripts, recordings, and outcomes"
+title: "Call logs"
+description: "Find any WhatsApp call, play its recording, and read the transcript."
 ---
+
+**Call Logs** lists every WhatsApp voice call your agents handle, in both directions, including calls from call campaigns. Browser calls from the web widget aren't logged.
+
+## Find a call
+
+Each call shows its direction, call ID, the numbers it was from and to, its status, its duration, and when it happened. Switch between cards and a table with the view toggle.
+
+Narrow the list with:
+
+- the search box, which matches call IDs and phone numbers
+- direction: inbound or outbound
+- status: completed, answered, ringing, missed, rejected, or failed
+
+## Call details
+
+Click **Details** on a call to open it.
+
+| Section | What's there |
+|---|---|
+| Overview | Call ID, direction, status, numbers, start time, and duration |
+| Voice Recording | A player, and **Download Audio File** |
+| Summary | A short summary, when one exists |
+| Call Transcription | The conversation, line by line, marked as the user or the agent |
+
+The recording and transcript only exist when the agent had recording and transcriptions turned on at the time of the call. See [Agent settings](/documentation/agents/configuration).
+
+## Statuses
+
+| Status | Meaning |
+|---|---|
+| Ringing | The call is being placed or answered |
+| Answered | The call connected and is in progress |
+| Completed | The call ended normally |
+| Missed | Nobody picked up |
+| Rejected | The call was declined |
+| Failed | The call couldn't be connected |
+
+## Pulling calls into other tools
+
+The [call logs API](/api-reference/call-logs/list-call-logs) supports the same filters and returns up to 100 calls per page. Each call comes with everything shown in the details view, plus the agent that handled it and what the call cost. A separate endpoint returns the recording audio.

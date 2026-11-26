@@ -1,0 +1,56 @@
+---
+title: "Launch checklist"
+description: "Check these before real customers reach your agent."
+---
+
+Most launch problems come from a few things people forget. Go through this list with your agent open, ideally with a teammate who didn't build it.
+
+## The agent
+
+- [ ] The prompt says who the agent is, what it should achieve, and what it must never do. See [Writing prompts](/documentation/agents/prompts).
+- [ ] The welcome message is the one you want customers to hear.
+- [ ] No `{customer_name}` style tokens appear in the prompt or welcome message. They aren't filled in, and the agent would read them out.
+- [ ] You tested at least ten realistic conversations, including awkward ones: off-topic questions, angry customers, and requests the agent can't help with.
+- [ ] The knowledge base holds only current documents, and a test question that needs one gets the right answer.
+- [ ] The agent's prompt says when to hand off to a person.
+
+## Voice
+
+- [ ] **Enable voice** is on and a voice is chosen. You've listened to it say your business name, prices, and a phone number.
+- [ ] Prompt replies are short enough for a phone call.
+- [ ] Recording and transcripts are on, if you want call logs. They can't be added to calls that already happened.
+- [ ] You know calls end after 15 minutes at most.
+
+## Channels
+
+- [ ] WhatsApp is connected, and the right agent is assigned to the number.
+- [ ] You sent a real message and made a real call to the number from your own phone.
+- [ ] The web widget is embedded on a live page, and you tested chat and voice there.
+- [ ] You know agents don't reply on Instagram and email. Your team answers those in the inbox.
+- [ ] WhatsApp templates you plan to use are approved, not pending.
+
+## Team and handoffs
+
+- [ ] Teammates are invited, with the right roles.
+- [ ] Someone watches the inbox during your opening hours. Handoffs don't notify anyone on their own. See [AI to human handoff](/documentation/inbox/ai-human-handoff).
+- [ ] If handoffs need alerts, an `agent.handoff` webhook sends them to Slack or email. See [Webhooks](/documentation/monitor/webhooks-and-events).
+- [ ] Your team knows to switch **AI Off** before they step into a conversation.
+
+## Bookings and tools
+
+- [ ] Calendar booking was tested end to end, and the event shows up in the right calendar.
+- [ ] Custom API tools respond quickly, and the agent behaves sensibly when they fail.
+
+## Campaigns
+
+- [ ] You sent the campaign to a test audience of your own contacts first.
+- [ ] The audience excludes anyone who asked not to be contacted.
+- [ ] You have enough credits for the whole campaign. Calls pause when credits run out.
+
+## Account
+
+- [ ] Credits are topped up, and the plan has the seats and webhooks you need.
+- [ ] Every admin has two-factor sign-in turned on.
+- [ ] API keys are stored safely and have sensible expiry dates.
+
+When you're done, go live with a small group first, such as one location or one campaign list, and review [call logs](/documentation/conversations/call-logs) after the first day.

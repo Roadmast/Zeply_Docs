@@ -1,37 +1,43 @@
 ---
-title: "Live Tool Calling"
-description: "Executing real-time REST API tools during voice calls and chats"
+title: "Function steps"
+description: "Run one of the agent's tools at a fixed point in a workflow and use the result."
 ---
 
-# Live Tool Calling
+A Function step runs a tool at an exact point in the conversation, instead of leaving it to the model to decide when. Use it when a call must always look something up before it moves on: check an order, verify a policy number, fetch a balance.
 
-*This page covers defining external REST tools and executing them synchronously while a voice call or WhatsApp conversation is active.*
+## Set up the tool first
 
----
+A Function step calls a tool by name. It doesn't hold the URL or request details itself, so set the tool up on the agent's **Tools & Integrations** tab first.
 
-## Tool Definition Schema
+| To call | Set up on the agent |
+|---|---|
+| Your own API | A custom tool with its endpoint, method, and timeout. See [Tools](/documentation/agents/tools-and-integrations). |
+| A tool from an MCP server | The MCP server connection. Its tools become available by name. |
+| Calendar booking | Enable Booking, which adds a tool called `booking` |
 
-*Content coming soon.*
+CRM tools, such as changing a stage or adding a note, can't be used in a Function step.
 
-- OpenAPI / JSON Schema function parameter definitions
-- Describing tool capabilities and parameter types for the LLM
-- Strict parameter validation and schema sanitization
+## Configure the step
 
----
+| Field | What to enter |
+|---|---|
+| Tool | The tool to run. Pick from the list or type its name. |
+| Arguments | Values to send, either fixed or taken from variables, such as `order_id` = `{{order_id}}` |
+| Speak while the tool runs | On calls, a filler line such as "One moment while I check that." |
+| Wait for the result before continuing | On by default. Turn it off only if nothing later needs the result. |
 
-## Strict Latency Budget (Sub-400ms)
+## Use the result
 
-*Content coming soon.*
+The result is saved as a variable named after the tool, followed by `_result`. A tool called `check_order` saves `{{check_order_result}}`. Very long results are cut to 4,000 characters.
 
-- HTTP client connection pooling and sub-400ms timeout enforcement
-- Fallback strategies when external REST APIs exceed timeouts or return 5xx errors
-- Circuit breakers for unstable downstream services
+You can branch on the result with a Logic Split, for example when `check_order_result.status` equals `shipped`. Or mention it in a later Conversation step's instruction, so the agent can talk about it:
 
----
+```text
+Tell the customer their delivery date, using {{check_order_result}}.
+```
 
-## Optimistic Filler Audio & Voice Masking
+## Handle slow and failing APIs
 
-*Content coming soon.*
+Your API's timeout is set on the custom tool, and defaults to 5 seconds. On a call, five seconds of silence feels long, so always set a filler line for tools that might be slow.
 
-- Triggering real-time filler audio ("*Looking that up for you right now...*") to mask API latency
-- Seamless injection of external API responses into the agent's active memory context
+Plan for failure, too. After the Function step, add a Logic Split that checks whether the result is set. If it's empty, send the caller to a Conversation step that apologises and offers a callback.

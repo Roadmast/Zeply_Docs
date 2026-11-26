@@ -1,26 +1,29 @@
 ---
-title: "Knowledge Base"
-description: "Document ingestion, embeddings, and grounding agent answers in company data"
+title: "Knowledge base"
+description: "Upload documents your agents search for answers during calls and chats."
 ---
 
-# Knowledge Base
+The knowledge base holds documents your agents can look things up in: price lists, FAQs, policies, product sheets. When a customer asks something the prompt doesn't cover, the agent searches these files and answers from what it finds.
 
-*This page covers uploading documents, managing knowledge base embeddings, and grounding agent answers.*
+## Upload documents
 
----
+You can upload PDF, DOCX, and TXT files. Documents belong to the workspace, not to one agent, so every agent in the workspace can search everything you upload.
 
-## Document Ingestion
+Each file is split into passages of roughly 400 words. Tables are kept together, so a row isn't cut off from its header. Once the upload finishes, the document is searchable.
 
-*Content coming soon.*
+## How agents use it
 
-- Supported document formats (PDF, Markdown, DOCX, TXT)
-- Text chunking, token sizing, and metadata tagging
+Every agent has a knowledge base search tool, and it can't be switched off. The agent decides when to use it, usually when a question needs a specific fact. A search returns the five closest passages by default. The search matches on meaning as well as on exact words, so "how much is a cleaning" can find a line that says "scaling and polishing: ₹1,500".
 
----
+The agent only sees what the search returns. It doesn't read whole documents.
 
-## Grounded RAG Retrieval
+## Tips for better answers
 
-*Content coming soon.*
+- Put one topic in each section, with a clear heading. Searches return passages, and a focused passage gives a cleaner answer.
+- Write out facts in full sentences or simple tables. Scanned images of text can't be searched.
+- Remove old versions when you upload new ones, or the agent may quote outdated prices.
+- Tell the agent in its prompt what the knowledge base contains, for example: "Prices and treatment details are in the knowledge base. Look them up before quoting."
 
-- Real-time semantic similarity search during voice calls and WhatsApp chats
-- Source citation and hallucination prevention
+## Delete a document
+
+Deleting a document removes it from search right away. Agents stop finding it on their next search.

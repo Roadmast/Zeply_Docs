@@ -1,47 +1,52 @@
 ---
 title: "Quickstart"
-description: "Launch your first Web Voice call and WhatsApp message in 5 minutes"
+description: "Create a workspace, build your first agent, and talk to it."
 ---
 
-# Quickstart
+This guide takes you from a new account to an agent you can talk to. Plan on about fifteen minutes, or longer if you also connect WhatsApp.
 
-*Get up and running with Sayvy AI by testing a browser voice call and sending an automated WhatsApp message.*
+You need a browser with microphone access. To try the WhatsApp step, you also need a Meta business account and a phone number you can register with WhatsApp Business.
 
----
+<Steps>
+  <Step title="Create your account">
+    Sign up with your email address, open the verification link we send you, then log in.
+  </Step>
+  <Step title="Name your workspace">
+    The first screen asks for a workspace name. A workspace holds your agents, contacts, inbox, and campaigns. You can create more workspaces later, for example one per brand or client.
+  </Step>
+  <Step title="Create an agent">
+    Open **Agents**, click **New Agent**, and choose **Prompt-based AI Agent**. Give it a welcome message, the first thing it says, and a system prompt that tells it who it is and what to do. For example:
 
-## Prerequisites
+    ```text
+    You are the front desk for Green Leaf Dental. Answer questions about
+    opening hours, prices, and treatments. If someone wants an appointment,
+    collect their name and preferred day. Keep answers short. You are on a call.
+    ```
 
-*Content coming soon.*
+    On **AI Model & Voice**, keep the Gemini stack, turn on **Enable voice**, and pick a voice. Click **Save Changes**.
+  </Step>
+  <Step title="Add knowledge (optional)">
+    Upload a PDF, DOCX, or TXT file to the knowledge base, such as a price list or FAQ. Every agent in the workspace can search it when a question comes up.
+  </Step>
+  <Step title="Talk to it">
+    Click **Test Agent** and open the **Webcall** tab. Ask a question your prompt covers, then one only your uploaded file can answer. The **Chat** tab lets you test by typing.
+  </Step>
+  <Step title="Connect WhatsApp">
+    On **Connections**, connect your WhatsApp Business number and assign it to the agent. Send the number a message from your phone. The agent replies, the conversation shows up in **Inbox**, and the sender appears in **Contacts**.
+  </Step>
+</Steps>
 
-- Active Sayvy AI workspace account
-- Web browser with microphone access enabled
-- Meta WhatsApp Business account access
+<Note>
+Browser calls are not saved to call logs. WhatsApp calls are, with their recording and transcript when recording is turned on for the agent.
+</Note>
 
----
+## Next steps
 
-## Step 1: Start a Web Call
-
-*Content coming soon.*
-
-- Initializing the browser WebRTC voice widget
-- Testing microphone capture and conversational response latency
-- Verifying turn-taking and interruption handling
-
----
-
-## Step 2: Send a WhatsApp Message
-
-*Content coming soon.*
-
-- Triggering an inbound test message to your registered WhatsApp number
-- Inspecting the automated conversational reply
-- Checking session window activation
-
----
-
-## Step 3: View the CRM Contact
-
-*Content coming soon.*
-
-- Finding the automatically generated lead in the in-built CRM
-- Viewing the call transcript, audio recording, and extracted customer memory
+<CardGroup cols={2}>
+  <Card title="Agent types" icon="robot" href="/documentation/learn/agent-types">
+    When to use a static bot or a workflow agent instead.
+  </Card>
+  <Card title="Campaigns" icon="bullhorn" href="/documentation/campaigns/overview">
+    Reach many contacts on WhatsApp at once.
+  </Card>
+</CardGroup>

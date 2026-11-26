@@ -1,4 +1,50 @@
 ---
-title: "Voice Campaigns"
-description: "Create and manage outbound voice campaigns"
+title: "Call campaigns"
+description: "Have your agent call a list of contacts over WhatsApp, after they give permission."
 ---
+
+A call campaign has your voice agent phone a group of contacts over WhatsApp. WhatsApp only allows a business to call someone who has agreed to it, so the campaign asks each contact for permission first, then calls the ones who say yes.
+
+<Note>
+Call campaigns are created through the [API](/api-reference/campaigns/create-campaign) or the [Sayvy MCP server](/developers/mcp/overview). The **New Campaign** screen in the dashboard creates template campaigns only.
+</Note>
+
+## What you need
+
+- A WhatsApp template that includes a call permission request, approved by Meta.
+- A voice agent with **Enable voice** turned on. This is the agent that makes the calls.
+- A WhatsApp Business number with calling turned on. See [WhatsApp calls](/documentation/voice/whatsapp-calls).
+- Enough voice credits. The campaign pauses when they run out.
+
+## Create the permission template
+
+The template builder in Sayvy AI can't add a call permission request yet, so create this template in Meta instead:
+
+1. In Meta's WhatsApp Manager, create a template for the same WhatsApp account and add a call permission request to it.
+2. Submit it and wait for Meta to approve it.
+3. In Sayvy AI, open **Message Templates**, click **Sync from Meta**, and choose the WhatsApp channel. The template appears in your list.
+
+Use that template's ID when you create the campaign.
+
+## How it runs
+
+<Steps>
+  <Step title="Contacts who already said yes are called">
+    If a contact gave permission recently and it hasn't expired, the agent calls them straight away, without asking again.
+  </Step>
+  <Step title="Everyone else gets a permission request">
+    The template goes out, and the campaign moves to **Awaiting responses**. Meta allows one request per contact every 24 hours, and two every seven days. Contacts over that limit are skipped.
+  </Step>
+  <Step title="Each acceptance triggers a call">
+    When a contact accepts, their call is queued at once. If the campaign is paused at that moment, they're called when you resume it.
+  </Step>
+  <Step title="The campaign closes after seven days">
+    Contacts who decline aren't called. Contacts who never answer are left alone. Seven days after the requests go out, the campaign completes.
+  </Step>
+</Steps>
+
+Each contact is called at most once per campaign. A call that isn't answered, or reaches a busy line, isn't tried again. See [Sending limits](/documentation/campaigns/retries-and-concurrency) for the cases that are retried, and for how many calls run at once.
+
+## What you get from each call
+
+Campaign calls are ordinary WhatsApp calls, so they leave the same records: a call log, the recording and transcript if those are on for the agent, an activity on the contact, and the `call.started` and `call.completed` webhooks.

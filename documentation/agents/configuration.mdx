@@ -1,4 +1,35 @@
 ---
-title: "Agent Configuration"
-description: "Configure agent behavior, voice, language, and runtime settings"
+title: "Agent settings"
+description: "Identity, model, recording, transcription, follow-ups, and call length for an agent."
 ---
+
+This page covers the settings on the **Prompts & Identity**, **AI Model & Voice**, and **Advanced Settings** tabs. Tools and deployment have their own pages.
+
+## Prompts & Identity
+
+| Field | What it does |
+|---|---|
+| Agent Name | Shown in the dashboard and used in the default welcome message. Required. |
+| Primary Language | The main language you expect callers to use. Options are English (US and UK), Spanish, French, German, and Hindi. |
+| Timezone | The agent's local timezone. |
+| Welcome Message | The first thing the agent says. If you leave it empty, the agent says "Hello! I am" followed by its name, then asks how it can help. |
+| Agent prompt | Your instructions. See [Writing prompts](/documentation/agents/prompts). |
+
+## AI Model & Voice
+
+First choose a stack, Gemini or Sarvam, then a category within it. The tab shows what each choice costs: the AI reply rate in credits per reply, and the voice price in credits per minute. Below that, **Enable voice** turns calling on for the agent and opens the voice picker.
+
+Switching stacks clears the voice you picked, because voices belong to one stack. You can't save with voice on and no voice selected.
+
+## Advanced Settings
+
+| Setting | What it does |
+|---|---|
+| Enable Voice / Call Recording | Records calls so you can play them back from call logs. |
+| Enable Transcriptions | Saves a written transcript of each call. Needs recording turned on. |
+| Enable Follow Ups | Sends the **Follow Up Message** you write to the contact on WhatsApp after a call ends. |
+| Max Call Duration (Minutes) | Ends the call when the time is up. |
+
+<Warning>
+Calls are capped at 15 minutes. A higher value, or **Unlimited**, still ends the call at 15 minutes.
+</Warning>

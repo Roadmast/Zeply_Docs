@@ -1,38 +1,50 @@
 ---
-title: "WhatsApp Calls"
-description: "Inbound and outbound WhatsApp audio calls and voice notes"
+title: "WhatsApp calls"
+description: "Let your agent answer and place voice calls on your WhatsApp Business number."
 ---
 
-# WhatsApp Calls
+Your agent can talk to customers over WhatsApp's own calling, on the same business number they already message. Customers call you from the WhatsApp app, and with their permission your agent can call them back.
 
-*This page covers the technical implementation for handling WhatsApp voice interactions and audio streams.*
+## Set up
 
----
+<Steps>
+  <Step title="Connect your number">
+    On **Connections**, click **Connect WhatsApp** and finish signing in with your Meta business account. See [WhatsApp setup](/documentation/whatsapp/setup).
+  </Step>
+  <Step title="Make sure calling is on for the number">
+    WhatsApp Business calling has to be available and turned on for your number in Meta's settings. If it's off, calls never reach Sayvy AI.
+  </Step>
+  <Step title="Assign the number to a voice agent">
+    On the agent's **Deploy** tab, turn on WhatsApp and choose the number. The agent needs **Enable voice** turned on and a voice picked.
+  </Step>
+  <Step title="Call it">
+    Call the number from WhatsApp on your phone. The agent should answer with its welcome message.
+  </Step>
+</Steps>
 
-## WhatsApp Audio Architecture
+## Calls from customers
 
-*Content coming soon.*
+Every call to the number goes to its agent, at any hour. See [Inbound calls](/documentation/deploy/inbound-calls) for how routing works and how to handle out-of-hours calls.
 
-- Meta Cloud API voice note and audio stream integration
-- Audio container specifications (`audio/ogg; codecs=opus`)
-- Inbound vs. Outbound calling flows
+## Calls to customers
 
----
+WhatsApp only lets a business call someone who has agreed to it. Outbound calls happen through [call campaigns](/documentation/campaigns/voice-campaigns), which you create through the API or MCP. They handle the permission step for you:
 
-## Inbound Audio Ingestion & Transcoding
+1. The campaign sends each contact a template message asking for permission to call.
+2. When a contact accepts, the agent calls them.
+3. Permission usually lasts seven days, unless the contact grants it permanently.
 
-*Content coming soon.*
+Meta limits how often you can ask. Each contact can get one permission request per 24 hours, and two per seven days.
 
-- Receiving audio payload URLs via Meta webhooks
-- Stream downloading and Opus-to-PCM normalization for STT
-- Voice note transcription and intent recognition
+## After the call
 
----
+| What | When it's saved |
+|---|---|
+| Call log with status and duration | Always |
+| Recording | When **Enable Voice / Call Recording** is on |
+| Transcript | When **Enable Transcriptions** is on |
+| Follow-up WhatsApp message | When **Enable Follow Ups** is on |
+| Activity in the contact's history | Always |
+| `call.started` and `call.completed` webhooks | Always, if you've set up a webhook |
 
-## Outbound Audio Response Synthesis
-
-*Content coming soon.*
-
-- Transcoding neural TTS output into WhatsApp-compatible Opus containers
-- Media upload to Meta Graph API
-- Dispatching outbound voice messages and interactive audio responses
+Calls end after 15 minutes at most, whatever **Max Call Duration** is set to.

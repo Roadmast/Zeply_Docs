@@ -1,37 +1,58 @@
 ---
-title: "Setup"
-description: "Connecting your Meta Cloud API account and WhatsApp Business number"
+title: "WhatsApp setup"
+description: "Connect your WhatsApp Business account to Sayvy AI."
 ---
 
-# Setup
+Connecting takes a few minutes. You sign in with Meta, and Sayvy AI finds your WhatsApp Business numbers and starts receiving their messages. You don't need to configure a webhook, copy an access token, or create a Meta app.
 
-*This page covers configuring your Meta WhatsApp Business API credentials and linking your phone number to Sayvy AI.*
+## Before you start
 
----
+- A Meta business account. Create one at business.facebook.com if you don't have it.
+- A WhatsApp Business account in it, with at least one phone number registered for the WhatsApp Business Platform.
+- Admin access to that business in Meta.
 
-## Meta Business Account Setup
+Use a number you're happy to dedicate to Sayvy AI. A number registered for the Business Platform can't also be used in the regular WhatsApp app.
 
-*Content coming soon.*
+## Connect
 
-- Creating a Meta Business Manager account
-- Setting up a Meta App with the WhatsApp Business product enabled
-- Generating permanent System User access tokens
+<Steps>
+  <Step title="Open Connections">
+    In the dashboard sidebar, go to **Connections** and find the **WhatsApp Business** card.
+  </Step>
+  <Step title="Sign in with Meta">
+    Click **Connect WhatsApp**. You're taken to Meta to sign in and approve access for your business.
+  </Step>
+  <Step title="Return to Sayvy AI">
+    When you're sent back, a message confirms the connection and the card shows your phone number and the date it was connected.
+  </Step>
+</Steps>
 
----
+If something goes wrong, you'll see "Failed to connect WhatsApp Business account. Please try again." Try once more, and check that you signed in with an account that has admin access to the business.
 
-## Linking Your Business Phone Number
+## What happens when you connect
 
-*Content coming soon.*
+Sayvy AI looks at every business you manage in Meta, and every WhatsApp number in them. It subscribes to each one's events, so incoming messages and calls reach your inbox. All of those numbers are connected, not only one.
 
-- Registering a clean, dedicated phone number with Meta
-- Completing SMS or Voice OTP verification
-- Setting display name and business profile attributes
+Connecting doesn't sync your templates. Open **Message Templates** and click **Sync from Meta** to bring them in. See [Message templates](/documentation/messaging/templates).
 
----
+## The WhatsApp card
 
-## Webhook Configuration
+The card shows your number's verified name, phone number, and connection date, along with the IDs Meta uses.
 
-*Content coming soon.*
+<Note>
+The **Webhooks** row always reads "Verified & Subscribed" once WhatsApp is connected. It's a label, not a live check. To test, send a message to your number and see if it reaches the inbox.
+</Note>
 
-- Setting the Sayvy AI webhook callback URL in the Meta App Dashboard
-- Entering the verification token and subscribing to `messages` events
+The card shows only your first number. To see every connected number, use the number picker when you create a campaign.
+
+## Several numbers
+
+Every number in your Meta businesses is connected automatically, and you assign each to an agent on that agent's **Deploy** tab. A number can have only one agent. There's no button to add a single number. If you add a number in Meta later, click **Update Token** to find it.
+
+## Renew access
+
+Meta access lasts about 60 days. When it ends you'll see "WhatsApp Session Expired or Invalidated on Meta", and messages and calls stop. Click **Reconnect WhatsApp**, or **Update Token** on the card, and sign in again.
+
+## Disconnect
+
+**Disconnect** stops Sayvy AI receiving events for your numbers. Campaigns and AI replies that use them pause. Your contacts, conversations, and templates stay where they are. Reconnect later and carry on.

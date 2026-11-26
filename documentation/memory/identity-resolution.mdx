@@ -1,35 +1,29 @@
 ---
-title: "Identity Resolution"
-description: "Connecting anonymous web visitors, phone numbers, and WhatsApp contacts"
+title: "Identity resolution"
+description: "How Sayvy AI decides which contact a message or call belongs to."
 ---
 
-# Identity Resolution
+When a message arrives, Sayvy AI looks for an existing contact to attach it to. If none matches, it creates one. The match is made on a single identifier per channel, stored in the contact's phone number field.
 
-*This page covers how Sayvy AI unifies web callers and WhatsApp conversations into a single customer profile.*
+| Channel | Identifier | Example |
+|---|---|---|
+| WhatsApp | The sender's WhatsApp number, digits only, as WhatsApp sends it | `919876543210` |
+| Instagram | `ig_` followed by the sender's Instagram ID | `ig_17841400000000000` |
+| Email | The sender's address in lowercase | `asha@example.com` |
+| Web widget | `web_` followed by the visitor's session ID | `web_5f2c9a` |
 
----
+Each identifier is unique in a workspace, so the same WhatsApp number always lands on the same contact.
 
-## Phone Number Normalization
+## Web visitors
 
-*Content coming soon.*
+People who chat in your web widget are anonymous. Each session creates a contact named "Web Visitor" with a short code, tagged `web_widget`. If the visitor gives a phone number or email in the chat, it isn't used to link them to an existing contact.
 
-- Converting numbers to international E.164 standard (`+14155552671`)
-- Using phone numbers as the universal identity anchor
+## One person, several contacts
 
----
+Contacts are never merged. Someone who messages you on WhatsApp and later on Instagram becomes two separate contacts, each with its own history. There's no merge tool yet.
 
-## Web Visitor Merging
+To keep track of these people, add a note or a custom field on each contact that points to the other one. That way your team has the full picture, even though the agent treats them as two people.
 
-*Content coming soon.*
+## Contacts you add yourself
 
-- Capturing phone numbers or emails during browser web calls
-- Merging temporary web session IDs into existing CRM contact records
-
----
-
-## Cross-Channel History
-
-*Content coming soon.*
-
-- Passing context seamlessly when a user moves between Web Voice and WhatsApp
-- Maintaining a single conversational thread across channels
+When you add a contact by hand or by import, the phone number is stored exactly as you type it. A WhatsApp message from that person only matches if the number is written the way WhatsApp sends it: country code and digits, no `+`, no spaces. See [Import and export](/documentation/crm/import-export).

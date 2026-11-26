@@ -1,38 +1,37 @@
 ---
-title: "Custom Fields"
-description: "Creating custom contact properties and schema validation"
+title: "Custom fields"
+description: "Store your own details on a contact as key and value pairs."
 ---
 
-# Custom Fields
+Custom fields hold details about a contact that the standard fields don't cover: a policy number, a preferred branch, a birthday, an email address. Each one is a key, such as `branch`, with a value, such as `Baner`.
 
-*This page covers defining custom attributes, configuring AI auto-tagging rules, and auditing the unified activity timeline.*
+There's no list of fields to set up first. Add whatever keys you need on each contact. Different contacts can have different fields.
 
----
+## Add or edit custom fields
 
-## Strongly Typed Custom Attributes
+Custom fields are edited from the inbox. Open a conversation with the contact, open the customer profile, and click **Edit Contact Details**. Under **Custom Fields**, click **Add Field**, enter a key and value, then **Save Details**.
 
-*Content coming soon.*
+The **Email** field in that form is stored as a custom field called `email`.
 
-- Defining custom fields on contacts (`string`, `number`, `boolean`, `date`, `enum`)
-- Reading and updating custom attributes via workflows and mid-call tools
-- Form validation and schema constraints
+## Keep keys consistent
 
----
+Because fields aren't defined in advance, nothing stops one teammate typing `Branch` and another `branch_name`. That matters more than it seems: campaign variables and API integrations look fields up by their exact key, so a contact with `Branch` won't get the value meant for `branch`. Write down the keys your team uses, in lowercase with underscores.
 
-## AI Auto-Tagging Rules
+## Fields Sayvy AI adds
 
-*Content coming soon.*
+Contacts from Instagram get a few fields filled in automatically, such as their Instagram username and display name.
 
-- Automatic rule-based and LLM classifier tagging (`#vip`, `#churn_risk`, `#high_intent`, `#pricing_sensitive`)
-- Applying tags based on sentiment score, keywords, and detected intent
-- Triggering workflow automations when specific tags are attached
+## Where custom fields are used
 
----
+| Place | How |
+|---|---|
+| WhatsApp campaigns | A template variable can take its value from a custom field |
+| Inbox profile | Shown and edited under **Custom Fields** |
+| API | Read and written on the contact object |
 
-## Unified Activity Timeline & Audit Feed
+Agents can't read or change custom fields during a conversation yet.
 
-*Content coming soon.*
+## Things to know
 
-- Chronological event stream for each contact
-- Embedded call recordings, wave forms, and full timestamped transcripts
-- WhatsApp message history and interactive button click logs
+- Custom fields can't be imported from a spreadsheet. The import only reads phone number, name, and tags.
+- When you update custom fields through the API, send the full set. The fields you send replace the old ones rather than being merged in.

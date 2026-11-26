@@ -1,37 +1,49 @@
 ---
-title: "Interactive Messages"
-description: "Buttons, list menus, and media messages in WhatsApp"
+title: "Interactive messages and Flows"
+description: "Collect structured answers in WhatsApp with Flows, and see how button taps are handled."
 ---
 
-# Interactive Messages
+WhatsApp can show customers tappable forms instead of making them type. Sayvy AI supports this through WhatsApp Flows: forms with one or more screens that a customer fills in inside the chat.
 
-*This page covers building and responding to interactive WhatsApp message formats and handling multimedia attachments.*
+## What's supported
 
----
+| | Support |
+|---|---|
+| Send a Flow to a contact | Yes |
+| Flow buttons on templates | Yes |
+| Receive a Flow submission | Yes |
+| Receive button and list replies | Yes |
+| Send reply buttons or list menus | Not yet |
 
-## Interactive Formats: Buttons & Lists
+## Build a Flow
 
-*Content coming soon.*
+Open **WhatsApp Flows** from the dashboard. Click **New Flow**, name it (for example "Lead Capture Form"), and choose a category. In the editor you add screens, and on each screen you add form fields. Use **Preview** to see how it looks on a phone.
 
-- Quick reply buttons (up to 3 buttons per message)
-- List messages (structured menu with sections, up to 10 items)
-- Character limits and validation rules for interactive components
+You can also paste in a Flow you built elsewhere. Click **Import Flow JSON**. Once a Flow is ready, publish it. Only published Flows can be sent.
 
----
+The list shows each Flow's name, category, and status, and you can search it. Open a Flow to see its submissions.
 
-## Inbound Media Pipeline
+## Send a Flow
 
-*Content coming soon.*
+You can send a published Flow in two ways:
 
-- Processing incoming images, documents (PDF), and voice notes
-- Fetching media binaries from Meta temporary URLs
-- Storage, security scanning, and ingestion into Sayvy multimodal and transcription models
+- To one contact, with the Flow's send option. Enter the contact's WhatsApp number, add an optional header, message body, footer, and button text, then send.
+- Inside a template, by adding a **Flow Button** in the template builder. Campaigns can then send the Flow to many contacts. See [Message templates](/documentation/messaging/templates).
 
----
+A Flow message sent on its own needs an open [24-hour window](/documentation/whatsapp/24h-session-management).
 
-## Interactive Callback Routing
+## Flow submissions
 
-*Content coming soon.*
+When a customer finishes a Flow, Sayvy AI saves their answers. See them under the Flow's submissions, or across all Flows in the global submissions list.
 
-- Parsing `button_reply.id` and `list_reply.id` payloads
-- Routing interactive selections directly into workflow triggers and intent classifiers
+## Button and list replies
+
+When a customer taps a button or picks from a list on a message you sent, Sayvy AI saves it as a message in the conversation, showing the label they tapped.
+
+<Warning>
+A button tap doesn't start an AI reply. Only typed text does. After a button tap, a teammate needs to reply, or the customer needs to type something. Keep that in mind when you design campaigns with quick reply buttons.
+</Warning>
+
+## Call permission replies
+
+When a customer answers a call permission request, the reply is saved as "Call permission: allowed" or "declined", and the call campaign that sent it moves on. See [Call campaigns](/documentation/campaigns/voice-campaigns).

@@ -1,26 +1,32 @@
 ---
-title: "Context Buffer"
-description: "Sliding window conversational context and token budgeting during active sessions"
+title: "Conversation context"
+description: "How much of a conversation your agent sees when it writes each reply."
 ---
 
-# Context Buffer
+Each time an agent replies, it gets your prompt plus a slice of the conversation so far. How big that slice is depends on the channel.
 
-*This page covers real-time short-term conversation memory and prompt token budget management.*
+## Messages
 
----
+On WhatsApp and the web widget, the agent sees the last 30 messages of the current ticket. Older messages fall out of view as the conversation grows. Anything said earlier than that, the agent no longer knows unless it's in the prompt or the knowledge base.
 
-## Sliding Window Memory
+Context belongs to one ticket. The agent doesn't see:
 
-*Content coming soon.*
+- earlier tickets that were closed, even with the same contact
+- the contact's conversations on other channels
+- the contact's notes, tags, or custom fields
 
-- Maintaining active conversational context across recent turns
-- Managing LLM token budgets dynamically during long calls or chats
+So if a customer comes back a week after their ticket was closed, the agent starts the new conversation fresh.
 
----
+## Calls
 
-## Session State Persistence
+On a call, the agent follows the call as it goes. Once a call runs past about ten turns, older turns are condensed into a summary, so the agent keeps the gist rather than every word. Each call starts fresh, without the contact's earlier calls or messages.
 
-*Content coming soon.*
+## Reply limits
 
-- Preserving context across intermittent network drops
-- Fast session restoration when resuming conversation
+A single reply can use up to four tool calls, for example searching the knowledge base and then checking calendar slots, before the agent answers.
+
+## Writing for limited context
+
+- Put facts the agent must always know in the prompt, not in an early message.
+- For long-running conversations, such as an order that spans days, keep the ticket open rather than closing and reopening it.
+- If your team needs the agent to know something about a returning customer, the knowledge base is the reliable place for shared facts. Per-contact details don't reach the agent yet.

@@ -1,36 +1,34 @@
 ---
-title: "Messaging Window"
-description: "Understanding WhatsApp 24-hour customer service session rules"
+title: "The 24-hour window"
+description: "When you can send free-form WhatsApp messages, and what to do when the window closes."
 ---
 
-# Messaging Window
+WhatsApp only lets a business send free-form messages for 24 hours after the customer's last message. This is called the customer service window. Inside it, you and your agent can reply however you like. Outside it, you can only send a template that Meta has approved.
 
-*This page covers the rules, timers, and state machine lifecycle governing Meta's 24-hour customer service window.*
+## How it works
 
----
+Every message from a customer opens or restarts a 24-hour window. Replies inside the window are free-form: text, images, documents, and so on. When 24 hours pass with no message from the customer, the window closes.
 
-## Session Lifecycle & Window Rules
+Starting a conversation yourself, with a customer who hasn't written recently, always needs a template. Once the customer replies, the window opens and you can write freely again.
 
-*Content coming soon.*
+## What Sayvy AI does
 
-- User-Initiated Conversations (UIC) vs. Business-Initiated Conversations (BIC)
-- 24-hour sliding window mechanics calculated from the last user message
-- Freeform conversational messages vs. pre-approved HSM template constraints
+Sayvy AI doesn't check the window for you. Neither the inbox composer nor the AI agent stops a message from being sent after 24 hours. WhatsApp rejects it, and you see an error instead of a delivered message.
 
----
+| Where | What happens after 24 hours |
+|---|---|
+| Inbox composer | The send fails and the composer shows an error |
+| AI agent | Replies come only after a customer message, so they're always in the window |
+| Campaigns | Always use templates, so the window doesn't apply |
 
-## Session State Machine
+## What to do when the window has closed
 
-*Content coming soon.*
+Send an approved template. You can send one from the inbox with the template button beside the search box, or in bulk with a [WhatsApp campaign](/documentation/campaigns/whatsapp-campaigns). When the customer replies, you're back inside the window.
 
-- States: `IDLE`, `ACTIVE_24H`, `EXPIRED`, `TEMPLATE_PENDING`
-- Transitions triggered by inbound messages, timer expirations, and template replies
+Keep a few templates ready for common cases: following up on a quote, reminding someone of an appointment, or asking if they still need help. See [Message templates](/documentation/messaging/templates).
 
----
+## Tips
 
-## Expiration Handling & Fallbacks
-
-*Content coming soon.*
-
-- Graceful degradation when the window closes mid-workflow
-- Automatic re-engagement via approved utility templates
+- Reply to customers within the day when you can. It keeps the conversation free-form.
+- If your team often takes over from the AI, check older tickets each morning for ones nearing 24 hours.
+- Calls follow separate rules. See [WhatsApp calls](/documentation/voice/whatsapp-calls).

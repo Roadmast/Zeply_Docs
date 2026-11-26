@@ -1,37 +1,37 @@
 ---
-title: "Voice Persona"
-description: "Designing conversational prompts, speech style, and pronunciation"
+title: "Writing for voice"
+description: "Write prompts that sound natural when an agent speaks them on a call."
 ---
 
-# Voice Persona
+On a call, everything the agent writes is read aloud. A reply that looks fine in chat can sound stiff, or confusing, when spoken. These habits make a voice agent easier to listen to.
 
-*This page covers voice prompt design principles, neural voice styling, and SSML markup control.*
+## Keep turns short
 
----
+Ask the agent to answer in one or two sentences, then stop and let the caller respond. People can't skim audio. A long answer with three options buries the first two.
 
-## Conversational Voice Prompt Engineering
+```markdown
+## Style
+You are on a phone call. Answer in one or two short sentences.
+Ask one question at a time. Never read out lists longer than three items.
+```
 
-*Content coming soon.*
+## Write numbers and symbols the way you'd say them
 
-- Designing system prompts for natural spoken dialogue
-- Eliminating visual artifacts (markdown tables, bullet points, raw URLs)
-- Phonetic formatting for acronyms, numbers, and currency values
+Voices read what they're given. Tell the agent how to say the things your business mentions often:
 
----
+- Prices: "fifteen hundred rupees", not "₹1,500/-"
+- Times: "half past four", not "16:30"
+- Phone numbers: read in small groups, with a pause between them
+- Links and email addresses: avoid them on calls. Offer to send them on WhatsApp instead.
 
-## SSML Markup & Prosody Control
+## No formatting
 
-*Content coming soon.*
+Markdown, bullet points, and emoji mean nothing in speech, and some voices read the symbols out loud. Sayvy AI already tells the model to speak naturally, but repeat it in your prompt if you see formatting slip into replies.
 
-- Pause insertion (`<break time="250ms"/>`)
-- Speech rate and pitch modulation (`<prosody>`)
-- Pronunciation lexicons and phonetic spellings (`<phoneme>`)
+## Give it a personality, briefly
 
----
+One or two lines on tone are enough: "Warm and patient. You speak like a helpful receptionist, not a salesperson." Long personality descriptions tend to make replies longer, not better.
 
-## Latency-Masking Utterances (Filler Audio)
+## What isn't supported
 
-*Content coming soon.*
-
-- Dynamic filler generation during background database queries and tool calls
-- Contextual fillers ("*Let me check that order for you...*")
+SSML tags, such as `<break>` or `<prosody>`, are not supported. The voice would read them as text. To slow the agent down or add pauses, use shorter sentences and commas.
