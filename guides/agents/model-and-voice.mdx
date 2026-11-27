@@ -2,3 +2,51 @@
 title: "Choose a model and voice"
 description: "Pick a stack, a preset, and a voice."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll choose the model that writes replies and the voice that speaks them, on the **AI Model & Voice** tab.
+
+<Steps>
+  <Step title="Open the tab">
+    In the agent editor, click **AI Model & Voice**.
+
+    <Visual note="AI Model & Voice tab" />
+  </Step>
+  <Step title="Choose a stack">
+    Pick **Gemini**, or **Sarvam** if most callers speak an Indian language. Choose the stack before the voice, because switching stacks clears the voice.
+
+    <Visual note="Stack selector with Gemini selected" />
+  </Step>
+  <Step title="Choose a category">
+    Pick a category within the stack. Flash is a good start. The tab shows the reply rate and the voice price beside your choice.
+
+    <Visual note="Category options with prices" />
+  </Step>
+  <Step title="Switch on Enable voice">
+    Turn on **Enable voice**. The voice list opens below.
+
+    <Visual note="Enable voice switch on, voice list showing" />
+  </Step>
+  <Step title="Pick a voice">
+    Search by name or gender, press play on a few, and click the one you want.
+
+    <Visual kind="gif" note="Searching the voice list and playing a sample" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes**. You can't save with voice on and no voice picked.
+
+    <Visual note="Save Changes button" />
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Add tools" icon="wrench" href="/guides/agents/tools">
+    Let the agent act mid-conversation.
+  </Card>
+  <Card title="Voices" icon="book" href="/documentation/voice/voices">
+    Voices by stack.
+  </Card>
+</CardGroup>

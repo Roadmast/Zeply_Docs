@@ -3,17 +3,51 @@ title: "Call logs"
 description: "Find a call, play its recording, and read the transcript."
 ---
 
-# Review call logs
+import { Visual } from "/snippets/visual.mdx";
 
-Call Logs gives you a searchable record of completed voice interactions. Use it to understand what happened, verify an outcome, and improve your agent or campaign.
+**Call Logs** lists every WhatsApp voice call your agents handle, in both directions. You'll find a call and open its recording and transcript.
 
-## Investigate a call
+<Visual note="Call Logs page with a list of calls" />
 
-1. Open **Call Logs** and filter by date, agent, campaign, or outcome.
-2. Open the call to review its metadata and transcript.
-3. Listen to the recording when you need to verify tone, interruptions, or a customer detail.
-4. Record the follow-up in your CRM or inbox workflow.
+<Steps>
+  <Step title="Open Call Logs">
+    Click **Call Logs** in the left sidebar. Each call shows its direction, numbers, status, duration, and time.
 
-<Note>When reviewing a failed call, check the transcript first, then the recording. This usually separates an instruction issue from a channel or connection issue.</Note>
+    <Visual note="Call Logs list in card view" />
+  </Step>
+  <Step title="Switch the view">
+    Use the view toggle to move between cards and a table.
 
-See the [Call Logs API](/api-reference/call-logs/overview) when you need to export or process call data programmatically.
+    <Visual note="View toggle set to table" />
+  </Step>
+  <Step title="Narrow the list">
+    Search by call ID or phone number, or filter by direction (inbound or outbound) and status.
+
+    <Visual note="Filters set to inbound and completed" />
+  </Step>
+  <Step title="Open a call">
+    Click **Details** on a call. You see the overview, a **Voice Recording** player, a summary, and the **Call Transcription**.
+
+    <Visual note="Call details with the recording player and transcript" />
+  </Step>
+  <Step title="Download the audio">
+    Click **Download Audio File** under **Voice Recording**.
+
+    <Visual note="Download Audio File button" />
+  </Step>
+</Steps>
+
+<Note>
+Recordings and transcripts exist only if the agent had them turned on at the time of the call. Browser calls from the web widget aren't logged. See [Set recording and follow-ups](/guides/agents/advanced-settings).
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Read your analytics" icon="chart-no-axes-combined" href="/guides/analytics">
+    See call patterns across the workspace.
+  </Card>
+  <Card title="Call logs" icon="book" href="/documentation/conversations/call-logs">
+    Statuses and the API.
+  </Card>
+</CardGroup>

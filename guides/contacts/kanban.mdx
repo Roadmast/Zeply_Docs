@@ -2,3 +2,47 @@
 title: "Use the Kanban view"
 description: "See contacts in columns by lifecycle stage."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+The Kanban view lays contacts out in columns by lifecycle stage, so you can see at a glance how many sit at each step.
+
+<Visual note="Kanban view with five stage columns and contact cards" />
+
+<Steps>
+  <Step title="Open CRM Hub">
+    Click **CRM Hub** in the left sidebar.
+
+    <Visual note="CRM Hub table view" />
+  </Step>
+  <Step title="Switch to Kanban">
+    Use the view switcher to choose **Kanban**.
+
+    <Visual note="View switcher with Kanban selected" />
+  </Step>
+  <Step title="Read the columns">
+    The columns are the five stages: new, engaged, qualified, customer, and lost. Each card is one contact.
+
+    <Visual note="Columns labelled with the five stages" />
+  </Step>
+  <Step title="Open a card">
+    Click a card to open the contact's profile and change their stage.
+
+    <Visual note="A contact card being opened" />
+  </Step>
+</Steps>
+
+<Note>
+The stages are fixed. You can't add, rename, or remove them, and the CRM has no deals or multiple pipelines. Use tags or custom fields for anything else.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Work with a contact" icon="user" href="/guides/contacts/profile">
+    Change a stage or score.
+  </Card>
+  <Card title="CRM data model" icon="book" href="/documentation/crm/data-model-and-pipelines">
+    Stages and what they mean.
+  </Card>
+</CardGroup>

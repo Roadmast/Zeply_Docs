@@ -3,17 +3,66 @@ title: "API keys"
 description: "Create and revoke API keys for your workspace."
 ---
 
-# Create and rotate API keys
+import { Visual } from "/snippets/visual.mdx";
 
-API keys authenticate server-to-server requests. Treat them like passwords: keep them on your backend, limit who can view them, and rotate them on a schedule.
+You'll create a key for your server and, later, revoke it. Each key belongs to one workspace. Keys can't be requested during the free trial.
 
 ## Create a key
 
-1. Open **Settings → API keys**.
-2. Select **Create API key** and give it a purpose-based name, such as `production-sync`.
-3. Copy the secret immediately and store it in your server's secret manager.
-4. Send it using the `Authorization: Bearer <your-key>` header.
+<Steps>
+  <Step title="Open API Keys">
+    Click **Developers**, then **API Keys**.
 
-<Warning>Never commit a key to source control, place it in browser code, or paste it into a support ticket. If it is exposed, revoke it immediately and create a replacement.</Warning>
+    <Visual note="Developers menu with API Keys selected" />
+  </Step>
+  <Step title="Click Create New API Key">
+    A form opens.
 
-See [API authentication](/api-reference/authentication) for request examples and [API limits](/api-reference/limits) for operational constraints.
+    <Visual note="Create New API Key form, empty" />
+  </Step>
+  <Step title="Fill it in">
+    Enter a **Key Name** that says where it's used, such as "Production backend worker". Choose **Permissions / Scopes** (Full Access, Read Only, or Webhooks & Events Only) and an **Expiration**.
+
+    <Visual note="Form filled in with Read Only and a 90-day expiry" />
+  </Step>
+  <Step title="Click Generate Key">
+    The key appears, starting with `sayvy_sk_live_`. Copy it now.
+
+    <Visual note="Generated key with the copy button" />
+  </Step>
+  <Step title="Store it">
+    Paste it into a password manager or your server's secret store.
+  </Step>
+</Steps>
+
+<Warning>
+The full key is shown only once. If you lose it, create a new one.
+</Warning>
+
+## Revoke a key
+
+<Steps>
+  <Step title="Find the key">
+    On **API Keys**, find it in the list by its name and masked prefix.
+
+    <Visual note="Key list with one key highlighted" />
+  </Step>
+  <Step title="Revoke it">
+    Revoke or delete it. Anything still using the key stops working straight away.
+
+    <Visual note="Revoke confirmation" />
+  </Step>
+</Steps>
+
+To replace a key, create the new one first, update your systems, then revoke the old one.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Webhooks" icon="webhook" href="/guides/webhooks">
+    Get events on your server.
+  </Card>
+  <Card title="API keys and security" icon="book" href="/documentation/platform/api-keys-and-security">
+    Using a key and keeping it safe.
+  </Card>
+</CardGroup>

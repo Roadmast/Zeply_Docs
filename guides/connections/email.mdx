@@ -2,3 +2,57 @@
 title: "Connect email"
 description: "Forward a mailbox into the inbox and confirm it."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+Email arrives by forwarding. You'll get a forwarding address from Sayvy AI and point your mailbox at it.
+
+<Visual kind="gif" note="Connect Email through forwarding to the first email in the inbox" />
+
+<Steps>
+  <Step title="Click Connect Email">
+    Open **Connections**, find the **Email Channel** card, and click **Connect Email**.
+
+    <Visual note="Email Channel card with Connect Email highlighted" />
+  </Step>
+  <Step title="Enter your address">
+    Type the address customers write to and continue.
+
+    <Visual note="Address entry dialog" />
+  </Step>
+  <Step title="Copy the forwarding address">
+    Sayvy AI shows an address to forward to. Copy it.
+
+    <Visual note="Forwarding address shown by Sayvy AI" />
+  </Step>
+  <Step title="Add a forwarding rule in your mail app">
+    In Gmail or Outlook, add auto-forwarding to that address.
+
+    <Visual note="Gmail forwarding settings with the address pasted in" />
+  </Step>
+  <Step title="Confirm forwarding">
+    Your mail provider sends a confirmation message. Sayvy AI catches it and shows the link or code on screen. Approve it there.
+
+    <Visual note="Confirmation link or code shown in Sayvy AI" />
+  </Step>
+  <Step title="Send a test email">
+    Write to your address from another account. It appears in **Inbox**.
+
+    <Visual note="Inbox showing the test email" />
+  </Step>
+</Steps>
+
+<Note>
+AI agents don't reply on email yet; your team answers from the inbox.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reply in the inbox" icon="inbox" href="/guides/inbox/reply">
+    Answer the email.
+  </Card>
+  <Card title="Channels" icon="book" href="/documentation/inbox/channels">
+    How email forwarding works.
+  </Card>
+</CardGroup>

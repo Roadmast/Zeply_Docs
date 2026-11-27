@@ -2,3 +2,62 @@
 title: "Create a template campaign"
 description: "Walk through the six steps of the campaign builder."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll send one approved WhatsApp template to a group of contacts. You need a template and a connected WhatsApp number.
+
+<Visual kind="gif" note="The six builder steps from Basics to Launch Campaign" />
+
+<Steps>
+  <Step title="Click New Campaign">
+    On **Campaigns**, click **New Campaign**.
+
+    <Visual note="Campaigns page with New Campaign highlighted" />
+  </Step>
+  <Step title="Basics">
+    Enter a **Campaign Name** and choose the **WhatsApp Business Channel**, the number messages come from.
+
+    <Visual note="Basics step filled in" />
+  </Step>
+  <Step title="Template">
+    Under **Select WhatsApp Template**, pick a template. The preview shows it as contacts will see it.
+
+    <Visual note="Template step with the preview" />
+  </Step>
+  <Step title="Audience">
+    Choose who gets it. See [Choose a campaign audience](/guides/campaigns/audience).
+
+    <Visual note="Audience step with Eligible Audience Preview" />
+  </Step>
+  <Step title="Variables">
+    This step appears only if the template has placeholders such as `{{1}}`. For each one, choose **Contact Field**, **Same for Everyone**, or **From CSV File**. Set **If missing** to **Use fallback** or **Skip contact**.
+
+    <Visual note="Variables step with a placeholder mapped to a contact field" />
+  </Step>
+  <Step title="Schedule">
+    Choose **Send Now (Immediate Launch)** or **Schedule for Later** and pick a time.
+
+    <Visual note="Schedule step" />
+  </Step>
+  <Step title="Review and launch">
+    Check the summary and the live preview, then click **Launch Campaign**.
+
+    <Visual note="Review step with Launch Campaign highlighted" />
+  </Step>
+</Steps>
+
+<Note>
+Only templates Meta has approved are delivered. Templates with an image, video, or document header can't be sent with their media from a campaign yet.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Read campaign results" icon="chart-simple" href="/guides/campaigns/results">
+    Check delivery after launch.
+  </Card>
+  <Card title="WhatsApp campaigns" icon="book" href="/documentation/campaigns/whatsapp-campaigns">
+    Variables and what happens after launch.
+  </Card>
+</CardGroup>

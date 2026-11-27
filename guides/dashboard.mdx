@@ -3,26 +3,48 @@ title: "Dashboard"
 description: "Find your way around the dashboard and get your workspace ready."
 ---
 
-# Start with the dashboard
+import { Visual } from "/snippets/visual.mdx";
 
-The dashboard is your workspace home. Use it to see what is happening across conversations, agents, campaigns, and connected channels, then jump directly into the area that needs your attention.
+The dashboard is the first screen after you log in. This walkthrough shows where things are and what to set up first.
 
-## A simple first-run path
+<Visual note="Full dashboard with the sidebar expanded and the workspace name at the top" />
 
 <Steps>
-  <Step title="Confirm your workspace">Check the workspace name and members in **Settings**.</Step>
-  <Step title="Connect a channel">Open **Connections** and connect the channel where your customers already talk to you.</Step>
-  <Step title="Create an agent">Add instructions and tools, then test a conversation before making it available to customers.</Step>
-  <Step title="Review the first conversation">Use **Inbox** for active conversations and **Call Logs** for completed voice calls.</Step>
+  <Step title="Check your workspace">
+    Look at the workspace name at the top of the left sidebar. Click it to see the workspaces you can switch to.
+
+    <Visual note="Workspace menu open, current workspace highlighted" />
+  </Step>
+  <Step title="Connect a channel">
+    Click **Connections** in the sidebar. You land on a page with one card per service. Click the connect button on the card you want.
+
+    <Visual note="Connections page with the channel cards" />
+  </Step>
+  <Step title="Create an agent">
+    Click **Agents**, then **New Agent**. The editor opens on the **Prompts & Identity** tab.
+
+    <Visual note="Agents page with New Agent highlighted" />
+  </Step>
+  <Step title="Watch the first conversation">
+    Click **Inbox** to see live conversations. Click **Call Logs** to see finished voice calls.
+
+    <Visual note="Inbox with one open conversation" />
+  </Step>
 </Steps>
 
-## Where to go next
+## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Create an agent" icon="robot" href="/guides/agents">Define how your AI agent responds and what it can do.</Card>
-  <Card title="Connect channels" icon="plug" href="/guides/connections">Bring messaging and voice conversations into one workspace.</Card>
-  <Card title="Work in the inbox" icon="inbox" href="/guides/inbox">Review, assign, and reply to customer conversations.</Card>
-  <Card title="Read your analytics" icon="chart-no-axes-combined" href="/guides/analytics">Measure activity and spot trends across your workspace.</Card>
+  <Card title="Build your first agent" icon="robot" href="/guides/get-started/first-agent">
+    From an empty workspace to a working agent.
+  </Card>
+  <Card title="Connect channels" icon="plug" href="/guides/connections">
+    Bring WhatsApp and other channels in.
+  </Card>
+  <Card title="Work in the inbox" icon="inbox" href="/guides/inbox">
+    Read and reply to conversations.
+  </Card>
+  <Card title="Read your analytics" icon="chart-no-axes-combined" href="/guides/analytics">
+    See activity across the workspace.
+  </Card>
 </CardGroup>
-
-<Note>Start with a small audience. Verify your agent's answers, escalation path, and channel connection before launching broadly.</Note>

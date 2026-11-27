@@ -2,3 +2,70 @@
 title: "Build your first agent"
 description: "Go from a new account to an agent you can talk to."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll create a voice agent for a dental clinic and talk to it from your browser. It takes about ten minutes.
+
+<Visual kind="gif" note="The whole flow sped up, from New Agent to the first test call" />
+
+<Steps>
+  <Step title="Open Agents">
+    Click **Agents** in the left sidebar. You land on the list of your agents, which is empty for now.
+
+    <Visual note="Agents page, empty state, sidebar item highlighted" />
+  </Step>
+  <Step title="Click New Agent">
+    Click **New Agent** at the top right, then choose **Prompt-based AI Agent**.
+
+    <Visual note="New Agent dialog with Prompt-based AI Agent highlighted" />
+  </Step>
+  <Step title="Name the agent and add a welcome message">
+    You're on the **Prompts & Identity** tab. Type a name in **Agent Name**, then paste this into **Welcome Message**:
+
+    ```text
+    Hi, you've reached Green Leaf Dental. How can I help?
+    ```
+
+    <Visual note="Prompts & Identity tab with name and welcome message filled in" />
+  </Step>
+  <Step title="Paste the prompt">
+    Scroll to **Agent prompt** and paste:
+
+    ```text
+    You are the front desk for Green Leaf Dental. Answer questions about
+    opening hours, prices, and treatments. If someone wants an appointment,
+    collect their name and preferred day. Keep answers short. You are on a call.
+    ```
+
+    <Visual note="Agent prompt field filled in" />
+  </Step>
+  <Step title="Choose a voice">
+    Open the **AI Model & Voice** tab. Switch on **Enable voice**, click a voice in the list, and press play to hear it.
+
+    <Visual note="AI Model & Voice tab, Enable voice on, one voice selected" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes** at the top right.
+
+    <Visual note="Save Changes button and the confirmation message" />
+  </Step>
+  <Step title="Talk to it">
+    Click **Test Agent**, open the **Webcall** tab, and allow the microphone. Say "What are your opening hours?" The agent answers out loud.
+
+    <Visual kind="gif" note="Test Agent panel, Webcall tab, a short exchange" />
+  </Step>
+</Steps>
+
+That's a working agent. To go further, see the [full agent editor](/documentation/agents/overview) in the documentation.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Test an agent" icon="flask" href="/guides/agents/test">
+    Try chat and a few harder questions.
+  </Card>
+  <Card title="Connect WhatsApp" icon="plug" href="/guides/connections/whatsapp">
+    Let customers reach the agent.
+  </Card>
+</CardGroup>

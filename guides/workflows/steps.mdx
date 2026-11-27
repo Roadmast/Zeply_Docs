@@ -2,3 +2,57 @@
 title: "Add and connect steps"
 description: "Build the graph, set up each step, and write transitions."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll add steps to the canvas, connect them, and set each one up. Open your workflow in the builder on the **Editor** tab first.
+
+<Visual kind="gif" note="Adding a step, connecting it, and opening its settings" />
+
+<Steps>
+  <Step title="Add a step">
+    Click **Add Node**, or drag a step from the palette onto the canvas.
+
+    <Visual note="Add Node button and the step palette" />
+  </Step>
+  <Step title="Connect it">
+    Drag from the handle on one step to the next step. An arrow appears between them.
+
+    <Visual note="Arrow being drawn between two steps" />
+  </Step>
+  <Step title="Open the step">
+    Double-click the step. Its settings open with **Parameters** and **Transitions** tabs.
+
+    <Visual note="Step settings panel, Parameters tab" />
+  </Step>
+  <Step title="Say what it does">
+    In a **Greeting** or **Conversation** step, choose **Prompt** and type an instruction, such as "Ask what brings them in today". Choose **Static sentence** to say exact words instead.
+
+    <Visual note="Conversation step with a prompt typed in" />
+  </Step>
+  <Step title="Write a transition">
+    Open **Transitions**. Add a **When** with a plain-language condition, such as "The user wants to speak to a person". Choose **Always** to move on as soon as the step is done.
+
+    <Visual note="Transitions tab with one When condition" />
+  </Step>
+  <Step title="Finish with an Ending">
+    Add an **Ending** step with a final message so every path has somewhere to stop.
+
+    <Visual note="Ending step with a final message" />
+  </Step>
+</Steps>
+
+<Note>
+Every workflow has one **Start** step. A step with no transitions keeps the conversation where it is.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Publish a workflow" icon="rocket" href="/guides/workflows/publish">
+    Test the graph and make it live.
+  </Card>
+  <Card title="Steps and transitions" icon="book" href="/documentation/workflows/architecture-and-triggers">
+    Every step type, including Extract Variables and Logic Split.
+  </Card>
+</CardGroup>

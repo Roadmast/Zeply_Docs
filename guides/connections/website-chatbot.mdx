@@ -2,3 +2,57 @@
 title: "Add the website chatbot"
 description: "Customize the widget and add it to your site."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll switch the widget on for an agent, style it, and paste one script into your site.
+
+<Visual kind="gif" note="From the Deploy tab to the widget opening on a live page" />
+
+<Steps>
+  <Step title="Open the agent's Deploy tab">
+    Click **Agents**, open your agent, and click the **Deploy** tab.
+
+    <Visual note="Deploy tab of an agent" />
+  </Step>
+  <Step title="Switch on the widget">
+    Turn on **Web Chat Widget**. Turn on **Enable Voice** too if visitors should be able to call.
+
+    <Visual note="Web Chat Widget and Enable Voice switched on" />
+  </Step>
+  <Step title="Click Configure Embed Script">
+    The widget settings open on the **Connections** page with a live preview beside them. Change the title, greeting, suggested questions, and colours.
+
+    <Visual note="Widget settings with the live preview" />
+  </Step>
+  <Step title="Copy the script">
+    Copy the embed script shown on the page.
+
+    <Visual note="Embed script with the copy button" />
+  </Step>
+  <Step title="Paste it into your site">
+    Paste it in your site's HTML, just before the closing `</head>` tag.
+
+    <Visual note="Script pasted in a site's head section" />
+  </Step>
+  <Step title="Try it as a visitor">
+    Open your site, click the launcher button in the corner, and send a message.
+
+    <Visual kind="gif" note="Opening the widget on a live page and chatting with the agent" />
+  </Step>
+</Steps>
+
+<Note>
+Widget chats show up in **Inbox**, but browser calls aren't saved to call logs.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Test an agent" icon="flask" href="/guides/agents/test">
+    Check answers before visitors do.
+  </Card>
+  <Card title="Web calls and widget" icon="book" href="/documentation/voice/web-audio-webrtc">
+    Every widget setting.
+  </Card>
+</CardGroup>

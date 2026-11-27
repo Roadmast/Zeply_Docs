@@ -2,3 +2,73 @@
 title: "Add tools"
 description: "Turn on CRM tools, custom API tools, and MCP servers."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+Tools let the agent act during a conversation. You manage them on the **Tools & Integrations** tab.
+
+<Visual note="Tools & Integrations tab overview" />
+
+## Turn on CRM tools
+
+<Steps>
+  <Step title="Open the tab">
+    In the agent editor, click **Tools & Integrations**.
+
+    <Visual note="Tools & Integrations tab, CRM tools section" />
+  </Step>
+  <Step title="Switch on what you need">
+    Turn on only the CRM tools the agent needs, such as notes or handoff.
+
+    <Visual note="CRM tool switches with two turned on" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes**.
+  </Step>
+</Steps>
+
+## Add your own API
+
+<Steps>
+  <Step title="Add a custom tool">
+    Click the button to add a custom tool. Fill in **Tool Name**, **Description**, **Endpoint URL**, and **HTTP Method**. For example, `check_order_status` with `https://api.example.com/orders/{order_id}`.
+
+    <Visual note="Custom tool form filled in" />
+  </Step>
+  <Step title="Test the connection">
+    Click **Test Connection**. A good response means the endpoint can be reached.
+
+    <Visual note="Test Connection result" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes**, then try the tool in **Test Agent**.
+  </Step>
+</Steps>
+
+## Connect an MCP server
+
+<Steps>
+  <Step title="Add the server">
+    Enter the name, server URL, and transport (**SSE (Server-Sent Events)** or **Streamable HTTP**), plus any headers it needs.
+
+    <Visual note="MCP server form filled in" />
+  </Step>
+  <Step title="Test and save">
+    Click **Test Connection**, then **Save Changes**.
+  </Step>
+</Steps>
+
+<Warning>
+Turn on only the tools the agent needs. Each one is something it can do without asking you.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Set up appointment booking" icon="calendar-check" href="/guides/agents/booking">
+    The booking tools have their own page.
+  </Card>
+  <Card title="Tools" icon="book" href="/documentation/agents/tools-and-integrations">
+    Every tool and field in detail.
+  </Card>
+</CardGroup>

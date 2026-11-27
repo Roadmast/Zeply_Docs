@@ -3,18 +3,52 @@ title: "Webhooks"
 description: "Send events from Sayvy AI to your server."
 ---
 
-# Receive events with webhooks
+import { Visual } from "/snippets/visual.mdx";
 
-Webhooks notify your application when supported Sayvy resources change. They are useful for syncing customer records, updating internal systems, and triggering follow-up work.
+A webhook sends an HTTP POST to your server when something happens, such as a message arriving or a call ending. You'll add an endpoint.
 
-## Set up a webhook safely
+<Steps>
+  <Step title="Open Webhooks">
+    Click **Developers**, then **Webhooks**.
 
-1. Create an HTTPS endpoint that returns a fast success response.
-2. Register the endpoint and subscribe only to the events you need.
-3. Validate the signature before processing the payload.
-4. Make processing idempotent because events can be retried or delivered more than once.
-5. Log failures and replay safely after fixing the cause.
+    <Visual note="Developers menu with Webhooks selected" />
+  </Step>
+  <Step title="Click Add Endpoint">
+    A form opens.
 
-<Warning>Treat webhook payloads as untrusted input. Verify authenticity, validate the schema, and never let an event directly execute an unreviewed destructive action.</Warning>
+    <Visual note="Add Endpoint form, empty" />
+  </Step>
+  <Step title="Enter the Payload URL">
+    Type your server's HTTPS address.
 
-See the [Webhooks API](/api-reference/webhooks/overview) for event and endpoint details.
+    <Visual note="Payload URL field filled in" />
+  </Step>
+  <Step title="Choose events">
+    Under **Event Subscriptions**, tick only the events you need, such as `message.received` or `call.completed`.
+
+    <Visual note="Event Subscriptions with two events ticked" />
+  </Step>
+  <Step title="Save and copy the secret">
+    Save the endpoint. The signing secret, starting with `whsec_`, is shown once. Copy it now.
+
+    <Visual note="Signing secret shown once with the copy button" />
+  </Step>
+  <Step title="Test it">
+    There's no test button. Subscribe to `message.received` and message your WhatsApp number to send a real event.
+  </Step>
+</Steps>
+
+<Note>
+To change events or turn an endpoint off, choose **Edit Endpoint** and use **Endpoint Status**. Endpoints per plan: none on Pay as you go, 1 on Basic, 3 on Advanced, 10 on Premium.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Verify webhook signatures" icon="shield-check" href="/guides/webhooks/verify-signatures">
+    Check requests are really from Sayvy AI.
+  </Card>
+  <Card title="Webhooks and events" icon="book" href="/documentation/monitor/webhooks-and-events">
+    Every event and the payload.
+  </Card>
+</CardGroup>

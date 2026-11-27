@@ -2,3 +2,65 @@
 title: "Create an agent"
 description: "Choose an agent type and start from scratch or a template."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You can start a blank agent or import a template and edit it. Both begin on the **Agents** page.
+
+## Start from scratch
+
+<Steps>
+  <Step title="Open Agents">
+    Click **Agents** in the left sidebar.
+
+    <Visual note="Agents page with New Agent and Import Template buttons" />
+  </Step>
+  <Step title="Click New Agent">
+    A dialog asks which type to build: **Prompt-based AI Agent**, **Static Bot**, or **Workflow Agent**. Choose **Prompt-based AI Agent** for most cases.
+
+    <Visual note="New Agent dialog with the three types" />
+  </Step>
+  <Step title="Name it and save">
+    The editor opens on **Prompts & Identity**. Type an **Agent Name** and click **Save Changes**.
+
+    <Visual note="Editor with Agent Name filled in and Save Changes highlighted" />
+  </Step>
+</Steps>
+
+## Start from a template
+
+<Steps>
+  <Step title="Click Import Template">
+    On the **Agents** page, click **Import Template**.
+
+    <Visual note="Import Template dialog" />
+  </Step>
+  <Step title="Search and pick">
+    Search by use case, such as front desk or sales, and choose the closest one. Rename the copy if you like.
+
+    <Visual note="Template search results" />
+  </Step>
+  <Step title="Edit your copy">
+    The new agent opens in the editor. Replace the business name, hours, and policies in the prompt with your own.
+
+    <Visual note="Imported agent's prompt with the business name highlighted" />
+  </Step>
+</Steps>
+
+<Note>
+Templates don't copy WhatsApp numbers. Assign yours on the **Deploy** tab.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Write the prompt and welcome message" icon="pen" href="/guides/agents/prompts-and-identity">
+    Tell the agent what to do.
+  </Card>
+  <Card title="Build a workflow" icon="diagram-project" href="/guides/workflows">
+    For scripted, step-by-step conversations.
+  </Card>
+  <Card title="Agent types" icon="book" href="/documentation/learn/agent-types">
+    How the three types differ.
+  </Card>
+</CardGroup>

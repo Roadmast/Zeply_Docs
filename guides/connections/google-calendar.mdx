@@ -2,3 +2,52 @@
 title: "Connect Google Calendar"
 description: "Let agents find free times and book appointments."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll sign in with the Google account whose primary calendar should hold your appointments, then turn booking on for an agent.
+
+<Visual kind="gif" note="Connect Calendar, Google consent, and the connected card" />
+
+<Steps>
+  <Step title="Open Connections">
+    Click **Connections** in the sidebar and find the **Google Calendar** card.
+
+    <Visual note="Google Calendar card before connecting" />
+  </Step>
+  <Step title="Click Connect Calendar">
+    Sign in with Google and approve the access it asks for.
+
+    <Visual note="Google consent screen" />
+  </Step>
+  <Step title="See the connected card">
+    You return to **Connections**. The card shows when you connected and when the sign-in expires.
+
+    <Visual note="Connected Google Calendar card" />
+  </Step>
+  <Step title="Turn booking on for an agent">
+    Open the agent, click **Tools & Integrations**, and turn on **Enable Booking**.
+
+    <Visual note="Tools & Integrations tab with Enable Booking on" />
+  </Step>
+  <Step title="Book a test slot">
+    Click **Test Agent**, ask for an appointment, then check your Google Calendar for the event.
+
+    <Visual kind="gif" note="Test conversation ending with an event in Google Calendar" />
+  </Step>
+</Steps>
+
+<Note>
+The **Real-time Booking** row always says "Verified". It's a label, so confirm with a test booking.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Set up appointment booking" icon="calendar-check" href="/guides/agents/booking">
+    Write the booking instructions.
+  </Card>
+  <Card title="Google Calendar" icon="book" href="/documentation/integrations/google-calendar">
+    Which calendar is used and what happens on disconnect.
+  </Card>
+</CardGroup>

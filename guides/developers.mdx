@@ -3,17 +3,43 @@ title: "Developer tools"
 description: "API keys, webhooks, and API documentation in one place."
 ---
 
-# Build with Sayvy
+import { Visual } from "/snippets/visual.mdx";
 
-Use the developer tools to integrate Sayvy with your own application, data pipeline, or internal operations.
+The **Developers** area holds the tools for connecting your own systems to Sayvy AI.
+
+<Visual note="Developers page with API Keys and Webhooks sections" />
+
+<Steps>
+  <Step title="Open Developers">
+    Click **Developers** in the left sidebar.
+
+    <Visual note="Sidebar with Developers highlighted" />
+  </Step>
+  <Step title="Create an API key">
+    Go to **API Keys** to let your code call Sayvy AI.
+
+    <Visual note="API Keys page" />
+  </Step>
+  <Step title="Add a webhook">
+    Go to **Webhooks** to have Sayvy AI notify your server when things happen.
+
+    <Visual note="Webhooks page" />
+  </Step>
+</Steps>
+
+## Where to go
 
 <CardGroup cols={2}>
-  <Card title="API keys" icon="key-round" href="/guides/api-keys">Authenticate server-side requests safely.</Card>
-  <Card title="API reference" icon="book-open" href="/api-reference">Browse endpoints, parameters, and examples.</Card>
-  <Card title="Webhooks" icon="webhook" href="/guides/webhooks">Receive events when important data changes.</Card>
-  <Card title="Errors and limits" icon="triangle-alert" href="/api-reference/errors">Design retries and failure handling for production.</Card>
+  <Card title="API keys" icon="key-round" href="/guides/api-keys">
+    Create and revoke keys.
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/guides/webhooks">
+    Add an endpoint.
+  </Card>
+  <Card title="API reference" icon="book-open" href="/api-reference">
+    Endpoints, parameters, and examples.
+  </Card>
+  <Card title="Errors and limits" icon="triangle-alert" href="/api-reference/errors">
+    Plan for retries and failures.
+  </Card>
 </CardGroup>
-
-## Production checklist
-
-Use environment-specific secrets, validate webhook signatures, make event processing idempotent, log request IDs, and monitor retries. Keep API calls on your server rather than exposing credentials in browser code.

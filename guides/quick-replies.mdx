@@ -3,18 +3,54 @@ title: "Quick replies"
 description: "Save messages your team sends often."
 ---
 
-# Create useful quick replies
+import { Visual } from "/snippets/visual.mdx";
 
-Quick replies are reusable response starters for the inbox. They should save time without making customer conversations feel automated or generic.
+Quick replies are saved messages your team can drop into any conversation. You'll create one and use it in the inbox.
 
-## Write a good quick reply
+<Steps>
+  <Step title="Open Quick Replies">
+    Go to **Message Library**, then **Quick Replies**.
 
-- Give it a name teammates can find quickly.
-- Keep the wording short and easy to personalize.
-- Include the next step or expected timing.
-- Avoid promises that depend on a specific person or order.
-- Review replies whenever policies, pricing, or contact details change.
+    <Visual note="Message Library with Quick Replies selected" />
+  </Step>
+  <Step title="Click New Quick Reply">
+    A form opens.
 
-<Note>Use quick replies for stable, repeatable guidance. For regulated or highly contextual answers, write a fresh response and verify the details first.</Note>
+    <Visual note="New Quick Reply form, empty" />
+  </Step>
+  <Step title="Fill it in">
+    Enter a **Shortcut** such as `/hours`, and the **Message Content**:
 
-See the [Quick Replies API](/api-reference/quick-replies/overview) for programmatic management.
+    ```text
+    We're open 9am to 7pm, Monday to Saturday. On Sundays
+    we open from 10am to 2pm.
+    ```
+
+    <Visual note="Form filled in with /hours" />
+  </Step>
+  <Step title="Save">
+    The quick reply is shared with everyone in the workspace.
+
+    <Visual note="Quick replies list with the new entry" />
+  </Step>
+  <Step title="Use it in a conversation">
+    In **Inbox**, open a conversation and type `/`. Keep typing to narrow the list, pick one with the arrow keys, and press Enter. Edit the text before you send.
+
+    <Visual kind="gif" note="Typing /hours in the composer and the reply filling in" />
+  </Step>
+</Steps>
+
+<Note>
+Quick replies can't be edited. To change one, delete it and create it again with the same shortcut. They are text only; attach files from the composer.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reply to a conversation" icon="reply" href="/guides/inbox/reply">
+    Use them in the inbox.
+  </Card>
+  <Card title="Quick replies" icon="book" href="/documentation/messaging/quick-replies">
+    Shortcut rules.
+  </Card>
+</CardGroup>

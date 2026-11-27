@@ -2,3 +2,50 @@
 title: "Add a contact"
 description: "Create a contact by hand."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll create a contact yourself, for someone who hasn't messaged you yet.
+
+<Steps>
+  <Step title="Open CRM Hub">
+    Click **CRM Hub** in the left sidebar.
+
+    <Visual note="CRM Hub with New Contact highlighted" />
+  </Step>
+  <Step title="Click New Contact">
+    A form opens.
+
+    <Visual note="New Contact form, empty" />
+  </Step>
+  <Step title="Fill it in">
+    Enter a **Full Name** and a **WhatsApp Phone Number** with the country code, such as `+919876543210`. Add any **Tags**.
+
+    <Visual note="New Contact form filled in" />
+  </Step>
+  <Step title="Save">
+    Click save. The contact appears at the top of the table.
+
+    <Visual note="The new contact in the table" />
+  </Step>
+  <Step title="Add the rest">
+    Click **View Profile** to set notes, stage, and custom fields, which can be set only after the contact is saved.
+
+    <Visual note="Profile of the new contact" />
+  </Step>
+</Steps>
+
+<Note>
+A phone number can belong to only one contact in the workspace. If it's already taken, the new contact isn't created.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Import from a spreadsheet" icon="file-import" href="/guides/contacts/import">
+    Add many contacts at once.
+  </Card>
+  <Card title="Work with a contact" icon="user" href="/guides/contacts/profile">
+    Set the stage and score.
+  </Card>
+</CardGroup>

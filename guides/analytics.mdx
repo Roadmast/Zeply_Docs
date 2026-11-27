@@ -3,18 +3,51 @@ title: "Analytics"
 description: "Track calls, messages, campaigns, and agent performance."
 ---
 
-# Understand workspace analytics
+import { Visual } from "/snippets/visual.mdx";
 
-Analytics helps you move from individual conversations to workspace-level patterns. Use it to answer what is being used, where customers are getting stuck, and what to improve next.
+**Analytics** shows how your workspace is doing over a time range. You'll open it and look at each tab.
 
-## A useful review routine
+<Visual note="Analytics page, Overview tab, with charts" />
 
-- **Daily:** check conversation volume, unresolved inbox items, and failed or escalated interactions.
-- **Weekly:** compare channel activity, agent outcomes, and campaign performance.
-- **After a change:** compare the period before and after an instruction, workflow, or channel update.
+<Steps>
+  <Step title="Open Analytics">
+    Click **Analytics** in the left sidebar.
 
-High volume is not automatically success. Pair activity with outcomes such as resolved conversations, completed calls, handoffs, and response quality.
+    <Visual note="Sidebar with Analytics highlighted" />
+  </Step>
+  <Step title="Pick a time range">
+    Choose the last 24 hours, 7 days, 30 days, or 90 days.
 
-<Note>Keep a short changelog for production changes. It makes analytics much easier to interpret when a metric moves unexpectedly.</Note>
+    <Visual note="Time range selector" />
+  </Step>
+  <Step title="Start with Overview">
+    The **Overview** tab shows total calls, messages, call time, and cost, with traffic trends and a channel breakdown.
 
-Continue with [Call Logs](/guides/call-logs) for conversation-level detail or [Campaigns](/guides/campaigns) for outbound performance.
+    <Visual note="Overview tab" />
+  </Step>
+  <Step title="Check Voice Calls">
+    Open **Voice Calls** for success rate, failed and missed calls, and the busiest hours of the day.
+
+    <Visual note="Voice Calls tab with the busiest-hours heatmap" />
+  </Step>
+  <Step title="Compare the rest">
+    **Messaging & Inbox** shows delivery and read rates. **Campaigns** shows what you sent. **Agent Performance** compares your agents.
+
+    <Visual note="Agent Performance tab with a table of agents" />
+  </Step>
+</Steps>
+
+<Note>
+Your credit balance is in the sidebar. Click it to open **Billing** and top up.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Review call logs" icon="phone" href="/guides/call-logs">
+    Drill into single calls.
+  </Card>
+  <Card title="Analytics and usage" icon="book" href="/documentation/platform/analytics-and-usage">
+    What each number means.
+  </Card>
+</CardGroup>

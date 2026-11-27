@@ -2,3 +2,50 @@
 title: "Top up credits"
 description: "Choose an amount and pay with Razorpay."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll add credits to your balance. Do it before a large campaign, because calls stop when credits run out.
+
+<Steps>
+  <Step title="Open Billing">
+    Click **Billing** in the sidebar, or click the balance in the sidebar.
+
+    <Visual note="Sidebar balance being clicked" />
+  </Step>
+  <Step title="Find Top-Up Credits">
+    Scroll to **Top-Up Credits**.
+
+    <Visual note="Top-Up Credits section" />
+  </Step>
+  <Step title="Choose an amount">
+    Drag the slider or click a quick pick. The minimum is 500 credits and the maximum is 25,000 per top-up.
+
+    <Visual kind="gif" note="Dragging the slider and the order summary updating" />
+  </Step>
+  <Step title="Check the order summary">
+    It shows the credit value, any discount, GST, and the total.
+
+    <Visual note="Order summary with a volume discount" />
+  </Step>
+  <Step title="Click Buy Credits">
+    Pay in Razorpay's checkout. The new balance appears in the sidebar.
+
+    <Visual note="Updated balance in the sidebar" />
+  </Step>
+</Steps>
+
+<Note>
+Credits cost ₹1 each plus 18% GST and never expire. The dashboard doesn't warn you when the balance runs low, so check the sidebar.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Invoices" icon="receipt" href="/guides/invoices">
+    Download the receipt.
+  </Card>
+  <Card title="Billing" icon="book" href="/documentation/platform/billing">
+    Voice and AI reply rates.
+  </Card>
+</CardGroup>

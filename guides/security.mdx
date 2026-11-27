@@ -3,18 +3,44 @@ title: "Security"
 description: "Turn on two-factor sign-in."
 ---
 
-# Protect your workspace
+import { Visual } from "/snippets/visual.mdx";
 
-Security is a shared workspace habit. Start with strong account access, narrow permissions, and a clear response plan for exposed credentials or unexpected activity.
+You'll add a second sign-in step with an authenticator app such as Google Authenticator. Ask every admin to do the same.
 
-## Security checklist
+<Steps>
+  <Step title="Open Security">
+    Click **Settings**, then **Security**.
 
-- Use a unique password and multifactor authentication where available.
-- Give members the lowest role that lets them do their work.
-- Rotate API keys and revoke unused connections.
-- Avoid placing secrets or sensitive customer data in agent instructions.
-- Review members, integrations, and audit signals regularly.
+    <Visual note="Settings with Security selected" />
+  </Step>
+  <Step title="Click Setup Google Authenticator">
+    A QR code appears.
 
-<Warning>If you suspect a key or account has been exposed, revoke the credential first, then investigate and replace it.</Warning>
+    <Visual note="QR code shown" />
+  </Step>
+  <Step title="Scan the code">
+    Open your authenticator app and scan it.
 
-See [API keys](/guides/api-keys) and [Team Members](/guides/team-members) for the controls you can manage directly.
+    <Visual note="Authenticator app showing the new entry" />
+  </Step>
+  <Step title="Enter the six-digit code">
+    Type the code from the app under **Verify & Enable**, then confirm.
+
+    <Visual note="Verify & Enable with a code typed in" />
+  </Step>
+</Steps>
+
+<Warning>
+Don't put passwords or card numbers in an agent prompt or knowledge base document.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create API keys safely" icon="key-round" href="/guides/api-keys">
+    Scope and revoke keys.
+  </Card>
+  <Card title="Security and compliance" icon="book" href="/documentation/platform/security-and-compliance">
+    What is protected, and what isn't available yet.
+  </Card>
+</CardGroup>

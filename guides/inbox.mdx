@@ -3,18 +3,57 @@ title: "Inbox"
 description: "Read, reply to, and manage customer conversations."
 ---
 
-# Work in the inbox
+import { Visual } from "/snippets/visual.mdx";
 
-The inbox is the team's operational view of customer conversations. Use it to see what needs attention, assign ownership, and preserve context when a person takes over from an agent.
+The inbox shows every conversation from WhatsApp, Instagram, email, and your web widget. This walkthrough finds a conversation and opens it.
 
-## Resolve a conversation
+<Visual note="Inbox with the conversation list on the left and a conversation open" />
 
-1. Filter for new, assigned, or waiting conversations.
-2. Read the latest messages and customer context before replying.
-3. Reply directly or take ownership when the conversation needs a person.
-4. Use a quick reply for a repeatable answer, then personalize it.
-5. Update the status when the next action is clear.
+<Steps>
+  <Step title="Open Inbox">
+    Click **Inbox** in the left sidebar. New messages appear on their own, without a refresh.
 
-<Note>A conversation should always have a visible next step: reply, wait for the customer, hand off, or close.</Note>
+    <Visual note="Sidebar with Inbox highlighted" />
+  </Step>
+  <Step title="Pick a tab">
+    Use **All**, **Open**, or **Closed** at the top of the list to filter the tickets.
 
-Continue with [Quick Replies](/guides/quick-replies) or [Conversations in the documentation](/documentation/conversations/inbox).
+    <Visual note="The three tabs with Open selected" />
+  </Step>
+  <Step title="Search">
+    Type a contact name or phone number in the search box.
+
+    <Visual note="Search box with a name typed in" />
+  </Step>
+  <Step title="Open a conversation">
+    Click a row. The messages open on the right, and the header shows **AI On** or **AI Off**, the close button, and contact details.
+
+    <Visual note="Conversation header with its three controls labelled" />
+  </Step>
+  <Step title="See who you're talking to">
+    Click contact details to open the customer profile beside the conversation.
+
+    <Visual note="Customer profile panel beside a conversation" />
+  </Step>
+</Steps>
+
+<Note>
+When AI is on, the agent answers text messages on WhatsApp and the web widget. Instagram and email wait for your team.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reply to a conversation" icon="reply" href="/guides/inbox/reply">
+    Type, attach, and use quick replies.
+  </Card>
+  <Card title="Switch between AI and your team" icon="user-check" href="/guides/inbox/ai-handoff">
+    Take over from the agent.
+  </Card>
+  <Card title="Start a conversation" icon="message" href="/guides/inbox/start-conversation">
+    Message someone who hasn't written first.
+  </Card>
+  <Card title="Inbox" icon="book" href="/documentation/conversations/inbox">
+    How tickets and statuses work.
+  </Card>
+</CardGroup>

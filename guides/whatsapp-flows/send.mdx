@@ -2,3 +2,45 @@
 title: "Send a Flow and read submissions"
 description: "Send to a contact and review what they filled in."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll send a published Flow to a contact and read what they submit.
+
+<Steps>
+  <Step title="Open the Flow">
+    On **WhatsApp Flows**, click a published Flow.
+
+    <Visual note="Flows list with a published Flow" />
+  </Step>
+  <Step title="Choose the send option">
+    Enter the contact's WhatsApp number. Add an optional header, message body, footer, and button text.
+
+    <Visual note="Send Flow form filled in" />
+  </Step>
+  <Step title="Send">
+    Click send. The customer sees a button that opens the form inside the chat.
+
+    <Visual kind="gif" note="Customer opening and filling in the Flow on a phone" />
+  </Step>
+  <Step title="Read the submissions">
+    Open the Flow and look at its submissions, or open the global submissions list to see every Flow at once.
+
+    <Visual note="Submissions table with one entry" />
+  </Step>
+</Steps>
+
+<Warning>
+A Flow sent on its own needs an open 24-hour window. To reach many contacts, add a **Flow Button** to a template and send it as a campaign.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a template" icon="file-lines" href="/guides/templates/create">
+    Add a Flow button.
+  </Card>
+  <Card title="Interactive messages and Flows" icon="book" href="/documentation/whatsapp/interactive-messages">
+    How button taps are handled.
+  </Card>
+</CardGroup>
