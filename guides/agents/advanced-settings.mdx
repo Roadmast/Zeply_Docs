@@ -2,3 +2,57 @@
 title: "Set recording and follow-ups"
 description: "Recording, transcripts, follow-up messages, and call length."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll decide what is saved after a call, on the **Advanced Settings** tab. Do this before going live, because earlier calls aren't recorded afterwards.
+
+<Steps>
+  <Step title="Open the tab">
+    In the agent editor, click **Advanced Settings**.
+
+    <Visual note="Advanced Settings tab" />
+  </Step>
+  <Step title="Turn on recording">
+    Switch on **Enable Voice / Call Recording**.
+
+    <Visual note="Recording switch on" />
+  </Step>
+  <Step title="Turn on transcripts">
+    Switch on **Enable Transcriptions**. It needs recording to be on.
+
+    <Visual note="Transcriptions switch on" />
+  </Step>
+  <Step title="Add a follow-up message">
+    Switch on **Enable Follow Ups** and type the **Follow Up Message**:
+
+    ```text
+    Thanks for calling Green Leaf Dental. Reply here if you'd like to change your appointment.
+    ```
+
+    <Visual note="Follow Up Message field filled in" />
+  </Step>
+  <Step title="Set the call length">
+    Choose a value in **Max Call Duration (Minutes)**.
+
+    <Visual note="Max Call Duration dropdown" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes**, then make a test WhatsApp call and open it in [Call Logs](/guides/call-logs).
+  </Step>
+</Steps>
+
+<Note>
+Calls end at 15 minutes whatever you choose. Browser test calls aren't saved to call logs.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Review call logs" icon="phone" href="/guides/call-logs">
+    Play back recordings and read transcripts.
+  </Card>
+  <Card title="Agent settings" icon="book" href="/documentation/agents/configuration">
+    Every setting in detail.
+  </Card>
+</CardGroup>

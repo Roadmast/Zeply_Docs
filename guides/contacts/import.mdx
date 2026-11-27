@@ -2,3 +2,51 @@
 title: "Import contacts from a spreadsheet"
 description: "Upload a CSV or Excel file."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll upload a file to add many contacts at once.
+
+<Steps>
+  <Step title="Get the sample file">
+    In **CRM Hub**, open the **⋮** menu and choose **Download Sample CSV**.
+
+    <Visual note="The three-dot menu with Download Sample CSV" />
+  </Step>
+  <Step title="Fill it in">
+    Keep the columns `phone_number`, `name`, and optionally `tags`. Include the country code in every number and use one format throughout.
+
+    ```csv
+    phone_number,name,tags
+    +919876543210,Asha Rao,vip;pune
+    +919812345678,Rahul Mehta,pune
+    ```
+
+    <Visual note="Spreadsheet with the three columns filled in" />
+  </Step>
+  <Step title="Click Upload Contacts">
+    Choose your CSV, XLSX, or XLS file.
+
+    <Visual note="Upload Contacts dialog with a file chosen" />
+  </Step>
+  <Step title="Read the result">
+    The result lists the rows that worked and each failure by row number. Fix those rows and upload again.
+
+    <Visual note="Import result with one failed row" />
+  </Step>
+</Steps>
+
+<Warning>
+A number already in the workspace updates that contact's name and replaces its tags. `+919876543210` and `9876543210` count as different contacts.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a campaign" icon="bullhorn" href="/guides/campaigns/create">
+    Reach your new contacts.
+  </Card>
+  <Card title="Import and export" icon="book" href="/documentation/crm/import-export">
+    What can't be imported, and exporting through the API.
+  </Card>
+</CardGroup>

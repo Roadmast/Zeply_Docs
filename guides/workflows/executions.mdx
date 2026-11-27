@@ -2,3 +2,50 @@
 title: "Review workflow executions"
 description: "See where conversations drop off."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll read how real conversations moved through your workflow and find the step where people get stuck.
+
+<Visual note="Executions tab with the summary counts and the graph" />
+
+<Steps>
+  <Step title="Open Executions">
+    In the builder, click the **Executions** tab.
+
+    <Visual note="Builder header with Executions selected" />
+  </Step>
+  <Step title="Read the summary">
+    The top shows runs, completed runs, transfers, drop-offs, and the average number of turns.
+
+    <Visual note="Summary counts" />
+  </Step>
+  <Step title="Filter">
+    Narrow the view by date range, channel, and version.
+
+    <Visual note="Filters set to one channel and one version" />
+  </Step>
+  <Step title="Find the drop-off">
+    Each step shows how many runs entered and how many dropped off there. A step with a high drop-off is where callers get stuck.
+
+    <Visual note="A step with a high drop-off number highlighted" />
+  </Step>
+  <Step title="Fix and republish">
+    Go back to **Editor**, improve that step's prompt or transitions, and [publish](/guides/workflows/publish) again.
+  </Step>
+</Steps>
+
+<Note>
+A run counts as dropped after 30 minutes without activity, if it never reached an ending or a transfer.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Publish a workflow" icon="rocket" href="/guides/workflows/publish">
+    Ship your fix.
+  </Card>
+  <Card title="Workflows overview" icon="book" href="/documentation/workflows/overview">
+    How executions are counted.
+  </Card>
+</CardGroup>

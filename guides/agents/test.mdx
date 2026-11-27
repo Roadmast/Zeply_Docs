@@ -2,3 +2,50 @@
 title: "Test an agent"
 description: "Try the agent in chat and on a web call before going live."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll talk to your agent the way a customer would, before any customer does.
+
+<Steps>
+  <Step title="Save first">
+    Click **Save Changes**. The test uses the saved agent.
+
+    <Visual note="Save Changes button" />
+  </Step>
+  <Step title="Click Test Agent">
+    **Test Agent** is in the editor header. A panel opens with **Chat** and **Webcall** tabs.
+
+    <Visual note="Test Agent panel with Chat and Webcall tabs" />
+  </Step>
+  <Step title="Try Chat">
+    Type a question your prompt covers, such as the opening hours. Read the reply.
+
+    <Visual note="Chat tab with one question and answer" />
+  </Step>
+  <Step title="Try Webcall">
+    Open **Webcall**, allow the microphone, and speak to the agent.
+
+    <Visual kind="gif" note="Webcall tab, a short spoken exchange" />
+  </Step>
+  <Step title="Push it a little">
+    Ask something out of scope, ask for a person, and interrupt it mid-sentence. If it answers wrongly, edit the prompt, save, and ask again.
+
+    <Visual note="Chat where the agent declines an out-of-scope question" />
+  </Step>
+</Steps>
+
+<Note>
+Static bots only have the chat test. Workflow agents are tested from the Workflow Builder. Browser test calls aren't saved to call logs.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Deploy an agent" icon="rocket" href="/guides/agents/deploy">
+    Put the tested agent live.
+  </Card>
+  <Card title="Go-live checklist" icon="clipboard-check" href="/documentation/go-live/launch-checklist">
+    The full list to run before launch.
+  </Card>
+</CardGroup>

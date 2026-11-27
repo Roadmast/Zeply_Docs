@@ -2,3 +2,48 @@
 title: "Connect Calendly"
 description: "Let agents send your Calendly scheduling link."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll connect Calendly so an agent can send customers your scheduling link.
+
+<Visual kind="gif" note="Connect Calendly and the agent sending the link in a test chat" />
+
+<Steps>
+  <Step title="Open Connections">
+    Click **Connections** in the sidebar and find the **Calendly** card.
+
+    <Visual note="Calendly card before connecting" />
+  </Step>
+  <Step title="Click Connect Calendly">
+    Sign in with your Calendly account.
+
+    <Visual note="Calendly sign-in screen" />
+  </Step>
+  <Step title="See the connected card">
+    You return to **Connections**. The card shows when you connected and when the sign-in expires.
+
+    <Visual note="Connected Calendly card" />
+  </Step>
+  <Step title="Turn booking on for an agent">
+    Open the agent, click **Tools & Integrations**, and turn on **Enable Booking**. In the booking instructions, tell the agent to send the scheduling link.
+
+    <Visual note="Booking instructions telling the agent to send the link" />
+  </Step>
+  <Step title="Try it">
+    Click **Test Agent**, ask to book an appointment, and look for your link in the reply.
+
+    <Visual note="Test chat with the Calendly link in the agent's reply" />
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Set up appointment booking" icon="calendar-check" href="/guides/agents/booking">
+    Write the booking instructions.
+  </Card>
+  <Card title="Calendly vs Google Calendar" icon="book" href="/documentation/integrations/calendly">
+    How the two differ.
+  </Card>
+</CardGroup>

@@ -2,3 +2,65 @@
 title: "Deploy an agent"
 description: "Put the agent live on the web widget and WhatsApp."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll put the agent where customers can reach it, on the **Deploy** tab. Test it first.
+
+<Visual note="Deploy tab with Web Chat Widget and WhatsApp options" />
+
+## Deploy to the web widget
+
+<Steps>
+  <Step title="Open the Deploy tab">
+    In the agent editor, click **Deploy**.
+
+    <Visual note="Deploy tab" />
+  </Step>
+  <Step title="Turn on Web Chat Widget">
+    Switch it on. Turn on **Enable Voice** as well if visitors should be able to call.
+
+    <Visual note="Widget switches on" />
+  </Step>
+  <Step title="Add the script to your site">
+    Click **Configure Embed Script** and follow [Add the website chatbot](/guides/connections/website-chatbot).
+  </Step>
+</Steps>
+
+## Deploy to WhatsApp
+
+<Steps>
+  <Step title="Connect WhatsApp">
+    If you haven't yet, follow [Connect WhatsApp](/guides/connections/whatsapp).
+  </Step>
+  <Step title="Turn on WhatsApp">
+    On the **Deploy** tab, switch on WhatsApp. The first connected number is selected for you.
+
+    <Visual note="WhatsApp section of the Deploy tab" />
+  </Step>
+  <Step title="Pick the number">
+    Choose another number if you have several. A number belongs to one agent.
+
+    <Visual note="Number picker open" />
+  </Step>
+  <Step title="Save and try it">
+    Click **Save Changes**. From your phone, message the number, then call it.
+
+    <Visual kind="gif" note="Messaging and calling the number and the agent answering" />
+  </Step>
+</Steps>
+
+<Note>
+The agent answers at any hour. For calls, WhatsApp calling must also be switched on for your number in Meta's settings.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Work in the inbox" icon="inbox" href="/guides/inbox">
+    See the conversations your agent starts.
+  </Card>
+  <Card title="Deploy overview" icon="book" href="/documentation/deploy/overview">
+    Channels and what each supports.
+  </Card>
+</CardGroup>

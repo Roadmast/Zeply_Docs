@@ -3,22 +3,44 @@ title: "Connections"
 description: "Connect WhatsApp, Instagram, email, your website chatbot, and calendars."
 ---
 
-# Manage connected services
+import { Visual } from "/snippets/visual.mdx";
 
-Connections let Sayvy exchange data with services such as calendars, messaging providers, and other workspace tools.
+The **Connections** page has one card for each service you can link. This walkthrough shows the steps every card shares.
 
-## Add a connection
+<Visual note="Connections page with all cards, some connected and some not" />
 
-1. Open **Connections** and choose the service.
-2. Review the permissions requested before authorizing it.
-3. Give the connection a descriptive name if you have more than one account.
-4. Run a small test from the workflow or agent that will use it.
+<Steps>
+  <Step title="Open Connections">
+    Click **Connections** in the left sidebar.
 
-## Keep connections healthy
+    <Visual note="Sidebar with Connections highlighted" />
+  </Step>
+  <Step title="Find your card">
+    Scroll to the service you want: WhatsApp Business, Website Chatbot, Instagram Direct, Email Channel, Google Calendar, or Calendly.
 
-- Remove connections that are no longer used.
-- Reauthorize when a provider password, token, or permission changes.
-- Use separate credentials for test and production workspaces.
-- Give teammates enough access to operate a connection, but not more than they need.
+    <Visual note="One unconnected card, with its connect button highlighted" />
+  </Step>
+  <Step title="Click the connect button">
+    Most cards send you to the provider to sign in and approve access, then bring you back.
 
-See [Integrations](/documentation/integrations/overview) for implementation details.
+    <Visual kind="gif" note="Clicking connect, approving at the provider, returning to a connected card" />
+  </Step>
+  <Step title="Check the card">
+    A connected card shows the account details, with buttons to update or disconnect.
+
+    <Visual note="A connected card showing account details and the Disconnect button" />
+  </Step>
+</Steps>
+
+## Pick a service
+
+<CardGroup cols={2}>
+  <Card title="WhatsApp" icon="whatsapp" href="/guides/connections/whatsapp">Sign in with Meta.</Card>
+  <Card title="Website chatbot" icon="message" href="/guides/connections/website-chatbot">Add the widget to your site.</Card>
+  <Card title="Instagram" icon="instagram" href="/guides/connections/instagram">Get direct messages in the inbox.</Card>
+  <Card title="Email" icon="envelope" href="/guides/connections/email">Forward a mailbox in.</Card>
+  <Card title="Google Calendar" icon="calendar" href="/guides/connections/google-calendar">Let agents book.</Card>
+  <Card title="Calendly" icon="calendar-check" href="/guides/connections/calendly">Let agents send your link.</Card>
+</CardGroup>
+
+For what each channel supports, see [Channels](/documentation/inbox/channels) in the documentation.

@@ -2,3 +2,50 @@
 title: "Publish a workflow"
 description: "Make a saved draft live and read the version label."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll test the draft, then publish it so customers reach it on the inbox, WhatsApp, campaigns, and calls.
+
+<Steps>
+  <Step title="Open the Test tab">
+    In the builder, click **Test** and talk to the workflow before it goes live.
+
+    <Visual note="Test tab with a conversation in progress" />
+  </Step>
+  <Step title="Fix any errors">
+    Go back to **Editor**. Publishing is blocked until the errors in the graph are fixed.
+
+    <Visual note="Canvas with an error marker on a step" />
+  </Step>
+  <Step title="Save a copy">
+    Click **Export JSON** on the canvas toolbar before big changes. Publishing replaces the live version and earlier ones aren't kept.
+
+    <Visual note="Export JSON on the canvas toolbar" />
+  </Step>
+  <Step title="Click Publish">
+    Click **Publish** in the header. Add a short note on what changed if you like, then confirm.
+
+    <Visual note="Publish dialog with a note typed in" />
+  </Step>
+  <Step title="Read the version label">
+    The header now shows the live version, such as **v3 live**. Later edits stay in the draft until you publish again.
+
+    <Visual note="Header showing v3 live" />
+  </Step>
+</Steps>
+
+<Warning>
+Until a workflow has been published once, live channels run the draft, so every saved edit reaches customers at once. Publish a first version early.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Review workflow executions" icon="chart-line" href="/guides/workflows/executions">
+    See where conversations drop off.
+  </Card>
+  <Card title="Workflows overview" icon="book" href="/documentation/workflows/overview">
+    Publishing and versions in detail.
+  </Card>
+</CardGroup>

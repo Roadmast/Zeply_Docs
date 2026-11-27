@@ -2,3 +2,68 @@
 title: "Write the prompt and welcome message"
 description: "Name the agent and tell it what to do."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll fill in the **Prompts & Identity** tab, the first tab of the agent editor.
+
+<Visual note="Prompts & Identity tab, fully filled in" />
+
+<Steps>
+  <Step title="Open the agent">
+    Click **Agents**, then click your agent. The editor opens on **Prompts & Identity**.
+
+    <Visual note="Agents list with an agent being clicked" />
+  </Step>
+  <Step title="Set the basics">
+    Enter the **Agent Name**, choose the **Primary Language**, and set the **Timezone** to your business's.
+
+    <Visual note="Name, language, and timezone fields" />
+  </Step>
+  <Step title="Write the welcome message">
+    Type what the agent says first:
+
+    ```text
+    Hi, you've reached Green Leaf Dental. How can I help?
+    ```
+
+    <Visual note="Welcome Message field filled in" />
+  </Step>
+  <Step title="Write the agent prompt">
+    Click into **Agent prompt** and write who the agent is, its goal, and its rules:
+
+    ```markdown
+    ## Role
+    You answer calls for Green Leaf Dental in Pune.
+
+    ## Goal
+    Help callers book a check-up. Collect their name, phone number, and preferred day.
+
+    ## Rules
+    - Never give a diagnosis. Suggest a visit instead.
+    - If the caller is upset or asks for a person, hand over to a human.
+    ```
+
+    <Visual note="Agent prompt editor with the headings visible" />
+  </Step>
+  <Step title="Save">
+    Click **Save Changes**.
+
+    <Visual note="Save Changes button" />
+  </Step>
+</Steps>
+
+<Warning>
+Don't use **Insert Variables** in live agents yet. The tokens aren't filled in, so the agent reads them out as written.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Choose a model and voice" icon="microphone" href="/guides/agents/model-and-voice">
+    Decide how the agent sounds.
+  </Card>
+  <Card title="Writing prompts" icon="book" href="/documentation/agents/prompts">
+    What a good prompt covers and what Sayvy AI adds.
+  </Card>
+</CardGroup>

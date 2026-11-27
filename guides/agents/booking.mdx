@@ -2,3 +2,57 @@
 title: "Set up appointment booking"
 description: "Turn on booking and write the booking instructions."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll turn booking on for an agent and tell it how your appointments work. Connect [Google Calendar](/guides/connections/google-calendar) or [Calendly](/guides/connections/calendly) first.
+
+<Steps>
+  <Step title="Open Tools & Integrations">
+    In the agent editor, click the **Tools & Integrations** tab.
+
+    <Visual note="Tools & Integrations tab" />
+  </Step>
+  <Step title="Turn on Enable Booking">
+    Switch on **Enable Booking**. A **Booking Instructions Prompt** box appears.
+
+    <Visual note="Enable Booking on with the instructions box visible" />
+  </Step>
+  <Step title="Write the booking instructions">
+    Paste and edit:
+
+    ```markdown
+    Appointments are 30 minutes. We take bookings Monday to Saturday,
+    10am to 7pm IST, up to two weeks ahead. Never book on Sundays.
+    Before booking, confirm the customer's name and the treatment they want.
+    Offer at most three times at once.
+    ```
+
+    <Visual note="Booking Instructions Prompt filled in" />
+  </Step>
+  <Step title="Check the timezone">
+    Click the **Prompts & Identity** tab and set **Timezone** to your business's.
+
+    <Visual note="Timezone field" />
+  </Step>
+  <Step title="Save and test">
+    Click **Save Changes**, then **Test Agent**. Ask for an appointment and check your calendar.
+
+    <Visual kind="gif" note="Test conversation that ends with the event on the calendar" />
+  </Step>
+</Steps>
+
+<Warning>
+The calendar isn't checked again when the slot is booked, so a double booking is possible. The customer also gets no calendar invite, so have the agent confirm the time in the chat.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Test an agent" icon="flask" href="/guides/agents/test">
+    Run a few more bookings.
+  </Card>
+  <Card title="Calendar booking" icon="book" href="/documentation/workflows/calendar-booking">
+    How booking works, including in workflows.
+  </Card>
+</CardGroup>

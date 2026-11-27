@@ -2,3 +2,45 @@
 title: "Read campaign results"
 description: "Delivery and read rates, and the PDF report."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll see how a campaign performed and download a report to share.
+
+<Steps>
+  <Step title="Check the list">
+    On **Campaigns**, each row shows sent, delivered, read, and failed counts. Use the tabs above the list to filter by status.
+
+    <Visual note="Campaign list with the four counts and status tabs" />
+  </Step>
+  <Step title="Open a campaign">
+    Click the campaign to see its status, audience, launch time, and the delivery funnel.
+
+    <Visual note="Delivery funnel with sent, delivered, read, failed" />
+  </Step>
+  <Step title="Read the funnel">
+    A big drop from sent to delivered often means numbers that aren't on WhatsApp. Few reads among delivered messages often means the opening line isn't working.
+
+    <Visual note="Funnel with a large sent-to-delivered gap" />
+  </Step>
+  <Step title="Download the report">
+    Click the download button for a PDF with the counts and rates.
+
+    <Visual note="PDF report download button and the report" />
+  </Step>
+</Steps>
+
+<Note>
+Contacts with read receipts off never show as read. The dashboard funnel and the PDF cover messages only, not calls.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Review call logs" icon="phone" href="/guides/call-logs">
+    Calls from call campaigns are logged here.
+  </Card>
+  <Card title="Campaign analytics" icon="book" href="/documentation/campaigns/campaign-analytics">
+    Funnel stages in detail.
+  </Card>
+</CardGroup>

@@ -2,3 +2,50 @@
 title: "Invite a teammate"
 description: "Send an invite, choose a role, and handle expired links."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll invite a teammate by email. You need to be an admin.
+
+<Steps>
+  <Step title="Open Team Management">
+    Click **Settings**, then **Team Management**.
+
+    <Visual note="Team Management page" />
+  </Step>
+  <Step title="Click Invite Member">
+    A form opens.
+
+    <Visual note="Invite Member form, empty" />
+  </Step>
+  <Step title="Fill it in">
+    Enter their **Full Name** and **Business Email**, and choose a role: **Admin**, **Member**, or **Viewer**.
+
+    <Visual note="Invite form filled in" />
+  </Step>
+  <Step title="Send the invite">
+    Send it. They get an email with a link that works for 7 days. Opening it lets them set a password and join straight away.
+
+    <Visual note="Roster showing the invite as pending" />
+  </Step>
+  <Step title="Handle an expired link">
+    If the link expired before they used it, click **Reinvite** on their row. Click **Cancel** to withdraw an invite nobody accepted.
+
+    <Visual note="Pending row with Reinvite and Cancel" />
+  </Step>
+</Steps>
+
+<Note>
+Your plan sets the seat limit. At the limit the form says "Seat limit reached" with an **Upgrade plan** link.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Team management" icon="users" href="/guides/team-members">
+    Change a role or remove someone.
+  </Card>
+  <Card title="Plans and limits" icon="book" href="/documentation/platform/plans-and-limits">
+    Seats per plan.
+  </Card>
+</CardGroup>

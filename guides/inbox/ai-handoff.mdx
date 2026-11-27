@@ -2,3 +2,51 @@
 title: "Switch between AI and your team"
 description: "Turn AI on or off for a ticket and take over a conversation."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll take over a conversation from the agent, then hand it back.
+
+<Steps>
+  <Step title="Open the conversation">
+    Click **Inbox** and open the ticket.
+
+    <Visual note="Inbox with a ticket open" />
+  </Step>
+  <Step title="Turn the AI off">
+    In the header, click **AI On**. It changes to **AI Off** and the agent stops replying on this ticket.
+
+    <Visual note="Header toggle on AI Off" />
+  </Step>
+  <Step title="Reply yourself">
+    Type in the composer and send.
+
+    <Visual note="Your reply sent in the conversation" />
+  </Step>
+  <Step title="Hand it back">
+    When you're done, click **AI Off** to switch back to **AI On**. If the contact had been handed off, AI handling turns back on for them.
+
+    <Visual note="Header toggle back on AI On" />
+  </Step>
+</Steps>
+
+## Switch a contact from the contacts list
+
+In **CRM Hub**, a contact's row has a **Handling** control. Change it between **AI Handled** and **Human Agent** to do the same for all of that contact's tickets.
+
+<Visual note="Contacts table with the Handling control on a row" />
+
+<Warning>
+Nobody is notified inside Sayvy AI when the agent hands off. Watch the inbox, or send the `agent.handoff` webhook to a tool your team checks.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reply to a conversation" icon="reply" href="/guides/inbox/reply">
+    Type, attach, and use quick replies.
+  </Card>
+  <Card title="AI to human handoff" icon="book" href="/documentation/inbox/ai-human-handoff">
+    When the agent hands off and what it records.
+  </Card>
+</CardGroup>

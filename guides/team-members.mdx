@@ -3,17 +3,46 @@ title: "Team management"
 description: "Invite teammates and manage their roles."
 ---
 
-# Manage team members
+import { Visual } from "/snippets/visual.mdx";
 
-Workspace admins can invite teammates, adjust roles, and remove access when someone changes teams or leaves.
+Only admins can invite people, change roles, or remove members. This walkthrough shows the roster and how to change someone's role or remove them.
 
-## Access checklist
+<Visual note="Team Management page with the Workspace Roster" />
 
-1. Invite a person using their work email.
-2. Choose the smallest role that matches their responsibilities.
-3. Confirm they can access the conversations, agents, or billing areas they need.
-4. Review membership regularly and remove stale access.
+<Steps>
+  <Step title="Open Team Management">
+    Click **Settings**, then **Team Management**.
 
-<Warning>Do not share a personal login. Individual accounts make ownership, security reviews, and offboarding traceable.</Warning>
+    <Visual note="Settings with Team Management selected" />
+  </Step>
+  <Step title="Read the roster">
+    The **Workspace Roster** lists everyone with their role, status, and when they joined or were invited.
 
-See [Security](/guides/security) for additional account-protection practices.
+    <Visual note="Roster with roles and statuses" />
+  </Step>
+  <Step title="Change a role">
+    Click **Role** on the person's row and pick **Admin**, **Member**, or **Viewer**.
+
+    <Visual note="Role menu open on a row" />
+  </Step>
+  <Step title="Remove someone">
+    Click **Remove** on their row and confirm. Do this as soon as someone leaves the team.
+
+    <Visual note="Remove confirmation" />
+  </Step>
+</Steps>
+
+<Note>
+An organization always needs one admin, so the last admin can't be removed or demoted.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Invite a teammate" icon="user-plus" href="/guides/team-members/invite">
+    Add someone new.
+  </Card>
+  <Card title="Team members" icon="book" href="/documentation/workspace/organizations-and-team-members">
+    Roles and seat limits.
+  </Card>
+</CardGroup>

@@ -3,16 +3,43 @@ title: "Message templates"
 description: "Create, sync, and send WhatsApp templates."
 ---
 
-# Manage message templates
+import { Visual } from "/snippets/visual.mdx";
 
-Templates help teams send approved, repeatable messages across supported channels. Keep them clear, current, and aligned with the channel's rules.
+A template is a WhatsApp message Meta has approved in advance. You need one to start a conversation, to message someone after 24 hours of silence, and to run a campaign. They live on the **Message Templates** page.
 
-## Template checklist
+<Visual note="Message Templates page with a list of templates and their status column" />
 
-- Use a descriptive name and purpose.
-- Keep placeholders obvious and validate them before sending.
-- Write for the channel and the customer's context.
-- Include a clear next step.
-- Review templates whenever policy, pricing, or contact details change.
+<Steps>
+  <Step title="Open Message Templates">
+    Click **Message Templates** in the left sidebar.
 
-For API workflows, see [Templates](/api-reference/templates/overview).
+    <Visual note="Sidebar with Message Templates highlighted" />
+  </Step>
+  <Step title="Check the status column">
+    Only approved templates can be sent. Pending ones are still in Meta's review, and rejected ones need a rewrite.
+
+    <Visual note="Status column showing approved, pending, and rejected" />
+  </Step>
+  <Step title="Add or bring in a template">
+    Click **+ Create Template** to build one, or **Sync from Meta** to pull in ones you made elsewhere.
+
+    <Visual note="Create Template and Sync from Meta buttons" />
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a template" icon="file-lines" href="/guides/templates/create">
+    Build one and submit it to Meta.
+  </Card>
+  <Card title="Sync and browse Meta's library" icon="rotate" href="/guides/templates/sync">
+    Bring in or add ready-made templates.
+  </Card>
+  <Card title="Start a conversation" icon="message" href="/guides/inbox/start-conversation">
+    Send a template to one contact.
+  </Card>
+  <Card title="Message templates" icon="book" href="/documentation/messaging/templates">
+    Categories and what Meta checks.
+  </Card>
+</CardGroup>

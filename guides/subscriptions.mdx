@@ -3,12 +3,49 @@ title: "Subscriptions and credits"
 description: "Choose a plan and top up credits."
 ---
 
-# Manage your subscription
+import { Visual } from "/snippets/visual.mdx";
 
-Workspace billing admins can review the current plan and available subscription actions from **Billing → Subscription**.
+A subscription unlocks features and sets your limits. Credits pay for voice minutes and AI replies. You'll open the billing page and subscribe to a plan.
 
-## Before you change plans
+<Visual note="Billing page with the credit balance and Subscription Plans" />
 
-Review current usage, confirm the workspace you are changing, and tell affected teammates when limits or features will change. After the change, verify the new status and check the next invoice.
+<Steps>
+  <Step title="Open Billing">
+    Click **Billing** in the left sidebar. Your credit balance shows at the top.
 
-For billing records, see [Invoices](/guides/invoices). For a broader overview, see [Billing](/guides/subscriptions).
+    <Visual note="Sidebar with Billing highlighted and the balance visible" />
+  </Step>
+  <Step title="Go to Subscription Plans">
+    Switch between **Monthly** and **Yearly**. Yearly billing saves 20%.
+
+    <Visual note="Monthly and Yearly switch above the plan cards" />
+  </Step>
+  <Step title="Click Subscribe">
+    Click **Subscribe** on the plan you want. Razorpay's checkout opens.
+
+    <Visual note="Plan cards with Subscribe highlighted" />
+  </Step>
+  <Step title="Pay">
+    Complete the payment in the checkout. You return to the billing page with the new plan active.
+
+    <Visual note="Razorpay checkout screen" />
+  </Step>
+</Steps>
+
+<Warning>
+Buying a new plan ends the old one straight away, with no proration, so change plans at the start of a billing cycle. The dashboard has no cancel button yet.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Top up credits" icon="coins" href="/guides/subscriptions/top-up">
+    Add credits for calls and replies.
+  </Card>
+  <Card title="Invoices" icon="receipt" href="/guides/invoices">
+    Download your receipts.
+  </Card>
+  <Card title="Billing" icon="book" href="/documentation/platform/billing">
+    Rates, trial, and what happens when credits run out.
+  </Card>
+</CardGroup>

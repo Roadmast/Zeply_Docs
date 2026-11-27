@@ -3,18 +3,49 @@ title: "Workflow builder"
 description: "Build a workflow agent step by step."
 ---
 
-# Build reliable workflows
+import { Visual } from "/snippets/visual.mdx";
 
-Workflows make a repeatable process visible and testable. Start with the customer outcome, then connect the smallest number of triggers, decisions, and actions needed to reach it.
+A workflow agent follows a conversation you draw as a graph. This walkthrough opens the builder and starts a draft.
 
-## Design a workflow
+<Visual note="Workflow Builder with a small graph on the canvas" />
 
-1. Define the trigger and the expected final state.
-2. Identify the data the workflow must read and the actions it may take.
-3. Add explicit branches for missing data, failure, and human handoff.
-4. Test with normal, duplicate, delayed, and invalid inputs.
-5. Monitor the result and document who owns failed runs.
+<Steps>
+  <Step title="Click New Agent">
+    Click **Agents**, then **New Agent**, and choose **Workflow Agent**.
 
-<Note>A workflow is production-ready when a teammate can understand what it does, why it stopped, and what to do next without reading implementation code.</Note>
+    <Visual note="New Agent dialog with Workflow Agent highlighted" />
+  </Step>
+  <Step title="Land in the builder">
+    The Workflow Builder opens with three tabs: **Editor**, **Test**, and **Executions**. You start on the **Editor** canvas.
 
-Continue with [Calendar booking](/documentation/workflows/calendar-booking) or [Architecture and triggers](/documentation/workflows/architecture-and-triggers).
+    <Visual note="Builder header with the three tabs" />
+  </Step>
+  <Step title="Start from a template">
+    Pick a template, such as **Lead qualification** or **Appointment request**. Or type what you want and click **Build with AI** to draft a graph.
+
+    <Visual note="Template picker with five templates" />
+  </Step>
+  <Step title="Edit the draft">
+    The graph appears on the canvas. Your work saves automatically; the header shows when it last saved.
+
+    <Visual note="Canvas with a template loaded and the saved-at time in the header" />
+  </Step>
+</Steps>
+
+<Note>
+**Build with AI** uses AI credits and opens as a draft for you to review.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Add and connect steps" icon="diagram-project" href="/guides/workflows/steps">
+    Build out the graph.
+  </Card>
+  <Card title="Publish a workflow" icon="rocket" href="/guides/workflows/publish">
+    Make the draft live.
+  </Card>
+  <Card title="Workflows overview" icon="book" href="/documentation/workflows/overview">
+    How workflow agents work.
+  </Card>
+</CardGroup>

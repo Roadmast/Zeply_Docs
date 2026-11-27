@@ -2,3 +2,45 @@
 title: "Pause, resume, and cancel"
 description: "Control a campaign after it launches."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll stop a campaign, restart it, or end it. Open **Campaigns** first.
+
+<Steps>
+  <Step title="Open the campaign">
+    Click **Campaigns** in the sidebar, then click the campaign.
+
+    <Visual note="Campaign details page" />
+  </Step>
+  <Step title="Pause it">
+    Click **Pause**. Sending stops before the next contact. Messages already sent stay sent.
+
+    <Visual note="Pause button and the Paused status" />
+  </Step>
+  <Step title="Resume it">
+    Click **Resume**. The campaign carries on where it stopped, and nobody gets the message twice.
+
+    <Visual note="Resume button" />
+  </Step>
+  <Step title="Cancel it">
+    Click **Cancel** and confirm. Messages not yet sent are dropped.
+
+    <Visual note="Cancel confirmation dialog" />
+  </Step>
+</Steps>
+
+<Warning>
+Cancelling can't be undone, and a scheduled campaign can't be edited. To fix a typo, pause, check how many went out, cancel, and create a corrected campaign for the rest.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Read campaign results" icon="chart-simple" href="/guides/campaigns/results">
+    See what was sent.
+  </Card>
+  <Card title="Scheduling and control" icon="book" href="/documentation/campaigns/scheduling">
+    When campaigns pause on their own.
+  </Card>
+</CardGroup>

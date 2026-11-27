@@ -2,3 +2,55 @@
 title: "Create a template"
 description: "Use the builder and submit to Meta."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll build a template in the builder and send it to Meta for approval.
+
+<Steps>
+  <Step title="Click Create Template">
+    On **Message Templates**, click **+ Create Template**. The builder opens with a live preview.
+
+    <Visual note="Template builder with the preview on the right" />
+  </Step>
+  <Step title="Name it">
+    Use lowercase letters, numbers, and underscores, such as `order_ready`. Choose the language and the category: Marketing, Utility, or Authentication.
+
+    <Visual note="Name, language, and category fields" />
+  </Step>
+  <Step title="Write the body">
+    Drag in a body and type your message. Use `{{1}}`, `{{2}}` for values that change per contact:
+
+    ```text
+    Hi {{1}}, your order {{2}} is ready for pickup at our Baner store.
+    Reply here if you'd like it delivered instead.
+    ```
+
+    <Visual kind="gif" note="Typing the body and watching the preview update" />
+  </Step>
+  <Step title="Add the optional parts">
+    Add a header, footer, or buttons if you need them. Buttons can be quick reply, URL, phone number, or a published WhatsApp Flow.
+
+    <Visual note="Builder with a footer and two buttons added" />
+  </Step>
+  <Step title="Submit to Meta">
+    Click **Save & Submit to Meta**. The template shows as pending, then changes to approved or rejected. Reviews often take minutes, but can take longer.
+
+    <Visual note="Template list showing the new template as pending" />
+  </Step>
+</Steps>
+
+<Note>
+Meta checks that the category fits the content. If a template is rejected, rewrite it and submit again.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a template campaign" icon="bullhorn" href="/guides/campaigns/create">
+    Send it to many contacts.
+  </Card>
+  <Card title="Message templates" icon="book" href="/documentation/messaging/templates">
+    Every part of a template.
+  </Card>
+</CardGroup>

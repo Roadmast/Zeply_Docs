@@ -3,27 +3,42 @@ title: "Agents"
 description: "Create, test, and deploy AI agents."
 ---
 
-# Create and manage agents
+import { Visual } from "/snippets/visual.mdx";
 
-Agents are the operational layer between your customers and Sayvy. Each agent has a purpose, instructions, and the tools it is allowed to use.
+The **Agents** page lists every agent in your workspace. This is the route from a new agent to one that is live.
 
-## Create an agent
+<Visual note="Agents page with a few agents listed, New Agent and Import Template visible" />
 
-1. Open **Agents** and select **Create agent**.
-2. Give the agent a specific name and describe its job in one sentence.
-3. Add clear instructions: tone, scope, required questions, and when to hand off.
-4. Add only the integrations and tools it needs.
-5. Test common, ambiguous, and out-of-scope requests before publishing.
+<Steps>
+  <Step title="Create it">
+    Click **New Agent**, or **Import Template** to start from a copy. See [Create an agent](/guides/agents/create).
+  </Step>
+  <Step title="Write the prompt">
+    Fill in the **Prompts & Identity** tab. See [Write the prompt and welcome message](/guides/agents/prompts-and-identity).
+  </Step>
+  <Step title="Pick a voice">
+    Use the **AI Model & Voice** tab. See [Choose a model and voice](/guides/agents/model-and-voice).
+  </Step>
+  <Step title="Add tools">
+    Use the **Tools & Integrations** tab. See [Add tools](/guides/agents/tools) and [Set up appointment booking](/guides/agents/booking).
+  </Step>
+  <Step title="Set recording">
+    Use the **Advanced Settings** tab. See [Set recording and follow-ups](/guides/agents/advanced-settings).
+  </Step>
+  <Step title="Test and deploy">
+    Click **Test Agent**, then use the **Deploy** tab. See [Test an agent](/guides/agents/test) and [Deploy an agent](/guides/agents/deploy).
+  </Step>
+</Steps>
 
-## Make an agent production-ready
+<Visual note="The agent editor with its five tabs in a row" />
+
+## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Define the boundary" icon="shield-check">State what the agent must not promise, change, or disclose.</Card>
-  <Card title="Plan the handoff" icon="arrow-up-right">Tell the agent when to involve a person and what context to include.</Card>
-  <Card title="Test edge cases" icon="flask-conical">Try missing information, interruptions, unhappy customers, and duplicate requests.</Card>
-  <Card title="Review outcomes" icon="chart-no-axes-combined">Use inbox history and call logs to improve instructions.</Card>
+  <Card title="Agents overview" icon="book" href="/documentation/agents/overview">
+    The editor and agent types in depth.
+  </Card>
+  <Card title="Agents API" icon="code" href="/api-reference/agents/overview">
+    Manage agents from your own systems.
+  </Card>
 </CardGroup>
-
-<Warning>Do not give an agent access to a tool just because it is available. Keep permissions narrow and review them whenever its scope changes.</Warning>
-
-For API-based workflows, see the [Agents API reference](/api-reference/agents/overview).

@@ -3,18 +3,40 @@ title: "CRM Hub"
 description: "Manage contacts, lifecycle stages, lead scores, and tasks."
 ---
 
-# Manage contacts
+import { Visual } from "/snippets/visual.mdx";
 
-Contacts are the shared customer record behind conversations, activities, and campaigns. Good contact data keeps personalization useful and reporting trustworthy.
+**CRM Hub** is where every contact lives. Most are created automatically when someone first reaches you. This walkthrough finds your way around it.
 
-## A reliable contact workflow
+<Visual note="CRM Hub with the contacts table and stage cards" />
 
-1. Create or import a contact with the best available identifier.
-2. Add only attributes your team and agents will actually use.
-3. Review duplicate records before starting a campaign.
-4. Add activities as meaningful customer interactions occur.
-5. Correct outdated details instead of creating a second record.
+<Steps>
+  <Step title="Open CRM Hub">
+    Click **CRM Hub** in the left sidebar. The table lists contacts with name, phone, stage, lead score, handling, and tags, most recently active first.
 
-<Note>Use consistent formats for phone numbers, names, and custom attributes. Consistency makes filtering and automation predictable.</Note>
+    <Visual note="Contacts table" />
+  </Step>
+  <Step title="Filter the list">
+    Use the search box, the **Handling** filter, the **Score** filter, or click a stage card at the top.
 
-For integrations, see the [Contacts API](/api-reference/contacts/overview).
+    <Visual note="Filters applied and a stage card selected" />
+  </Step>
+  <Step title="Switch views">
+    Switch between the table, the **Kanban** view, and the **Tasks** view.
+
+    <Visual note="View switcher with Kanban, table, and Tasks" />
+  </Step>
+  <Step title="Open a contact">
+    Click **View Profile** on a row.
+
+    <Visual note="Contact profile open" />
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Add a contact" icon="user-plus" href="/guides/contacts/add">One at a time.</Card>
+  <Card title="Import from a spreadsheet" icon="file-import" href="/guides/contacts/import">Many at once.</Card>
+  <Card title="Work with a contact" icon="user" href="/guides/contacts/profile">Stage, score, and timeline.</Card>
+  <Card title="Contacts" icon="book" href="/documentation/crm/contacts">Every field and what it means.</Card>
+</CardGroup>

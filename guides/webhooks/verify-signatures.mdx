@@ -2,3 +2,52 @@
 title: "Verify webhook signatures"
 description: "Check that requests really come from Sayvy AI."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+Anyone can send a POST to your webhook URL, so check the signature on every request before you trust it. You'll need the `whsec_` secret from when you created the endpoint.
+
+<Steps>
+  <Step title="Read the header">
+    Each request carries `X-Sayvy-Signature-256`, set to `sha256=` followed by a hex digest.
+  </Step>
+  <Step title="Capture the raw body">
+    Use the exact bytes you received. If your framework parses the JSON and you serialise it again, the signature won't match.
+  </Step>
+  <Step title="Compute and compare">
+    Sign the raw body with HMAC-SHA256 using your secret, then compare:
+
+    ```python
+    import hmac, hashlib
+
+    def is_valid(raw_body: bytes, header: str, secret: str) -> bool:
+        expected = "sha256=" + hmac.new(
+            secret.encode(), raw_body, hashlib.sha256
+        ).hexdigest()
+        return hmac.compare_digest(expected, header)
+    ```
+
+    <Visual note="Your server code with the check in place (optional, for a worked example)" />
+  </Step>
+  <Step title="Reject mismatches">
+    If the signatures differ, return an error and ignore the request.
+  </Step>
+  <Step title="Reply fast">
+    Answer with a 2xx within 10 seconds. Store the event and do slow work afterwards.
+  </Step>
+</Steps>
+
+<Warning>
+Failed deliveries are retried twice more, then dropped, and there's no replay queue. Use the event `id` to skip duplicates, and pull anything you can't miss from the API.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Webhook delivery and security" icon="book" href="/documentation/workflows/outbound-webhooks-dlq">
+    Retries and a JavaScript example.
+  </Card>
+  <Card title="Add an endpoint" icon="webhook" href="/guides/webhooks">
+    Back to creating one.
+  </Card>
+</CardGroup>

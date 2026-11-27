@@ -3,12 +3,39 @@ title: "Invoices"
 description: "Download receipts for your payments."
 ---
 
-# View invoices
+import { Visual } from "/snippets/visual.mdx";
 
-Workspace billing admins can use **Billing → Invoices** to review past charges and download invoices for finance or record keeping.
+You'll find a payment and download it as a PDF.
 
-## Find the right invoice
+<Steps>
+  <Step title="Open Invoices">
+    Click **Billing** in the sidebar, then **Invoices**.
 
-Check the workspace name, billing period, invoice status, and amount before downloading. If an invoice does not match the subscription or usage you expected, review [Subscriptions](/guides/subscriptions) and contact the billing owner.
+    <Visual note="Billing page with Invoices selected" />
+  </Step>
+  <Step title="Pick a tab">
+    Payments are split into **Plans**, **Add-ons**, and **AI Credits**.
 
-<Note>Keep invoice access limited to the people who need it. Invoices may include workspace and payment details.</Note>
+    <Visual note="The three tabs with AI Credits selected" />
+  </Step>
+  <Step title="Download it">
+    Find the payment and download it as a PDF.
+
+    <Visual note="Invoice row with the download button" />
+  </Step>
+</Steps>
+
+<Note>
+These are payment receipts. They aren't GST tax invoices and don't include a GSTIN.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Top up credits" icon="coins" href="/guides/subscriptions/top-up">
+    Add more credits.
+  </Card>
+  <Card title="Billing" icon="book" href="/documentation/platform/billing">
+    How billing works.
+  </Card>
+</CardGroup>

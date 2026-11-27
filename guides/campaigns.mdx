@@ -3,18 +3,42 @@ title: "Campaigns"
 description: "Send WhatsApp template campaigns to your contacts."
 ---
 
-# Run a campaign
+import { Visual } from "/snippets/visual.mdx";
 
-Campaigns help you reach a defined contact list with a consistent voice workflow. Start small, validate the experience, and scale only after the first results are healthy.
+A campaign sends one WhatsApp template to a group of contacts. This walkthrough shows where campaigns live and the route from idea to results.
 
-## Campaign checklist
+<Visual note="Campaigns page with a list of campaigns and the status tabs" />
 
-1. Prepare and validate the contact list.
-2. Choose the agent and confirm its instructions and handoff behavior.
-3. Set a schedule that respects your audience's local time.
-4. Test with a small batch before launching the full audience.
-5. Monitor call outcomes, retries, and opt-outs.
+<Steps>
+  <Step title="Open Campaigns">
+    Click **Campaigns** in the left sidebar. Each campaign shows its sent, delivered, read, and failed counts.
 
-<Warning>Confirm consent, regional calling rules, and your opt-out process before contacting customers. Pause the campaign if these controls are not ready.</Warning>
+    <Visual note="Campaign list with the four counts" />
+  </Step>
+  <Step title="Create one">
+    Click **New Campaign**. See [Create a template campaign](/guides/campaigns/create).
 
-Use [Call Logs](/guides/call-logs) to review individual calls and the [Campaigns API](/api-reference/campaigns/overview) for programmatic control.
+    <Visual note="New Campaign button" />
+  </Step>
+  <Step title="Control it">
+    Pause, resume, or cancel from the campaign. See [Pause, resume, and cancel](/guides/campaigns/manage).
+  </Step>
+  <Step title="Read the results">
+    Open a campaign for its delivery funnel. See [Read campaign results](/guides/campaigns/results).
+  </Step>
+</Steps>
+
+<Warning>
+Template campaigns aren't available on the Pay as you go plan.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a template campaign" icon="bullhorn" href="/guides/campaigns/create">
+    The six-step builder.
+  </Card>
+  <Card title="Campaigns overview" icon="book" href="/documentation/campaigns/overview">
+    Template and call campaigns, and statuses.
+  </Card>
+</CardGroup>

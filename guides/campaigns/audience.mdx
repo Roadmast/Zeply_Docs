@@ -2,3 +2,49 @@
 title: "Choose a campaign audience"
 description: "Target all contacts, tags, or a hand-picked list."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll pick who receives the campaign in the **Audience** step of the builder.
+
+<Steps>
+  <Step title="Reach the Audience step">
+    In the campaign builder, continue past **Basics** and **Template**.
+
+    <Visual note="Builder with the Audience step active" />
+  </Step>
+  <Step title="Choose a strategy">
+    Under **Target Audience Strategy**, choose **All Contacts**, **Contacts by Tags**, or **Select Contacts Manually**.
+
+    <Visual note="The three strategy options" />
+  </Step>
+  <Step title="Pick tags or contacts">
+    For tags, tick the tags you want. For manual, search and pick the contacts.
+
+    <Visual note="Tag list with two tags ticked" />
+  </Step>
+  <Step title="Check the preview">
+    The **Eligible Audience Preview** lists the first 20 contacts who will get the message.
+
+    <Visual note="Eligible Audience Preview" />
+  </Step>
+</Steps>
+
+<Warning>
+Tags match on any, not all, and opted-out contacts aren't filtered. Tag anyone who asks to stop, for example `do-not-contact`, and target by tags that leave them out.
+</Warning>
+
+## Add contacts first
+
+Need more contacts? [Import them from a spreadsheet](/guides/contacts/import) before you build the campaign.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a template campaign" icon="bullhorn" href="/guides/campaigns/create">
+    Continue to variables and schedule.
+  </Card>
+  <Card title="Audiences" icon="book" href="/documentation/campaigns/audiences">
+    Who is skipped, and how tags match.
+  </Card>
+</CardGroup>

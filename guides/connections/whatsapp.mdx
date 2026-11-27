@@ -2,3 +2,52 @@
 title: "Connect WhatsApp"
 description: "Sign in with Meta and connect your WhatsApp Business number."
 ---
+
+import { Visual } from "/snippets/visual.mdx";
+
+You'll sign in with Meta and bring your WhatsApp Business number into Sayvy AI. You need a Meta business account with a number registered for the WhatsApp Business Platform.
+
+<Visual kind="gif" note="Connect WhatsApp from the card, through Meta sign-in, to the connected card" />
+
+<Steps>
+  <Step title="Open Connections">
+    Click **Connections** in the sidebar and find the **WhatsApp Business** card.
+
+    <Visual note="WhatsApp Business card before connecting" />
+  </Step>
+  <Step title="Click Connect WhatsApp">
+    You're taken to Meta. Sign in with an account that has admin access to your business.
+
+    <Visual note="Meta sign-in screen" />
+  </Step>
+  <Step title="Approve access">
+    Choose your business and number, and approve. Meta sends you back to Sayvy AI.
+
+    <Visual note="Meta business and number selection screen" />
+  </Step>
+  <Step title="See the connected card">
+    A message confirms the connection. The card now shows your phone number and the date.
+
+    <Visual note="Connected WhatsApp card with phone number and date" />
+  </Step>
+  <Step title="Send a test message">
+    From your phone, message the number. The conversation appears in **Inbox**.
+
+    <Visual note="Inbox showing the test conversation" />
+  </Step>
+</Steps>
+
+<Note>
+If you see "Failed to connect WhatsApp Business account", try again and check you signed in as a business admin. Access expires after about 60 days; click **Reconnect WhatsApp** when that happens.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Deploy an agent" icon="rocket" href="/guides/agents/deploy">
+    Assign the number to an agent.
+  </Card>
+  <Card title="WhatsApp setup" icon="book" href="/documentation/whatsapp/setup">
+    What connecting does, renewals, and several numbers.
+  </Card>
+</CardGroup>

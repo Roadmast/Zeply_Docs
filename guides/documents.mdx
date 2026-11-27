@@ -3,18 +3,51 @@ title: "Documents"
 description: "Upload files your agents search for answers."
 ---
 
-# Manage documents
+import { Visual } from "/snippets/visual.mdx";
 
-Documents provide durable source material for your workspace and knowledge-based experiences. Treat them as maintained product content, not a one-time upload folder.
+You'll upload a file so your agents can answer from it, then check that they do. Every agent in the workspace can search every file you upload.
 
-## Upload and maintain a document
+<Visual note="Documents page with a few uploaded files listed" />
 
-1. Open **Resources → Documents** and upload a supported file.
-2. Use a clear filename that includes the subject and version where useful.
-3. Confirm the document is available to the intended agent or workflow.
-4. Replace outdated versions and remove duplicates.
-5. Test a question that depends on the document before publishing changes.
+<Steps>
+  <Step title="Open Documents">
+    Open **Resources**, then **Documents**.
 
-<Warning>Do not upload secrets, private credentials, or personal data that your workspace does not need. Review access before sharing a document with an agent.</Warning>
+    <Visual note="Sidebar with Resources and Documents highlighted" />
+  </Step>
+  <Step title="Upload a file">
+    Click the upload button and choose a PDF, DOCX, or TXT file, such as a price list or FAQ. Give it a clear name.
 
-See [Knowledge Base](/api-reference/knowledge-base/overview) for programmatic document management.
+    <Visual kind="gif" note="Choosing a file and watching it upload" />
+  </Step>
+  <Step title="Wait until it's ready">
+    Once the upload finishes the document is searchable.
+
+    <Visual note="The uploaded document listed as ready" />
+  </Step>
+  <Step title="Ask a question from it">
+    Click **Agents**, open an agent, click **Test Agent**, and ask something only the file can answer.
+
+    <Visual note="Test chat answering a price question from the file" />
+  </Step>
+  <Step title="Remove old versions">
+    When a file is out of date, delete it from **Documents**. Agents stop finding it on their next search.
+
+    <Visual note="Delete action on a document row" />
+  </Step>
+</Steps>
+
+<Warning>
+Don't upload secrets or personal data your agents don't need.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Test an agent" icon="flask" href="/guides/agents/test">
+    Check the answers it gives.
+  </Card>
+  <Card title="Knowledge base" icon="book" href="/documentation/memory/knowledge-base">
+    Tips for better answers.
+  </Card>
+</CardGroup>
